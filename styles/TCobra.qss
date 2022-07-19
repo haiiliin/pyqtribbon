@@ -1,0 +1,286 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+    color: #aaa;
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(57, 49, 68, 255),stop:1 rgba(110, 105, 118, 255));
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #fff;
+	
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar 
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(110, 105, 118, 255),stop:1 rgba(57, 49, 68, 255));
+	color: #fff;
+
+}
+
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:selected
+{
+    background-color: #444;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    border: 1px solid #000;
+    background-color: #444;
+    margin-bottom:-1px;
+    padding-bottom:1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: #444;
+    border: 1px solid #222;
+    padding: 4px;
+    padding-right: 0px;
+
+}
+
+
+QMenu::item
+{
+    background-color: transparent;
+    padding: 2px 20px 2px 20px;
+
+}
+
+
+QMenu::item:disabled
+{
+    color: #555;
+    background-color: transparent;
+    padding: 2px 20px 2px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: #55aaff;
+    color: #fff;
+
+}
+
+
+/*-----QToolTip-----*/
+QToolBar
+{
+	background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(57, 49, 68, 255),stop:1 rgba(110, 105, 118, 255));
+
+}
+
+
+/*-----QToolTip-----*/
+QToolTip
+{
+    border: 1px solid #222;
+    background-color: #333;
+    color: #aaa;
+
+}
+
+
+/*-----QToolButton-----*/
+QToolButton
+{
+    color: #b1b1b1;
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(75, 165, 255, 255),stop:0.509615 rgba(119, 187, 255, 255),stop:1 rgba(72, 164, 255, 255));
+    border-width: 1px;
+    border-color: #1e1e1e;
+    border-style: solid;
+	margin-right: 2px;
+	padding: 3px;
+
+}
+
+
+QToolButton:pressed
+{
+    background-color: qlineargradient(spread:repeat, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(65, 155, 245, 255),stop:0.509615 rgba(109, 177, 245, 255),stop:1 rgba(72, 164, 255, 255));
+
+}
+
+
+QToolButton:checked
+{
+    background-color: #9999ff;
+	border: none;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit{
+	background-color: #fff;
+	color: #000;
+	selection-color: #fff;
+	selection-background-color: #507098;
+
+}
+
+
+/*-----QTreeView-----*/
+QTreeView
+{
+	background-color: #242526;
+   	show-decoration-selected: 0;
+   	selection-background-color: transparent; /* Used on Mac */
+	alternate-background-color: #404040;
+	selection-color: #fff; /* Used on Mac */
+	font: 8pt;
+	color: #fff;
+	outline : 0;
+
+}
+
+QTreeView::item
+{
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+
+}
+
+QTreeView::item:hover
+{
+	background-color: #1a1b1c;
+	show-decoration-selected: 1;
+	color: #fff;
+
+}
+
+QTreeView::item:selected
+{
+	background-color: #41cd52;
+	color: #fff;
+
+}
+
+QTreeView::item:selected:active
+{
+	background-color: rgba(57, 49, 68, 255);
+	color: #fff;
+
+}
+
+QTreeView::item:selected:!active
+{
+	background-color: rgba(57, 49, 68, 255);
+	color: #fff;
+
+}
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings
+{
+	border-image: none;
+	image: url(://tree-closed.png); /*To replace*/
+
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings
+{
+	border-image: none;
+	image: url(://tree-open.png); /*To replace*/
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal 
+{
+    background-color: #333;
+    height: 8px;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+
+QScrollBar::handle:horizontal 
+{
+    border: 1px solid #111;
+    background-color: #535353;
+
+}
+
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal 
+{
+    width: 0px;
+    background-color: transparent;
+
+}
+
+
+QScrollBar:vertical 
+{
+    background-color: #333;
+    width: 8px;
+    margin: 0;
+
+}
+
+
+QScrollBar::handle:vertical 
+{
+    border: 1px solid #111;
+    background-color: #535353;
+
+}
+
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical 
+{
+    height: 0px;
+    background-color: transparent;
+
+}
+

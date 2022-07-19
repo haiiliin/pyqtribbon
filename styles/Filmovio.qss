@@ -1,0 +1,257 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(116, 116, 116, 255),stop:0.509615 rgba(216, 216, 216, 255),stop:1 rgba(123, 123, 123, 255));
+	color: #000000;
+	border-color: #000000;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #000;
+
+}
+
+
+QLabel::disabled
+{
+	background-color: transparent;
+	color: gray;
+
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(156, 156, 156, 255),stop:0.509615 rgba(216, 216, 216, 255));
+	color: #000;
+	border-color: #000000;
+
+}
+
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:disabled
+{
+    background-color: transparent;
+	color: gray;
+
+}
+
+
+QMenuBar::item:selected
+{
+    background-color: gray;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    background-color: darkgray;
+    border: 1px solid #794f34;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0.00480769 rgba(89, 89, 89, 255),stop:1 rgba(113, 113, 113, 255));
+    border: 1px solid;
+    color: #fff;
+
+}
+
+
+QMenu::separator
+{
+    height: 1px;
+    background-color: #000;
+    color: #ffffff;
+    padding-left: 4px;
+
+}
+
+
+QMenu::item
+{
+    min-width : 150px;
+    padding: 3px 20px 3px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 50, 50, 255),stop:0.504808 rgba(94, 94, 94, 255),stop:1 rgba(58, 58, 58, 255));
+    color: #ffffff;
+
+}
+
+
+QMenu::item:disabled
+{
+    color: #262626;
+
+}
+
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(116, 116, 116, 255),stop:0.509615 rgba(216, 216, 216, 255),stop:1 rgba(123, 123, 123, 255));
+	color: #000000;
+	border: 1px solid #454545;
+	border-radius: 15px;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(156, 156, 156, 255),stop:0.509615 rgba(116, 116, 116, 255),stop:1 rgba(156, 156, 156, 255));
+	color: #000000;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: gray;
+	color: #000000;
+
+}
+
+
+QPushButton::checked
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 50, 50, 255),stop:0.504808 rgba(94, 94, 94, 255),stop:1 rgba(58, 58, 58, 255));
+	color: #000000;
+
+}
+
+
+/*-----QSlider-----*/
+QSlider{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(50, 50, 50, 255),stop:0.504808 rgba(94, 94, 94, 255),stop:1 rgba(58, 58, 58, 255));
+	border: 1px solid ;
+	border-radius: 5px;
+	height: 10px;
+	margin-left: 1px;	
+	padding-left: -5px;
+
+}
+
+
+QSlider::groove:horizontal 
+{
+	background-color: transparent;
+	height: 14px;
+	padding: 3px;
+
+}
+
+
+QSlider::sub-page:horizontal 
+{
+	background-color: gray;
+	margin: 6px;
+
+}
+
+
+QSlider::add-page:horizontal 
+{
+	background-color: transparent;
+
+}
+
+
+QSlider::handle:horizontal 
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(116, 116, 116, 255),stop:0.509615 rgba(216, 216, 216, 255),stop:1 rgba(123, 123, 123, 255));
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+
+}
+
+
+QSlider::handle:horizontal:hover 
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(116, 116, 116, 255),stop:0.509615 rgba(216, 216, 216, 255),stop:1 rgba(123, 123, 123, 255));
+
+}
+
+
+QSlider::sub-page:horizontal:disabled 
+{
+	background-color: transparent;
+	border-color: #999;
+
+}
+
+
+QSlider::add-page:horizontal:disabled 
+{
+	background-color: transparent;
+	border-color: #999;
+
+}
+
+
+QSlider::handle:horizontal:disabled 
+{
+	background-color: #eee;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+
+}
+
+
+/*-----QStatusBar-----*/
+QStatusBar
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(123, 123, 123, 255),stop:0.509615 rgba(116, 116, 116, 255));
+	color: #000;
+	border-color: #000000;
+
+}
+

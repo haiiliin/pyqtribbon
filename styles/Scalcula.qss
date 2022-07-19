@@ -1,0 +1,147 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: white;
+	color: #000000;
+	border-color: #000000;
+
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar
+{
+	background-color: white;
+	color: #2b2b2b;
+	font-weight: bold;
+	border-color: #000000;
+
+}
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:selected
+{
+	background-color: #aa0000;
+	color: #fff;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    background-color: #8a0000;
+    border: 1px solid #8a0000;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: #cfcfcf;
+    border: 1px solid;
+	font-weight: bold;
+    color: #000;
+
+}
+
+
+QMenu::separator
+{
+    height: 1px;
+    background-color: #aa0000;
+    color: #ffffff;
+    padding-left: 4px;
+    margin-left: 10px;
+    margin-right: 5px;
+
+}
+
+
+QMenu::item
+{
+    min-width : 150px;
+    padding: 3px 20px 3px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: #aa0000;
+    color: #fff;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: #cfcfcf;
+	color: #2b2b2b;
+	border-style: solid;
+	border-radius: 15px;
+	border-color: #000000;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 2px;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #a3a3a1;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #6f706e;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #aa0000;
+	color: #000;
+	border-style: solid;
+	border-radius: 0px;	
+	border-color: #000000;
+
+}
+
+

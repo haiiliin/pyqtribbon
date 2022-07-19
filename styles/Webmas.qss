@@ -1,0 +1,427 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #3c3737;
+	color: #fff;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel 
+{
+	color: black;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
+    margin-top:1px;
+	margin-bottom:1px;
+
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar
+{
+    background-color: #323232;
+    border: none;
+    color: white;
+
+}
+
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:selected
+{
+    background-color: transparent;
+    border: 1px solid #251507;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    border: 1px solid #000;
+    background-color: QLinearGradient(x1:0, y1:0,x2:0, y2:1, stop:1 #212121, stop:0.4 #343434);
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: #251507;
+    border: 1px solid #000;
+    color: white;
+
+}
+
+
+QMenu::separator
+{
+    height: 1px;
+    background-color: #fff;
+    color: white;
+    padding-left: 4px;
+    margin-left: 10px;
+    margin-right: 5px;
+
+}
+
+
+QMenu::item
+{
+    min-width : 150px;
+    padding: 3px 20px 3px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: #917a51;
+    color: #fff;
+
+}
+
+
+QMenu::item:disabled
+{
+    color: #262626;
+
+}
+
+
+/*-----QToolButton-----*/
+QToolButton
+{
+	background-color: #323232;
+	border: 1px solid #111111;
+	border-radius: 5px;
+	margin-left: 4px;
+	padding: 5px;
+
+}
+
+
+QToolButton::hover
+{
+	background-color: #917a51;
+
+}
+
+
+QToolButton::pressed
+{
+	background-color: #724e22;
+
+}
+
+QToolButton::checked
+{
+	background-color: #724e22;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit{
+	background-color: white;
+	color: #000;
+
+}
+
+
+/*-----QSplitter-----*/
+QSplitter::handle 
+{
+	background-color: #282323;
+
+}
+
+
+/*-----QListView-----*/
+QListView
+{
+	font: 8pt;
+	color:white;
+	show-decoration-selected: 1;
+
+}
+
+
+QListView::item:selected
+{
+	color:black;
+	background-color:lightgray;
+	border: none;
+	border-radius: 0px;
+	padding-left : 10px;
+
+}
+
+
+QListView::item:!selected
+{
+	color:white;
+	background-color:transparent;
+	border: none;
+	border-radius: 0px;
+	padding-left : 10px;
+
+}
+
+
+QListView::item:!selected:hover
+{
+	color:white;
+	background-color:rgb(62, 62, 62);
+	border: none;
+	border-radius: 0px;
+	padding-left : 10px;
+
+}
+
+
+/*-----QTreeView-----*/
+QTreeView 
+{
+	background-color: #251507;
+	show-decoration-selected: 0;
+	selection-color: white; 
+	font: 8pt;
+	color: #fff;
+
+}
+
+
+QHeaderView::section
+{
+	color: #fff;
+	font-weight: bold;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #3c3737, stop:1 #251507);
+    margin-top:1px;
+	margin-bottom:1px;
+
+}
+
+
+QTreeView::item 
+{
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+
+}
+
+
+QTreeView::item:hover 
+{
+	background-color:rgb(62, 62, 62);
+	color:white;
+
+}
+
+
+QTreeView::item:selected 
+{
+	background-color:lightgray;
+	color:black;
+
+}
+
+
+QTreeView::item:selected:active
+{
+	background-color:lightgray;
+	color:black;
+
+}
+
+
+QTreeView::item:selected:!active 
+{
+	background-color:lightgray;
+	color:black;
+
+}
+
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings 
+{
+	image: url(://tree-closed.png);
+
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  
+{
+	image: url(://tree-open.png);
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal
+{
+    border: 0px;
+    background-color: #1e1919;
+    height: 13px;
+    margin: 0px 16px 0 16px;
+
+}
+
+
+QScrollBar::handle:horizontal
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:horizontal
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    width: 14px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:horizontal
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    width: 14px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::right-arrow:horizontal
+{
+    image: url(://arrow-right.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::left-arrow:horizontal
+{
+    image: url(://arrow-left.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal
+{
+    background: none;
+
+}
+
+
+QScrollBar:vertical
+{
+    border: 0px;
+    background-color: #1e1919;
+    width: 13px;
+    margin: 16px 0 16px 0;
+}
+
+
+QScrollBar::handle:vertical
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:vertical
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    height: 14px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:vertical
+{
+    background-color: #504b4b;
+	border: 1px solid #000;
+    height: 14px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::up-arrow:vertical
+{
+    image: url(://arrow-up.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::down-arrow:vertical
+{
+    image: url(://arrow-down.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical
+{
+    background: none;
+
+}

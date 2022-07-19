@@ -1,0 +1,415 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #b0b0b0;
+	color: #ffffff;
+	border-color: #000000;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #000000;
+	border-color: #000000;
+
+}
+
+
+/*-----QMenuBar-----*/
+QMenuBar
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(227, 227, 228, 255),stop:1 rgba(213, 213, 213, 255));
+	color: #000;
+	font-weight: bold;
+
+}
+
+
+QMenuBar::disabled
+{
+	background-color: #404040;
+	color: #656565;
+	border-color: #051a39;
+
+}
+
+
+QMenuBar::item
+{
+    background-color: transparent;
+
+}
+
+
+QMenuBar::item:selected
+{
+    background-color: #bebebe;
+	color: #000;
+
+}
+
+
+QMenuBar::item:pressed
+{
+    background-color: #a0a0a0;
+    border: 0px solid;
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+
+}
+
+
+/*-----QMenu-----*/
+QMenu
+{
+    background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(207, 208, 216, 255),stop:1 rgba(152, 153, 159, 255));
+    border: 1px solid;
+	border-radius: 3px;
+    color: #000;
+	font-weight: bold;
+
+}
+
+
+QMenu QWidget{
+	background-color: transparent;
+
+}
+
+
+QMenu::separator
+{
+    height: 1px;
+    background-color: #000;
+	margin-left: 15px;
+	margin-right: 15px;
+    color: #ffffff;
+
+}
+
+
+QMenu::item
+{
+    min-width : 150px;
+    padding: 3px 20px 3px 20px;
+
+}
+
+
+QMenu::item:selected
+{
+    background-color: #3da8ff;
+    color: #f0f5f3;
+
+}
+
+
+QMenu::item:disabled
+{
+    color: #262626;
+
+}
+
+
+/*-----QToolTip-----*/
+QToolTip
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(207, 208, 216, 255),stop:1 rgba(152, 153, 159, 255));
+	color: #000;
+	border: 1px solid #4e4e4d;
+	font-weight: bold;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: #b0b0b0;
+	color: #000000;
+	border: 1px solid #888888;
+	border-radius: 14px;
+	padding: 6px;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #cbccd4;
+	border: 1px solid #888888;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #787878;
+
+}
+
+
+QPushButton::checked
+{
+	background-color: #787878;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #e6e6e6;
+	color: #000;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #0a84ff;
+	border-radius: 4px;
+	padding: 5px;
+
+}
+
+
+/*-----QTabBar-----*/
+QTabBar::tab
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(207, 208, 216, 255),stop:1 rgba(152, 153, 159, 255));
+	color: #000;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #7a7b79;
+	padding: 4px;
+
+}
+
+
+QTabWidget::pane 
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(207, 208, 216, 255),stop:1 rgba(152, 153, 159, 255));
+	border: 0px solid #444;
+	top: 1px;
+
+}
+
+
+QTabBar::close-button 
+{
+	image: url(://checkbox.png);
+	subcontrol-position: right;
+}
+
+
+QTabBar::close-button:hover 
+{
+	background-color: #1d1d1d;
+	border: 0px solid;
+	border-radius: 8px;
+
+}
+
+
+QTabBar::tab:last
+{
+	margin-right: 0; 
+
+}
+
+
+QTabBar::tab:first:!selected,
+QTabBar::tab:last:!selected
+{
+	background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(191, 191, 191, 255),stop:1 rgba(186, 186, 186, 255));
+	color: #4d4d4c;
+	margin-left: 0px;
+
+}
+
+
+QTabBar::tab:!selected
+{
+	color: #b1b1b1;
+	border-bottom-style: solid;
+	margin-top: 3px;
+	background-color: #c5c6c4;
+
+}
+
+
+QTabBar::tab:selected
+{
+	margin-bottom: 0px;
+
+}
+
+
+QTabBar::tab:!selected:hover
+{
+	background-color: #c5c6c4;
+	color: #000;
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:vertical 
+{
+   border: none;
+   width: 10px;
+
+}
+
+
+QScrollBar:horizontal 
+{
+   border: none;
+   height: 10px;
+
+}
+
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal
+{
+   border: none;
+   border-radius : 0px;
+   background-color: #7a7a7a;
+   min-height: 80px;
+   width : 12px;
+
+}
+
+
+QScrollBar::handle:vertical:pressed,
+QScrollBar::handle:horizontal:pressed
+{
+   background-color: #5d5f60; 
+
+}
+
+
+QScrollBar::handle:vertical:hover,
+QScrollBar::handle:horizontal:hover
+{
+   background-color: #5d5f60; 
+
+}
+
+
+QScrollBar::add-line:vertical,
+QScrollBar::add-line:horizontal
+{
+   border: none;
+   background: transparent;
+   height: 0px;
+   subcontrol-position: bottom;
+   subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::add-line:vertical:hover,
+QScrollBar::add-line:horizontal:hover
+{
+   background-color: transparent;
+
+}
+
+
+QScrollBar::add-line:vertical:pressed, 
+QScrollBar::add-line:horizontal:pressed
+{
+   background-color: #3f3f3f;
+
+}
+
+
+QScrollBar::sub-line:vertical,
+QScrollBar::sub-line:horizontal
+{
+   border: none;
+   background: transparent;
+   height: 0px;
+
+}
+
+
+QScrollBar::sub-line:vertical:hover,
+QScrollBar::sub-line:horizontal:hover
+{
+   background-color: transparent;
+
+}
+
+
+QScrollBar::sub-line:vertical:pressed,
+QScrollBar::sub-line:horizontal:pressed
+{
+   background-color: #3f3f3f;
+
+}
+
+
+QScrollBar::up-arrow:vertical,
+QScrollBar::up-arrow:horizontal
+{
+   width: 0px;
+   height: 0px;
+   background: transparent;
+
+}
+
+
+QScrollBar::down-arrow:vertical, 
+QScrollBar::down-arrow:horizontal
+{
+   width: 0px;
+   height: 0px;
+   background: transparent;
+
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+   background-color: white;
+	
+}
+
+
+/*-----QStatusBar-----*/
+QStatusBar
+{
+	background-color: #b0b0b0;
+	color: #000;
+
+}
+
+

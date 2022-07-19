@@ -1,0 +1,166 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #0f0f0f;
+	color: #fff;
+	border-color: #000000;
+
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+	background-color: transparent;
+	color: #fff;
+	font-weight: bold;
+	border-color: #000000;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+	background-color: #d10000;
+	color: #fff;
+	font-weight: bold;
+	border: 1px solid #d10000;  
+	border-radius: 2px;
+	padding: 5px;
+
+}
+
+
+QPushButton::hover
+{
+	background-color: #ad0000;
+	color: #fff;
+
+}
+
+
+QPushButton::pressed
+{
+	background-color: #e00000;
+	color: #fff;
+
+}
+
+
+/*-----QToolButton-----*/
+QToolButton
+{
+	background-color: transparent;
+	color: #000000;
+	border-style: solid;
+	border-color: #000000;
+
+}
+
+
+QToolButton::hover
+{
+	background-color: #d10000;
+	color: #000000;
+	border-radius: 15px;
+	border-color: #d10000;
+
+}
+
+
+QToolButton::pressed
+{
+	background-color: #d10000;
+	color: #000000;
+	border-style: solid;
+	border-width: 0px;
+
+}
+
+
+/*-----QLineEdit-----*/
+QLineEdit{
+	background-color: #4d4d4d;
+	color: #fff;
+	font-weight: bold;
+	border-style: solid;
+	border-radius: 5px;
+	padding: 5px;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+	color: #b9b9bb;
+	font-weight: bold;
+
+}
+
+
+QCheckBox::indicator
+{
+    color: #b1b1b1;
+    background-color: #00111d;
+    border: 1px solid #d10000;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url("./ressources/check.png"); /*To replace*/
+	background-color: #d10000;
+    border: 1px solid #d10000;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 1px solid #ff0000;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}

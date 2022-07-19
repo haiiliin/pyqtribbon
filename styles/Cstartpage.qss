@@ -1,0 +1,319 @@
+/*Copyright (c) DevSec Studio. All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+/*-----QWidget-----*/
+QWidget
+{
+	background-color: #1c1c1c;
+	color: #f5f5f5;
+	border-color: #000000;
+
+}
+
+
+/*-----QPushButton-----*/
+QPushButton
+{
+    background-color: transparent;
+    border: none;
+    border-radius : 0px;
+    color: rgb(255, 255, 255);
+	padding: 5px;
+
+}
+
+
+QPushButton::hover
+{
+    background-color: rgb(79, 79, 79);
+    border: none;
+    border-radius : 0px;
+    color: rgb(0, 0, 0);
+    font: bold 12px;
+
+}
+
+
+QPushButton::pressed
+{
+    background-color: #b4b4b4;
+    border: none;
+    border-radius : 0px;
+    color: rgb(0, 0, 0);
+    font: bold 12px;
+
+}
+
+
+/*-----QCheckBox-----*/
+QCheckBox
+{
+	background-color: transparent;
+	color: #b9b9bb;
+	font-weight: bold;
+
+}
+
+
+QCheckBox::indicator
+{
+    color: #b1b1b1;
+    background-color: #000;
+    border: 1px solid #41cd52;
+    width: 12px;
+    height: 12px;
+
+}
+
+
+QCheckBox::indicator:checked
+{
+    image:url("./ressources/check.png"); /*To replace*/
+	background-color: #1f2b2b;
+    border: 1px solid #41cd52;
+
+}
+
+
+QCheckBox::indicator:unchecked:hover
+{
+    border: 1px solid #41cd52;
+
+}
+
+
+QCheckBox::disabled
+{
+	color: #656565;
+
+}
+
+
+QCheckBox::indicator:disabled
+{
+	background-color: #656565;
+	color: #656565;
+    border: 1px solid #656565;
+
+}
+
+
+/*-----QListView-----*/
+QListView 
+{
+    border : none;
+    background-color: #343434;
+    color: white;
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+    outline: 0;
+	border: 1px solid gray;
+
+}
+
+
+QListView::disabled 
+{
+	background-color: #656565;
+	color: #1b1b1b;
+    border: 1px solid #656565;
+
+}
+
+
+QListView::item 
+{
+    padding: 1px;
+
+}
+
+
+QListView::item:alternate 
+{
+    background-color: #4a4b4d;
+
+}
+
+
+QListView::item:selected 
+{
+    border: 1px solid #6a6ea9;
+    border: none;
+    color: rgb(0, 0, 0);
+
+}
+
+
+QListView::item:selected:!active 
+{
+    background-color: #41cd52;
+    border: none;
+    color: rgb(0, 0, 0);
+
+}
+
+
+QListView::item:selected:active 
+{
+    background-color: #41cd52;
+    border: none;
+    color: rgb(0, 0, 0);
+
+}
+
+
+QListView::item:hover {
+    background-color: #262626;
+    border: none;
+    color: white;
+
+}
+
+
+/*-----QScrollBar-----*/
+QScrollBar:horizontal
+{
+    border: 1px solid #222222;
+    background-color: #3d3d3d;
+    height: 15px;
+    margin: 0px 16px 0 16px;
+
+}
+
+
+QScrollBar::handle:horizontal
+{
+    background-color: #41cd52;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:horizontal
+{
+    border: 1px solid #1b1b19;
+    background-color: #41cd52;
+    width: 14px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:horizontal
+{
+    border: 1px solid #1b1b19;
+    background-color: #41cd52;
+    width: 14px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::right-arrow:horizontal
+{
+    image: url(://arrow-right.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::left-arrow:horizontal
+{
+    image: url(://arrow-left.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+    background: none;
+
+}
+
+
+QScrollBar:vertical
+{
+    background-color: #3d3d3d;
+    width: 13px;
+    margin: 16px 0 16px 0;
+    border: 1px solid #222222;
+
+}
+
+
+QScrollBar::handle:vertical
+{
+    background-color: #41cd52;
+    min-height: 20px;
+
+}
+
+
+QScrollBar::add-line:vertical
+{
+    border: 1px solid #1b1b19;
+    background-color: #41cd52;
+    height: 14px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::sub-line:vertical
+{
+    border: 1px solid #41cd52;
+    background-color: #41cd52;
+    height: 14px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+
+}
+
+
+QScrollBar::up-arrow:vertical
+{
+    image: url(://arrow-up.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::down-arrow:vertical
+{
+    image: url(://arrow-down.png);
+    width: 6px;
+    height: 6px;
+
+}
+
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background-color: none;
+
+}
