@@ -61,11 +61,7 @@ class Ribbon(QtWidgets.QWidget):
         self._minRibbonButton.setToolTip("Minimize")
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(32, 32))
-        self._helpButton.setIcon(
-            QtWidgets.qApp.style().standardIcon(
-                QtWidgets.QStyle.SP_TitleBarContextHelpButton
-            )
-        )
+        self._helpButton.setIcon(QtGui.QIcon("icons/help.png"))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)
