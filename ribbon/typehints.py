@@ -1,5 +1,7 @@
 import typing
 
+from PyQt5 import QtCore, QtWidgets
+
 
 class PyQtSignalType(typing.Protocol):
     """This is a protocol for the pyqt signal type."""
@@ -18,3 +20,14 @@ class PyQtActionType(typing.Protocol):
     """This is a protocol for the pyqt action type."""
 
     triggered: PyQtSignalType
+
+
+class RibbonType(typing.Protocol):
+    """
+    This is a protocol for the ribbon type for type hints in categories for getting the tabRect.
+    """
+    def tabBar(self) -> QtWidgets.QTabBar:
+        ...
+
+    def tabRect(self, category) -> QtCore.QRect:
+        ...

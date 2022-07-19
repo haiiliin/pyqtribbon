@@ -2,7 +2,8 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from .category import Category, CategoryStyle
+from .category import Category, CategoryStyle, contextualColors
+from .tabbar import TabBar
 
 
 class Ribbon(QtWidgets.QWidget):
@@ -14,7 +15,9 @@ class Ribbon(QtWidgets.QWidget):
 
     #: The categories of the ribbon.
     _categories: typing.List[Category]
+    _contextCategoryCount = 0
 
+    #: Buttons
     _quickAccessButtons = []
     _rightToolButtons = []
 
@@ -77,7 +80,7 @@ class Ribbon(QtWidgets.QWidget):
         self.addRightToolButton(self._helpButton)
 
         # category tab bar
-        self._tabBar = QtWidgets.QTabBar(self)
+        self._tabBar = TabBar(self)
         font = self._tabBar.font()
         font.setPointSize(10)
         self._tabBar.setFont(font)
@@ -123,24 +126,62 @@ class Ribbon(QtWidgets.QWidget):
         self._fileMenu = menu
         self._applicationButton.setMenu(menu)
 
-    def addCategory(self, title: str, style=CategoryStyle.Normal) -> Category:
+    def tabBar(self) -> QtWidgets.QTabBar:
+        """Return the tab bar of the ribbon.
+
+        :return: The tab bar of the ribbon.
+        """
+        return self._tabBar
+
+    def addCategory(self, title: str, style=CategoryStyle.Normal, color: QtGui.QColor = None) -> Category:
         """Add a new category to the ribbon.
 
         :param title: The title of the category.
         :param style: The buttonStyle of the category.
+        :param color: The color of the context category, only used if style is Contextual, if None, the default color
+                      will be used.
         :return: The newly created category.
         """
-        category = Category(style, self)
+        category = Category(title, style, self)
         category.setFixedHeight(self._ribbonHeight -
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom() - 2)
+        if style == CategoryStyle.Contextual:
+            if color is None:
+                color = contextualColors[self._contextCategoryCount % len(contextualColors)]
+            self._contextCategoryCount += 1
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         self._categories.append(category)
-        self._tabBar.addTab(title)
+        self._tabBar.addTab(title, color)
         self._stackedWidget.addWidget(category)
         return category
+
+    def tabRect(self, category: Category) -> QtCore.QRect:
+        """Get the rectangle of the tab of the given category.
+
+        :param category: The category to get the tab rectangle of.
+        :return: The rectangle of the tab.
+        """
+        return self._tabBar.tabRect(self._categories.index(category))
+
+    def addNormalCategory(self, title: str) -> Category:
+        """Add a new category to the ribbon.
+
+        :param title: The title of the category.
+        :return: The newly created category.
+        """
+        return self.addCategory(title, CategoryStyle.Normal)
+
+    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> Category:
+        """Add a new context category to the ribbon.
+
+        :param title: The title of the category.
+        :param color: The color of the context category, if None, the default color will be used.
+        :return: The newly created category.
+        """
+        return self.addCategory(title, CategoryStyle.Contextual, color)
 
     def removeCategory(self, category: Category):
         """Remove a category from the ribbon.

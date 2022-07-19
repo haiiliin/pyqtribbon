@@ -3,16 +3,31 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 from .panel import Panel
+from .typehints import RibbonType
 
 
 class CategoryStyle(enum.IntEnum):
     """The buttonStyle of a category."""
-
     Normal = 0
     Contextual = 1
 
 
+#: A list of contextual category colors
+contextualColors = [
+    QtGui.QColor(201, 89, 156),  # 玫红
+    QtGui.QColor(242, 203, 29),  # 黄
+    QtGui.QColor(255, 157, 0),  # 橙
+    QtGui.QColor(14, 81, 167),  # 蓝
+    QtGui.QColor(228, 0, 69),  # 红
+    QtGui.QColor(67, 148, 0),  # 绿
+]
+
+
 class Category(QtWidgets.QFrame):
+    #: Title of the category
+    _title: str
+    #: The ribbon parent of this category
+    _ribbon: RibbonType
     #: The buttonStyle of the category.
     _style: CategoryStyle
     #: Panels
@@ -21,11 +36,13 @@ class Category(QtWidgets.QFrame):
     #: The signal that is emitted when the display options button is clicked.
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
-    def __init__(self, style: CategoryStyle = CategoryStyle.Normal, parent=None):
+    def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, parent: RibbonType = None):
         super().__init__(parent)
         self.setStyleSheet("QWidget { background-color: white; }")
+        self._title = title
         self._style = style
         self._panels = {}
+        self._ribbon = parent
 
         self._scrollArea = QtWidgets.QScrollArea()
         self._scrollArea.setFrameStyle(QtWidgets.QFrame.NoFrame)
@@ -72,6 +89,21 @@ class Category(QtWidgets.QFrame):
             )
         )
         self._mainLayout.addLayout(self._displayOptionsLayout)
+
+    def setCategoryStyle(self, style: CategoryStyle):
+        """Set the buttonStyle of the category.
+
+        :param style: The buttonStyle.
+        """
+        self._style = style
+        self.repaint()
+
+    def categoryStyle(self):
+        """Return the buttonStyle of the category.
+
+        :return: The buttonStyle.
+        """
+        return self._style
 
     def addPanel(self, title: str) -> Panel:
         """Add a new panel to the category.
