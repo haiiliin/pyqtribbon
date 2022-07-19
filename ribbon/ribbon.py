@@ -22,7 +22,7 @@ class Ribbon(QtWidgets.QWidget):
     _rightToolButtons = []
 
     #: heights of the ribbon elements
-    _ribbonHeight = 200
+    _ribbonHeight = 220
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
 
@@ -47,19 +47,14 @@ class Ribbon(QtWidgets.QWidget):
             "QToolButton { border: none; padding: 0px; } "
             "QToolButton::menu-indicator { image: none; } "
         )
-
         self._applicationButton.setToolTip("File")
-        self._tabsLayout.addWidget(self._applicationButton)
-
         self._fileMenu = QtWidgets.QMenu(self)
         self._applicationButton.setMenu(self._fileMenu)
 
-        # quick access title bar actions
-        self.quickAccessToolBar = QtWidgets.QToolBar()
-        self.quickAccessToolBar.setOrientation(QtCore.Qt.Horizontal)
-        self.quickAccessToolBar.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
-        self.quickAccessToolBar.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-        self._tabsLayout.addWidget(self.quickAccessToolBar)
+        self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout()
+        self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
+        self._quickAccessToolBarLayout.setSpacing(0)
+        self._quickAccessToolBarLayout.addWidget(self._applicationButton, 0, QtCore.Qt.AlignBottom)
 
         # right toolbar
         self._rightToolBar = QtWidgets.QToolBar()
@@ -82,11 +77,12 @@ class Ribbon(QtWidgets.QWidget):
         # category tab bar
         self._tabBar = TabBar(self)
         font = self._tabBar.font()
-        font.setPointSize(10)
+        font.setPointSize(font.pointSize() + 3)
         self._tabBar.setFont(font)
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
 
+        self._tabsLayout.addLayout(self._quickAccessToolBarLayout)
         self._tabsLayout.addWidget(self._tabBar)
         self._tabsLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
@@ -147,7 +143,7 @@ class Ribbon(QtWidgets.QWidget):
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() - 2)
+                                self._mainLayout.contentsMargins().bottom() - 22)
         if style == CategoryStyle.Contextual:
             if color is None:
                 color = contextualColors[self._contextCategoryCount % len(contextualColors)]
@@ -208,7 +204,7 @@ class Ribbon(QtWidgets.QWidget):
         """
         button.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._quickAccessButtons.append(button)
-        self.quickAccessToolBar.addWidget(button)
+        self._quickAccessToolBarLayout.addWidget(button, 0, QtCore.Qt.AlignBottom)
 
     def setQuickAccessButtonHeight(self, height: int):
         """Set the height of the quick access buttons.
