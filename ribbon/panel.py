@@ -57,6 +57,7 @@ class Panel(QtWidgets.QWidget):
 
     def __init__(self, title: str, maxRows=3, parent=None):
         super().__init__(parent)
+        self.setStyleSheet("QWidget { background-color: white; }")
         self._maxRows = maxRows
         self._gridLayoutManager = GridLayoutManager(self._maxRows)
         self._widgets = []
@@ -70,8 +71,8 @@ class Panel(QtWidgets.QWidget):
         # Actions layout
         self._horizontalLayout = QtWidgets.QHBoxLayout()
         self._actionsLayout = QtWidgets.QGridLayout()
-        self._actionsLayout.setContentsMargins(5, 5, 5, 5)
-        self._actionsLayout.setSpacing(5)
+        self._actionsLayout.setContentsMargins(0, 0, 0, 0)
+        self._actionsLayout.setSpacing(0)
         self._horizontalLayout.addLayout(self._actionsLayout, 0)
         self._horizontalLayout.addSpacerItem(
             QtWidgets.QSpacerItem(

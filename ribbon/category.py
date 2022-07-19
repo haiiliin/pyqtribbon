@@ -20,6 +20,7 @@ class Category(QtWidgets.QWidget):
 
     def __init__(self, style: CategoryStyle = CategoryStyle.Normal, parent=None):
         super().__init__(parent)
+        self.setStyleSheet("QWidget { background-color: white; }")
         self._style = style
         self._panels = {}
 
