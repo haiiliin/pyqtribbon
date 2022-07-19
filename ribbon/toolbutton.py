@@ -81,4 +81,5 @@ class ToolButton(QtWidgets.QToolButton):
         """
         super().setMenu(menu)
         self.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
-        self.setDefaultAction(self.menu().actions()[0])
+        if self.menu().actions():
+            self.setDefaultAction(self.menu().actions()[0])

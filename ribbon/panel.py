@@ -3,7 +3,7 @@ import typing
 import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-from .buton import ToolButton, ButtonStyle
+from .toolbutton import ToolButton, ButtonStyle
 from .separator import Separator
 
 
