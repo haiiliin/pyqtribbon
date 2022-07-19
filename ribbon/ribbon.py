@@ -9,6 +9,9 @@ class Ribbon(QtWidgets.QWidget):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
 
+    #: The signal that is emitted when the display options button is clicked.
+    displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
+
     #: The categories of the ribbon.
     _categories: typing.List[Category]
 
@@ -19,9 +22,6 @@ class Ribbon(QtWidgets.QWidget):
     _ribbonHeight = 200
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
-
-    #: The signal that is emitted when the display options button is clicked.
-    displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
     def __init__(self, parent=None):
         super().__init__(parent)
