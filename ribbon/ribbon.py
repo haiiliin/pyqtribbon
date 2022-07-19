@@ -14,7 +14,7 @@ class Ribbon(QtWidgets.QWidget):
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
     #: The categories of the ribbon.
-    _categories: typing.List[Category]
+    _categories: typing.List[Category] = []
     _contextCategoryCount = 0
 
     #: Buttons
@@ -138,21 +138,55 @@ class Ribbon(QtWidgets.QWidget):
                       will be used.
         :return: The newly created category.
         """
-        category = Category(title, style, self)
+        if style == CategoryStyle.Contextual:
+            if color is None:
+                color = contextualColors[self._contextCategoryCount % len(contextualColors)]
+            self._contextCategoryCount += 1
+        category = Category(title, style, color, self)
         category.setFixedHeight(self._ribbonHeight -
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom() - 12)
-        if style == CategoryStyle.Contextual:
-            if color is None:
-                color = contextualColors[self._contextCategoryCount % len(contextualColors)]
-            self._contextCategoryCount += 1
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
-        self._categories.append(category)
-        self._tabBar.addTab(title, color)
-        self._stackedWidget.addWidget(category)
+        if style == CategoryStyle.Normal:
+            self._categories.append(category)
+            self._tabBar.addTab(title, color)
+            self._stackedWidget.addWidget(category)
+        elif style == CategoryStyle.Contextual:
+            category.hide()
         return category
+
+    def categories(self) -> typing.List[Category]:
+        """Return the list of categories of the ribbon.
+
+        :return: The list of categories of the ribbon.
+        """
+        return self._categories
+
+    def showContextCategory(self, category: Category):
+        """Show the given category, if it is not a contextual category, nothing happens.
+
+        :param category: The category to show.
+        """
+        if category.style() == CategoryStyle.Normal:
+            return
+        self._categories.append(category)
+        self._tabBar.addTab(category.title(), category.color())
+        self._tabBar.setCurrentIndex(self._tabBar.count() - 1)
+        self._stackedWidget.addWidget(category)
+        self._stackedWidget.setCurrentIndex(self._tabBar.count() - 1)
+
+    def hideContextCategory(self, category: Category):
+        """Hide the given category, if it is not a contextual category, nothing happens.
+
+        :param category: The category to hide.
+        """
+        if category.style() == CategoryStyle.Normal:
+            return
+        self._categories.remove(category)
+        self._tabBar.removeTab(self._tabBar.indexOf(category.title()))
+        self._stackedWidget.removeWidget(category)
 
     def tabRect(self, category: Category) -> QtCore.QRect:
         """Get the rectangle of the tab of the given category.

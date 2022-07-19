@@ -27,22 +27,26 @@ class Category(QtWidgets.QFrame):
     #: Title of the category
     _title: str
     #: The ribbon parent of this category
-    _ribbon: RibbonType
+    _ribbon: typing.Optional[RibbonType]
     #: The buttonStyle of the category.
     _style: CategoryStyle
     #: Panels
     _panels: typing.Dict[str, Panel]
+    #: color of the contextual category
+    _color: typing.Optional[QtGui.QColor]
 
     #: The signal that is emitted when the display options button is clicked.
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
-    def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, parent: RibbonType = None):
+    def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, color: QtGui.QColor = None,
+                 parent=None):
         super().__init__(parent)
         self.setStyleSheet("QWidget { background-color: white; }")
         self._title = title
         self._style = style
         self._panels = {}
         self._ribbon = parent
+        self._color = color
 
         self._scrollArea = QtWidgets.QScrollArea()
         self._scrollArea.setFrameStyle(QtWidgets.QFrame.NoFrame)
@@ -89,6 +93,42 @@ class Category(QtWidgets.QFrame):
             )
         )
         self._mainLayout.addLayout(self._displayOptionsLayout)
+
+    def title(self) -> str:
+        """Return the title of the category."""
+        return self._title
+
+    def color(self) -> QtGui.QColor:
+        """Return the color of the contextual category.
+
+        :return: The color of the contextual category.
+        """
+        return self._color
+
+    def showContextCategory(self):
+        """Show the given category, if it is not a contextual category, nothing happens."""
+        self._ribbon.showContextCategory(self)
+
+    def hideContextCategory(self):
+        """Hide the given category, if it is not a contextual category, nothing happens."""
+        self._ribbon.hideContextCategory(self)
+
+    def isShown(self) -> bool:
+        """Return whether the category is shown.
+
+        :return: Whether the category is shown.
+        """
+        return self in self._ribbon.categories()
+
+    def setCategoryState(self, state: bool):
+        """Set the state of the category.
+
+        :param state: The state.
+        """
+        if state:
+            self.showContextCategory()
+        else:
+            self.hideContextCategory()
 
     def setCategoryStyle(self, style: CategoryStyle):
         """Set the buttonStyle of the category.

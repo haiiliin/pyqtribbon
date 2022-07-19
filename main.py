@@ -36,14 +36,14 @@ if __name__ == "__main__":
     redoButton.setIcon(QtGui.QIcon("icons/redo.png"))
     ribbon.addQuickAccessButton(redoButton)
 
-    category = ribbon.addCategory("Category 1")
-    panel = category.addPanel("Panel 1")
+    category1 = ribbon.addCategory("Category 1")
+    panel = category1.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
-    panel.addMediumButton("Button 4", icon=QtGui.QIcon("icons/close.png"))
+    showCategoryButton2 = panel.addMediumToggleButton("Show/Hide Category 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addSeparator()
-    panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
+    showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 6", icon=QtGui.QIcon("icons/close.png"))
     panel.addSeparator()
     panel.addMediumButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
     panel.addWidget(saveButton, rowSpan=6)
 
-    panel = category.addPanel("Panel 2")
+    panel = category1.addPanel("Panel 2")
     panel.addMediumButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 9", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("This is a very very very very very long button",
@@ -87,8 +87,8 @@ if __name__ == "__main__":
     panel.addSmallButton("This is a very very very very very long button",
                          icon=QtGui.QIcon("icons/close.png"), colSpan=3)
 
-    category = ribbon.addContextCategory("Category 2")
-    panel = category.addPanel("Panel 1")
+    category2 = ribbon.addContextCategory("Category 2")
+    panel = category2.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
@@ -96,11 +96,14 @@ if __name__ == "__main__":
     panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
     panel.addCalendarWidget()
 
-    category = ribbon.addContextCategory("Category 3")
-    panel = category.addPanel("Panel 1")
+    category3 = ribbon.addContextCategory("Category 3")
+    panel = category3.addPanel("Panel 1")
     panel.addLargeButton("Button 1", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
+
+    showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryState(checked))
+    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryState(not category3.isShown()))
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
