@@ -11,6 +11,8 @@ if __name__ == "__main__":
     app.setFont(QtGui.QFont("Times New Roman", 8))
     app.setStyle("Windows")
 
+    app.setStyleSheet(open("styles/Default.qss", "r").read())
+
     window = QtWidgets.QMainWindow()
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QtGui.QIcon("icons/python.png"))
