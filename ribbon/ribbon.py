@@ -143,7 +143,7 @@ class Ribbon(QtWidgets.QWidget):
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() - 22)
+                                self._mainLayout.contentsMargins().bottom() - 12)
         if style == CategoryStyle.Contextual:
             if color is None:
                 color = contextualColors[self._contextCategoryCount % len(contextualColors)]

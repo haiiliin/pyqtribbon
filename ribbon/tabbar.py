@@ -12,8 +12,8 @@ class TabBar(QtWidgets.QTabBar):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setStyleSheet("QTabBar::tab {margin-top: 20px; margin-bottom: 5px; } "
-                           "QTabBar::tab:!selected {margin-top: 20px; margin-bottom: 5px; }")
+        self.setStyleSheet("QTabBar::tab {margin-top: 10px; margin-bottom: 5px; } "
+                           "QTabBar::tab:!selected {margin-top: 10px; margin-bottom: 5px; }")
 
     def addTab(self, text: str, color: QtGui.QColor = None) -> int:
         self._tabColors[text] = color
