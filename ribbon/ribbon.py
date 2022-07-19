@@ -30,6 +30,7 @@ class Ribbon(QtWidgets.QWidget):
         # Application
         self._applicationButton = QtWidgets.QToolButton()
         self._applicationButton.setIcon(QtGui.QIcon('icons/python.png'))
+        self._applicationButton.setIconSize(QtCore.QSize(32, 32))
         self._applicationButton.setText("File")
         self._applicationButton.setStyleSheet(
             "QToolButton { border: none; padding: 0px; } "
@@ -58,6 +59,10 @@ class Ribbon(QtWidgets.QWidget):
         self._tabBar.setDocumentMode(True)
 
         # min/max/close buttons
+        self._rightButtonGroup = QtWidgets.QWidget()
+        self._rightButtonLayout = QtWidgets.QHBoxLayout(self._rightButtonGroup)
+        self._rightButtonLayout.setContentsMargins(0, 0, 0, 0)
+        self._rightButtonLayout.setSpacing(5)
         self._minRibbonButton = QtWidgets.QToolButton(self)
         self._minRibbonButton.setIconSize(QtCore.QSize(32, 32))
         self._minRibbonButton.setArrowType(QtCore.Qt.UpArrow)
@@ -69,6 +74,8 @@ class Ribbon(QtWidgets.QWidget):
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)
+        self._rightButtonLayout.addWidget(self._minRibbonButton)
+        self._rightButtonLayout.addWidget(self._helpButton)
 
         self._tabsLayout.addWidget(self._tabBar)
         self._tabsLayout.addSpacerItem(
@@ -76,8 +83,7 @@ class Ribbon(QtWidgets.QWidget):
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
         )
-        self._tabsLayout.addWidget(self._minRibbonButton)
-        self._tabsLayout.addWidget(self._helpButton)
+        self._tabsLayout.addWidget(self._rightButtonGroup)
 
         # stacked widget
         self._stackedWidget = QtWidgets.QStackedWidget(self)
@@ -146,11 +152,12 @@ class Ribbon(QtWidgets.QWidget):
         self._tabBar.setCurrentIndex(index)
         self._stackedWidget.setCurrentIndex(index)
 
-    def addQuickAccessButton(self, button: QtWidgets.QWidget):
+    def addQuickAccessButton(self, button: QtWidgets.QToolButton):
         """Add a widget to the quick access bar.
 
         :param button: The button to add.
         """
+        button.setIconSize(QtCore.QSize(32, 32))
         self._titleBarActions.addWidget(button)
 
     def setRibbonHeight(self, height: int):
@@ -175,12 +182,35 @@ class Ribbon(QtWidgets.QWidget):
         """
         self._applicationButton.setIcon(icon)
 
-    def setHelpIcon(self, icon: QtGui.QIcon):
+    def setMinButtonIcon(self, icon: QtGui.QIcon):
+        """Set the icon of the min button.
+
+        :param icon: The icon to set.
+        """
+        self._minRibbonButton.setIcon(icon)
+
+    def removeMinButton(self):
+        """Remove the min button from the ribbon."""
+        self._minRibbonButton.setVisible(False)
+
+    def setHelpButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the help button.
 
         :param icon: The icon to set.
         """
         self._helpButton.setIcon(icon)
+
+    def removeHelpButton(self):
+        """Remove the help button from the ribbon."""
+        self._helpButton.setVisible(False)
+
+    def addRightButton(self, button: QtWidgets.QToolButton):
+        """Add a widget to the right button bar.
+
+        :param button: The button to add.
+        """
+        button.setIconSize(QtCore.QSize(32, 32))
+        self._rightButtonLayout.addWidget(button)
 
     def minimumSizeHint(self) -> QtCore.QSize:
         """Return the minimum size hint of the widget.
