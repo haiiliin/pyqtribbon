@@ -45,11 +45,11 @@ if __name__ == "__main__":
     panel.addSmallButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 4", icon=QtGui.QIcon("icons/close.png"))
     panel.addSeparator()
-    panel.addWidget(QtWidgets.QPushButton("Label 1"))
     panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 6", icon=QtGui.QIcon("icons/close.png"))
     panel.addSeparator()
     panel.addMediumButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
+    panel.addMediumButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
 
     saveButton = panel.addLargeButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -81,11 +81,13 @@ if __name__ == "__main__":
     panel = category.addPanel("Panel 2")
     panel.addMediumButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 9", icon=QtGui.QIcon("icons/close.png"))
-    panel.addWidget(QtWidgets.QPushButton("This is a very very very very very long button"), colSpan=3)
+    panel.addSmallButton("This is a very very very very very long button",
+                         icon=QtGui.QIcon("icons/close.png"), colSpan=3)
     panel.addSmallToggleButton("Button 10", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallToggleButton("Button 11", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallToggleButton("Button 12", icon=QtGui.QIcon("icons/close.png"))
-    panel.addWidget(QtWidgets.QPushButton("This is a very very very very very long button"), colSpan=3)
+    panel.addSmallButton("This is a very very very very very long button",
+                         icon=QtGui.QIcon("icons/close.png"), colSpan=3)
 
     category = ribbon.addCategory("Category 2")
     panel = category.addPanel("Panel 1")
@@ -93,7 +95,7 @@ if __name__ == "__main__":
     panel.addSmallButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 4", icon=QtGui.QIcon("icons/close.png"))
-    panel.addWidget(QtWidgets.QPushButton("Label 1"))
+    panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
     panel.addCalendarWidget()
 
     category = ribbon.addCategory("Category 3")
