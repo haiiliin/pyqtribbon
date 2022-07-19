@@ -2,7 +2,7 @@ import sys
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-from ribbon import Ribbon
+from ribbon import RibbonMainWindow
 
 
 if __name__ == "__main__":
@@ -12,13 +12,11 @@ if __name__ == "__main__":
 
     app.setStyleSheet(open("styles/Default.qss", "r").read())
 
-    window = QtWidgets.QMainWindow()
+    window = RibbonMainWindow()
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QtGui.QIcon("icons/python.png"))
-    window.setCentralWidget(QtWidgets.QWidget())
-    layout = QtWidgets.QVBoxLayout(window.centralWidget())
 
-    ribbon = Ribbon()
+    ribbon = window.ribbon
 
     saveButton = QtWidgets.QToolButton()
     saveButton.setAutoRaise(True)
@@ -104,12 +102,10 @@ if __name__ == "__main__":
     panel.addLargeButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
 
-    layout.addWidget(ribbon, 0)
-
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)
-    layout.addWidget(label, 1)
+    window.mainLayout.addWidget(label, 1)
 
     window.resize(1800, 350)
     window.show()
