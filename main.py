@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     layout.addWidget(ribbon, 0)
 
-    label = QtWidgets.QLabel("Ribbon Text Window")
+    label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)
     layout.addWidget(label, 1)
