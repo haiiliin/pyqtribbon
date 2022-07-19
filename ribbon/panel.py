@@ -137,13 +137,14 @@ class Panel(QtWidgets.QFrame):
         return self._widgets[index]
 
     def addButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            style: ButtonStyle = ButtonStyle.Large,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        style: ButtonStyle = ButtonStyle.Large,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
         button = ToolButton(self)
         button.setButtonStyle(style)
@@ -164,48 +165,52 @@ class Panel(QtWidgets.QFrame):
         self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
-            colSpan=1,
+            colSpan=colSpan,
         )
         return button
 
     def addSmallButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Small, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Small, colSpan, slot, shortcut, statusTip)
 
     def addMediumButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Medium, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Medium, colSpan, slot, shortcut, statusTip)
 
     def addLargeButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Large, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Large, colSpan, slot, shortcut, statusTip)
 
     def addToggleButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            style: ButtonStyle = ButtonStyle.Large,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        style: ButtonStyle = ButtonStyle.Large,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
         button = ToolButton(self)
         button.setButtonStyle(style)
@@ -223,44 +228,47 @@ class Panel(QtWidgets.QFrame):
         self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
-            colSpan=1,
+            colSpan=colSpan,
         )
         return button
 
     def addSmallToggleButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Small, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Small, colSpan, slot, shortcut, statusTip
         )
 
     def addMediumToggleButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Medium, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Medium, colSpan, slot, shortcut, statusTip
         )
 
     def addLargeToggleButton(
-            self,
-            text: str = None,
-            icon: QtGui.QIcon = None,
-            slot=None,
-            shortcut=None,
-            statusTip=None,
+        self,
+        text: str = None,
+        icon: QtGui.QIcon = None,
+        colSpan: int = 1,
+        slot=None,
+        shortcut=None,
+        statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Large, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Large, colSpan, slot, shortcut, statusTip
         )
 
     def addComboBox(
@@ -289,14 +297,14 @@ class Panel(QtWidgets.QFrame):
         return textEdit
 
     def addPlainTextEdit(
-            self, rowSpan: int = 2, colSpan: int = 1
+        self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QPlainTextEdit:
         textEdit = QtWidgets.QPlainTextEdit(self)
         self.addWidget(textEdit, rowSpan, colSpan)
         return textEdit
 
     def addLabel(
-            self, text: str, rowSpan: int = 2, colSpan: int = 1
+        self, text: str, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QLabel:
         label = QtWidgets.QLabel(self)
         label.setText(text)
@@ -304,7 +312,7 @@ class Panel(QtWidgets.QFrame):
         return label
 
     def addProgressBar(
-            self, rowSpan: int = 2, colSpan: int = 1
+        self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QProgressBar:
         progressBar = QtWidgets.QProgressBar(self)
         self.addWidget(progressBar, rowSpan, colSpan)
@@ -339,35 +347,35 @@ class Panel(QtWidgets.QFrame):
         return timeEdit
 
     def addDateTimeEdit(
-            self, rowSpan: int = 2, colSpan: int = 1
+        self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QDateTimeEdit:
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
         self.addWidget(dateTimeEdit, rowSpan, colSpan)
         return dateTimeEdit
 
     def addTableWidget(
-            self, rowSpan: int = 6, colSpan: int = 1
+        self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QTableWidget:
         tableWidget = QtWidgets.QTableWidget(self)
         self.addWidget(tableWidget, rowSpan, colSpan)
         return tableWidget
 
     def addTreeWidget(
-            self, rowSpan: int = 6, colSpan: int = 1
+        self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QTreeWidget:
         treeWidget = QtWidgets.QTreeWidget(self)
         self.addWidget(treeWidget, rowSpan, colSpan)
         return treeWidget
 
     def addListWidget(
-            self, rowSpan: int = 6, colSpan: int = 1
+        self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QListWidget:
         listWidget = QtWidgets.QListWidget(self)
         self.addWidget(listWidget, rowSpan, colSpan)
         return listWidget
 
     def addCalendarWidget(
-            self, rowSpan: int = 6, colSpan: int = 1
+        self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QCalendarWidget:
         calendarWidget = QtWidgets.QCalendarWidget(self)
         self.addWidget(calendarWidget, rowSpan, colSpan)
