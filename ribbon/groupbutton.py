@@ -2,8 +2,16 @@ import typing
 
 from PyQt5.QtCore import QEvent, QSize, Qt, pyqtSignal
 from PyQt5.QtGui import QActionEvent, QIcon
-from PyQt5.QtWidgets import (QAction, QFrame, QHBoxLayout, QMenu, QSizePolicy,
-                             QToolButton, QWidget, QWidgetAction)
+from PyQt5.QtWidgets import (
+    QAction,
+    QFrame,
+    QHBoxLayout,
+    QMenu,
+    QSizePolicy,
+    QToolButton,
+    QWidget,
+    QWidgetAction,
+)
 
 from .toolbutton import ToolButton, ButtonStyle
 from .separator import Separator
@@ -19,7 +27,9 @@ class ButtonGroupWidgetItem:
         pass
 
     @typing.overload
-    def __init__(self, action: QWidgetAction, button: ToolButton, customWidget: bool) -> None:
+    def __init__(
+        self, action: QWidgetAction, button: ToolButton, customWidget: bool
+    ) -> None:
         pass
 
     def __init__(self, *args) -> None:
@@ -35,10 +45,10 @@ class ButtonGroupWidgetItem:
         pass
 
     @typing.overload
-    def __eq__(self, widget: 'ButtonGroupWidgetItem') -> bool:
+    def __eq__(self, widget: "ButtonGroupWidgetItem") -> bool:
         pass
 
-    def __eq__(self, arg: typing.Union[QWidgetAction, 'ButtonGroupWidgetItem']) -> bool:
+    def __eq__(self, arg: typing.Union[QWidgetAction, "ButtonGroupWidgetItem"]) -> bool:
         if type(arg) == QWidgetAction:
             return self.action == arg
         else:
@@ -46,10 +56,10 @@ class ButtonGroupWidgetItem:
 
 
 class ButtonGroupWidgetPrivate:
-    Parent: 'ButtonGroupWidget'
+    Parent: "ButtonGroupWidget"
     mItems: list[ButtonGroupWidgetItem] = []  # 用于记录所有管理的item
 
-    def __init__(self, parent: 'ButtonGroupWidget') -> None:
+    def __init__(self, parent: "ButtonGroupWidget") -> None:
         self.Parent = parent
 
     def init(self):
@@ -65,6 +75,7 @@ class ButtonGroupWidget(QFrame):
     """
     用于管理一组Action,类似于 QToolBar
     """
+
     actionTriggered = pyqtSignal(QAction)
     m_d: ButtonGroupWidgetPrivate
 
@@ -83,7 +94,9 @@ class ButtonGroupWidget(QFrame):
     def addAction(self, action: QAction) -> None:
         super(ButtonGroupWidget, self).addAction(action)
 
-    def addNewAction(self, text: str, icon: QIcon, popMode: QToolButton.ToolButtonPopupMode) -> QAction:
+    def addNewAction(
+        self, text: str, icon: QIcon, popMode: QToolButton.ToolButtonPopupMode
+    ) -> QAction:
         """生成 action, action 的所有权归 ButtonGroupWidget
 
         Args:

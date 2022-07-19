@@ -6,7 +6,8 @@ from .panel import Panel
 
 
 class CategoryStyle(enum.IntEnum):
-    """ The buttonStyle of a category. """
+    """The buttonStyle of a category."""
+
     Normal = 0
     Contextual = 1
 
@@ -34,12 +35,15 @@ class Category(QtWidgets.QWidget):
         self._mainLayout = QtWidgets.QHBoxLayout()
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.setSpacing(5)
-        self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Expanding,
-                                                             QtWidgets.QSizePolicy.Preferred))
+        self._mainLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(
+                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
+            )
+        )
         self._scrollArea.setLayout(self._mainLayout)
 
     def addPanel(self, title: str) -> Panel:
-        """ Add a new panel to the category.
+        """Add a new panel to the category.
 
         :param title: The title of the panel.
         :return: The newly created panel.
@@ -56,7 +60,7 @@ class Category(QtWidgets.QWidget):
         return panel
 
     def removePanel(self, title: str):
-        """ Remove a panel from the category.
+        """Remove a panel from the category.
 
         :param title: The title of the panel.
         """
@@ -64,7 +68,7 @@ class Category(QtWidgets.QWidget):
         self._panels.pop(title)
 
     def takePanel(self, title: str):
-        """ Remove and return a panel from the category.
+        """Remove and return a panel from the category.
 
         :param title: The title of the panel.
         :return: The removed panel.
@@ -74,7 +78,7 @@ class Category(QtWidgets.QWidget):
         return panel
 
     def panel(self, title: str):
-        """ Return a panel from the category.
+        """Return a panel from the category.
 
         :param title: The title of the panel.
         :return: The panel.

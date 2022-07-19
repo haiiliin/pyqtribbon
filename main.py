@@ -36,13 +36,8 @@ if __name__ == "__main__":
     panel.addSeparator()
     panel.addSmallButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
 
-    button = ToolButton()
-    button.setButtonStyle(ButtonStyle.Large)
-    button.setText("Button 8")
-    button.setIcon(QtGui.QIcon("icons/close.png"))
-    button.setFocusPolicy(QtCore.Qt.NoFocus)
+    button = panel.addLargeButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
     button.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-
     menu = QtWidgets.QMenu()
     menu.addAction(QtGui.QIcon("icons/close.png"), "Action 1")
     menu.addAction(QtGui.QIcon("icons/close.png"), "Action 2")

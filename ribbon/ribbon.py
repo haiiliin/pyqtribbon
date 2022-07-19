@@ -27,10 +27,14 @@ class Ribbon(QtWidgets.QWidget):
 
         # Application
         self._applicationButton = QtWidgets.QToolButton()
-        self._applicationButton.setIcon(QtWidgets.qApp.style().standardIcon(QtWidgets.QStyle.SP_TitleBarMenuButton))
-        self._applicationButton.setText('File')
-        self._applicationButton.setStyleSheet("QToolButton { border: none; padding: 0px; }")
-        self._applicationButton.setToolTip('File')
+        self._applicationButton.setIcon(
+            QtWidgets.qApp.style().standardIcon(QtWidgets.QStyle.SP_TitleBarMenuButton)
+        )
+        self._applicationButton.setText("File")
+        self._applicationButton.setStyleSheet(
+            "QToolButton { border: none; padding: 0px; }"
+        )
+        self._applicationButton.setToolTip("File")
         self._tabsLayout.addWidget(self._applicationButton)
 
         self._fileMenu = QtWidgets.QMenu(self)
@@ -56,14 +60,21 @@ class Ribbon(QtWidgets.QWidget):
         self._minRibbonButton.setToolTip("Minimize")
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(24, 24))
-        self._helpButton.setIcon(QtWidgets.qApp.style().standardIcon(QtWidgets.QStyle.SP_TitleBarContextHelpButton))
+        self._helpButton.setIcon(
+            QtWidgets.qApp.style().standardIcon(
+                QtWidgets.QStyle.SP_TitleBarContextHelpButton
+            )
+        )
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)
 
         self._tabsLayout.addWidget(self._tabBar)
-        self._tabsLayout.addSpacerItem(QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Expanding,
-                                                             QtWidgets.QSizePolicy.Preferred))
+        self._tabsLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(
+                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
+            )
+        )
         self._tabsLayout.addWidget(self._minRibbonButton)
         self._tabsLayout.addWidget(self._helpButton)
 
@@ -78,17 +89,19 @@ class Ribbon(QtWidgets.QWidget):
 
         # Connect signals
         self._minRibbonButton.clicked.connect(self._minButtonClicked)
-        self._tabBar.currentChanged.connect(lambda index: self._stackedWidget.setCurrentIndex(index))
+        self._tabBar.currentChanged.connect(
+            lambda index: self._stackedWidget.setCurrentIndex(index)
+        )
 
     def setFileTitle(self, title: str):
-        """ Set the title of the file menu.
+        """Set the title of the file menu.
 
         :param title: The title to set.
         """
         self._tabBar.setTabText(0, title)
 
     def setFileMenu(self, menu: QtWidgets.QMenu):
-        """ Set the file menu of the ribbon.
+        """Set the file menu of the ribbon.
 
         :param menu: The menu to set.
         """
@@ -96,7 +109,7 @@ class Ribbon(QtWidgets.QWidget):
         self._applicationButton.setMenu(menu)
 
     def addCategory(self, title: str, style=CategoryStyle.Normal) -> Category:
-        """ Add a new category to the ribbon.
+        """Add a new category to the ribbon.
 
         :param title: The title of the category.
         :param style: The buttonStyle of the category.
@@ -110,7 +123,7 @@ class Ribbon(QtWidgets.QWidget):
         return category
 
     def removeCategory(self, category: Category):
-        """ Remove a category from the ribbon.
+        """Remove a category from the ribbon.
 
         :param category: The category to remove.
         """
@@ -119,14 +132,14 @@ class Ribbon(QtWidgets.QWidget):
         self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
 
     def addQuickAccessButton(self, button: QtWidgets.QWidget):
-        """ Add a widget to the quick access bar.
+        """Add a widget to the quick access bar.
 
         :param button: The button to add.
         """
         self._titleBarActions.addWidget(button)
 
     def setTotalHeight(self, height: int):
-        """ Set the total height of the ribbon.
+        """Set the total height of the ribbon.
 
         :param height: The height to set.
         """

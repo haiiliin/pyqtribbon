@@ -18,12 +18,12 @@ class Separator(QWidget):
         pass
 
     def __init__(self, *args, **kwargs) -> None:
-        if (args and isinstance(args[0], int)) or (kwargs and 'height' in kwargs):
-            width = kwargs.get('height', args[0])
-            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
+        if (args and isinstance(args[0], int)) or (kwargs and "height" in kwargs):
+            width = kwargs.get("height", args[0])
+            parent = args[1] if len(args) > 1 else kwargs.get("parent", None)
         else:
             width = 6
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super(Separator, self).__init__(parent=parent)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         self.setFixedWidth(width)
@@ -41,5 +41,7 @@ class Separator(QWidget):
         pen.setColor(QColor(Qt.gray))
         painter.setPen(pen)
         x1: int = self.rect().center().x()
-        painter.drawLine(QPoint(x1, self.rect().top() + self._topMargins),
-                         QPoint(x1, self.rect().bottom() - self._bottomMargins))
+        painter.drawLine(
+            QPoint(x1, self.rect().top() + self._topMargins),
+            QPoint(x1, self.rect().bottom() - self._bottomMargins),
+        )

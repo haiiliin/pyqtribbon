@@ -1,12 +1,33 @@
 import typing
 from enum import Enum
 
-from PyQt5.QtCore import (QAbstractListModel, QItemSelectionModel, QModelIndex,
-                          QRect, QSize, Qt, QVariant, pyqtSignal, QPoint)
+from PyQt5.QtCore import (
+    QAbstractListModel,
+    QItemSelectionModel,
+    QModelIndex,
+    QRect,
+    QSize,
+    Qt,
+    QVariant,
+    pyqtSignal,
+    QPoint,
+)
 from PyQt5.QtGui import QIcon, QPainter, QPaintEvent, QResizeEvent
-from PyQt5.QtWidgets import (QAction, QListView, QStyle, QStyledItemDelegate,
-                             QStyleOptionViewItem, QActionGroup, QApplication, QFrame,
-                             QScrollBar, QSizePolicy, QVBoxLayout, QWidget, QToolButton)
+from PyQt5.QtWidgets import (
+    QAction,
+    QListView,
+    QStyle,
+    QStyledItemDelegate,
+    QStyleOptionViewItem,
+    QActionGroup,
+    QApplication,
+    QFrame,
+    QScrollBar,
+    QSizePolicy,
+    QVBoxLayout,
+    QWidget,
+    QToolButton,
+)
 from .typehints import PyQtSignalType
 
 
@@ -112,13 +133,15 @@ class GalleryItem:
 
 
 class GalleryGroupItemDelegate(QStyledItemDelegate):
-    _group: 'GalleryGroup'
+    _group: "GalleryGroup"
 
-    def __init__(self, group: 'GalleryGroup', parent=None) -> None:
+    def __init__(self, group: "GalleryGroup", parent=None) -> None:
         super().__init__(parent)
         self._group = group
 
-    def paint(self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex) -> None:
+    def paint(
+        self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex
+    ) -> None:
         if self._group is None:
             return
         if self._group.enableIconText():
@@ -126,7 +149,9 @@ class GalleryGroupItemDelegate(QStyledItemDelegate):
         else:
             self.paintIconOnly(painter, option, index)
 
-    def paintIconOnly(self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex) -> None:
+    def paintIconOnly(
+        self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex
+    ) -> None:
         style = self._group.style()
         painter.save()
         painter.setClipRect(option.rect)
@@ -139,7 +164,9 @@ class GalleryGroupItemDelegate(QStyledItemDelegate):
         icon.paint(painter, iconRect, Qt.AlignCenter, QIcon.Normal, QIcon.On)
         painter.restore()
 
-    def paintIconWithText(self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex) -> None:
+    def paintIconWithText(
+        self, painter: QPainter, option: QStyleOptionViewItem, index: QModelIndex
+    ) -> None:
         super().paint(painter, option, index)
 
     def sizeHint(self, option: QStyleOptionViewItem, index: QModelIndex) -> QSize:
@@ -167,7 +194,9 @@ class GalleryGroupModel(QAbstractListModel):
             return QVariant()
         return self._items[index.row()].data(role)
 
-    def index(self, row: int, column: int = 0, parent: QModelIndex = None) -> QModelIndex:
+    def index(
+        self, row: int, column: int = 0, parent: QModelIndex = None
+    ) -> QModelIndex:
         if self.hasIndex(row, column, parent):
             return self.createIndex(row, column, self._items[row])
         return QModelIndex()
@@ -193,7 +222,7 @@ class GalleryGroupModel(QAbstractListModel):
 
     def take(self, row: int) -> GalleryItem:
         if row < 0 or row > len(self._items):
-            raise ValueError('row = {row} out of range'.format(row=row))
+            raise ValueError("row = {row} out of range".format(row=row))
         self.beginRemoveRows(QModelIndex(), row, row)
         item = self._items[row]
         del self._items[row]
@@ -215,7 +244,7 @@ class GalleryGroup(QListView):
     groupTitleChanged = pyqtSignal(str)  # type: PyQtSignalType
 
     _enableIconText: bool = False
-    _groupTitle: str = ''
+    _groupTitle: str = ""
     clicked: PyQtSignalType
 
     def __init__(self, parent=None) -> None:
@@ -229,7 +258,7 @@ class GalleryGroup(QListView):
         self.clicked.connect(self.onItemClicked)
 
         self._enableIconText = False
-        self._groupTitle = ''
+        self._groupTitle = ""
 
     def setPreinstallStyle(self, style: PreinstallStyle) -> None:
         if style == PreinstallStyle.LargeIconWithText:
@@ -246,7 +275,11 @@ class GalleryGroup(QListView):
             self.setEnableIconText(True)
 
     def addItem(self, icon_or_item: typing.Union[QIcon, GalleryItem]) -> None:
-        galleryItem = GalleryItem(icon_or_item) if isinstance(icon_or_item, QIcon) else icon_or_item
+        galleryItem = (
+            GalleryItem(icon_or_item)
+            if isinstance(icon_or_item, QIcon)
+            else icon_or_item
+        )
         # self.model().append(galleryItem)
         if self.groupModel() is not None:
             self.groupModel().append(galleryItem)
@@ -374,7 +407,7 @@ class Gallery(QFrame):
         group.clicked.connect(self.onItemClicked)
         return group
 
-    def addCategoryActions(self, title: str, actions: list[QAction]) -> 'GalleryGroup':
+    def addCategoryActions(self, title: str, actions: list[QAction]) -> "GalleryGroup":
         group = GalleryGroup(self)
         model = GalleryGroupModel(self)
         group.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
@@ -390,7 +423,7 @@ class Gallery(QFrame):
         self.setCurrentViewGroup(group)
         return group
 
-    def setCurrentViewGroup(self, group: 'GalleryGroup') -> None:
+    def setCurrentViewGroup(self, group: "GalleryGroup") -> None:
         if self._viewportGroup is None:
             self._viewportGroup = GalleryGroup(self)
         self._viewportGroup.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -400,7 +433,7 @@ class Gallery(QFrame):
         self._viewportGroup.show()
         QApplication.postEvent(self, QResizeEvent(self.size(), self.size()))
 
-    def currentViewGroup(self) -> 'GalleryGroup':
+    def currentViewGroup(self) -> "GalleryGroup":
         return self._viewportGroup
 
     def actionGroup(self) -> QActionGroup:
@@ -425,7 +458,9 @@ class Gallery(QFrame):
             return
         popupMenuSize = self._popupWidget.minimumSizeHint()  # sizeHint()
         start: QPoint = self.mapToGlobal(QPoint(0, 0))
-        self._popupWidget.setGeometry(start.x(), start.y(), self.width(), popupMenuSize.height())
+        self._popupWidget.setGeometry(
+            start.x(), start.y(), self.width(), popupMenuSize.height()
+        )
         self._popupWidget.show()
 
     def onItemClicked(self, index: QModelIndex) -> None:
@@ -452,9 +487,14 @@ class Gallery(QFrame):
         subW = 0
         self._buttonUp.move(size.width() - self._buttonUp.width(), 0)
         subW = max(subW, self._buttonUp.width())
-        self._buttonDown.move(size.width() - self._buttonDown.width(), self._buttonUp.height())
+        self._buttonDown.move(
+            size.width() - self._buttonDown.width(), self._buttonUp.height()
+        )
         subW = max(subW, self._buttonDown.width())
-        self._buttonMore.move(size.width() - self._buttonMore.width(), self._buttonDown.geometry().bottom())
+        self._buttonMore.move(
+            size.width() - self._buttonMore.width(),
+            self._buttonDown.geometry().bottom(),
+        )
         subW = max(subW, self._buttonMore.width())
         if self._viewportGroup is not None:
             self._viewportGroup.setGeometry(0, 0, size.width() - subW, size.height())
