@@ -88,8 +88,8 @@ class Panel(QtWidgets.QWidget):
         self._mainLayout.addLayout(self._titleLayout, 0)
 
     def addWidget(
-            self, widget: QtWidgets.QWidget, rowSpan: int = 2, colSpan: int = 1
-    ) -> typing.Union[QtWidgets.QWidget, typing.Any]:
+        self, widget: QtWidgets.QWidget, rowSpan: int = 2, colSpan: int = 1
+    ):
         """Add a widget to the panel.
 
         :param widget: The widget to add.
@@ -101,7 +101,28 @@ class Panel(QtWidgets.QWidget):
         self._actionsLayout.addWidget(
             widget, row, col, rowSpan, colSpan, QtCore.Qt.AlignCenter
         )
-        return widget
+
+    def addSmallWidget(self, widget: QtWidgets.QWidget):
+        """Add a small widget to the panel.
+
+        :param widget: The widget to add.
+        :return: The widget that was added.
+        """
+        return self.addWidget(widget, 2, 1)
+
+    def addMediumWidget(self, widget: QtWidgets.QWidget):
+        """Add a medium widget to the panel.
+
+        :param widget: The widget to add.
+        """
+        return self.addWidget(widget, 3, 1)
+
+    def addLargeWidget(self, widget: QtWidgets.QWidget):
+        """Add a large widget to the panel.
+
+        :param widget: The widget to add.
+        """
+        return self.addWidget(widget, 6, 1)
 
     def removeWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the panel."""
@@ -140,11 +161,12 @@ class Panel(QtWidgets.QWidget):
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom())
-        return self.addWidget(
+        self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
             colSpan=1,
         )
+        return button
 
     def addSmallButton(
             self,
@@ -198,11 +220,12 @@ class Panel(QtWidgets.QWidget):
             button.setShortcut(shortcut)
         if statusTip:
             button.setStatusTip(statusTip)
-        return self.addWidget(
+        self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
             colSpan=1,
         )
+        return button
 
     def addSmallToggleButton(
             self,
@@ -245,93 +268,110 @@ class Panel(QtWidgets.QWidget):
     ) -> QtWidgets.QComboBox:
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
-        return self.addWidget(comboBox, rowSpan, colSpan)
+        self.addWidget(comboBox, rowSpan, colSpan)
+        return comboBox
 
     def addFontComboBox(
             self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QFontComboBox:
         comboBox = QtWidgets.QFontComboBox(self)
-        return self.addWidget(comboBox, rowSpan, colSpan)
+        self.addWidget(comboBox, rowSpan, colSpan)
+        return comboBox
 
     def addLineEdit(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QLineEdit:
         lineEdit = QtWidgets.QLineEdit(self)
-        return self.addWidget(lineEdit, rowSpan, colSpan)
+        self.addWidget(lineEdit, rowSpan, colSpan)
+        return lineEdit
 
     def addTextEdit(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QTextEdit:
         textEdit = QtWidgets.QTextEdit(self)
-        return self.addWidget(textEdit, rowSpan, colSpan)
+        self.addWidget(textEdit, rowSpan, colSpan)
+        return textEdit
 
     def addPlainTextEdit(
             self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QPlainTextEdit:
         textEdit = QtWidgets.QPlainTextEdit(self)
-        return self.addWidget(textEdit, rowSpan, colSpan)
+        self.addWidget(textEdit, rowSpan, colSpan)
+        return textEdit
 
     def addLabel(
             self, text: str, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QLabel:
         label = QtWidgets.QLabel(self)
         label.setText(text)
-        return self.addWidget(label, rowSpan, colSpan)
+        self.addWidget(label, rowSpan, colSpan)
+        return label
 
     def addProgressBar(
             self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QProgressBar:
         progressBar = QtWidgets.QProgressBar(self)
-        return self.addWidget(progressBar, rowSpan, colSpan)
+        self.addWidget(progressBar, rowSpan, colSpan)
+        return progressBar
 
     def addSlider(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QSlider:
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
-        return self.addWidget(slider, rowSpan, colSpan)
+        self.addWidget(slider, rowSpan, colSpan)
+        return slider
 
     def addSpinBox(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QSpinBox:
         spinBox = QtWidgets.QSpinBox(self)
-        return self.addWidget(spinBox, rowSpan, colSpan)
+        self.addWidget(spinBox, rowSpan, colSpan)
+        return spinBox
 
     def addDoubleSpinBox(
             self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QDoubleSpinBox:
         doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
-        return self.addWidget(doubleSpinBox, rowSpan, colSpan)
+        self.addWidget(doubleSpinBox, rowSpan, colSpan)
+        return doubleSpinBox
 
     def addDateEdit(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QDateEdit:
         dateEdit = QtWidgets.QDateEdit(self)
-        return self.addWidget(dateEdit, rowSpan, colSpan)
+        self.addWidget(dateEdit, rowSpan, colSpan)
+        return dateEdit
 
     def addTimeEdit(self, rowSpan: int = 2, colSpan: int = 1) -> QtWidgets.QTimeEdit:
         timeEdit = QtWidgets.QTimeEdit(self)
-        return self.addWidget(timeEdit, rowSpan, colSpan)
+        self.addWidget(timeEdit, rowSpan, colSpan)
+        return timeEdit
 
     def addDateTimeEdit(
             self, rowSpan: int = 2, colSpan: int = 1
     ) -> QtWidgets.QDateTimeEdit:
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
-        return self.addWidget(dateTimeEdit, rowSpan, colSpan)
+        self.addWidget(dateTimeEdit, rowSpan, colSpan)
+        return dateTimeEdit
 
     def addTableWidget(
             self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QTableWidget:
         tableWidget = QtWidgets.QTableWidget(self)
-        return self.addWidget(tableWidget, rowSpan, colSpan)
+        self.addWidget(tableWidget, rowSpan, colSpan)
+        return tableWidget
 
     def addTreeWidget(
             self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QTreeWidget:
         treeWidget = QtWidgets.QTreeWidget(self)
-        return self.addWidget(treeWidget, rowSpan, colSpan)
+        self.addWidget(treeWidget, rowSpan, colSpan)
+        return treeWidget
 
     def addListWidget(
             self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QListWidget:
         listWidget = QtWidgets.QListWidget(self)
-        return self.addWidget(listWidget, rowSpan, colSpan)
+        self.addWidget(listWidget, rowSpan, colSpan)
+        return listWidget
 
     def addCalendarWidget(
             self, rowSpan: int = 6, colSpan: int = 1
     ) -> QtWidgets.QCalendarWidget:
         calendarWidget = QtWidgets.QCalendarWidget(self)
-        return self.addWidget(calendarWidget, rowSpan, colSpan)
+        self.addWidget(calendarWidget, rowSpan, colSpan)
+        return calendarWidget
 
     def addSeparator(self, width=10) -> Separator:
         """Add a separator to the panel.
@@ -339,7 +379,8 @@ class Panel(QtWidgets.QWidget):
         :param width: The width of the separator.
         """
         separator = Separator(width=width)
-        return self.addWidget(separator, rowSpan=6, colSpan=1)
+        self.addWidget(separator, rowSpan=6, colSpan=1)
+        return separator
 
     def setTitleText(self, text: str):
         """Set the title text of the panel.
