@@ -119,10 +119,10 @@ class Ribbon(QtWidgets.QWidget):
         """
         category = Category(style, self)
         category.setFixedHeight(self._ribbonHeight -
-                                self._tabsWidget.height() -
+                                self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() - 20)
+                                self._mainLayout.contentsMargins().bottom() - 2)
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
@@ -187,7 +187,7 @@ class Ribbon(QtWidgets.QWidget):
 
         :return: The minimum size hint.
         """
-        return QtCore.QSize(self.width(), self._ribbonHeight)
+        return QtCore.QSize(super().minimumSizeHint().width(), self._ribbonHeight)
 
     def sizeHint(self) -> QtCore.QSize:
         return QtCore.QSize(self.width(), self._ribbonHeight)

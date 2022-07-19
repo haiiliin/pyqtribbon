@@ -1,9 +1,8 @@
 import sys
 
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 
 from ribbon import Ribbon
-from ribbon.gallery import Gallery
 
 
 if __name__ == "__main__":
@@ -96,8 +95,6 @@ if __name__ == "__main__":
     panel.addMediumButton("Button 4", icon=QtGui.QIcon("icons/close.png"))
     panel.addWidget(QtWidgets.QPushButton("Label 1"))
     panel.addCalendarWidget()
-    layout.addWidget(ribbon, 0)
-    layout.addWidget(QtWidgets.QCalendarWidget(), 1)
 
     category = ribbon.addCategory("Category 3")
     panel = category.addPanel("Panel 1")
@@ -105,13 +102,13 @@ if __name__ == "__main__":
     panel.addLargeButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
 
-    gallery = Gallery()
-    group = gallery.addGalleryGroup()
-    for i in range(100):
-        group.addItem(QtGui.QIcon("icons/close.png"))
+    layout.addWidget(ribbon, 0)
 
-    panel.addWidget(gallery, rowSpan=6)
+    label = QtWidgets.QLabel("Ribbon Text Window")
+    label.setFont(QtGui.QFont("Arial", 20))
+    label.setAlignment(QtCore.Qt.AlignCenter)
+    layout.addWidget(label, 1)
 
-    window.resize(1800, 1200)
+    window.resize(1800, 350)
     window.show()
     sys.exit(app.exec_())

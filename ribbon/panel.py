@@ -35,7 +35,7 @@ class GridLayoutManager(object):
         return 0, cols
 
 
-class Panel(QtWidgets.QWidget):
+class Panel(QtWidgets.QFrame):
     #: maximal number of rows
     _maxRows: int
     #: GridLayout manager to request available cells.
@@ -56,7 +56,7 @@ class Panel(QtWidgets.QWidget):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(10, 10, 10, 10)
+        self._mainLayout.setContentsMargins(10, 10, 10, 5)
         self._mainLayout.setSpacing(0)
 
         # Actions layout
