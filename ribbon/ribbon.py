@@ -63,18 +63,18 @@ class Ribbon(QtWidgets.QWidget):
         self._rightButtonLayout = QtWidgets.QHBoxLayout(self._rightButtonGroup)
         self._rightButtonLayout.setContentsMargins(0, 0, 0, 0)
         self._rightButtonLayout.setSpacing(5)
-        self._minRibbonButton = QtWidgets.QToolButton(self)
-        self._minRibbonButton.setIconSize(QtCore.QSize(32, 32))
-        self._minRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
-        self._minRibbonButton.setAutoRaise(True)
-        self._minRibbonButton.setToolTip("Collapse Ribbon")
+        self._collapseRibbonButton = QtWidgets.QToolButton(self)
+        self._collapseRibbonButton.setIconSize(QtCore.QSize(32, 32))
+        self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
+        self._collapseRibbonButton.setAutoRaise(True)
+        self._collapseRibbonButton.setToolTip("Collapse Ribbon")
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(32, 32))
         self._helpButton.setIcon(QtGui.QIcon("icons/help.png"))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)
-        self._rightButtonLayout.addWidget(self._minRibbonButton)
+        self._rightButtonLayout.addWidget(self._collapseRibbonButton)
         self._rightButtonLayout.addWidget(self._helpButton)
 
         self._tabsLayout.addWidget(self._tabBar)
@@ -96,7 +96,7 @@ class Ribbon(QtWidgets.QWidget):
         self._mainLayout.addWidget(self._stackedWidget, 1)
 
         # Connect signals
-        self._minRibbonButton.clicked.connect(self._minButtonClicked)
+        self._collapseRibbonButton.clicked.connect(self._collapseButtonClicked)
         self._tabBar.currentChanged.connect(
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
@@ -182,16 +182,16 @@ class Ribbon(QtWidgets.QWidget):
         """
         self._applicationButton.setIcon(icon)
 
-    def setMinButtonIcon(self, icon: QtGui.QIcon):
+    def setCollapseButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the min button.
 
         :param icon: The icon to set.
         """
-        self._minRibbonButton.setIcon(icon)
+        self._collapseRibbonButton.setIcon(icon)
 
     def removeMinButton(self):
         """Remove the min button from the ribbon."""
-        self._minRibbonButton.setVisible(False)
+        self._collapseRibbonButton.setVisible(False)
 
     def setHelpButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the help button.
@@ -222,14 +222,14 @@ class Ribbon(QtWidgets.QWidget):
     def sizeHint(self) -> QtCore.QSize:
         return QtCore.QSize(self.width(), self._ribbonHeight)
 
-    def _minButtonClicked(self):
+    def _collapseButtonClicked(self):
         if self._stackedWidget.isVisible():
-            self._minRibbonButton.setToolTip("Expand Ribbon")
-            self._minRibbonButton.setIcon(QtGui.QIcon('icons/expand-arrow.png'))
+            self._collapseRibbonButton.setToolTip("Expand Ribbon")
+            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/expand-arrow.png'))
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._tabsWidget.height())
         else:
-            self._minRibbonButton.setToolTip("Collapse Ribbon")
-            self._minRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
+            self._collapseRibbonButton.setToolTip("Collapse Ribbon")
+            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
