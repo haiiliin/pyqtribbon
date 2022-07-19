@@ -49,7 +49,10 @@ class Category(QtWidgets.QWidget):
         :return: The newly created panel.
         """
         panel = Panel(title, maxRows=6, parent=self)
-        panel.setFixedHeight(self.height() - self._mainLayout.spacing())
+        panel.setFixedHeight(self.height() -
+                             self._mainLayout.spacing() -
+                             self._mainLayout.contentsMargins().top() -
+                             self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
         self._mainLayout.insertWidget(self._mainLayout.count() - 1, panel)
 

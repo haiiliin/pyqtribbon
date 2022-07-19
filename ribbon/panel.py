@@ -56,7 +56,7 @@ class Panel(QtWidgets.QWidget):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(10, 10, 5, 5)
+        self._mainLayout.setContentsMargins(10, 10, 10, 10)
         self._mainLayout.setSpacing(0)
 
         # Actions layout

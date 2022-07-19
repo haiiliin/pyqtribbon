@@ -84,7 +84,7 @@ class Ribbon(QtWidgets.QWidget):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(10, 10, 10, 10)
+        self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabsWidget, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
@@ -118,11 +118,11 @@ class Ribbon(QtWidgets.QWidget):
         :return: The newly created category.
         """
         category = Category(style, self)
-        category.setFixedHeight(self._ribbonHeight - self._tabsWidget.height() -
+        category.setFixedHeight(self._ribbonHeight -
+                                self._tabsWidget.height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom()
-                                - 20)
+                                self._mainLayout.contentsMargins().bottom() - 20)
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
