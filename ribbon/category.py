@@ -2,6 +2,7 @@ import enum
 import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
+
 from .panel import Panel
 from .typehints import RibbonType
 

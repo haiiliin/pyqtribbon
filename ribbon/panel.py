@@ -3,8 +3,8 @@ import typing
 import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-from .toolbutton import ToolButton, ButtonStyle
 from .separator import Separator
+from .toolbutton import ToolButton, ButtonStyle
 
 
 class GridLayoutManager(object):

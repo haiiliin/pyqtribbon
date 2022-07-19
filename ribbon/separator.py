@@ -2,7 +2,7 @@ import typing
 
 from PyQt5.QtCore import QSize, QPoint, Qt
 from PyQt5.QtGui import QColor, QPaintEvent, QPainter, QPen
-from PyQt5.QtWidgets import QWidget, QSizePolicy, QMessageBox
+from PyQt5.QtWidgets import QWidget, QSizePolicy
 
 
 class Separator(QWidget):

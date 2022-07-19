@@ -28,6 +28,7 @@ from PyQt5.QtWidgets import (
     QWidget,
     QToolButton,
 )
+
 from .typehints import PyQtSignalType
 
 
