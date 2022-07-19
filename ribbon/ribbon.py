@@ -79,14 +79,15 @@ class Ribbon(QtWidgets.QWidget):
         self._tabsLayout.addWidget(self._minRibbonButton)
         self._tabsLayout.addWidget(self._helpButton)
 
+        # stacked widget
+        self._stackedWidget = QtWidgets.QStackedWidget(self)
+
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.setSpacing(5)
-        self._stackedWidget = QtWidgets.QStackedWidget(self)
         self._mainLayout.addWidget(self._tabsWidget, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
-        self.setLayout(self._mainLayout)
 
         # Connect signals
         self._minRibbonButton.clicked.connect(self._minButtonClicked)
