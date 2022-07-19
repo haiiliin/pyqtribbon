@@ -32,6 +32,9 @@ class ToolButton(QtWidgets.QToolButton):
         self._actions = []
         self._maxHeight = 64
 
+        # Make way for the popup button
+        self.setStyleSheet("""ToolButton[popupMode="1"] { padding-right: 20px; }""")
+
         # Styles
         self.setButtonStyle(ButtonStyle.Large)
         self.setAutoRaise(True)
