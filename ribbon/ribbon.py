@@ -33,8 +33,10 @@ class Ribbon(QtWidgets.QWidget):
         )
         self._applicationButton.setText("File")
         self._applicationButton.setStyleSheet(
-            "QToolButton { border: none; padding: 0px; }"
+            "QToolButton { border: none; padding: 0px; } "
+            "QToolButton::menu-indicator { image: none; } "
         )
+
         self._applicationButton.setToolTip("File")
         self._tabsLayout.addWidget(self._applicationButton)
 
