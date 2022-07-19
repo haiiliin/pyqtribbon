@@ -9,7 +9,7 @@ class Ribbon(QtWidgets.QWidget):
     #: The categories of the ribbon.
     _categories: typing.List[Category]
     #: height of the ribbon
-    _totalHeight = 200
+    _ribbonHeight: int
 
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal()
@@ -17,7 +17,8 @@ class Ribbon(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._categories = []
-        self.setFixedHeight(self._totalHeight)
+        self._ribbonHeight = 250
+        self.setFixedHeight(self._ribbonHeight)
 
         # Tab bar layout
         self._tabsWidget = QtWidgets.QWidget(self)
@@ -28,9 +29,7 @@ class Ribbon(QtWidgets.QWidget):
 
         # Application
         self._applicationButton = QtWidgets.QToolButton()
-        self._applicationButton.setIcon(
-            QtWidgets.qApp.style().standardIcon(QtWidgets.QStyle.SP_TitleBarMenuButton)
-        )
+        self._applicationButton.setIcon(QtGui.QIcon('icons/python.png'))
         self._applicationButton.setText("File")
         self._applicationButton.setStyleSheet(
             "QToolButton { border: none; padding: 0px; } "
@@ -115,7 +114,7 @@ class Ribbon(QtWidgets.QWidget):
         :return: The newly created category.
         """
         category = Category(style, self)
-        category.setFixedHeight(self._totalHeight - self._tabsWidget.height() - self._mainLayout.spacing())
+        category.setFixedHeight(self._ribbonHeight - self._tabsWidget.height() - self._mainLayout.spacing())
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
@@ -147,13 +146,20 @@ class Ribbon(QtWidgets.QWidget):
         """
         self._titleBarActions.addWidget(button)
 
-    def setTotalHeight(self, height: int):
+    def setRibbonHeight(self, height: int):
         """Set the total height of the ribbon.
 
         :param height: The height to set.
         """
-        self._totalHeight = height
+        self._ribbonHeight = height
         self.setFixedHeight(height)
+
+    def ribbonHeight(self) -> int:
+        """Get the total height of the ribbon.
+
+        :return: The height of the ribbon.
+        """
+        return self._ribbonHeight
 
     def setFileIcon(self, icon: QtGui.QIcon):
         """Set the icon of the file menu.
@@ -174,10 +180,10 @@ class Ribbon(QtWidgets.QWidget):
 
         :return: The minimum size hint.
         """
-        return QtCore.QSize(self.width(), self._totalHeight)
+        return QtCore.QSize(self.width(), self._ribbonHeight)
 
     def sizeHint(self) -> QtCore.QSize:
-        return QtCore.QSize(self.width(), self._totalHeight)
+        return QtCore.QSize(self.width(), self._ribbonHeight)
 
     def _minButtonClicked(self):
         if self._stackedWidget.isVisible():
