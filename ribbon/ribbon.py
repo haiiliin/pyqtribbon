@@ -51,6 +51,9 @@ class Ribbon(QtWidgets.QWidget):
 
         # tab bar
         self._tabBar = QtWidgets.QTabBar(self)
+        font = self._tabBar.font()
+        font.setPointSize(10)
+        self._tabBar.setFont(font)
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
 
@@ -59,7 +62,7 @@ class Ribbon(QtWidgets.QWidget):
         self._minRibbonButton.setIconSize(QtCore.QSize(32, 32))
         self._minRibbonButton.setArrowType(QtCore.Qt.UpArrow)
         self._minRibbonButton.setAutoRaise(True)
-        self._minRibbonButton.setToolTip("Minimize")
+        self._minRibbonButton.setToolTip("Hide Ribbon")
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(32, 32))
         self._helpButton.setIcon(QtGui.QIcon("icons/help.png"))
@@ -118,7 +121,6 @@ class Ribbon(QtWidgets.QWidget):
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
-        self._tabBar.setCurrentIndex(self._tabBar.count() - 1)
         return category
 
     def removeCategory(self, category: Category):
@@ -187,10 +189,12 @@ class Ribbon(QtWidgets.QWidget):
 
     def _minButtonClicked(self):
         if self._stackedWidget.isVisible():
+            self._minRibbonButton.setToolTip("Show Ribbon")
             self._minRibbonButton.setArrowType(QtCore.Qt.DownArrow)
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._tabsWidget.height())
         else:
+            self._minRibbonButton.setToolTip("Hide Ribbon")
             self._minRibbonButton.setArrowType(QtCore.Qt.UpArrow)
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
