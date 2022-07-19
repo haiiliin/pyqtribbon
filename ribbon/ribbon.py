@@ -1,6 +1,6 @@
 import typing
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .category import Category, CategoryStyle
 
@@ -17,6 +17,7 @@ class Ribbon(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._categories = []
+        self.setFixedHeight(self._totalHeight)
 
         # Tab bar layout
         self._tabsWidget = QtWidgets.QWidget(self)
@@ -43,7 +44,7 @@ class Ribbon(QtWidgets.QWidget):
         # Title bar actions
         self._titleBarActions = QtWidgets.QToolBar()
         self._titleBarActions.setOrientation(QtCore.Qt.Horizontal)
-        self._titleBarActions.setIconSize(QtCore.QSize(24, 24))
+        self._titleBarActions.setIconSize(QtCore.QSize(32, 32))
         self._titleBarActions.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._tabsLayout.addWidget(self._titleBarActions)
 
@@ -54,12 +55,12 @@ class Ribbon(QtWidgets.QWidget):
 
         # min/max/close buttons
         self._minRibbonButton = QtWidgets.QToolButton(self)
-        self._minRibbonButton.setIconSize(QtCore.QSize(24, 24))
+        self._minRibbonButton.setIconSize(QtCore.QSize(32, 32))
         self._minRibbonButton.setArrowType(QtCore.Qt.UpArrow)
         self._minRibbonButton.setAutoRaise(True)
         self._minRibbonButton.setToolTip("Minimize")
         self._helpButton = QtWidgets.QToolButton(self)
-        self._helpButton.setIconSize(QtCore.QSize(24, 24))
+        self._helpButton.setIconSize(QtCore.QSize(32, 32))
         self._helpButton.setIcon(
             QtWidgets.qApp.style().standardIcon(
                 QtWidgets.QStyle.SP_TitleBarContextHelpButton
@@ -116,6 +117,7 @@ class Ribbon(QtWidgets.QWidget):
         :return: The newly created category.
         """
         category = Category(style, self)
+        category.setFixedHeight(self._totalHeight - self._tabsWidget.height() - self._mainLayout.spacing())
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
@@ -145,6 +147,27 @@ class Ribbon(QtWidgets.QWidget):
         """
         self._totalHeight = height
         self.setFixedHeight(height)
+
+    def setFileIcon(self, icon: QtGui.QIcon):
+        """Set the icon of the file menu.
+
+        :param icon: The icon to set.
+        """
+        self._applicationButton.setIcon(icon)
+
+    def setHelpIcon(self, icon: QtGui.QIcon):
+        """Set the icon of the help button.
+
+        :param icon: The icon to set.
+        """
+        self._helpButton.setIcon(icon)
+
+    def minimumSizeHint(self) -> QtCore.QSize:
+        """Return the minimum size hint of the widget.
+
+        :return: The minimum size hint.
+        """
+        return QtCore.QSize(self.width(), self._totalHeight)
 
     def sizeHint(self) -> QtCore.QSize:
         return QtCore.QSize(self.width(), self._totalHeight)

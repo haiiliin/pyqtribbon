@@ -28,12 +28,7 @@ class Category(QtWidgets.QWidget):
         self._scrollArea.setFrameStyle(QtWidgets.QFrame.NoFrame)
         self._scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
-        self._mLayout = QtWidgets.QVBoxLayout(self)
-        self._mLayout.setSpacing(0)
-        self._mLayout.setContentsMargins(0, 0, 0, 0)
-        self._mLayout.addWidget(self._scrollArea)
-
-        self._mainLayout = QtWidgets.QHBoxLayout()
+        self._mainLayout = QtWidgets.QHBoxLayout(self._scrollArea)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addSpacerItem(
@@ -41,7 +36,11 @@ class Category(QtWidgets.QWidget):
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
         )
-        self._scrollArea.setLayout(self._mainLayout)
+
+        self._mLayout = QtWidgets.QVBoxLayout(self)
+        self._mLayout.setSpacing(0)
+        self._mLayout.setContentsMargins(0, 0, 0, 0)
+        self._mLayout.addWidget(self._scrollArea)
 
     def addPanel(self, title: str) -> Panel:
         """Add a new panel to the category.
@@ -49,7 +48,8 @@ class Category(QtWidgets.QWidget):
         :param title: The title of the panel.
         :return: The newly created panel.
         """
-        panel = Panel(title, maxRows=3, parent=self)
+        panel = Panel(title, maxRows=6, parent=self)
+        panel.setFixedHeight(self.height() - self._mainLayout.spacing())
         self._panels[title] = panel
         self._mainLayout.insertWidget(self._mainLayout.count() - 1, panel)
 

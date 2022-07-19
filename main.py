@@ -1,9 +1,8 @@
 import sys
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 
 from ribbon import Ribbon
-from ribbon.toolbutton import ToolButton, ButtonStyle
 from ribbon.gallery import Gallery
 
 
@@ -34,7 +33,7 @@ if __name__ == "__main__":
     panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 6", icon=QtGui.QIcon("icons/close.png"))
     panel.addSeparator()
-    panel.addSmallButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
+    panel.addMediumButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
 
     button = panel.addLargeButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
     button.setPopupMode(QtWidgets.QToolButton.InstantPopup)
@@ -44,7 +43,7 @@ if __name__ == "__main__":
     menu.addAction(QtGui.QIcon("icons/close.png"), "Action 3")
     button.setMenu(menu)
 
-    panel.addWidget(button, rowSpan=3)
+    panel.addWidget(button, rowSpan=6)
 
     panel = category.addPanel("Panel 2")
     panel.addSmallButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
