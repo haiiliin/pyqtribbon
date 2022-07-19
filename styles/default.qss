@@ -9,24 +9,7 @@ QFrame {
 
 QTabBar {
     background-color: transparent;
-}
-
-QTabBar::tab {
-	color: gray;
-	border: none;
-	background: transparent;
-	margin-top: 50px;
-	margin-right: 0px;
-	margin-left: 6px;
-	margin-bottom: 0px;
-	min-width: 60px;
-	max-width: 200px;
-	min-height: 25px;
-	max-height: 25px;
-	padding-left: 1px;
-	padding-right: 1px;
-	padding-top: 1px;
-	padding-bottom: 1px;
+	left: 10px;
 }
 
 QTabBar::tab {
@@ -37,13 +20,13 @@ QTabBar::tab {
 	margin-right: 0px;
 	margin-left: 6px;
 	margin-bottom: 0px;
-	min-width: 60px;
-	max-width: 200px;
+	min-width: 100px;
+	max-width: 250px;
 	min-height: 25px;
 	max-height: 25px;
-	padding-left: 1px;
-	padding-right: 1px;
-	padding-top: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
 	padding-bottom: 1px;
 }
 
