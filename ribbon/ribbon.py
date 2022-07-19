@@ -129,6 +129,15 @@ class Ribbon(QtWidgets.QWidget):
         self._tabBar.removeTab(index)
         self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
 
+    def setCurrentCategory(self, category: Category):
+        """Set the current category.
+
+        :param category: The category to set.
+        """
+        index = self._categories.index(category)
+        self._tabBar.setCurrentIndex(index)
+        self._stackedWidget.setCurrentIndex(index)
+
     def addQuickAccessButton(self, button: QtWidgets.QWidget):
         """Add a widget to the quick access bar.
 
