@@ -1,7 +1,7 @@
 import enum
 import typing
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from .panel import Panel
 
 
@@ -17,6 +17,9 @@ class Category(QtWidgets.QFrame):
     _style: CategoryStyle
     #: Panels
     _panels: typing.Dict[str, Panel]
+
+    #: The signal that is emitted when the display options button is clicked.
+    displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
     def __init__(self, style: CategoryStyle = CategoryStyle.Normal, parent=None):
         super().__init__(parent)
@@ -37,10 +40,38 @@ class Category(QtWidgets.QFrame):
             )
         )
 
-        self._mainLayout = QtWidgets.QVBoxLayout(self)
+        self._displayOptionsLayout = QtWidgets.QVBoxLayout()
+        self._displayOptionsLayout.setContentsMargins(0, 0, 0, 0)
+        self._displayOptionsLayout.setSpacing(5)
+        self._displayOptionsLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(
+                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+            )
+        )
+        self._displayOptionsToolbar = QtWidgets.QToolBar()
+        self._displayOptionsToolbar.setOrientation(QtCore.Qt.Vertical)
+        self._displayOptionsToolbar.setIconSize(QtCore.QSize(16, 16))
+        self._displayOptionsToolbar.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self._displayOptionsButton = QtWidgets.QToolButton()
+        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
+        self._displayOptionsButton.setText("Ribbon Display Options")
+        self._displayOptionsButton.setToolTip("Ribbon Display Options")
+        self._displayOptionsButton.setEnabled(True)
+        self._displayOptionsButton.setAutoRaise(True)
+        self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
+        self._displayOptionsToolbar.addWidget(self._displayOptionsButton)
+        self._displayOptionsLayout.addWidget(self._displayOptionsToolbar)
+
+        self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(0)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.addWidget(self._scrollArea)
+        self._mainLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(
+                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+            )
+        )
+        self._mainLayout.addLayout(self._displayOptionsLayout)
 
     def addPanel(self, title: str) -> Panel:
         """Add a new panel to the category.
@@ -88,3 +119,21 @@ class Category(QtWidgets.QFrame):
         :return: The panel.
         """
         return self._panels[title]
+
+    def displayOptionsButton(self):
+        """Return the display options button."""
+        return self._displayOptionsButton
+
+    def setDisplayOptionsButtonMenu(self, menu: QtWidgets.QMenu):
+        """Set the menu of the display options button.
+
+        :param menu: The menu.
+        """
+        self._displayOptionsButton.setMenu(menu)
+
+    def setDisplayOptionsMenuPopupMode(self, mode: QtWidgets.QToolButton.ToolButtonPopupMode):
+        """Set the popup mode of the display options button.
+
+        :param mode: The popup mode.
+        """
+        self._displayOptionsButton.setPopupMode(mode)

@@ -16,9 +16,12 @@ class Ribbon(QtWidgets.QWidget):
     _rightToolButtons = []
 
     #: heights of the ribbon elements
-    _ribbonHeight = 270
+    _ribbonHeight = 200
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
+
+    #: The signal that is emitted when the display options button is clicked.
+    displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -133,6 +136,7 @@ class Ribbon(QtWidgets.QWidget):
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom() - 2)
+        category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         self._categories.append(category)
         self._tabBar.addTab(title)
         self._stackedWidget.addWidget(category)
