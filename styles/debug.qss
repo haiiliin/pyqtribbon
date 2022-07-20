@@ -1,8 +1,16 @@
 
-Ribbon, Category, Panel, QFrame, QToolButton {
+QFrame, QToolButton {
     border: 1px solid blue;
     border-radius: 20px;
 	
+}
+
+ApplicationButton::menu-indicator {
+    image: none;
+}
+
+DisplayOptionsButton::menu-indicator {
+    image: none;
 }
 
 TabBar {
@@ -14,6 +22,11 @@ QStackedWidget {
     border: 1px solid red;
     border-radius: 20px;
 	
+}
+
+Ribbon {
+    border: 1px solid red;
+    border-radius: 20px;
 }
 
 Category {
