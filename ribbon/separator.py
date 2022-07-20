@@ -1,47 +1,56 @@
-import typing
-
-from PyQt5.QtCore import QSize, QPoint, Qt
-from PyQt5.QtGui import QColor, QPaintEvent, QPainter, QPen
-from PyQt5.QtWidgets import QWidget, QSizePolicy
+from PyQt5 import QtCore, QtWidgets, QtGui
 
 
-class Separator(QWidget):
+class Separator(QtWidgets.QWidget):
     _topMargins: int = 4
     _bottomMargins: int = 4
+    _leftMargins: int = 4
+    _rightMargins: int = 4
+    _orientation: QtCore.Qt.Orientation
 
-    @typing.overload
-    def __init__(self, parent=None) -> None:
-        pass
-
-    @typing.overload
-    def __init__(self, width=6, parent=None) -> None:
-        pass
-
-    def __init__(self, *args, **kwargs) -> None:
-        if (args and isinstance(args[0], int)) or (kwargs and "height" in kwargs):
-            width = kwargs.get("height", args[0])
-            parent = args[1] if len(args) > 1 else kwargs.get("parent", None)
+    def __init__(self, orientation=QtCore.Qt.Vertical, width=6, parent=None) -> None:
+        super().__init__(parent=parent)
+        self._orientation = orientation
+        if orientation == QtCore.Qt.Horizontal:
+            self.setFixedHeight(width)
+            self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         else:
-            width = 6
-            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
-        super(Separator, self).__init__(parent=parent)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
-        self.setFixedWidth(width)
+            self.setFixedWidth(width)
+            self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
 
-    def sizeHint(self) -> QSize:
+    def sizeHint(self) -> QtCore.QSize:
         return self.size()
 
     def setTopBottomMargins(self, top: int, bottom: int) -> None:
         self._topMargins = top
         self._bottomMargins = bottom
 
-    def paintEvent(self, event: QPaintEvent) -> None:
-        painter = QPainter(self)
-        pen = QPen()
-        pen.setColor(QColor(Qt.gray))
+    def paintEvent(self, event: QtGui.QPaintEvent) -> None:
+        painter = QtGui.QPainter(self)
+        pen = QtGui.QPen()
+        pen.setColor(QtGui.QColor(QtCore.Qt.gray))
         painter.setPen(pen)
-        x1: int = self.rect().center().x()
-        painter.drawLine(
-            QPoint(x1, self.rect().top() + self._topMargins),
-            QPoint(x1, self.rect().bottom() - self._bottomMargins),
-        )
+        if self._orientation == QtCore.Qt.Vertical:
+            x1 = self.rect().center().x()
+            painter.drawLine(
+                QtCore.QPoint(x1, self.rect().top() + self._topMargins),
+                QtCore.QPoint(x1, self.rect().bottom() - self._bottomMargins),
+            )
+        else:
+            y1 = self.rect().center().y()
+            painter.drawLine(
+                QtCore.QPoint(self.rect().left() + self._leftMargins, y1),
+                QtCore.QPoint(self.rect().right() - self._rightMargins, y1),
+            )
+
+
+class HorizontalSeparator(Separator):
+
+    def __init__(self, linewidth: int = 6, parent=None) -> None:
+        super().__init__(QtCore.Qt.Horizontal, linewidth, parent)
+
+
+class VerticalSeparator(Separator):
+
+    def __init__(self, linewidth: int = 6, parent=None) -> None:
+        super().__init__(QtCore.Qt.Vertical, linewidth, parent)
