@@ -265,29 +265,8 @@ class Panel(QtWidgets.QFrame):
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
     ) -> ToolButton:
-        button = ToolButton(self)
-        button.setButtonStyle(style)
-        if text:
-            button.setText(text)
-        if icon:
-            button.setIcon(icon)
+        button = self.addButton(text, icon, style, showText, colSpan, slot, shortcut, tooltip, statusTip, mode)
         button.setCheckable(True)
-        if slot:
-            button.clicked.connect(slot)
-        if shortcut:
-            button.setShortcut(shortcut)
-        if tooltip:
-            button.setToolTip(tooltip)
-        if statusTip:
-            button.setStatusTip(statusTip)
-        if not showText:
-            button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-        self.addWidget(
-            button,
-            rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
-            colSpan=colSpan,
-            mode=mode,
-        )
         return button
 
     def addSmallToggleButton(
