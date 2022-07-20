@@ -3,8 +3,8 @@ import typing
 import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-from .separator import Separator
 from .toolbutton import ToolButton, ButtonStyle
+from .separator import HorizontalSeparator, VerticalSeparator
 
 
 class PanelTitle(QtWidgets.QLabel):
@@ -410,14 +410,45 @@ class Panel(QtWidgets.QFrame):
         self.addWidget(calendarWidget, rowSpan, colSpan)
         return calendarWidget
 
-    def addSeparator(self, width=10) -> Separator:
+    def addSeparator(
+        self,
+        orientation=QtCore.Qt.Vertical,
+        linewidth=6,
+        rowSpan: int = 6,
+        colSpan: int = 1
+    ) -> typing.Union[HorizontalSeparator, VerticalSeparator]:
         """Add a separator to the panel.
 
-        :param width: The width of the separator.
+        :param orientation: The orientation of the separator.
+        :param linewidth: The width of the separator.
+        :param rowSpan: The number of rows the separator spans.
+        :param colSpan: The number of columns the separator spans.
+        :return: The separator.
         """
-        separator = Separator(width=width)
-        self.addWidget(separator, rowSpan=6, colSpan=1)
+        separator = (HorizontalSeparator(linewidth) if orientation == QtCore.Qt.Horizontal else
+                     VerticalSeparator(linewidth))
+        self.addWidget(separator, rowSpan, colSpan)
         return separator
+
+    def addHorizontalSeparator(self, linewidth=6, rowSpan: int = 1, colSpan: int = 2) -> HorizontalSeparator:
+        """Add a horizontal separator to the panel.
+
+        :param linewidth: The width of the separator.
+        :param rowSpan: The number of rows the separator spans.
+        :param colSpan: The number of columns the separator spans.
+        :return: The separator.
+        """
+        return self.addSeparator(QtCore.Qt.Horizontal, linewidth, rowSpan, colSpan)
+
+    def addVerticalSeparator(self, linewidth=6, rowSpan: int = 6, colSpan: int = 1) -> VerticalSeparator:
+        """Add a vertical separator to the panel.
+
+        :param linewidth: The width of the separator.
+        :param rowSpan: The number of rows the separator spans.
+        :param colSpan: The number of columns the separator spans.
+        :return: The separator.
+        """
+        return self.addSeparator(QtCore.Qt.Vertical, linewidth, rowSpan, colSpan)
 
     def setTitleText(self, text: str):
         """Set the title text of the panel.
