@@ -29,6 +29,8 @@ class TabBar(QtWidgets.QTabBar):
         return self._tabColors[self.tabText(self.currentIndex())]
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
+        if self.count() == 0:
+            return super().paintEvent(a0)
         color = self.currentTabColor()
         if color is not None:
             # Tab rectangle

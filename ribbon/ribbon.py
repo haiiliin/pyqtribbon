@@ -29,6 +29,9 @@ class Ribbon(QtWidgets.QFrame):
     _quickAccessButtons = []
     _rightToolButtons = []
 
+    #: Whether the ribbon is visible.
+    _ribbonVisible = True
+
     #: heights of the ribbon elements
     _ribbonHeight = 260
     _tabBarHeight = 60
@@ -44,6 +47,7 @@ class Ribbon(QtWidgets.QFrame):
         # Tab bar layout
         self._tabsWidget = QtWidgets.QFrame(self)
         self._tabsWidget.setFixedHeight(self._tabBarHeight)
+        self._tabsWidget.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         self._tabsLayout = QtWidgets.QHBoxLayout(self._tabsWidget)
         self._tabsLayout.setContentsMargins(5, 0, 5, 5)
         self._tabsLayout.setSpacing(5)
@@ -145,6 +149,9 @@ class Ribbon(QtWidgets.QFrame):
         self._tabBar.currentChanged.connect(
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
+
+        # Hide ribbon when no tabs are added
+        self.setRibbonVisible(False)
 
     def applicationOptionButton(self):
         """Return the application button."""
@@ -420,7 +427,8 @@ class Ribbon(QtWidgets.QFrame):
 
     def showRibbon(self):
         """Show the ribbon."""
-        if not self.ribbonVisible():
+        if not self._ribbonVisible:
+            self._ribbonVisible = True
             self._collapseRibbonButton.setToolTip("Collapse Ribbon")
             self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
             self._horizontalWidget.setVisible(True)
@@ -428,7 +436,8 @@ class Ribbon(QtWidgets.QFrame):
 
     def hideRibbon(self):
         """Hide the ribbon."""
-        if self.ribbonVisible():
+        if self._ribbonVisible:
+            self._ribbonVisible = False
             self._collapseRibbonButton.setToolTip("Expand Ribbon")
             self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/expand-arrow.png'))
             self._horizontalWidget.setVisible(False)
@@ -439,7 +448,7 @@ class Ribbon(QtWidgets.QFrame):
 
         :return: True if the ribbon is visible, False otherwise.
         """
-        return self._horizontalWidget.isVisible()
+        return self._ribbonVisible
 
     def setRibbonVisible(self, visible: bool):
         """Set the visibility of the ribbon.
