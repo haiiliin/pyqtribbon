@@ -32,7 +32,7 @@ class Ribbon(QtWidgets.QFrame):
     #: heights of the ribbon elements
     _ribbonHeight = 260
     _tabBarHeight = 60
-    _quickAccessButtonHeight = 32
+    _quickAccessButtonHeight = 40
     _rightButtonHeight = 24
     _displayOptionsButtonHeight = 24
 
@@ -55,12 +55,17 @@ class Ribbon(QtWidgets.QFrame):
         self._applicationButton.setText("PyQtRibbon")
         self._applicationButton.setToolTip("PyQtRibbon")
         self._applicationMenu = QtWidgets.QMenu(self)
-        # self._applicationButton.setMenu(self._applicationMenu)
 
+        self._quickAccessToolBar = QtWidgets.QToolBar()
+        self._quickAccessToolBar.setFixedHeight(self._quickAccessButtonHeight)
+        self._quickAccessToolBar.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
+        self._quickAccessToolBar.setOrientation(QtCore.Qt.Horizontal)
+        self._quickAccessToolBar.setMovable(False)
+        self._quickAccessToolBar.addWidget(self._applicationButton)
         self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout()
         self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
         self._quickAccessToolBarLayout.setSpacing(0)
-        self._quickAccessToolBarLayout.addWidget(self._applicationButton, 0, QtCore.Qt.AlignBottom)
+        self._quickAccessToolBarLayout.addWidget(self._quickAccessToolBar, 0, QtCore.Qt.AlignBottom)
 
         # right toolbar
         self._rightToolBar = QtWidgets.QToolBar()
@@ -153,6 +158,112 @@ class Ribbon(QtWidgets.QFrame):
         self._applicationMenu.addAction(action)
         self._applicationButton.setMenu(self._applicationMenu if self._applicationMenu.actions() else None)
 
+    def ribbonHeight(self) -> int:
+        """Get the total height of the ribbon.
+
+        :return: The height of the ribbon.
+        """
+        return self._ribbonHeight
+
+    def setRibbonHeight(self, height: int):
+        """Set the total height of the ribbon.
+
+        :param height: The height to set.
+        """
+        self._ribbonHeight = height
+        self.setFixedHeight(height)
+
+    def tabBar(self) -> QtWidgets.QTabBar:
+        """Return the tab bar of the ribbon.
+
+        :return: The tab bar of the ribbon.
+        """
+        return self._tabBar
+
+    def tabBarHeight(self) -> int:
+        """Get the height of the tab bar.
+
+        :return: The height of the tab bar.
+        """
+        return self._tabBarHeight
+
+    def setTabBarHeight(self, height: int = 50):
+        """Set the height of the tab bar.
+
+        :param height: The height to set.
+        """
+        self._tabBarHeight = height
+        self._tabsWidget.setFixedHeight(height)
+
+    def quickAccessToolBar(self) -> QtWidgets.QToolBar:
+        """Return the quick access toolbar of the ribbon.
+
+        :return: The quick access toolbar of the ribbon.
+        """
+        return self._quickAccessToolBar
+
+    def addQuickAccessButton(self, button: QtWidgets.QToolButton):
+        """Add a widget to the quick access bar.
+
+        :param button: The button to add.
+        """
+        button.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
+        self._quickAccessButtons.append(button)
+        self._quickAccessToolBar.addWidget(button)
+
+    def setQuickAccessButtonHeight(self, height: int = 40):
+        """Set the height of the quick access buttons.
+
+        :param height: The height to set.
+        """
+        self._quickAccessButtonHeight = height
+        self._applicationButton.setIconSize(QtCore.QSize(height, height))
+        for button in self._quickAccessButtons:
+            button.setIconSize(QtCore.QSize(height, height))
+
+    def rightToolBar(self) -> QtWidgets.QToolBar:
+        """Return the right toolbar of the ribbon.
+
+        :return: The right toolbar of the ribbon.
+        """
+        return self._rightToolBar
+
+    def addRightToolButton(self, button: QtWidgets.QToolButton):
+        """Add a widget to the right button bar.
+
+        :param button: The button to add.
+        """
+        button.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
+        self._rightToolButtons.append(button)
+        self._rightToolBar.addWidget(button)
+
+    def setRightToolBarHeight(self, height: int = 24):
+        """Set the height of the right buttons.
+
+        :param height: The height to set.
+        """
+        self._rightButtonHeight = height
+        for button in self._rightToolButtons:
+            button.setIconSize(QtCore.QSize(height, height))
+
+    def setHelpButtonIcon(self, icon: QtGui.QIcon):
+        """Set the icon of the help button.
+
+        :param icon: The icon to set.
+        """
+        self._helpButton.setIcon(icon)
+
+    def removeHelpButton(self):
+        """Remove the help button from the ribbon."""
+        self._helpButton.setVisible(False)
+
+    def displayOptionsButton(self) -> DisplayOptionsButton:
+        """Return the display options button.
+
+        :return: The display options button.
+        """
+        return self._displayOptionsButton
+
     def addDisplayOptionAction(self, action: QtWidgets.QAction):
         """Add a display option to the category.
 
@@ -161,12 +272,13 @@ class Ribbon(QtWidgets.QFrame):
         self._displayOptionsMenu.addAction(action)
         self._displayOptionsButton.setMenu(self._displayOptionsMenu if self._displayOptionsMenu.actions() else None)
 
-    def tabBar(self) -> QtWidgets.QTabBar:
-        """Return the tab bar of the ribbon.
+    def setDisplayOptionsButtonHeight(self, height: int = 24):
+        """Set the height of the display options button.
 
-        :return: The tab bar of the ribbon.
+        :param height: The height to set.
         """
-        return self._tabBar
+        self._displayOptionsButtonHeight = height
+        self._displayOptionsButton.setIconSize(QtCore.QSize(height, height))
 
     def categories(self) -> typing.List[Category]:
         """Return the list of categories of the ribbon.
@@ -275,25 +387,6 @@ class Ribbon(QtWidgets.QFrame):
         self._tabBar.setCurrentIndex(index)
         self._stackedWidget.setCurrentIndex(index)
 
-    def addQuickAccessButton(self, button: QtWidgets.QToolButton):
-        """Add a widget to the quick access bar.
-
-        :param button: The button to add.
-        """
-        button.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
-        self._quickAccessButtons.append(button)
-        self._quickAccessToolBarLayout.addWidget(button, 0, QtCore.Qt.AlignBottom)
-
-    def setQuickAccessButtonHeight(self, height: int = 32):
-        """Set the height of the quick access buttons.
-
-        :param height: The height to set.
-        """
-        self._quickAccessButtonHeight = height
-        self._applicationButton.setIconSize(QtCore.QSize(height, height))
-        for button in self._quickAccessButtons:
-            button.setIconSize(QtCore.QSize(height, height))
-
     def setCollapseButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the min button.
 
@@ -304,80 +397,6 @@ class Ribbon(QtWidgets.QFrame):
     def removeCollapseButton(self):
         """Remove the min button from the ribbon."""
         self._collapseRibbonButton.setVisible(False)
-
-    def setHelpButtonIcon(self, icon: QtGui.QIcon):
-        """Set the icon of the help button.
-
-        :param icon: The icon to set.
-        """
-        self._helpButton.setIcon(icon)
-
-    def removeHelpButton(self):
-        """Remove the help button from the ribbon."""
-        self._helpButton.setVisible(False)
-
-    def addRightToolButton(self, button: QtWidgets.QToolButton):
-        """Add a widget to the right button bar.
-
-        :param button: The button to add.
-        """
-        button.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
-        self._rightToolButtons.append(button)
-        self._rightToolBar.addWidget(button)
-
-    def setRightButtonHeight(self, height: int = 24):
-        """Set the height of the right buttons.
-
-        :param height: The height to set.
-        """
-        self._rightButtonHeight = height
-        for button in self._rightToolButtons:
-            button.setIconSize(QtCore.QSize(height, height))
-
-    def setDisplayOptionsButtonHeight(self, height: int = 24):
-        """Set the height of the display options button.
-
-        :param height: The height to set.
-        """
-        self._displayOptionsButtonHeight = height
-        self._displayOptionsButton.setIconSize(QtCore.QSize(height, height))
-
-    def setRibbonHeight(self, height: int):
-        """Set the total height of the ribbon.
-
-        :param height: The height to set.
-        """
-        self._ribbonHeight = height
-        self.setFixedHeight(height)
-
-    def ribbonHeight(self) -> int:
-        """Get the total height of the ribbon.
-
-        :return: The height of the ribbon.
-        """
-        return self._ribbonHeight
-
-    def setTabBarHeight(self, height: int = 50):
-        """Set the height of the tab bar.
-
-        :param height: The height to set.
-        """
-        self._tabBarHeight = height
-        self._tabsWidget.setFixedHeight(height)
-
-    def tabBarHeight(self) -> int:
-        """Get the height of the tab bar.
-
-        :return: The height of the tab bar.
-        """
-        return self._tabBarHeight
-
-    def setFileIcon(self, icon: QtGui.QIcon):
-        """Set the icon of the file menu.
-
-        :param icon: The icon to set.
-        """
-        self._applicationButton.setIcon(icon)
 
     def minimumSizeHint(self) -> QtCore.QSize:
         """Return the minimum size hint of the widget.
