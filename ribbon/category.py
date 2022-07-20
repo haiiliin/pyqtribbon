@@ -165,14 +165,14 @@ class ContextCategory(Category):
         """Hide the given category, if it is not a context category, nothing happens."""
         self._ribbon.hideContextCategory(self)
 
-    def categoryState(self) -> bool:
+    def categoryVisible(self) -> bool:
         """Return whether the category is shown.
 
         :return: Whether the category is shown.
         """
         return self in self._ribbon.categories()
 
-    def setCategoryState(self, state: bool):
+    def setCategoryVisible(self, state: bool):
         """Set the state of the category.
 
         :param state: The state.

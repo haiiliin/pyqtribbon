@@ -134,8 +134,8 @@ if __name__ == "__main__":
     panel.addLargeButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
 
-    showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryState(checked))
-    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryState(not category3.categoryState()))
+    showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryVisible(checked))
+    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
