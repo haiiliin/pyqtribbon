@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5 import QtWidgets, QtGui
-from ribbon import RibbonMainWindow, SpaceFindMode
+from ribbon import RibbonMainWindow
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -31,27 +31,27 @@ if __name__ == "__main__":
                                   tooltip="Format Painter")
 
     fontPanel = homeCategory.addPanel("Font")
-    fontComboBox = fontPanel.addFontComboBox(rowSpan=3, colSpan=4)
+    fontComboBox = fontPanel.addFontComboBox(rowSpan=3, colSpan=6)
     fontComboBox.setMinimumHeight(60)
-    fontPanel.addMediumToggleButton("Bold", icon=QtGui.QIcon("examples/bold.png"), showText=False, tooltip="Bold")
-    fontPanel.addMediumToggleButton("Italic", icon=QtGui.QIcon("examples/italic.png"), showText=False, tooltip="Italic")
-    fontPanel.addMediumToggleButton("Underline", icon=QtGui.QIcon("examples/underline.png"), showText=False,
-                                    tooltip="Underline")
-    fontPanel.addMediumToggleButton("Strikethrough", icon=QtGui.QIcon("examples/strikethrough.png"), showText=False,
-                                    tooltip="Strikethrough")
+    fontPanel.addSmallToggleButton("Bold", icon=QtGui.QIcon("examples/bold.png"), showText=False, tooltip="Bold")
+    fontPanel.addSmallToggleButton("Italic", icon=QtGui.QIcon("examples/italic.png"), showText=False, tooltip="Italic")
+    fontPanel.addSmallToggleButton("Underline", icon=QtGui.QIcon("examples/underline.png"), showText=False,
+                                   tooltip="Underline")
+    fontPanel.addSmallToggleButton("Strikethrough", icon=QtGui.QIcon("examples/strikethrough.png"), showText=False,
+                                   tooltip="Strikethrough")
+    fontPanel.addSmallToggleButton("Superscript", icon=QtGui.QIcon("examples/superscript.png"), showText=False,
+                                   tooltip="Superscript")
+    fontPanel.addSmallToggleButton("Subscript", icon=QtGui.QIcon("examples/subscript.png"), showText=False,
+                                   tooltip="Subscript")
     fontSizeComboBox = fontPanel.addComboBox(['8', '9', '10'], rowSpan=3, colSpan=2)
     fontSizeComboBox.setMinimumHeight(60)
     fontSizeComboBox.setMinimumWidth(100)
-    fontPanel.addMediumToggleButton("Superscript", icon=QtGui.QIcon("examples/superscript.png"), showText=False,
-                                    tooltip="Superscript")
-    fontPanel.addMediumToggleButton("Subscript", icon=QtGui.QIcon("examples/subscript.png"), showText=False,
-                                    tooltip="Subscript")
-    fontPanel.addMediumToggleButton("Increase Font Size", icon=QtGui.QIcon("examples/increase-font.png"),
-                                    showText=False, tooltip="Increase Font Size")
-    fontPanel.addMediumButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
-                              showText=False, tooltip="Decrease Font Size", mode=SpaceFindMode.RowWise)
-    fontPanel.addMediumButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
-                              showText=False, tooltip="Decrease Font Size", mode=SpaceFindMode.ColumnWise)
+    fontPanel.addSmallToggleButton("Increase Font Size", icon=QtGui.QIcon("examples/increase-font.png"),
+                                   showText=False, tooltip="Increase Font Size")
+    fontPanel.addSmallToggleButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
+                                   showText=False, tooltip="Decrease Font Size")
+    fontPanel.addSmallToggleButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
+                                   showText=False, tooltip="Decrease Font Size")
 
     window.resize(1500, 1000)
     window.show()
