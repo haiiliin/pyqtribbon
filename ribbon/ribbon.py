@@ -34,6 +34,7 @@ class Ribbon(QtWidgets.QFrame):
     _tabBarHeight = 60
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
+    _displayOptionsButtonHeight = 24
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -108,7 +109,8 @@ class Ribbon(QtWidgets.QFrame):
         self._displayOptionsButton = DisplayOptionsButton()
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
-        self._displayOptionsButton.setIconSize(QtCore.QSize(16, 16))
+        self._displayOptionsButton.setIconSize(QtCore.QSize(self._displayOptionsButtonHeight,
+                                                            self._displayOptionsButtonHeight))
         self._displayOptionsButton.setText("Ribbon Display Options")
         self._displayOptionsButton.setToolTip("Ribbon Display Options")
         self._displayOptionsButton.setEnabled(True)
@@ -331,6 +333,14 @@ class Ribbon(QtWidgets.QFrame):
         self._rightButtonHeight = height
         for button in self._rightToolButtons:
             button.setIconSize(QtCore.QSize(height, height))
+
+    def setDisplayOptionsButtonHeight(self, height: int = 24):
+        """Set the height of the display options button.
+
+        :param height: The height to set.
+        """
+        self._displayOptionsButtonHeight = height
+        self._displayOptionsButton.setIconSize(QtCore.QSize(height, height))
 
     def setRibbonHeight(self, height: int):
         """Set the total height of the ribbon.
