@@ -69,7 +69,7 @@ class Category(QtWidgets.QFrame):
         self._mainLayout.addWidget(self._scrollArea)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
         )
 
