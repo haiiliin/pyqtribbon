@@ -1,5 +1,5 @@
 
-Ribbon, Category, Panel {
+QFrame {
     border: 0px solid transparent;
     border-radius: 20px;
 	
@@ -14,10 +14,6 @@ ApplicationButton::menu-indicator {
     image: none;
 }
 
-DisplayOptionsButton {
-    border: none;
-    padding: 0px;
-}
 DisplayOptionsButton::menu-indicator {
     image: none;
 }
