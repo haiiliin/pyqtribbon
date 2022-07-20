@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     fontPanel = homeCategory.addPanel("Font")
     fontComboBox = fontPanel.addFontComboBox(rowSpan=3, colSpan=6)
-    fontComboBox.setMinimumHeight(60)
+    # fontComboBox.setMinimumHeight(60)
     fontPanel.addSmallToggleButton("Bold", icon=QtGui.QIcon("examples/bold.png"), showText=False, tooltip="Bold")
     fontPanel.addSmallToggleButton("Italic", icon=QtGui.QIcon("examples/italic.png"), showText=False, tooltip="Italic")
     fontPanel.addSmallToggleButton("Underline", icon=QtGui.QIcon("examples/underline.png"), showText=False,
@@ -44,8 +44,8 @@ if __name__ == "__main__":
     fontPanel.addSmallToggleButton("Subscript", icon=QtGui.QIcon("examples/subscript.png"), showText=False,
                                    tooltip="Subscript")
     fontSizeComboBox = fontPanel.addComboBox(['8', '9', '10'], rowSpan=3, colSpan=2)
-    fontSizeComboBox.setMinimumHeight(60)
-    fontSizeComboBox.setMinimumWidth(100)
+    # fontSizeComboBox.setMinimumHeight(60)
+    # fontSizeComboBox.setMinimumWidth(100)
     fontPanel.addSmallToggleButton("Increase Font Size", icon=QtGui.QIcon("examples/increase-font.png"),
                                    showText=False, tooltip="Increase Font Size")
     fontPanel.addSmallToggleButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
