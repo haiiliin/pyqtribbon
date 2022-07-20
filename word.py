@@ -47,7 +47,7 @@ if __name__ == "__main__":
     fontPanel.addMediumToggleButton("Subscript", icon=QtGui.QIcon("examples/subscript.png"), showText=False,
                                     tooltip="Subscript")
     fontPanel.addMediumToggleButton("Increase Font Size", icon=QtGui.QIcon("examples/increase-font.png"),
-                              showText=False, tooltip="Increase Font Size")
+                                    showText=False, tooltip="Increase Font Size")
     fontPanel.addMediumButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
                               showText=False, tooltip="Decrease Font Size", mode=SpaceFindMode.RowWise)
     fontPanel.addMediumButton("Decrease Font Size", icon=QtGui.QIcon("examples/decrease-font.png"),
