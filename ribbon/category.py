@@ -70,28 +70,25 @@ class Category(QtWidgets.QFrame):
                 10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
             )
         )
-        self._displayOptionsToolbar = QtWidgets.QToolBar()
-        self._displayOptionsToolbar.setOrientation(QtCore.Qt.Vertical)
-        self._displayOptionsToolbar.setIconSize(QtCore.QSize(16, 16))
-        self._displayOptionsToolbar.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._displayOptionsButton = QtWidgets.QToolButton()
         self._displayOptionsButton.setStyleSheet(
+            "QToolButton { background-color: transparent; border: none; }"
             "QToolButton::menu-indicator { image: none; } "
         )
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
+        self._displayOptionsButton.setIconSize(QtCore.QSize(16, 16))
         self._displayOptionsButton.setText("Ribbon Display Options")
         self._displayOptionsButton.setToolTip("Ribbon Display Options")
         self._displayOptionsButton.setEnabled(True)
         self._displayOptionsButton.setAutoRaise(True)
         self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
-        self._displayOptionsToolbar.addWidget(self._displayOptionsButton)
-        self._displayOptionsLayout.addWidget(self._displayOptionsToolbar)
+        self._displayOptionsLayout.addWidget(self._displayOptionsButton, 0, QtCore.Qt.AlignBottom)
         self._displayOptionsMenu = QtWidgets.QMenu()
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(0)
-        self._mainLayout.setContentsMargins(0, 0, 0, 0)
+        self._mainLayout.setContentsMargins(0, 0, 5, 5)
         self._mainLayout.addWidget(self._scrollArea)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
