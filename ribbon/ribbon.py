@@ -22,7 +22,7 @@ class Ribbon(QtWidgets.QWidget):
     _rightToolButtons = []
 
     #: heights of the ribbon elements
-    _ribbonHeight = 220
+    _ribbonHeight = 240
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
 
@@ -160,7 +160,7 @@ class Ribbon(QtWidgets.QWidget):
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() - 12)
+                                self._mainLayout.contentsMargins().bottom() - 20)
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         if style == CategoryStyle.Normal:
             self._categories.append(category)
