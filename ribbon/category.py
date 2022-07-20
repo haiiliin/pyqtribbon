@@ -50,14 +50,11 @@ class Category(QtWidgets.QFrame):
         self._ribbon = parent
         self._color = color
 
-        self._scrollArea = QtWidgets.QScrollArea()
-        self._scrollArea.setFrameStyle(QtWidgets.QFrame.NoFrame)
-        self._scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-
-        self._scrollLayout = QtWidgets.QHBoxLayout(self._scrollArea)
-        self._scrollLayout.setContentsMargins(0, 0, 0, 0)
-        self._scrollLayout.setSpacing(5)
-        self._scrollLayout.addSpacerItem(
+        self._panelWidget = QtWidgets.QWidget()
+        self._panelLayout = QtWidgets.QHBoxLayout(self._panelWidget)
+        self._panelLayout.setContentsMargins(0, 0, 0, 0)
+        self._panelLayout.setSpacing(5)
+        self._panelLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
@@ -66,7 +63,7 @@ class Category(QtWidgets.QFrame):
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(5)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
-        self._mainLayout.addWidget(self._scrollArea)
+        self._mainLayout.addWidget(self._panelWidget)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
@@ -104,9 +101,8 @@ class Category(QtWidgets.QFrame):
                              self._mainLayout.contentsMargins().top() -
                              self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
-        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, panel)
-        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, Separator(width=10))
-        self._scrollLayout.addStretch(1)
+        self._panelLayout.insertWidget(self._panelLayout.count() - 1, panel)
+        self._panelLayout.insertWidget(self._panelLayout.count() - 1, Separator(width=10))
         return panel
 
     def removePanel(self, title: str):
@@ -114,7 +110,7 @@ class Category(QtWidgets.QFrame):
 
         :param title: The title of the panel.
         """
-        self._scrollLayout.removeWidget(self._panels[title])
+        self._panelLayout.removeWidget(self._panels[title])
         self._panels.pop(title)
 
     def takePanel(self, title: str):

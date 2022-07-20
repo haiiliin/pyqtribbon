@@ -94,7 +94,7 @@ class Panel(QtWidgets.QFrame):
         # Actions layout
         # self._actionsWidget = QtWidgets.QWidget(self)
         self._actionsLayout = QtWidgets.QGridLayout()
-        self._actionsLayout.setContentsMargins(0, 0, 0, 0)
+        self._actionsLayout.setContentsMargins(5, 0, 5, 0)
         self._actionsLayout.setSpacing(5)
         self._mainLayout.addLayout(self._actionsLayout, 1)
 
