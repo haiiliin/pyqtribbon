@@ -43,7 +43,7 @@ class Category(QtWidgets.QFrame):
     def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, color: QtGui.QColor = None,
                  parent=None):
         super().__init__(parent)
-        self.setStyleSheet("QWidget { background-color: white; }")
+        self.setStyleSheet("Category { background-color: white; }")
         self._title = title
         self._style = style
         self._panels = {}
@@ -65,7 +65,7 @@ class Category(QtWidgets.QFrame):
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(5)
-        self._mainLayout.setContentsMargins(5, 5, 5, 5)
+        self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.addWidget(self._scrollArea)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
@@ -105,7 +105,7 @@ class Category(QtWidgets.QFrame):
                              self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
         self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, panel)
-        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, Separator(width=15))
+        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, Separator(width=10))
         self._scrollLayout.addStretch(1)
         return panel
 

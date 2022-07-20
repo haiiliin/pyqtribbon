@@ -53,14 +53,14 @@ class Panel(QtWidgets.QFrame):
 
     def __init__(self, title: str, maxRows=6, parent=None):
         super().__init__(parent)
-        self.setStyleSheet("QWidget { background-color: white; }")
+        self.setStyleSheet("Panel { background-color: white; }")
         self._maxRows = maxRows
         self._gridLayoutManager = GridLayoutManager(self._maxRows)
         self._widgets = []
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 5, 5, 5)
+        self._mainLayout.setContentsMargins(5, 2, 5, 2)
         self._mainLayout.setSpacing(5)
 
         # Actions layout

@@ -126,16 +126,16 @@ class Ribbon(QtWidgets.QFrame):
 
         # layout for the display options button and stacked widget
         self._horizontalWidget = QtWidgets.QFrame(self)
-        self._horizontalWidget.setStyleSheet("QFrame { background-color: white; border: none;}")
+        self._horizontalWidget.setStyleSheet("QFrame { background-color: white; }")
         self._horizontalLayout = QtWidgets.QHBoxLayout(self._horizontalWidget)
-        self._horizontalLayout.setContentsMargins(5, 5, 5, 5)
+        self._horizontalLayout.setContentsMargins(2, 2, 2, 2)
         self._horizontalLayout.setSpacing(5)
         self._horizontalLayout.addWidget(self._stackedWidget, 1)
         self._horizontalLayout.addLayout(self._displayOptionsLayout, 0)
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 5, 5)
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabsWidget, 0)
         self._mainLayout.addWidget(self._horizontalWidget, 1)
@@ -314,7 +314,10 @@ class Ribbon(QtWidgets.QFrame):
                                 self._mainLayout.contentsMargins().bottom() -
                                 self._tabsLayout.spacing() -
                                 self._tabsLayout.contentsMargins().top() -
-                                self._tabsLayout.contentsMargins().bottom() - 2)
+                                self._tabsLayout.contentsMargins().bottom() -
+                                self._horizontalLayout.spacing() -
+                                self._horizontalLayout.contentsMargins().top() -
+                                self._horizontalLayout.contentsMargins().bottom() - 4)
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         if style == CategoryStyle.Normal:
             self._categories.append(category)
