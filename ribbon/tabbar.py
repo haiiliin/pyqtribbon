@@ -6,7 +6,7 @@ class TabBar(QtWidgets.QTabBar):
     _contextCategoryTopMargin = 0
     #: context category dark color height
     _contextCategoryDarkColorHeight = 5
-    _contextualColor = QtGui.QColor(255, 0, 0)
+    _contextColor = QtGui.QColor(255, 0, 0)
 
     _tabColors = {}
 
@@ -50,7 +50,7 @@ class TabBar(QtWidgets.QTabBar):
                              self._contextCategoryDarkColorHeight)
 
             # Paint rest of the category
-            lightColor = self._contextualColor.lighter(190)
+            lightColor = self._contextColor.lighter(190)
             tabRect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
             painter.fillRect(tabRect, lightColor)
         super().paintEvent(a0)

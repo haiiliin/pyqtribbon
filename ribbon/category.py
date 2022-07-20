@@ -10,11 +10,11 @@ from .typehints import RibbonType
 class CategoryStyle(enum.IntEnum):
     """The buttonStyle of a category."""
     Normal = 0
-    Contextual = 1
+    Context = 1
 
 
-#: A list of contextual category colors
-contextualColors = [
+#: A list of context category colors
+contextColors = [
     QtGui.QColor(201, 89, 156),  # 玫红
     QtGui.QColor(242, 203, 29),  # 黄
     QtGui.QColor(255, 157, 0),  # 橙
@@ -33,7 +33,7 @@ class Category(QtWidgets.QFrame):
     _style: CategoryStyle
     #: Panels
     _panels: typing.Dict[str, Panel]
-    #: color of the contextual category
+    #: color of the context category
     _color: typing.Optional[QtGui.QColor]
 
     #: The signal that is emitted when the display options button is clicked.
@@ -98,38 +98,6 @@ class Category(QtWidgets.QFrame):
     def title(self) -> str:
         """Return the title of the category."""
         return self._title
-
-    def color(self) -> QtGui.QColor:
-        """Return the color of the contextual category.
-
-        :return: The color of the contextual category.
-        """
-        return self._color
-
-    def showContextCategory(self):
-        """Show the given category, if it is not a contextual category, nothing happens."""
-        self._ribbon.showContextCategory(self)
-
-    def hideContextCategory(self):
-        """Hide the given category, if it is not a contextual category, nothing happens."""
-        self._ribbon.hideContextCategory(self)
-
-    def isShown(self) -> bool:
-        """Return whether the category is shown.
-
-        :return: Whether the category is shown.
-        """
-        return self in self._ribbon.categories()
-
-    def setCategoryState(self, state: bool):
-        """Set the state of the category.
-
-        :param state: The state.
-        """
-        if state:
-            self.showContextCategory()
-        else:
-            self.hideContextCategory()
 
     def setCategoryStyle(self, style: CategoryStyle):
         """Set the buttonStyle of the category.
@@ -210,3 +178,47 @@ class Category(QtWidgets.QFrame):
         :param mode: The popup mode.
         """
         self._displayOptionsButton.setPopupMode(mode)
+
+
+class NormalCategory(Category):
+
+    def __init__(self, title: str, parent: QtWidgets.QWidget):
+        super().__init__(title, CategoryStyle.Normal, parent=parent)
+
+
+class ContextCategory(Category):
+
+    def __init__(self, title: str, color: QtGui.QColor, parent: QtWidgets.QWidget):
+        super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
+
+    def color(self) -> QtGui.QColor:
+        """Return the color of the context category.
+
+        :return: The color of the context category.
+        """
+        return self._color
+
+    def showContextCategory(self):
+        """Show the given category, if it is not a context category, nothing happens."""
+        self._ribbon.showContextCategory(self)
+
+    def hideContextCategory(self):
+        """Hide the given category, if it is not a context category, nothing happens."""
+        self._ribbon.hideContextCategory(self)
+
+    def isShown(self) -> bool:
+        """Return whether the category is shown.
+
+        :return: Whether the category is shown.
+        """
+        return self in self._ribbon.categories()
+
+    def setCategoryState(self, state: bool):
+        """Set the state of the category.
+
+        :param state: The state.
+        """
+        if state:
+            self.showContextCategory()
+        else:
+            self.hideContextCategory()

@@ -2,7 +2,7 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from .category import Category, CategoryStyle, contextualColors
+from .category import Category, ContextCategory, NormalCategory, CategoryStyle, contextColors
 from .tabbar import TabBar
 
 
@@ -129,20 +129,33 @@ class Ribbon(QtWidgets.QWidget):
         """
         return self._tabBar
 
-    def addCategory(self, title: str, style=CategoryStyle.Normal, color: QtGui.QColor = None) -> Category:
+    def categories(self) -> typing.List[Category]:
+        """Return the list of categories of the ribbon.
+
+        :return: The list of categories of the ribbon.
+        """
+        return self._categories
+
+    def addCategory(
+        self,
+        title: str,
+        style=CategoryStyle.Normal,
+        color: QtGui.QColor = None,
+    ) -> typing.Union[NormalCategory, ContextCategory]:
         """Add a new category to the ribbon.
 
         :param title: The title of the category.
         :param style: The buttonStyle of the category.
-        :param color: The color of the context category, only used if style is Contextual, if None, the default color
+        :param color: The color of the context category, only used if style is Context, if None, the default color
                       will be used.
         :return: The newly created category.
         """
-        if style == CategoryStyle.Contextual:
+        if style == CategoryStyle.Context:
             if color is None:
-                color = contextualColors[self._contextCategoryCount % len(contextualColors)]
+                color = contextColors[self._contextCategoryCount % len(contextColors)]
             self._contextCategoryCount += 1
-        category = Category(title, style, color, self)
+        category = (ContextCategory(title, color, self) if style == CategoryStyle.Context else
+                    NormalCategory(title, self))
         category.setFixedHeight(self._ribbonHeight -
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
@@ -153,37 +166,43 @@ class Ribbon(QtWidgets.QWidget):
             self._categories.append(category)
             self._tabBar.addTab(title, color)
             self._stackedWidget.addWidget(category)
-        elif style == CategoryStyle.Contextual:
+        elif style == CategoryStyle.Context:
             category.hide()
         return category
 
-    def categories(self) -> typing.List[Category]:
-        """Return the list of categories of the ribbon.
+    def addNormalCategory(self, title: str) -> NormalCategory:
+        """Add a new category to the ribbon.
 
-        :return: The list of categories of the ribbon.
+        :param title: The title of the category.
+        :return: The newly created category.
         """
-        return self._categories
+        return self.addCategory(title, CategoryStyle.Normal)
 
-    def showContextCategory(self, category: Category):
-        """Show the given category, if it is not a contextual category, nothing happens.
+    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> ContextCategory:
+        """Add a new context category to the ribbon.
+
+        :param title: The title of the category.
+        :param color: The color of the context category, if None, the default color will be used.
+        :return: The newly created category.
+        """
+        return self.addCategory(title, CategoryStyle.Context, color)
+
+    def showContextCategory(self, category: ContextCategory):
+        """Show the given category, if it is not a context category, nothing happens.
 
         :param category: The category to show.
         """
-        if category.style() == CategoryStyle.Normal:
-            return
         self._categories.append(category)
         self._tabBar.addTab(category.title(), category.color())
         self._tabBar.setCurrentIndex(self._tabBar.count() - 1)
         self._stackedWidget.addWidget(category)
         self._stackedWidget.setCurrentIndex(self._tabBar.count() - 1)
 
-    def hideContextCategory(self, category: Category):
-        """Hide the given category, if it is not a contextual category, nothing happens.
+    def hideContextCategory(self, category: ContextCategory):
+        """Hide the given category, if it is not a context category, nothing happens.
 
         :param category: The category to hide.
         """
-        if category.style() == CategoryStyle.Normal:
-            return
         self._categories.remove(category)
         self._tabBar.removeTab(self._tabBar.indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
@@ -195,23 +214,6 @@ class Ribbon(QtWidgets.QWidget):
         :return: The rectangle of the tab.
         """
         return self._tabBar.tabRect(self._categories.index(category))
-
-    def addNormalCategory(self, title: str) -> Category:
-        """Add a new category to the ribbon.
-
-        :param title: The title of the category.
-        :return: The newly created category.
-        """
-        return self.addCategory(title, CategoryStyle.Normal)
-
-    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> Category:
-        """Add a new context category to the ribbon.
-
-        :param title: The title of the category.
-        :param color: The color of the context category, if None, the default color will be used.
-        :return: The newly created category.
-        """
-        return self.addCategory(title, CategoryStyle.Contextual, color)
 
     def removeCategory(self, category: Category):
         """Remove a category from the ribbon.
