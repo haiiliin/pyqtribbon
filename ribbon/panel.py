@@ -73,6 +73,9 @@ class Panel(QtWidgets.QFrame):
     #: widgets that are added to the panel
     _widgets: typing.List[QtWidgets.QWidget] = []
 
+    # height of the title widget
+    _titleHeight: int = 30
+
     # Panel options signal
     panelOptionClicked = QtCore.pyqtSignal(bool)
 
@@ -97,6 +100,7 @@ class Panel(QtWidgets.QFrame):
 
         # Title layout
         self._titleWidget = QtWidgets.QWidget()
+        self._titleWidget.setFixedHeight(self._titleHeight)
         self._titleLayout = QtWidgets.QHBoxLayout(self._titleWidget)
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
         self._titleLayout.setSpacing(5)
@@ -125,6 +129,14 @@ class Panel(QtWidgets.QFrame):
         """
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
+        height = (self.height() -
+                  self._mainLayout.contentsMargins().top() -
+                  self._mainLayout.contentsMargins().bottom() -
+                  self._mainLayout.spacing() -
+                  self._titleWidget.height() -
+                  self._actionsLayout.contentsMargins().top() -
+                  self._actionsLayout.contentsMargins().bottom()) / self._gridLayoutManager.rows
+        widget.setFixedHeight(height * rowSpan)
         self._actionsLayout.addWidget(
             widget, row, col, rowSpan, colSpan, QtCore.Qt.AlignCenter
         )
