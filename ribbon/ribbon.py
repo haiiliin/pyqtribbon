@@ -146,7 +146,7 @@ class Ribbon(QtWidgets.QFrame):
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
 
-    def applicationButton(self):
+    def applicationOptionButton(self):
         """Return the application button."""
         return self._applicationButton
 
