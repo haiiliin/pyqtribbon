@@ -44,7 +44,7 @@ class Ribbon(QtWidgets.QFrame):
         self._tabsWidget = QtWidgets.QFrame(self)
         self._tabsWidget.setFixedHeight(self._tabBarHeight)
         self._tabsLayout = QtWidgets.QHBoxLayout(self._tabsWidget)
-        self._tabsLayout.setContentsMargins(5, 5, 5, 5)
+        self._tabsLayout.setContentsMargins(5, 0, 5, 5)
         self._tabsLayout.setSpacing(5)
 
         # Application
@@ -108,7 +108,7 @@ class Ribbon(QtWidgets.QFrame):
         self._displayOptionsButton = DisplayOptionsButton()
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
-        self._displayOptionsButton.setIconSize(QtCore.QSize(24, 24))
+        self._displayOptionsButton.setIconSize(QtCore.QSize(16, 16))
         self._displayOptionsButton.setText("Ribbon Display Options")
         self._displayOptionsButton.setToolTip("Ribbon Display Options")
         self._displayOptionsButton.setEnabled(True)
@@ -116,7 +116,6 @@ class Ribbon(QtWidgets.QFrame):
         self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
         self._displayOptionsLayout.addWidget(self._displayOptionsButton, 0, QtCore.Qt.AlignBottom)
         self._displayOptionsMenu = QtWidgets.QMenu()
-        self.addDisplayOption("Ribbon", QtGui.QIcon("icons/ribbon.png"))
 
         # layout for the display options button and stacked widget
         self._horizontalWidget = QtWidgets.QFrame(self)
@@ -129,7 +128,7 @@ class Ribbon(QtWidgets.QFrame):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 5, 5, 5)
+        self._mainLayout.setContentsMargins(5, 0, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabsWidget, 0)
         self._mainLayout.addWidget(self._horizontalWidget, 1)

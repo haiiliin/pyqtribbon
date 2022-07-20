@@ -9,5 +9,6 @@ class RibbonMainWindow(QtWidgets.QMainWindow):
         super().__init__(parent)
         self.setCentralWidget(QtWidgets.QWidget(self))
         self.mainLayout = QtWidgets.QVBoxLayout(self.centralWidget())
+        self.mainLayout.setContentsMargins(5, 0, 5, 5)
         self.ribbon = Ribbon()
         self.mainLayout.addWidget(self.ribbon)
