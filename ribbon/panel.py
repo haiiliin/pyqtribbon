@@ -32,8 +32,12 @@ class GridLayoutManager(object):
                     self.cells[row: row + rowSpan, col: col + colSpan] = False
                     return row, col
         cols = self.cells.shape[1]
+        colSpan1 = colSpan
+        if self.cells[:, -1].all():
+            cols -= 1
+            colSpan1 -= 1
         self.cells = np.append(
-            self.cells, np.ones((self.rows, colSpan), dtype=bool), axis=1
+            self.cells, np.ones((self.rows, colSpan1), dtype=bool), axis=1
         )
         self.cells[:rowSpan, cols: cols + colSpan] = False
         return 0, cols
