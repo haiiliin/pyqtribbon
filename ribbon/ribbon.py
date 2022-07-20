@@ -314,7 +314,7 @@ class Ribbon(QtWidgets.QFrame):
                                 self._mainLayout.contentsMargins().bottom() -
                                 self._tabsLayout.spacing() -
                                 self._tabsLayout.contentsMargins().top() -
-                                self._tabsLayout.contentsMargins().bottom())
+                                self._tabsLayout.contentsMargins().bottom() - 2)
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         if style == CategoryStyle.Normal:
             self._categories.append(category)

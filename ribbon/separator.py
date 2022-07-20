@@ -25,7 +25,7 @@ class Separator(QWidget):
             width = 6
             parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super(Separator, self).__init__(parent=parent)
-        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
+        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         self.setFixedWidth(width)
 
     def sizeHint(self) -> QSize:

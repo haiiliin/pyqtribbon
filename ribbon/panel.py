@@ -7,6 +7,10 @@ from .separator import Separator
 from .toolbutton import ToolButton, ButtonStyle
 
 
+class PanelTitle(QtWidgets.QLabel):
+    pass
+
+
 class GridLayoutManager(object):
 
     def __init__(self, rows: int):
@@ -67,20 +71,22 @@ class Panel(QtWidgets.QFrame):
         self._mainLayout.addLayout(self._actionsLayout, 1)
 
         # Title layout
-        self._titleLayout = QtWidgets.QHBoxLayout()
+        self._titleWidget = QtWidgets.QWidget()
+        self._titleLayout = QtWidgets.QHBoxLayout(self._titleWidget)
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
         self._titleLayout.setSpacing(5)
-        self._titleLabel = QtWidgets.QLabel(self)
+        self._titleLabel = PanelTitle()
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
-        self._panelOption = QtWidgets.QToolButton(self)
+        self._panelOption = QtWidgets.QToolButton()
         self._panelOption.setAutoRaise(True)
         self._panelOption.setIcon(QtGui.QIcon("icons/linking.png"))
         self._panelOption.setIconSize(QtCore.QSize(16, 16))
         self._panelOption.clicked.connect(self.panelOptionClicked)
         self._titleLayout.addWidget(self._panelOption, 0)
-        self._mainLayout.addLayout(self._titleLayout, 0)
+
+        self._mainLayout.addWidget(self._titleWidget, 0)
 
     def addWidget(
         self, widget: QtWidgets.QWidget, rowSpan: int = 2, colSpan: int = 1

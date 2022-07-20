@@ -4,6 +4,7 @@ import typing
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .panel import Panel
+from .separator import Separator
 from .typehints import RibbonType
 
 
@@ -104,11 +105,7 @@ class Category(QtWidgets.QFrame):
                              self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
         self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, panel)
-
-        line = QtWidgets.QFrame()
-        line.setFrameStyle(QtWidgets.QFrame.VLine | QtWidgets.QFrame.Sunken)
-        line.setEnabled(False)
-        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, line)
+        self._scrollLayout.insertWidget(self._scrollLayout.count() - 1, Separator(width=15))
         self._scrollLayout.addStretch(1)
         return panel
 
