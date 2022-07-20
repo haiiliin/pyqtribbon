@@ -45,7 +45,7 @@ class Panel(QtWidgets.QFrame):
     _widgets: typing.List[QtWidgets.QWidget] = []
 
     # Panel options signal
-    panelOptionsClicked = QtCore.pyqtSignal(bool)
+    panelOptionClicked = QtCore.pyqtSignal(bool)
 
     def __init__(self, title: str, maxRows=6, parent=None):
         super().__init__(parent)
@@ -74,11 +74,12 @@ class Panel(QtWidgets.QFrame):
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
-        self._panelOptions = QtWidgets.QToolButton(self)
-        self._panelOptions.setAutoRaise(True)
-        self._panelOptions.setIcon(QtGui.QIcon("icons/ribbonPanelOptionButton.png"))
-        self._panelOptions.clicked.connect(self.panelOptionsClicked)
-        self._titleLayout.addWidget(self._panelOptions, 0)
+        self._panelOption = QtWidgets.QToolButton(self)
+        self._panelOption.setAutoRaise(True)
+        self._panelOption.setIcon(QtGui.QIcon("icons/circle-down-right.png"))
+        self._panelOption.setIconSize(QtCore.QSize(24, 24))
+        self._panelOption.clicked.connect(self.panelOptionClicked)
+        self._titleLayout.addWidget(self._panelOption, 0)
         self._mainLayout.addLayout(self._titleLayout, 0)
 
     def addWidget(
