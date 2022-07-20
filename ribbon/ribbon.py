@@ -77,6 +77,8 @@ class Ribbon(QtWidgets.QFrame):
 
         # category tab bar
         self._tabBar = TabBar(self)
+        self._tabBar.setExpanding(False)
+        self._tabBar.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         font = self._tabBar.font()
         font.setPointSize(font.pointSize() + 3)
         self._tabBar.setFont(font)
@@ -85,11 +87,6 @@ class Ribbon(QtWidgets.QFrame):
 
         self._tabsLayout.addLayout(self._quickAccessToolBarLayout)
         self._tabsLayout.addWidget(self._tabBar)
-        self._tabsLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
-            )
-        )
         self._tabsLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         # stacked widget
