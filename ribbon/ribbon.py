@@ -400,11 +400,7 @@ class Ribbon(QtWidgets.QFrame):
             self._collapseRibbonButton.setToolTip("Expand Ribbon")
             self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/expand-arrow.png'))
             self._horizontalWidget.setVisible(False)
-            self.setFixedSize(self.sizeHint().width(),
-                              self._tabBarHeight +
-                              self._tabsLayout.contentsMargins().top() +
-                              self._tabsLayout.contentsMargins().bottom() +
-                              self._tabsLayout.spacing())
+            self.setFixedSize(self.sizeHint().width(), self._tabBarHeight)
 
     def ribbonVisible(self) -> bool:
         """Get the visibility of the ribbon.
