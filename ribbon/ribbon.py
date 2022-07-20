@@ -10,6 +10,10 @@ class ApplicationButton(QtWidgets.QToolButton):
     pass
 
 
+class DisplayOptionsButton(QtWidgets.QToolButton):
+    pass
+
+
 class Ribbon(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
@@ -50,7 +54,7 @@ class Ribbon(QtWidgets.QFrame):
         self._applicationButton.setText("PyQtRibbon")
         self._applicationButton.setToolTip("PyQtRibbon")
         self._applicationMenu = QtWidgets.QMenu(self)
-        self._applicationButton.setMenu(self._applicationMenu)
+        # self._applicationButton.setMenu(self._applicationMenu)
 
         self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout()
         self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
@@ -92,12 +96,43 @@ class Ribbon(QtWidgets.QFrame):
         # stacked widget
         self._stackedWidget = QtWidgets.QStackedWidget(self)
 
+        # Display options button
+        self._displayOptionsLayout = QtWidgets.QVBoxLayout()
+        self._displayOptionsLayout.setContentsMargins(0, 0, 0, 0)
+        self._displayOptionsLayout.setSpacing(5)
+        self._displayOptionsLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(
+                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
+            )
+        )
+        self._displayOptionsButton = DisplayOptionsButton()
+        self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
+        self._displayOptionsButton.setIconSize(QtCore.QSize(24, 24))
+        self._displayOptionsButton.setText("Ribbon Display Options")
+        self._displayOptionsButton.setToolTip("Ribbon Display Options")
+        self._displayOptionsButton.setEnabled(True)
+        self._displayOptionsButton.setAutoRaise(True)
+        self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
+        self._displayOptionsLayout.addWidget(self._displayOptionsButton, 0, QtCore.Qt.AlignBottom)
+        self._displayOptionsMenu = QtWidgets.QMenu()
+        self.addDisplayOption("Ribbon", QtGui.QIcon("icons/ribbon.png"))
+
+        # layout for the display options button and stacked widget
+        self._horizontalWidget = QtWidgets.QFrame(self)
+        self._horizontalWidget.setStyleSheet("QFrame { background-color: white; border: none;}")
+        self._horizontalLayout = QtWidgets.QHBoxLayout(self._horizontalWidget)
+        self._horizontalLayout.setContentsMargins(5, 5, 5, 5)
+        self._horizontalLayout.setSpacing(5)
+        self._horizontalLayout.addWidget(self._stackedWidget, 1)
+        self._horizontalLayout.addLayout(self._displayOptionsLayout, 0)
+
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(0, 0, 0, 0)
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabsWidget, 0)
-        self._mainLayout.addWidget(self._stackedWidget, 1)
+        self._mainLayout.addWidget(self._horizontalWidget, 1)
 
         # Connect signals
         self._collapseRibbonButton.clicked.connect(self._collapseButtonClicked)
@@ -130,6 +165,28 @@ class Ribbon(QtWidgets.QFrame):
         """
         self._applicationMenu.addAction(action)
         self._applicationButton.setMenu(self._applicationMenu if self._applicationMenu.actions() else None)
+
+    def addDisplayOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
+        """Add a display option to the category.
+
+        :param title: The title of the display option.
+        :param icon: The icon of the display option.
+        :param callback: The callback of the display option.
+        """
+        action = QtWidgets.QAction(title, self)
+        if icon is not None:
+            action.setIcon(icon)
+        if callback is not None:
+            action.triggered.connect(callback)
+        self.addDisplayOptionAction(action)
+
+    def addDisplayOptionAction(self, action: QtWidgets.QAction):
+        """Add a display option to the category.
+
+        :param action: The action of the display option.
+        """
+        self._displayOptionsMenu.addAction(action)
+        self._displayOptionsButton.setMenu(self._displayOptionsMenu if self._displayOptionsMenu.actions() else None)
 
     def tabBar(self) -> QtWidgets.QTabBar:
         """Return the tab bar of the ribbon.

@@ -24,10 +24,6 @@ contextColors = [
 ]
 
 
-class DisplayOptionsButton(QtWidgets.QToolButton):
-    pass
-
-
 class Category(QtWidgets.QFrame):
     #: Title of the category
     _title: str
@@ -66,26 +62,6 @@ class Category(QtWidgets.QFrame):
             )
         )
 
-        self._displayOptionsLayout = QtWidgets.QVBoxLayout()
-        self._displayOptionsLayout.setContentsMargins(0, 0, 0, 0)
-        self._displayOptionsLayout.setSpacing(5)
-        self._displayOptionsLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
-            )
-        )
-        self._displayOptionsButton = DisplayOptionsButton()
-        self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
-        self._displayOptionsButton.setIconSize(QtCore.QSize(16, 16))
-        self._displayOptionsButton.setText("Ribbon Display Options")
-        self._displayOptionsButton.setToolTip("Ribbon Display Options")
-        self._displayOptionsButton.setEnabled(True)
-        self._displayOptionsButton.setAutoRaise(True)
-        self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
-        self._displayOptionsLayout.addWidget(self._displayOptionsButton, 0, QtCore.Qt.AlignBottom)
-        self._displayOptionsMenu = QtWidgets.QMenu()
-
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(5)
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
@@ -95,7 +71,6 @@ class Category(QtWidgets.QFrame):
                 10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
             )
         )
-        self._mainLayout.addLayout(self._displayOptionsLayout)
 
     def title(self) -> str:
         """Return the title of the category."""
@@ -162,28 +137,6 @@ class Category(QtWidgets.QFrame):
         :return: The panel.
         """
         return self._panels[title]
-
-    def addDisplayOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
-        """Add a display option to the category.
-
-        :param title: The title of the display option.
-        :param icon: The icon of the display option.
-        :param callback: The callback of the display option.
-        """
-        action = QtWidgets.QAction(title, self)
-        if icon is not None:
-            action.setIcon(icon)
-        if callback is not None:
-            action.triggered.connect(callback)
-        self._displayOptionsMenu.addAction(action)
-
-    def addDisplayOptionAction(self, action: QtWidgets.QAction):
-        """Add a display option to the category.
-
-        :param action: The action of the display option.
-        """
-        self._displayOptionsMenu.addAction(action)
-        self._displayOptionsButton.setMenu(self._displayOptionsMenu if self._displayOptionsMenu.actions() else None)
 
 
 class NormalCategory(Category):
