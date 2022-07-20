@@ -154,6 +154,13 @@ class Ribbon(QtWidgets.QFrame):
         """Return the application button."""
         return self._applicationButton
 
+    def setApplicationIcon(self, icon: QtGui.QIcon):
+        """Set the application icon.
+
+        :param icon: The icon to set.
+        """
+        self._applicationButton.setIcon(icon)
+
     def addApplicationOptionAction(self, action: QtWidgets.QAction):
         """Add a display option to the category.
 
