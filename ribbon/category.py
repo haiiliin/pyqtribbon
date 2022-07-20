@@ -25,9 +25,7 @@ contextColors = [
 
 
 class DisplayOptionsButton(QtWidgets.QToolButton):
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    pass
 
 
 class Category(QtWidgets.QFrame):

@@ -7,9 +7,7 @@ from .tabbar import TabBar
 
 
 class ApplicationButton(QtWidgets.QToolButton):
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    pass
 
 
 class Ribbon(QtWidgets.QFrame):
