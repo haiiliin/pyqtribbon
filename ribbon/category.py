@@ -75,6 +75,10 @@ class Category(QtWidgets.QFrame):
         self._displayOptionsToolbar.setIconSize(QtCore.QSize(16, 16))
         self._displayOptionsToolbar.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._displayOptionsButton = QtWidgets.QToolButton()
+        self._displayOptionsButton.setStyleSheet(
+            "QToolButton::menu-indicator { image: none; } "
+        )
+        self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
         self._displayOptionsButton.setText("Ribbon Display Options")
         self._displayOptionsButton.setToolTip("Ribbon Display Options")
@@ -83,6 +87,7 @@ class Category(QtWidgets.QFrame):
         self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
         self._displayOptionsToolbar.addWidget(self._displayOptionsButton)
         self._displayOptionsLayout.addWidget(self._displayOptionsToolbar)
+        self._displayOptionsMenu = QtWidgets.QMenu()
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(0)
@@ -161,23 +166,27 @@ class Category(QtWidgets.QFrame):
         """
         return self._panels[title]
 
-    def displayOptionsButton(self):
-        """Return the display options button."""
-        return self._displayOptionsButton
+    def addDisplayOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
+        """Add a display option to the category.
 
-    def setDisplayOptionsButtonMenu(self, menu: QtWidgets.QMenu):
-        """Set the menu of the display options button.
-
-        :param menu: The menu.
+        :param title: The title of the display option.
+        :param icon: The icon of the display option.
+        :param callback: The callback of the display option.
         """
-        self._displayOptionsButton.setMenu(menu)
+        action = QtWidgets.QAction(title, self)
+        if icon is not None:
+            action.setIcon(icon)
+        if callback is not None:
+            action.triggered.connect(callback)
+        self._displayOptionsMenu.addAction(action)
 
-    def setDisplayOptionsMenuPopupMode(self, mode: QtWidgets.QToolButton.ToolButtonPopupMode):
-        """Set the popup mode of the display options button.
+    def addDisplayOptionAction(self, action: QtWidgets.QAction):
+        """Add a display option to the category.
 
-        :param mode: The popup mode.
+        :param action: The action of the display option.
         """
-        self._displayOptionsButton.setPopupMode(mode)
+        self._displayOptionsMenu.addAction(action)
+        self._displayOptionsButton.setMenu(self._displayOptionsMenu if self._displayOptionsMenu.actions() else None)
 
 
 class NormalCategory(Category):
