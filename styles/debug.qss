@@ -5,6 +5,11 @@ Ribbon, Category, Panel, QFrame, QToolButton {
 	
 }
 
+TabBar {
+    border: 1px solid blue;
+    border-radius: 20px;
+}
+
 QStackedWidget {
     border: 1px solid red;
     border-radius: 20px;
