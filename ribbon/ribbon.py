@@ -143,20 +143,6 @@ class Ribbon(QtWidgets.QFrame):
         """Return the application button."""
         return self._applicationButton
 
-    def addApplicationOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
-        """Add a display option to the category.
-
-        :param title: The title of the display option.
-        :param icon: The icon of the display option.
-        :param callback: The callback of the display option.
-        """
-        action = QtWidgets.QAction(title, self)
-        if icon is not None:
-            action.setIcon(icon)
-        if callback is not None:
-            action.triggered.connect(callback)
-        self._applicationMenu.addAction(action)
-
     def addApplicationOptionAction(self, action: QtWidgets.QAction):
         """Add a display option to the category.
 
@@ -164,20 +150,6 @@ class Ribbon(QtWidgets.QFrame):
         """
         self._applicationMenu.addAction(action)
         self._applicationButton.setMenu(self._applicationMenu if self._applicationMenu.actions() else None)
-
-    def addDisplayOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
-        """Add a display option to the category.
-
-        :param title: The title of the display option.
-        :param icon: The icon of the display option.
-        :param callback: The callback of the display option.
-        """
-        action = QtWidgets.QAction(title, self)
-        if icon is not None:
-            action.setIcon(icon)
-        if callback is not None:
-            action.triggered.connect(callback)
-        self.addDisplayOptionAction(action)
 
     def addDisplayOptionAction(self, action: QtWidgets.QAction):
         """Add a display option to the category.
