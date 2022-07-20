@@ -56,21 +56,15 @@ class Panel(QtWidgets.QFrame):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(10, 10, 10, 5)
-        self._mainLayout.setSpacing(0)
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
+        self._mainLayout.setSpacing(5)
 
         # Actions layout
-        self._horizontalLayout = QtWidgets.QHBoxLayout()
+        # self._actionsWidget = QtWidgets.QWidget(self)
         self._actionsLayout = QtWidgets.QGridLayout()
         self._actionsLayout.setContentsMargins(0, 0, 0, 0)
         self._actionsLayout.setSpacing(5)
-        self._horizontalLayout.addLayout(self._actionsLayout, 0)
-        self._horizontalLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                5, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred
-            )
-        )
-        self._mainLayout.addLayout(self._horizontalLayout, 1)
+        self._mainLayout.addLayout(self._actionsLayout, 1)
 
         # Title layout
         self._titleLayout = QtWidgets.QHBoxLayout()

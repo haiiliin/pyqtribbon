@@ -1,8 +1,25 @@
 
-QFrame {
+Ribbon, Category, Panel {
     border: 0px solid transparent;
     border-radius: 20px;
 	
+}
+
+ApplicationButton {
+    border: none;
+    padding: 0px;
+}
+
+ApplicationButton::menu-indicator {
+    image: none;
+}
+
+DisplayOptionsButton {
+    border: none;
+    padding: 0px;
+}
+DisplayOptionsButton::menu-indicator {
+    image: none;
 }
 
 /*QTabBar*/

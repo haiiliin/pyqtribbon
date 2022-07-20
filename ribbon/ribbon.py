@@ -6,7 +6,13 @@ from .category import Category, ContextCategory, NormalCategory, CategoryStyle, 
 from .tabbar import TabBar
 
 
-class Ribbon(QtWidgets.QWidget):
+class ApplicationButton(QtWidgets.QToolButton):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+
+class Ribbon(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
 
@@ -23,6 +29,7 @@ class Ribbon(QtWidgets.QWidget):
 
     #: heights of the ribbon elements
     _ribbonHeight = 240
+    _tabBarHeight = 60
     _quickAccessButtonHeight = 32
     _rightButtonHeight = 24
 
@@ -32,24 +39,20 @@ class Ribbon(QtWidgets.QWidget):
         self.setFixedHeight(self._ribbonHeight)
 
         # Tab bar layout
-        self._tabsWidget = QtWidgets.QWidget(self)
-        self._tabsLayout = QtWidgets.QHBoxLayout(self)
-        self._tabsLayout.setContentsMargins(0, 0, 0, 0)
-        self._tabsLayout.setSpacing(0)
-        self._tabsWidget.setLayout(self._tabsLayout)
+        self._tabsWidget = QtWidgets.QFrame(self)
+        self._tabsWidget.setFixedHeight(self._tabBarHeight)
+        self._tabsLayout = QtWidgets.QHBoxLayout(self._tabsWidget)
+        self._tabsLayout.setContentsMargins(5, 5, 5, 5)
+        self._tabsLayout.setSpacing(5)
 
         # Application
-        self._applicationButton = QtWidgets.QToolButton()
+        self._applicationButton = ApplicationButton()
         self._applicationButton.setIcon(QtGui.QIcon('icons/python.png'))
         self._applicationButton.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
-        self._applicationButton.setText("File")
-        self._applicationButton.setStyleSheet(
-            "QToolButton { border: none; padding: 0px; } "
-            "QToolButton::menu-indicator { image: none; } "
-        )
-        self._applicationButton.setToolTip("File")
-        self._fileMenu = QtWidgets.QMenu(self)
-        self._applicationButton.setMenu(self._fileMenu)
+        self._applicationButton.setText("PyQtRibbon")
+        self._applicationButton.setToolTip("PyQtRibbon")
+        self._applicationMenu = QtWidgets.QMenu(self)
+        self._applicationButton.setMenu(self._applicationMenu)
 
         self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout()
         self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
@@ -89,7 +92,7 @@ class Ribbon(QtWidgets.QWidget):
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
         )
-        self._tabsLayout.addWidget(self._rightToolBar)
+        self._tabsLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         # stacked widget
         self._stackedWidget = QtWidgets.QStackedWidget(self)
@@ -107,20 +110,31 @@ class Ribbon(QtWidgets.QWidget):
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
 
-    def setFileTitle(self, title: str):
-        """Set the title of the file menu.
+    def applicationButton(self):
+        """Return the application button."""
+        return self._applicationButton
 
-        :param title: The title to set.
+    def addApplicationOption(self, title: str, icon: QtGui.QIcon = None, callback: callable = None):
+        """Add a display option to the category.
+
+        :param title: The title of the display option.
+        :param icon: The icon of the display option.
+        :param callback: The callback of the display option.
         """
-        self._tabBar.setTabText(0, title)
+        action = QtWidgets.QAction(title, self)
+        if icon is not None:
+            action.setIcon(icon)
+        if callback is not None:
+            action.triggered.connect(callback)
+        self._applicationMenu.addAction(action)
 
-    def setFileMenu(self, menu: QtWidgets.QMenu):
-        """Set the file menu of the ribbon.
+    def addApplicationOptionAction(self, action: QtWidgets.QAction):
+        """Add a display option to the category.
 
-        :param menu: The menu to set.
+        :param action: The action of the display option.
         """
-        self._fileMenu = menu
-        self._applicationButton.setMenu(menu)
+        self._applicationMenu.addAction(action)
+        self._applicationButton.setMenu(self._applicationMenu if self._applicationMenu.actions() else None)
 
     def tabBar(self) -> QtWidgets.QTabBar:
         """Return the tab bar of the ribbon.
@@ -160,7 +174,10 @@ class Ribbon(QtWidgets.QWidget):
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() - 20)
+                                self._mainLayout.contentsMargins().bottom() -
+                                self._tabsLayout.spacing() -
+                                self._tabsLayout.contentsMargins().top() -
+                                self._tabsLayout.contentsMargins().bottom())
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         if style == CategoryStyle.Normal:
             self._categories.append(category)
@@ -242,7 +259,7 @@ class Ribbon(QtWidgets.QWidget):
         self._quickAccessButtons.append(button)
         self._quickAccessToolBarLayout.addWidget(button, 0, QtCore.Qt.AlignBottom)
 
-    def setQuickAccessButtonHeight(self, height: int):
+    def setQuickAccessButtonHeight(self, height: int = 32):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.
@@ -283,7 +300,7 @@ class Ribbon(QtWidgets.QWidget):
         self._rightToolButtons.append(button)
         self._rightToolBar.addWidget(button)
 
-    def setRightButtonHeight(self, height: int):
+    def setRightButtonHeight(self, height: int = 24):
         """Set the height of the right buttons.
 
         :param height: The height to set.
@@ -306,6 +323,21 @@ class Ribbon(QtWidgets.QWidget):
         :return: The height of the ribbon.
         """
         return self._ribbonHeight
+
+    def setTabBarHeight(self, height: int = 50):
+        """Set the height of the tab bar.
+
+        :param height: The height to set.
+        """
+        self._tabBarHeight = height
+        self._tabsWidget.setFixedHeight(height)
+
+    def tabBarHeight(self) -> int:
+        """Get the height of the tab bar.
+
+        :return: The height of the tab bar.
+        """
+        return self._tabBarHeight
 
     def setFileIcon(self, icon: QtGui.QIcon):
         """Set the icon of the file menu.

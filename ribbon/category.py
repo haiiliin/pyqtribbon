@@ -24,6 +24,12 @@ contextColors = [
 ]
 
 
+class DisplayOptionsButton(QtWidgets.QToolButton):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+
 class Category(QtWidgets.QFrame):
     #: Title of the category
     _title: str
@@ -70,11 +76,7 @@ class Category(QtWidgets.QFrame):
                 10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
             )
         )
-        self._displayOptionsButton = QtWidgets.QToolButton()
-        self._displayOptionsButton.setStyleSheet(
-            "QToolButton { background-color: transparent; border: none; }"
-            "QToolButton::menu-indicator { image: none; } "
-        )
+        self._displayOptionsButton = DisplayOptionsButton()
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
         self._displayOptionsButton.setIconSize(QtCore.QSize(16, 16))
@@ -87,8 +89,8 @@ class Category(QtWidgets.QFrame):
         self._displayOptionsMenu = QtWidgets.QMenu()
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setSpacing(0)
-        self._mainLayout.setContentsMargins(0, 0, 5, 5)
+        self._mainLayout.setSpacing(5)
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.addWidget(self._scrollArea)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
