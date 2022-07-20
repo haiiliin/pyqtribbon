@@ -144,11 +144,25 @@ class NormalCategory(Category):
     def __init__(self, title: str, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Normal, parent=parent)
 
+    def setCategoryStyle(self, style: CategoryStyle):
+        """Set the buttonStyle of the category.
+
+        :param style: The buttonStyle.
+        """
+        raise ValueError("You can not set the category style of a normal category.")
+
 
 class ContextCategory(Category):
 
     def __init__(self, title: str, color: QtGui.QColor, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
+
+    def setCategoryStyle(self, style: CategoryStyle):
+        """Set the buttonStyle of the category.
+
+        :param style: The buttonStyle.
+        """
+        raise ValueError("You can not set the category style of a context category.")
 
     def color(self) -> QtGui.QColor:
         """Return the color of the context category.
@@ -156,6 +170,14 @@ class ContextCategory(Category):
         :return: The color of the context category.
         """
         return self._color
+
+    def setColor(self, color: QtGui.QColor):
+        """Set the color of the context category.
+
+        :param color: The color of the context category.
+        """
+        self._color = color
+        self._ribbon.repaint()
 
     def showContextCategory(self):
         """Show the given category, if it is not a context category, nothing happens."""

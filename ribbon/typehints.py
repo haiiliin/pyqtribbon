@@ -43,3 +43,6 @@ class RibbonType(typing.Protocol):
 
     def categories(self) -> typing.List:
         ...
+
+    def repaint(self):
+        ...
