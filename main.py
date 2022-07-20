@@ -10,7 +10,7 @@ if __name__ == "__main__":
     app.setFont(QtGui.QFont("Times New Roman", 8))
     app.setStyle("Windows")
 
-    app.setStyleSheet(open("styles/Default.qss", "r").read())
+    app.setStyleSheet(open("styles/default.qss", "r").read())
 
     window = RibbonMainWindow()
     window.setWindowTitle("Ribbon Test")
