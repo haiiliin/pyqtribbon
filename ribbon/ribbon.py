@@ -150,9 +150,6 @@ class Ribbon(QtWidgets.QFrame):
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
 
-        # Hide ribbon when no tabs are added
-        self.setRibbonVisible(False)
-
     def applicationOptionButton(self):
         """Return the application button."""
         return self._applicationButton
