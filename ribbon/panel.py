@@ -142,9 +142,11 @@ class Panel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         style: ButtonStyle = ButtonStyle.Large,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
         button = ToolButton(self)
@@ -157,12 +159,16 @@ class Panel(QtWidgets.QFrame):
             button.clicked.connect(slot)
         if shortcut:
             button.setShortcut(shortcut)
+        if tooltip:
+            button.setToolTip(tooltip)
         if statusTip:
             button.setStatusTip(statusTip)
         button.setMaximumHeight(self.height() - self._titleLabel.sizeHint().height() -
                                 self._mainLayout.spacing() -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom())
+        if not showText:
+            button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
@@ -174,43 +180,51 @@ class Panel(QtWidgets.QFrame):
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Small, colSpan, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip)
 
     def addMediumButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Medium, colSpan, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip)
 
     def addLargeButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
-        return self.addButton(text, icon, ButtonStyle.Large, colSpan, slot, shortcut, statusTip)
+        return self.addButton(text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip)
 
     def addToggleButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
         style: ButtonStyle = ButtonStyle.Large,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
         button = ToolButton(self)
@@ -224,8 +238,12 @@ class Panel(QtWidgets.QFrame):
             button.clicked.connect(slot)
         if shortcut:
             button.setShortcut(shortcut)
+        if tooltip:
+            button.setToolTip(tooltip)
         if statusTip:
             button.setStatusTip(statusTip)
+        if not showText:
+            button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.addWidget(
             button,
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
@@ -237,39 +255,45 @@ class Panel(QtWidgets.QFrame):
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Small, colSpan, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip
         )
 
     def addMediumToggleButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Medium, colSpan, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip
         )
 
     def addLargeToggleButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
+        showText: bool = True,
         colSpan: int = 1,
         slot=None,
         shortcut=None,
+        tooltip=None,
         statusTip=None,
     ) -> ToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Large, colSpan, slot, shortcut, statusTip
+            text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip
         )
 
     def addComboBox(
