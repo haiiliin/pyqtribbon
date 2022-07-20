@@ -51,8 +51,7 @@ QTabBar::tab:selected, QTabBar::tab:hover {
 QTabBar::tab:selected {
 	color: blue;
 	background: transparent;
-	border-bottom: 3px solid transparent;
-	border-bottom-color: blue;
+	border-bottom: 3px solid blue;
 }
 
 QTabBar::tab:hover:!selected {
