@@ -44,10 +44,10 @@ if __name__ == "__main__":
     panel.addSmallButton("Button 2", icon=QtGui.QIcon("icons/close.png"))
     panel.addSmallButton("Button 3", icon=QtGui.QIcon("icons/close.png"))
     showCategoryButton2 = panel.addMediumToggleButton("Show/Hide Category 2", icon=QtGui.QIcon("icons/close.png"))
-    panel.addSeparator()
+    panel.addVerticalSeparator()
     showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 6", icon=QtGui.QIcon("icons/close.png"))
-    panel.addSeparator()
+    panel.addVerticalSeparator()
     panel.addMediumButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     panel.addMediumButton("Button 4", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 5", icon=QtGui.QIcon("icons/close.png"))
     panel.addLargeButton("Button 6", icon=QtGui.QIcon("icons/close.png"))
-    panel.addSeparator()
+    panel.addVerticalSeparator()
     panel.addMediumButton("Button 7", icon=QtGui.QIcon("icons/close.png"))
     panel.addMediumButton("Button 8", icon=QtGui.QIcon("icons/close.png"))
 
