@@ -1,17 +1,17 @@
-QFrame {
+QToolButton {
     border: 2px solid blue;
     border-radius: 5px;
 }
 
-ApplicationButton::menu-indicator {
+RibbonApplicationButton::menu-indicator {
     image: none;
 }
 
-DisplayOptionsButton::menu-indicator {
+RibbonDisplayOptionsButton::menu-indicator {
     image: none;
 }
 
-TabBar {
+RibbonTabBar {
     border: 2px solid blue;
     border-radius: 20px;
 }
@@ -21,14 +21,24 @@ Ribbon {
     border-radius: 20px;
 }
 
-Category {
+RibbonCategory {
     border: 2px solid green;
+    border-radius: 20px;
+}
+
+RibbonPanel {
+    border: 2px solid brown;
     border-radius: 20px;
 
 }
 
-Panel {
-    border: 2px solid brown;
+RibbonPanelTitle {
+    border: 2px solid green;
+    border-radius: 20px;
+}
+
+RibbonPanelItemWidget {
+    border: 0px solid black;
     border-radius: 20px;
 
 }

@@ -8,7 +8,7 @@ from .toolbutton import RibbonToolButton, ButtonStyle
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
 
 
-class PanelTitle(QtWidgets.QLabel):
+class RibbonPanelTitle(QtWidgets.QLabel):
     pass
 
 
@@ -119,7 +119,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self._titleLayout = QtWidgets.QHBoxLayout(self._titleWidget)
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
         self._titleLayout.setSpacing(5)
-        self._titleLabel = PanelTitle()
+        self._titleLabel = RibbonPanelTitle()
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)

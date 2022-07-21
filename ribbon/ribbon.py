@@ -6,11 +6,11 @@ from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategor
 from .tabbar import RibbonTabBar
 
 
-class ApplicationButton(QtWidgets.QToolButton):
+class RibbonApplicationButton(QtWidgets.QToolButton):
     pass
 
 
-class DisplayOptionsButton(QtWidgets.QToolButton):
+class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
     pass
 
 
@@ -53,7 +53,7 @@ class Ribbon(QtWidgets.QFrame):
         self._tabsLayout.setSpacing(5)
 
         # Application
-        self._applicationButton = ApplicationButton()
+        self._applicationButton = RibbonApplicationButton()
         self._applicationButton.setIcon(QtGui.QIcon('icons/python.png'))
         self._applicationButton.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._applicationButton.setText("PyQtRibbon")
@@ -115,7 +115,7 @@ class Ribbon(QtWidgets.QFrame):
                 10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
             )
         )
-        self._displayOptionsButton = DisplayOptionsButton()
+        self._displayOptionsButton = RibbonDisplayOptionsButton()
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
         self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
         self._displayOptionsButton.setIconSize(QtCore.QSize(self._displayOptionsButtonHeight,
@@ -130,7 +130,7 @@ class Ribbon(QtWidgets.QFrame):
 
         # layout for the display options button and stacked widget
         self._horizontalWidget = QtWidgets.QFrame(self)
-        self._horizontalWidget.setStyleSheet("QFrame { background-color: white; }")
+        # self._horizontalWidget.setStyleSheet("QFrame { background-color: white; }")
         self._horizontalLayout = QtWidgets.QHBoxLayout(self._horizontalWidget)
         self._horizontalLayout.setContentsMargins(2, 2, 2, 2)
         self._horizontalLayout.setSpacing(5)
@@ -268,7 +268,7 @@ class Ribbon(QtWidgets.QFrame):
         """Remove the help button from the ribbon."""
         self._helpButton.setVisible(False)
 
-    def displayOptionsButton(self) -> DisplayOptionsButton:
+    def displayOptionsButton(self) -> RibbonDisplayOptionsButton:
         """Return the display options button.
 
         :return: The display options button.

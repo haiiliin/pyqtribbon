@@ -2,19 +2,19 @@
 QFrame {
     border: 0px solid transparent;
     border-radius: 20px;
-	
+
 }
 
-ApplicationButton {
+RibbonApplicationButton {
     border: none;
     padding: 0px;
 }
 
-ApplicationButton::menu-indicator {
+RibbonApplicationButton::menu-indicator {
     image: none;
 }
 
-DisplayOptionsButton::menu-indicator {
+RibbonDisplayOptionsButton::menu-indicator {
     image: none;
 }
 
