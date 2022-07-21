@@ -139,6 +139,10 @@ if __name__ == "__main__":
     showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryVisible(checked))
     showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
 
+    gallery = panel.addGallery()
+    for i in range(100):
+        gallery.addButton(f'item {i+1}', QtGui.QIcon("icons/close.png"))
+
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)

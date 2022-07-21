@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 from .toolbutton import RibbonToolButton, ButtonStyle
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
+from .gallery import RibbonGallery
 
 
 class RibbonPanelTitle(QtWidgets.QLabel):
@@ -519,6 +520,27 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The separator.
         """
         return self.addSeparator(QtCore.Qt.Vertical, linewidth, rowSpan, colSpan, mode)
+
+    def addGallery(
+        self,
+        minimumWidth=800,
+        rowSpan: int = 6,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise
+    ) -> RibbonGallery:
+        """Add a gallery to the panel.
+
+        :param minimumWidth: The minimum width of the gallery.
+        :param rowSpan: The number of rows the gallery spans.
+        :param colSpan: The number of columns the gallery spans.
+        :param mode: The mode of the gallery.
+        :return: The gallery.
+        """
+        gallery = RibbonGallery(minimumWidth, self)
+        maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
+        gallery.setFixedHeight(maximumHeight)
+        self.addWidget(gallery, rowSpan, colSpan, mode)
+        return gallery
 
     def setTitleText(self, text: str):
         """Set the title text of the panel.
