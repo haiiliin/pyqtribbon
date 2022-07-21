@@ -34,9 +34,6 @@ class RibbonToolButton(QtWidgets.QToolButton):
         super().__init__(parent)
         self._actions = []
 
-        # Make way for the popup button
-        self.setStyleSheet("""ToolButton[popupMode="1"] { padding-right: 20px; }""")
-
         # Styles
         self.setButtonStyle(ButtonStyle.Large)
         self.setAutoRaise(True)
