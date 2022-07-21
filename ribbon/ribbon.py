@@ -34,6 +34,7 @@ class Ribbon(QtWidgets.QFrame):
         self.setFixedHeight(self._ribbonHeight)
 
         self._tabWidget = RibbonTabWidget(self)
+        self._separator = RibbonHorizontalSeparator(width=1, parent=self)
         self._ribbonSection = RibbonSection(self)
 
         # Main layout
@@ -41,7 +42,7 @@ class Ribbon(QtWidgets.QFrame):
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabWidget, 0)
-        self._mainLayout.addWidget(RibbonHorizontalSeparator(width=1), 0)
+        self._mainLayout.addWidget(self._separator, 0)
         self._mainLayout.addWidget(self._ribbonSection, 1)
 
         # Connect signals
@@ -333,6 +334,7 @@ class Ribbon(QtWidgets.QFrame):
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/up.png'))
+            self._separator.setVisible(True)
             self._ribbonSection.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
@@ -342,8 +344,9 @@ class Ribbon(QtWidgets.QFrame):
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/down.png'))
+            self._separator.setVisible(False)
             self._ribbonSection.setVisible(False)
-            self.setFixedSize(self.sizeHint().width(), self._tabWidget.tabBarHeight())
+            self.setFixedSize(self.sizeHint().width(), self._tabWidget.tabBarHeight() + 5)
 
     def ribbonVisible(self) -> bool:
         """Get the visibility of the ribbon.
