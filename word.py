@@ -13,7 +13,7 @@ if __name__ == "__main__":
     window.setWindowIcon(QtGui.QIcon("examples/word.png"))
     window.mainLayout.addWidget(QtWidgets.QTextEdit())
     window.ribbon.setApplicationIcon(QtGui.QIcon("examples/word.png"))
-    window.ribbon.applicationOptionButton().setToolTip("Microsoft Word")
+    window.ribbon.applicationButton().setToolTip("Microsoft Word")
 
     # Home category
     homeCategory = window.ribbon.addCategory("Home")
