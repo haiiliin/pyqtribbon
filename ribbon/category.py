@@ -63,12 +63,13 @@ class RibbonCategory(QtWidgets.QFrame):
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(5)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
-        self._mainLayout.addWidget(self._panelWidget)
+        self._mainLayout.addWidget(self._panelWidget, 0)
         self._mainLayout.addSpacerItem(
             QtWidgets.QSpacerItem(
                 10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
             )
         )
+        self._mainLayout.setStretch(1, 1)
 
     def title(self) -> str:
         """Return the title of the category."""

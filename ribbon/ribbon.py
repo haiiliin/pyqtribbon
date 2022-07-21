@@ -33,7 +33,7 @@ class Ribbon(QtWidgets.QFrame):
     _ribbonVisible = True
 
     #: heights of the ribbon elements
-    _ribbonHeight = 260
+    _ribbonHeight = 220
     _tabBarHeight = 60
     _quickAccessButtonHeight = 40
     _rightButtonHeight = 24
