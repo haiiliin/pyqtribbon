@@ -1,3 +1,7 @@
+QFrame {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
 
 ApplicationButton::menu-indicator {
     image: none;
@@ -111,9 +115,4 @@ QToolButton::menu-button {
 	border-bottom-right-radius: 6px;
 	/* 16px width + 4px for border = 20px allocated above */
 	width: 16px;
-}
-
-QToolButton, QLabel {
-    border: 1px solid black;
-    border-radius: 20px;
 }
