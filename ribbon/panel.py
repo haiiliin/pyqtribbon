@@ -146,7 +146,12 @@ class RibbonPanel(QtWidgets.QFrame):
         ) / self._gridLayoutManager.rows
 
     def addWidget(
-        self, widget: QtWidgets.QWidget, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise,
+        self,
+        widget: QtWidgets.QWidget,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ):
         """Add a widget to the panel.
 
@@ -154,6 +159,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param rowSpan: The number of rows the widget should span, 2: small, 3: medium, 6: large.
         :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
         """
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
@@ -163,33 +169,51 @@ class RibbonPanel(QtWidgets.QFrame):
         item.setFixedHeight(maximumHeight)
         item.addWidget(widget)
         self._actionsLayout.addWidget(
-            item, row, col, rowSpan, colSpan, QtCore.Qt.AlignCenter
+            item, row, col, rowSpan, colSpan, alignment
         )
 
-    def addSmallWidget(self, widget: QtWidgets.QWidget, mode=SpaceFindMode.ColumnWise):
+    def addSmallWidget(
+        self,
+        widget: QtWidgets.QWidget,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ):
         """Add a small widget to the panel.
 
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
         :return: The widget that was added.
         """
-        return self.addWidget(widget, 2, 1, mode)
+        return self.addWidget(widget, 2, 1, mode, alignment)
 
-    def addMediumWidget(self, widget: QtWidgets.QWidget, mode=SpaceFindMode.ColumnWise):
+    def addMediumWidget(
+        self,
+        widget: QtWidgets.QWidget,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ):
         """Add a medium widget to the panel.
 
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
         """
-        return self.addWidget(widget, 3, 1, mode)
+        return self.addWidget(widget, 3, 1, mode, alignment)
 
-    def addLargeWidget(self, widget: QtWidgets.QWidget, mode=SpaceFindMode.ColumnWise):
+    def addLargeWidget(
+        self,
+        widget: QtWidgets.QWidget,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ):
         """Add a large widget to the panel.
 
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
         """
-        return self.addWidget(widget, 6, 1, mode)
+        return self.addWidget(widget, 6, 1, mode, alignment)
 
     def removeWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the panel."""
@@ -215,6 +239,7 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         button = RibbonToolButton(self)
         button.setButtonStyle(style)
@@ -241,6 +266,7 @@ class RibbonPanel(QtWidgets.QFrame):
             rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
             colSpan=colSpan,
             mode=mode,
+            alignment=alignment
         )
         return button
 
@@ -255,9 +281,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Small, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode)
+                              slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addMediumButton(
         self,
@@ -270,9 +297,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Medium, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode)
+                              slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addLargeButton(
         self,
@@ -285,9 +313,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Large, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode)
+                              slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addToggleButton(
         self,
@@ -301,8 +330,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
-        button = self.addButton(text, icon, style, showText, colSpan, slot, shortcut, tooltip, statusTip, mode)
+        button = self.addButton(text, icon, style, showText, colSpan,
+                                slot, shortcut, tooltip, statusTip, mode, alignment)
         button.setCheckable(True)
         return button
 
@@ -317,9 +348,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
+            text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addMediumToggleButton(
@@ -333,9 +365,10 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
+            text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addLargeToggleButton(
@@ -349,17 +382,23 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
         return self.addToggleButton(
-            text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
+            text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addComboBox(
-        self, items: typing.List[str], rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        items: typing.List[str],
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QComboBox:
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
-        self.addWidget(comboBox, rowSpan, colSpan, mode)
+        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment)
         return comboBox
 
     def addFontComboBox(
@@ -369,121 +408,196 @@ class RibbonPanel(QtWidgets.QFrame):
         self.addWidget(comboBox, rowSpan, colSpan, mode)
         return comboBox
 
-    def addLineEdit(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QLineEdit:
+    def addLineEdit(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QLineEdit:
         lineEdit = QtWidgets.QLineEdit(self)
-        self.addWidget(lineEdit, rowSpan, colSpan, mode)
+        self.addWidget(lineEdit, rowSpan, colSpan, mode, alignment)
         return lineEdit
 
-    def addTextEdit(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QTextEdit:
+    def addTextEdit(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QTextEdit:
         textEdit = QtWidgets.QTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode)
+        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
         return textEdit
 
     def addPlainTextEdit(
-        self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QPlainTextEdit:
         textEdit = QtWidgets.QPlainTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode)
+        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
         return textEdit
 
     def addLabel(
-        self, text: str, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        text: str,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QLabel:
         label = QtWidgets.QLabel(self)
         label.setText(text)
-        self.addWidget(label, rowSpan, colSpan, mode)
+        self.addWidget(label, rowSpan, colSpan, mode, alignment)
         return label
 
     def addProgressBar(
-        self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QProgressBar:
         progressBar = QtWidgets.QProgressBar(self)
-        self.addWidget(progressBar, rowSpan, colSpan, mode)
+        self.addWidget(progressBar, rowSpan, colSpan, mode, alignment)
         return progressBar
 
-    def addSlider(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QSlider:
+    def addSlider(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QSlider:
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
-        self.addWidget(slider, rowSpan, colSpan, mode)
+        self.addWidget(slider, rowSpan, colSpan, mode, alignment)
         return slider
 
-    def addSpinBox(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QSpinBox:
+    def addSpinBox(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QSpinBox:
         spinBox = QtWidgets.QSpinBox(self)
-        self.addWidget(spinBox, rowSpan, colSpan, mode)
+        self.addWidget(spinBox, rowSpan, colSpan, mode, alignment)
         return spinBox
 
     def addDoubleSpinBox(
-        self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QDoubleSpinBox:
         doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
-        self.addWidget(doubleSpinBox, rowSpan, colSpan, mode)
+        self.addWidget(doubleSpinBox, rowSpan, colSpan, mode, alignment)
         return doubleSpinBox
 
-    def addDateEdit(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QDateEdit:
+    def addDateEdit(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QDateEdit:
         dateEdit = QtWidgets.QDateEdit(self)
-        self.addWidget(dateEdit, rowSpan, colSpan, mode)
+        self.addWidget(dateEdit, rowSpan, colSpan, mode, alignment)
         return dateEdit
 
-    def addTimeEdit(self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise) -> QtWidgets.QTimeEdit:
+    def addTimeEdit(
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+    ) -> QtWidgets.QTimeEdit:
         timeEdit = QtWidgets.QTimeEdit(self)
-        self.addWidget(timeEdit, rowSpan, colSpan, mode)
+        self.addWidget(timeEdit, rowSpan, colSpan, mode, alignment)
         return timeEdit
 
     def addDateTimeEdit(
-        self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QDateTimeEdit:
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
-        self.addWidget(dateTimeEdit, rowSpan, colSpan, mode)
+        self.addWidget(dateTimeEdit, rowSpan, colSpan, mode, alignment)
         return dateTimeEdit
 
     def addTableWidget(
-        self, rowSpan: int = 6, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 6,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTableWidget:
         tableWidget = QtWidgets.QTableWidget(self)
-        self.addWidget(tableWidget, rowSpan, colSpan, mode)
+        self.addWidget(tableWidget, rowSpan, colSpan, mode, alignment)
         return tableWidget
 
     def addTreeWidget(
-        self, rowSpan: int = 6, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 6,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTreeWidget:
         treeWidget = QtWidgets.QTreeWidget(self)
-        self.addWidget(treeWidget, rowSpan, colSpan, mode)
+        self.addWidget(treeWidget, rowSpan, colSpan, mode, alignment)
         return treeWidget
 
     def addListWidget(
-        self, rowSpan: int = 6, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 6,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QListWidget:
         listWidget = QtWidgets.QListWidget(self)
-        self.addWidget(listWidget, rowSpan, colSpan, mode)
+        self.addWidget(listWidget, rowSpan, colSpan, mode, alignment)
         return listWidget
 
     def addCalendarWidget(
-        self, rowSpan: int = 6, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 6,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QCalendarWidget:
         calendarWidget = QtWidgets.QCalendarWidget(self)
-        self.addWidget(calendarWidget, rowSpan, colSpan, mode)
+        self.addWidget(calendarWidget, rowSpan, colSpan, mode, alignment)
         return calendarWidget
 
     def addSeparator(
         self,
         orientation=QtCore.Qt.Vertical,
-        linewidth=6,
+        width=6,
         rowSpan: int = 6,
         colSpan: int = 1,
         mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]:
         """Add a separator to the panel.
 
         :param orientation: The orientation of the separator.
-        :param linewidth: The width of the separator.
+        :param width: The width of the separator.
         :param rowSpan: The number of rows the separator spans.
         :param colSpan: The number of columns the separator spans.
-        :param mode: The mode of the separator.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the separator.
         :return: The separator.
         """
-        separator = (RibbonHorizontalSeparator(linewidth) if orientation == QtCore.Qt.Horizontal else
-                     RibbonVerticalSeparator(linewidth))
-        self.addWidget(separator, rowSpan, colSpan, mode)
+        separator = (RibbonHorizontalSeparator(width) if orientation == QtCore.Qt.Horizontal else
+                     RibbonVerticalSeparator(width))
+        self.addWidget(separator, rowSpan, colSpan, mode, alignment)
         return separator
 
     def addHorizontalSeparator(
@@ -491,14 +605,16 @@ class RibbonPanel(QtWidgets.QFrame):
         linewidth=6,
         rowSpan: int = 1,
         colSpan: int = 2,
-        mode=SpaceFindMode.ColumnWise
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonHorizontalSeparator:
         """Add a horizontal separator to the panel.
 
         :param linewidth: The width of the separator.
         :param rowSpan: The number of rows the separator spans.
         :param colSpan: The number of columns the separator spans.
-        :param mode: The mode of the separator.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the separator.
         :return: The separator.
         """
         return self.addSeparator(QtCore.Qt.Horizontal, linewidth, rowSpan, colSpan, mode)
@@ -508,17 +624,19 @@ class RibbonPanel(QtWidgets.QFrame):
         linewidth=6,
         rowSpan: int = 6,
         colSpan: int = 1,
-        mode=SpaceFindMode.ColumnWise
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonVerticalSeparator:
         """Add a vertical separator to the panel.
 
         :param linewidth: The width of the separator.
         :param rowSpan: The number of rows the separator spans.
         :param colSpan: The number of columns the separator spans.
-        :param mode: The mode of the separator.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the separator.
         :return: The separator.
         """
-        return self.addSeparator(QtCore.Qt.Vertical, linewidth, rowSpan, colSpan, mode)
+        return self.addSeparator(QtCore.Qt.Vertical, linewidth, rowSpan, colSpan, mode, alignment)
 
     def addGallery(
         self,
