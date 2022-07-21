@@ -7,7 +7,7 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
     pass
 
 
-class RibbonTabWidget(QtWidgets.QFrame):
+class RibbonTitleWidget(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
     collapseRibbonButtonClicked = QtCore.pyqtSignal(bool)
