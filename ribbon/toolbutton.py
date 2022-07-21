@@ -22,7 +22,7 @@ class MenuRole(IntEnum):
     Separate = 1
 
 
-class ToolButton(QtWidgets.QToolButton):
+class RibbonToolButton(QtWidgets.QToolButton):
     _buttonStyle: ButtonStyle
     _actions: typing.List[QtWidgets.QAction]
     _maxHeight: int

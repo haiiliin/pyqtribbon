@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 
-class Separator(QtWidgets.QWidget):
+class RibbonSeparator(QtWidgets.QWidget):
     _topMargins: int = 4
     _bottomMargins: int = 4
     _leftMargins: int = 4
@@ -44,13 +44,13 @@ class Separator(QtWidgets.QWidget):
             )
 
 
-class HorizontalSeparator(Separator):
+class RibbonHorizontalSeparator(RibbonSeparator):
 
     def __init__(self, linewidth: int = 6, parent=None) -> None:
         super().__init__(QtCore.Qt.Horizontal, linewidth, parent)
 
 
-class VerticalSeparator(Separator):
+class RibbonVerticalSeparator(RibbonSeparator):
 
     def __init__(self, linewidth: int = 6, parent=None) -> None:
         super().__init__(QtCore.Qt.Vertical, linewidth, parent)

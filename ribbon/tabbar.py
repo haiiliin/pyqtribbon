@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 
 
-class TabBar(QtWidgets.QTabBar):
+class RibbonTabBar(QtWidgets.QTabBar):
     #: context category top margin
     _contextCategoryTopMargin = 0
     #: context category dark color height

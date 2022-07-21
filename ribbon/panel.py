@@ -4,8 +4,8 @@ from enum import IntEnum
 import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore
 
-from .toolbutton import ToolButton, ButtonStyle
-from .separator import HorizontalSeparator, VerticalSeparator
+from .toolbutton import RibbonToolButton, ButtonStyle
+from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
 
 
 class PanelTitle(QtWidgets.QLabel):
@@ -64,7 +64,7 @@ class GridLayoutManager(object):
         return 0, cols
 
 
-class Panel(QtWidgets.QFrame):
+class RibbonPanel(QtWidgets.QFrame):
     #: maximal number of rows
     _maxRows: int
     #: GridLayout manager to request available cells.
@@ -191,8 +191,8 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
-        button = ToolButton(self)
+    ) -> RibbonToolButton:
+        button = RibbonToolButton(self)
         button.setButtonStyle(style)
         if text:
             button.setText(text)
@@ -231,7 +231,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Small, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode)
 
@@ -246,7 +246,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Medium, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode)
 
@@ -261,7 +261,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addButton(text, icon, ButtonStyle.Large, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode)
 
@@ -277,7 +277,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         button = self.addButton(text, icon, style, showText, colSpan, slot, shortcut, tooltip, statusTip, mode)
         button.setCheckable(True)
         return button
@@ -293,7 +293,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addToggleButton(
             text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
         )
@@ -309,7 +309,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addToggleButton(
             text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
         )
@@ -325,7 +325,7 @@ class Panel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         mode=SpaceFindMode.ColumnWise,
-    ) -> ToolButton:
+    ) -> RibbonToolButton:
         return self.addToggleButton(
             text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode
         )
@@ -447,7 +447,7 @@ class Panel(QtWidgets.QFrame):
         rowSpan: int = 6,
         colSpan: int = 1,
         mode=SpaceFindMode.ColumnWise,
-    ) -> typing.Union[HorizontalSeparator, VerticalSeparator]:
+    ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]:
         """Add a separator to the panel.
 
         :param orientation: The orientation of the separator.
@@ -457,8 +457,8 @@ class Panel(QtWidgets.QFrame):
         :param mode: The mode of the separator.
         :return: The separator.
         """
-        separator = (HorizontalSeparator(linewidth) if orientation == QtCore.Qt.Horizontal else
-                     VerticalSeparator(linewidth))
+        separator = (RibbonHorizontalSeparator(linewidth) if orientation == QtCore.Qt.Horizontal else
+                     RibbonVerticalSeparator(linewidth))
         self.addWidget(separator, rowSpan, colSpan, mode)
         return separator
 
@@ -468,7 +468,7 @@ class Panel(QtWidgets.QFrame):
         rowSpan: int = 1,
         colSpan: int = 2,
         mode=SpaceFindMode.ColumnWise
-    ) -> HorizontalSeparator:
+    ) -> RibbonHorizontalSeparator:
         """Add a horizontal separator to the panel.
 
         :param linewidth: The width of the separator.
@@ -485,7 +485,7 @@ class Panel(QtWidgets.QFrame):
         rowSpan: int = 6,
         colSpan: int = 1,
         mode=SpaceFindMode.ColumnWise
-    ) -> VerticalSeparator:
+    ) -> RibbonVerticalSeparator:
         """Add a vertical separator to the panel.
 
         :param linewidth: The width of the separator.

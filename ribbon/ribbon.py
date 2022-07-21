@@ -2,8 +2,8 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from .category import Category, ContextCategory, NormalCategory, CategoryStyle, contextColors
-from .tabbar import TabBar
+from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
+from .tabbar import RibbonTabBar
 
 
 class ApplicationButton(QtWidgets.QToolButton):
@@ -22,7 +22,7 @@ class Ribbon(QtWidgets.QFrame):
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
     #: The categories of the ribbon.
-    _categories: typing.List[Category] = []
+    _categories: typing.List[RibbonCategory] = []
     _contextCategoryCount = 0
 
     #: Buttons
@@ -90,7 +90,7 @@ class Ribbon(QtWidgets.QFrame):
         self.addRightToolButton(self._helpButton)
 
         # category tab bar
-        self._tabBar = TabBar(self)
+        self._tabBar = RibbonTabBar(self)
         self._tabBar.setExpanding(False)
         self._tabBar.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         font = self._tabBar.font()
@@ -291,7 +291,7 @@ class Ribbon(QtWidgets.QFrame):
         self._displayOptionsButtonHeight = height
         self._displayOptionsButton.setIconSize(QtCore.QSize(height, height))
 
-    def categories(self) -> typing.List[Category]:
+    def categories(self) -> typing.List[RibbonCategory]:
         """Return the list of categories of the ribbon.
 
         :return: The list of categories of the ribbon.
@@ -303,7 +303,7 @@ class Ribbon(QtWidgets.QFrame):
         title: str,
         style=CategoryStyle.Normal,
         color: QtGui.QColor = None,
-    ) -> typing.Union[NormalCategory, ContextCategory]:
+    ) -> typing.Union[RibbonNormalCategory, RibbonContextCategory]:
         """Add a new category to the ribbon.
 
         :param title: The title of the category.
@@ -316,8 +316,8 @@ class Ribbon(QtWidgets.QFrame):
             if color is None:
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
             self._contextCategoryCount += 1
-        category = (ContextCategory(title, color, self) if style == CategoryStyle.Context else
-                    NormalCategory(title, self))
+        category = (RibbonContextCategory(title, color, self) if style == CategoryStyle.Context else
+                    RibbonNormalCategory(title, self))
         category.setFixedHeight(self._ribbonHeight -
                                 self._tabsWidget.sizeHint().height() -
                                 self._mainLayout.spacing() -
@@ -338,7 +338,7 @@ class Ribbon(QtWidgets.QFrame):
             category.hide()
         return category
 
-    def addNormalCategory(self, title: str) -> NormalCategory:
+    def addNormalCategory(self, title: str) -> RibbonNormalCategory:
         """Add a new category to the ribbon.
 
         :param title: The title of the category.
@@ -346,7 +346,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         return self.addCategory(title, CategoryStyle.Normal)
 
-    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> ContextCategory:
+    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
 
         :param title: The title of the category.
@@ -355,7 +355,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         return self.addCategory(title, CategoryStyle.Context, color)
 
-    def showContextCategory(self, category: ContextCategory):
+    def showContextCategory(self, category: RibbonContextCategory):
         """Show the given category, if it is not a context category, nothing happens.
 
         :param category: The category to show.
@@ -366,7 +366,7 @@ class Ribbon(QtWidgets.QFrame):
         self._stackedWidget.addWidget(category)
         self._stackedWidget.setCurrentIndex(self._tabBar.count() - 1)
 
-    def hideContextCategory(self, category: ContextCategory):
+    def hideContextCategory(self, category: RibbonContextCategory):
         """Hide the given category, if it is not a context category, nothing happens.
 
         :param category: The category to hide.
@@ -375,7 +375,7 @@ class Ribbon(QtWidgets.QFrame):
         self._tabBar.removeTab(self._tabBar.indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
 
-    def tabRect(self, category: Category) -> QtCore.QRect:
+    def tabRect(self, category: RibbonCategory) -> QtCore.QRect:
         """Get the rectangle of the tab of the given category.
 
         :param category: The category to get the tab rectangle of.
@@ -383,7 +383,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         return self._tabBar.tabRect(self._categories.index(category))
 
-    def removeCategory(self, category: Category):
+    def removeCategory(self, category: RibbonCategory):
         """Remove a category from the ribbon.
 
         :param category: The category to remove.
@@ -392,7 +392,7 @@ class Ribbon(QtWidgets.QFrame):
         self._tabBar.removeTab(index)
         self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
 
-    def setCurrentCategory(self, category: Category):
+    def setCurrentCategory(self, category: RibbonCategory):
         """Set the current category.
 
         :param category: The category to set.

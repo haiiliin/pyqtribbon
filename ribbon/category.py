@@ -3,8 +3,8 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from .panel import Panel
-from .separator import Separator
+from .panel import RibbonPanel
+from .separator import RibbonSeparator
 from .typehints import RibbonType
 
 
@@ -25,7 +25,7 @@ contextColors = [
 ]
 
 
-class Category(QtWidgets.QFrame):
+class RibbonCategory(QtWidgets.QFrame):
     #: Title of the category
     _title: str
     #: The ribbon parent of this category
@@ -33,7 +33,7 @@ class Category(QtWidgets.QFrame):
     #: The buttonStyle of the category.
     _style: CategoryStyle
     #: Panels
-    _panels: typing.Dict[str, Panel]
+    _panels: typing.Dict[str, RibbonPanel]
     #: color of the context category
     _color: typing.Optional[QtGui.QColor]
 
@@ -89,20 +89,20 @@ class Category(QtWidgets.QFrame):
         """
         return self._style
 
-    def addPanel(self, title: str) -> Panel:
+    def addPanel(self, title: str) -> RibbonPanel:
         """Add a new panel to the category.
 
         :param title: The title of the panel.
         :return: The newly created panel.
         """
-        panel = Panel(title, maxRows=6, parent=self)
+        panel = RibbonPanel(title, maxRows=6, parent=self)
         panel.setFixedHeight(self.height() -
                              self._mainLayout.spacing() -
                              self._mainLayout.contentsMargins().top() -
                              self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
         self._panelLayout.insertWidget(self._panelLayout.count() - 1, panel)
-        self._panelLayout.insertWidget(self._panelLayout.count() - 1, Separator(width=10))
+        self._panelLayout.insertWidget(self._panelLayout.count() - 1, RibbonSeparator(width=10))
         return panel
 
     def removePanel(self, title: str):
@@ -132,7 +132,7 @@ class Category(QtWidgets.QFrame):
         return self._panels[title]
 
 
-class NormalCategory(Category):
+class RibbonNormalCategory(RibbonCategory):
 
     def __init__(self, title: str, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Normal, parent=parent)
@@ -145,7 +145,7 @@ class NormalCategory(Category):
         raise ValueError("You can not set the category style of a normal category.")
 
 
-class ContextCategory(Category):
+class RibbonContextCategory(RibbonCategory):
 
     def __init__(self, title: str, color: QtGui.QColor, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
