@@ -25,12 +25,14 @@ class MenuRole(IntEnum):
 class RibbonToolButton(QtWidgets.QToolButton):
     _buttonStyle: ButtonStyle
     _actions: typing.List[QtWidgets.QAction]
-    _maxHeight: int
+
+    _largeButtonIconSize = 64
+    _mediumButtonIconSize = 48
+    _smallButtonIconSize = 32
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self._actions = []
-        self._maxHeight = 64
 
         # Make way for the popup button
         self.setStyleSheet("""ToolButton[popupMode="1"] { padding-right: 20px; }""")
@@ -43,38 +45,23 @@ class RibbonToolButton(QtWidgets.QToolButton):
         # Connect signals
         self.triggered.connect(self.setDefaultAction)
 
-    def setMaximumHeight(self, maxh: int) -> None:
-        """Set the maximum height of the button.
-
-        :param maxh: The maximum height of the button.
-        """
-        super().setMaximumHeight(maxh)
-        self.setButtonMaximumHeight(int(maxh * 0.7))
-
-    def setButtonMaximumHeight(self, height: int):
-        """Set the maximum height of the button.
-
-        :param height: The maximum height of the button.
-        """
-        self._maxHeight = height
-        self.setButtonStyle(self._buttonStyle)
-
     def setButtonStyle(self, style: ButtonStyle):
         """Set the buttonStyle of the button.
 
         :param style: The buttonStyle of the button.
         """
         self._buttonStyle = style
-        largeHeight = self._maxHeight
-        smallHeight, mediumHeight = int(.5 * largeHeight), int(.75 * largeHeight)
         if style == ButtonStyle.Small:
-            self.setIconSize(QtCore.QSize(smallHeight, smallHeight))
+            height = self._smallButtonIconSize
+            self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
         elif style == ButtonStyle.Medium:
-            self.setIconSize(QtCore.QSize(mediumHeight, mediumHeight))
+            height = self._mediumButtonIconSize
+            self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
         elif style == ButtonStyle.Large:
-            self.setIconSize(QtCore.QSize(largeHeight, largeHeight))
+            height = self._largeButtonIconSize
+            self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
     def setMenu(self, menu: QtWidgets.QMenu):

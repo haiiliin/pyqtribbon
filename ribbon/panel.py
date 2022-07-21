@@ -64,6 +64,21 @@ class GridLayoutManager(object):
         return 0, cols
 
 
+class RibbonPanelItemWidget(QtWidgets.QFrame):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setLayout(QtWidgets.QVBoxLayout())
+        self.layout().setContentsMargins(0, 0, 0, 0)
+        self.layout().setSpacing(0)
+        self.layout().setAlignment(QtCore.Qt.AlignCenter)
+        self.layout().setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+
+    def addWidget(self, widget):
+        self.layout().addWidget(widget)
+
+
 class RibbonPanel(QtWidgets.QFrame):
     #: maximal number of rows
     _maxRows: int
@@ -117,6 +132,19 @@ class RibbonPanel(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._titleWidget, 0)
 
+    def rowHeight(self) -> int:
+        """Return the height of a row."""
+        return (
+            self.size().height() -
+            self._mainLayout.contentsMargins().top() -
+            self._mainLayout.contentsMargins().bottom() -
+            self._mainLayout.spacing() -
+            self._titleWidget.height() -
+            self._actionsLayout.contentsMargins().top() -
+            self._actionsLayout.contentsMargins().bottom() -
+            self._actionsLayout.verticalSpacing() * (self._gridLayoutManager.rows - 1)
+        ) / self._gridLayoutManager.rows
+
     def addWidget(
         self, widget: QtWidgets.QWidget, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise,
     ):
@@ -129,8 +157,13 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
+        maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
+        widget.setMaximumHeight(maximumHeight)
+        item = RibbonPanelItemWidget(self)
+        item.setFixedHeight(maximumHeight)
+        item.addWidget(widget)
         self._actionsLayout.addWidget(
-            widget, row, col, rowSpan, colSpan, QtCore.Qt.AlignCenter
+            item, row, col, rowSpan, colSpan, QtCore.Qt.AlignCenter
         )
 
     def addSmallWidget(self, widget: QtWidgets.QWidget, mode=SpaceFindMode.ColumnWise):
