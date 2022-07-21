@@ -24,6 +24,10 @@ class RibbonGalleryListWidget(QtWidgets.QListWidget):
         self.verticalScrollBar().setValue(self.verticalScrollBar().value() - self.verticalScrollBar().singleStep())
 
 
+class RibbonGalleryButton(QtWidgets.QToolButton):
+    pass
+
+
 class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 
     def __init__(self, parent=None):
@@ -39,39 +43,33 @@ class RibbonGallery(QtWidgets.QFrame):
         self.setMinimumWidth(minimumWidth)
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 5, 0)
+        self._mainLayout.setContentsMargins(5, 0, 0, 0)
         self._mainLayout.setSpacing(5)
 
-        self._upButton = QtWidgets.QToolButton(self)
+        self._upButton = RibbonGalleryButton(self)
         self._upButton.setIcon(QtGui.QIcon("icons/up.png"))
         self._upButton.setIconSize(QtCore.QSize(24, 24))
         self._upButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-        self._downButton = QtWidgets.QToolButton(self)
+        self._upButton.setAutoRaise(True)
+        self._downButton = RibbonGalleryButton(self)
         self._downButton.setIcon(QtGui.QIcon("icons/down.png"))
         self._downButton.setIconSize(QtCore.QSize(24, 24))
         self._downButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-        self._moreButton = QtWidgets.QToolButton(self)
+        self._downButton.setAutoRaise(True)
+        self._moreButton = RibbonGalleryButton(self)
         self._moreButton.setIcon(QtGui.QIcon("icons/more.png"))
         self._moreButton.setIconSize(QtCore.QSize(24, 24))
         self._moreButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self._moreButton.setAutoRaise(True)
         self._scrollButtonLayout = QtWidgets.QVBoxLayout()
         self._scrollButtonLayout.setContentsMargins(0, 0, 0, 0)
-        self._scrollButtonLayout.setSpacing(0)
-        self._scrollButtonLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
-            )
-        )
+        self._scrollButtonLayout.setSpacing(2)
         self._scrollButtonLayout.addWidget(self._upButton)
         self._scrollButtonLayout.addWidget(self._downButton)
         self._scrollButtonLayout.addWidget(self._moreButton)
-        self._scrollButtonLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
-            )
-        )
 
         self._listWidget = RibbonGalleryListWidget()
+        self._listWidget.setStyleSheet("QListWidget { background-color: transparent; }")
         self._mainLayout.addWidget(self._listWidget)
         self._mainLayout.addLayout(self._scrollButtonLayout)
 
@@ -86,6 +84,12 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupLayout.addWidget(self._popupListWidget)
 
         self._moreButton.clicked.connect(self.showPopup)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self._upButton.setFixedSize(self.height() // 4, self.height() // 3)
+        self._downButton.setFixedSize(self.height() // 4, self.height() // 3)
+        self._moreButton.setFixedSize(self.height() // 4, self.height() // 3)
+        super().resizeEvent(a0)
 
     def showPopup(self):
         """Show the popup window"""

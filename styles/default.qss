@@ -1,8 +1,37 @@
 
-QFrame {
+
+
+Ribbon {
+    border: 1px solid gray;
+    border-radius: 20px;
+    background-color: white;
+}
+
+RibbonCategory {
     border: 0px solid transparent;
     border-radius: 20px;
+    background-color: white;
+}
 
+RibbonPanel {
+    border: 0px solid transparent;
+    border-radius: 20px;
+    background-color: white;
+}
+
+RibbonGallery {
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+RibbonGalleryButton {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+RibbonGalleryListWidget {
+    border: 0px solid transparent;
 }
 
 RibbonApplicationButton {
