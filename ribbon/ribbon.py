@@ -318,9 +318,6 @@ class Ribbon(QtWidgets.QFrame):
         """
         return QtCore.QSize(super().minimumSizeHint().width(), self._ribbonHeight)
 
-    def sizeHint(self) -> QtCore.QSize:
-        return QtCore.QSize(self.width(), self._ribbonHeight)
-
     def _collapseButtonClicked(self):
         self.tabBar().currentChanged.connect(self.showRibbon)
         if self._ribbonSection.stackedWidget().isVisible():
