@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     gallery = panel.addGallery()
     for i in range(100):
-        gallery.addButton(f'item {i+1}', QtGui.QIcon("icons/close.png"))
+        gallery.addToggleButton(f'item {i+1}', QtGui.QIcon("icons/close.png"))
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
