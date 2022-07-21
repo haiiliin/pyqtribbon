@@ -43,7 +43,6 @@ class RibbonCategory(QtWidgets.QFrame):
     def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, color: QtGui.QColor = None,
                  parent=None):
         super().__init__(parent)
-        self.setStyleSheet("Category { background-color: white; }")
         self._title = title
         self._style = style
         self._panels = {}

@@ -97,7 +97,6 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def __init__(self, title: str, maxRows=6, parent=None):
         super().__init__(parent)
-        self.setStyleSheet("Panel { background-color: white; }")
         self._maxRows = maxRows
         self._gridLayoutManager = GridLayoutManager(self._maxRows)
         self._widgets = []
