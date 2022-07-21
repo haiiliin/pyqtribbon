@@ -114,7 +114,7 @@ class RibbonGallery(QtWidgets.QFrame):
         """
         self._popupWindowSize = size
 
-    def addWidget(self, widget: QtWidgets.QWidget):
+    def _addWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the gallery
 
         :param widget: widget to add
@@ -125,7 +125,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._listWidget.addItem(item)
         self._listWidget.setItemWidget(item, widget)
 
-    def addPopupWidget(self, widget: QtWidgets.QWidget):
+    def _addPopupWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the popup gallery
 
         :param widget: widget to add
@@ -173,8 +173,8 @@ class RibbonGallery(QtWidgets.QFrame):
         else:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
             popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
-        self.addWidget(button)
-        self.addPopupWidget(popupButton)
+        self._addWidget(button)
+        self._addPopupWidget(popupButton)
         return button
 
     def addToggleButton(
