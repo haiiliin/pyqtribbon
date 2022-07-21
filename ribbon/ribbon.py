@@ -71,7 +71,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         self._titleWidget.applicationMenu().addAction(action)
         self._titleWidget.applicationButton().setMenu(self._titleWidget.applicationMenu()
-                                                    if self._titleWidget.applicationMenu().actions() else None)
+                                                      if self._titleWidget.applicationMenu().actions() else None)
 
     def ribbonHeight(self) -> int:
         """Get the total height of the ribbon.
