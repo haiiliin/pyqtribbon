@@ -46,11 +46,11 @@ class RibbonSeparator(QtWidgets.QWidget):
 
 class RibbonHorizontalSeparator(RibbonSeparator):
 
-    def __init__(self, linewidth: int = 6, parent=None) -> None:
-        super().__init__(QtCore.Qt.Horizontal, linewidth, parent)
+    def __init__(self, width: int = 6, parent=None) -> None:
+        super().__init__(QtCore.Qt.Horizontal, width, parent)
 
 
 class RibbonVerticalSeparator(RibbonSeparator):
 
-    def __init__(self, linewidth: int = 6, parent=None) -> None:
-        super().__init__(QtCore.Qt.Vertical, linewidth, parent)
+    def __init__(self, width: int = 6, parent=None) -> None:
+        super().__init__(QtCore.Qt.Vertical, width, parent)
