@@ -4,6 +4,8 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
 from .tabwidget import RibbonTabWidget
+from .section import RibbonSection
+from .separator import RibbonHorizontalSeparator
 
 
 class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
@@ -13,7 +15,6 @@ class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
 class Ribbon(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
-
     #: The signal that is emitted when the display options button is clicked.
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
@@ -26,7 +27,6 @@ class Ribbon(QtWidgets.QFrame):
 
     #: heights of the ribbon elements
     _ribbonHeight = 240
-    _displayOptionsButtonHeight = 24
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -34,54 +34,23 @@ class Ribbon(QtWidgets.QFrame):
         self.setFixedHeight(self._ribbonHeight)
 
         self._tabWidget = RibbonTabWidget(self)
-        self._tabWidget.helpButtonClicked.connect(self.helpButtonClicked)
-
-        # stacked widget
-        self._stackedWidget = QtWidgets.QStackedWidget(self)
-
-        # Display options button
-        self._displayOptionsLayout = QtWidgets.QVBoxLayout()
-        self._displayOptionsLayout.setContentsMargins(0, 0, 0, 0)
-        self._displayOptionsLayout.setSpacing(5)
-        self._displayOptionsLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding
-            )
-        )
-        self._displayOptionsButton = RibbonDisplayOptionsButton()
-        self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/down.png"))
-        self._displayOptionsButton.setIconSize(QtCore.QSize(self._displayOptionsButtonHeight,
-                                                            self._displayOptionsButtonHeight))
-        self._displayOptionsButton.setText("Ribbon Display Options")
-        self._displayOptionsButton.setToolTip("Ribbon Display Options")
-        self._displayOptionsButton.setEnabled(True)
-        self._displayOptionsButton.setAutoRaise(True)
-        self._displayOptionsButton.clicked.connect(self.displayOptionsButtonClicked)
-        self._displayOptionsLayout.addWidget(self._displayOptionsButton, 0, QtCore.Qt.AlignBottom)
-        self._displayOptionsMenu = QtWidgets.QMenu()
-
-        # layout for the display options button and stacked widget
-        self._horizontalWidget = QtWidgets.QFrame(self)
-        # self._horizontalWidget.setStyleSheet("QFrame { background-color: white; }")
-        self._horizontalLayout = QtWidgets.QHBoxLayout(self._horizontalWidget)
-        self._horizontalLayout.setContentsMargins(2, 2, 2, 2)
-        self._horizontalLayout.setSpacing(5)
-        self._horizontalLayout.addWidget(self._stackedWidget, 1)
-        self._horizontalLayout.addLayout(self._displayOptionsLayout, 0)
+        self._ribbonSection = RibbonSection(self)
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._tabWidget, 0)
-        self._mainLayout.addWidget(self._horizontalWidget, 1)
+        self._mainLayout.addWidget(RibbonHorizontalSeparator(width=1), 0)
+        self._mainLayout.addWidget(self._ribbonSection, 1)
 
         # Connect signals
+        self._tabWidget.helpButtonClicked.connect(self.helpButtonClicked)
         self._tabWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
         self._tabWidget.tabBar().currentChanged.connect(
-            lambda index: self._stackedWidget.setCurrentIndex(index)
+            lambda index: self._ribbonSection.stackedWidget().setCurrentIndex(index)
         )
+        self._ribbonSection.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
 
     def applicationOptionButton(self):
         """Return the application button."""
@@ -197,23 +166,21 @@ class Ribbon(QtWidgets.QFrame):
 
         :return: The display options button.
         """
-        return self._displayOptionsButton
+        return self._ribbonSection.displayOptionsButton()
 
     def addDisplayOptionAction(self, action: QtWidgets.QAction):
         """Add a display option to the category.
 
         :param action: The action of the display option.
         """
-        self._displayOptionsMenu.addAction(action)
-        self._displayOptionsButton.setMenu(self._displayOptionsMenu if self._displayOptionsMenu.actions() else None)
+        self._ribbonSection.addDisplayOptionAction(action)
 
     def setDisplayOptionsButtonHeight(self, height: int = 24):
         """Set the height of the display options button.
 
         :param height: The height to set.
         """
-        self._displayOptionsButtonHeight = height
-        self._displayOptionsButton.setIconSize(QtCore.QSize(height, height))
+        self._ribbonSection.setDisplayOptionsButtonHeight(height)
 
     def categories(self) -> typing.List[RibbonCategory]:
         """Return the list of categories of the ribbon.
@@ -250,14 +217,14 @@ class Ribbon(QtWidgets.QFrame):
                                 self._tabWidget.layout().spacing() -
                                 self._tabWidget.layout().contentsMargins().top() -
                                 self._tabWidget.layout().contentsMargins().bottom() -
-                                self._horizontalLayout.spacing() -
-                                self._horizontalLayout.contentsMargins().top() -
-                                self._horizontalLayout.contentsMargins().bottom() - 4)
+                                self._ribbonSection.layout().spacing() -
+                                self._ribbonSection.layout().contentsMargins().top() -
+                                self._ribbonSection.layout().contentsMargins().bottom() - 4)
         category.displayOptionsButtonClicked.connect(self.displayOptionsButtonClicked)
         if style == CategoryStyle.Normal:
             self._categories.append(category)
             self._tabWidget.tabBar().addTab(title, color)
-            self._stackedWidget.addWidget(category)
+            self._ribbonSection.stackedWidget().addWidget(category)
         elif style == CategoryStyle.Context:
             category.hide()
         return category
@@ -287,8 +254,8 @@ class Ribbon(QtWidgets.QFrame):
         self._categories.append(category)
         self._tabWidget.tabBar().addTab(category.title(), category.color())
         self._tabWidget.tabBar().setCurrentIndex(self._tabWidget.tabBar().count() - 1)
-        self._stackedWidget.addWidget(category)
-        self._stackedWidget.setCurrentIndex(self._tabWidget.tabBar().count() - 1)
+        self._ribbonSection.stackedWidget().addWidget(category)
+        self._ribbonSection.stackedWidget().setCurrentIndex(self._tabWidget.tabBar().count() - 1)
 
     def hideContextCategory(self, category: RibbonContextCategory):
         """Hide the given category, if it is not a context category, nothing happens.
@@ -297,7 +264,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         self._categories.remove(category)
         self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
-        self._stackedWidget.removeWidget(category)
+        self._ribbonSection.stackedWidget().removeWidget(category)
 
     def tabRect(self, category: RibbonCategory) -> QtCore.QRect:
         """Get the rectangle of the tab of the given category.
@@ -314,7 +281,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         index = self._categories.index(category)
         self.tabBar().removeTab(index)
-        self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
+        self._ribbonSection.stackedWidget().removeWidget(self._ribbonSection.stackedWidget().widget(index))
 
     def setCurrentCategory(self, category: RibbonCategory):
         """Set the current category.
@@ -323,7 +290,7 @@ class Ribbon(QtWidgets.QFrame):
         """
         index = self._categories.index(category)
         self.tabBar().setCurrentIndex(index)
-        self._stackedWidget.setCurrentIndex(index)
+        self._ribbonSection.stackedWidget().setCurrentIndex(index)
 
     def collapseRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the collapse ribbon button.
@@ -355,7 +322,7 @@ class Ribbon(QtWidgets.QFrame):
 
     def _collapseButtonClicked(self):
         self.tabBar().currentChanged.connect(self.showRibbon)
-        if self._stackedWidget.isVisible():
+        if self._ribbonSection.stackedWidget().isVisible():
             self.hideRibbon()
         else:
             self.showRibbon()
@@ -366,7 +333,7 @@ class Ribbon(QtWidgets.QFrame):
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/up.png'))
-            self._horizontalWidget.setVisible(True)
+            self._ribbonSection.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
     def hideRibbon(self):
@@ -375,7 +342,7 @@ class Ribbon(QtWidgets.QFrame):
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/down.png'))
-            self._horizontalWidget.setVisible(False)
+            self._ribbonSection.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._tabWidget.tabBarHeight())
 
     def ribbonVisible(self) -> bool:
