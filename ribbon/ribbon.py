@@ -77,7 +77,7 @@ class Ribbon(QtWidgets.QFrame):
         self._rightToolBar.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._collapseRibbonButton = QtWidgets.QToolButton(self)
         self._collapseRibbonButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
-        self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
+        self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/up.png'))
         self._collapseRibbonButton.setAutoRaise(True)
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
         self._helpButton = QtWidgets.QToolButton(self)
@@ -117,7 +117,7 @@ class Ribbon(QtWidgets.QFrame):
         )
         self._displayOptionsButton = RibbonDisplayOptionsButton()
         self._displayOptionsButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/expand-arrow.png"))
+        self._displayOptionsButton.setIcon(QtGui.QIcon("icons/down.png"))
         self._displayOptionsButton.setIconSize(QtCore.QSize(self._displayOptionsButtonHeight,
                                                             self._displayOptionsButtonHeight))
         self._displayOptionsButton.setText("Ribbon Display Options")
@@ -434,7 +434,7 @@ class Ribbon(QtWidgets.QFrame):
         if not self._ribbonVisible:
             self._ribbonVisible = True
             self._collapseRibbonButton.setToolTip("Collapse Ribbon")
-            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/collapse-arrow.png'))
+            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/up.png'))
             self._horizontalWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
@@ -443,7 +443,7 @@ class Ribbon(QtWidgets.QFrame):
         if self._ribbonVisible:
             self._ribbonVisible = False
             self._collapseRibbonButton.setToolTip("Expand Ribbon")
-            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/expand-arrow.png'))
+            self._collapseRibbonButton.setIcon(QtGui.QIcon('icons/down.png'))
             self._horizontalWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._tabBarHeight)
 
