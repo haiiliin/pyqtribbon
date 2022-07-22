@@ -57,6 +57,10 @@ QTabBar {
     background-color: transparent;
 }
 
+QTabBar QToolButton {
+    background-color: transparent;
+}
+
 QTabBar::tab {
 	color: gray;
 	border: none;
