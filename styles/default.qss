@@ -1,5 +1,5 @@
 
-Ribbon {
+RibbonBar {
     border: 1px solid gray;
     border-radius: 20px;
     background-color: white;

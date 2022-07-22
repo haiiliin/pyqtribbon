@@ -21,7 +21,7 @@ RibbonTitleLabel {
     border-radius: 20px;
 }
 
-Ribbon {
+RibbonBar {
     border: 2px solid red;
     border-radius: 20px;
 }
