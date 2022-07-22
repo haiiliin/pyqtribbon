@@ -79,9 +79,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignBottom)
         self._mainLayout.addWidget(self._tabBar, 1)
-        self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
-                                                             QtWidgets.QSizePolicy.Preferred))
-        self._mainLayout.setStretch(2, 1)
         self._mainLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
