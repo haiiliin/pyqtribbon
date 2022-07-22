@@ -7,6 +7,10 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
     pass
 
 
+class RibbonTitleLabel(QtWidgets.QLabel):
+    pass
+
+
 class RibbonTitleWidget(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
@@ -20,7 +24,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtonHeight = 40
     _rightButtonHeight = 24
 
-    def __init__(self, parent=None):
+    def __init__(self, title='PyQtRibbon', parent=None):
         super().__init__(parent)
         # Tab bar layout
         self.setFixedHeight(self._tabBarHeight)
@@ -77,8 +81,21 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
 
+        # Title label
+        self._titleLabel = RibbonTitleLabel(self)
+        self._titleLabel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self._titleLabel.setFixedHeight(self._tabBarHeight -
+                                        self._mainLayout.contentsMargins().top() -
+                                        self._mainLayout.contentsMargins().bottom())
+        self._titleLabel.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self._titleLabel.setText(title)
+        font = self._titleLabel.font()
+        font.setPointSize(font.pointSize() + 3)
+        self._titleLabel.setFont(font)
+
         self._mainLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignBottom)
-        self._mainLayout.addWidget(self._tabBar, 1)
+        self._mainLayout.addWidget(self._tabBar, 1, QtCore.Qt.AlignBottom)
+        self._mainLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignBottom)
         self._mainLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
@@ -163,6 +180,20 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._applicationButton.setIconSize(QtCore.QSize(height, height))
         for button in self._quickAccessButtons:
             button.setIconSize(QtCore.QSize(height, height))
+
+    def title(self):
+        """Return the title of the ribbon.
+
+        :return: The title of the ribbon.
+        """
+        return self._titleLabel.text()
+
+    def setTitle(self, title: str):
+        """Set the title of the ribbon.
+
+        :param title: The title to set.
+        """
+        self._titleLabel.setText(title)
 
     def rightToolBar(self) -> QtWidgets.QToolBar:
         """Return the right toolbar of the ribbon.

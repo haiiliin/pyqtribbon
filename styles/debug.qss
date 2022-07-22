@@ -16,6 +16,11 @@ RibbonTabBar {
     border-radius: 20px;
 }
 
+RibbonTitleLabel {
+    border: 2px solid blue;
+    border-radius: 20px;
+}
+
 Ribbon {
     border: 2px solid red;
     border-radius: 20px;

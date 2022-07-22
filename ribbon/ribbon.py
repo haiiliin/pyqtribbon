@@ -26,12 +26,12 @@ class Ribbon(QtWidgets.QFrame):
     #: heights of the ribbon elements
     _ribbonHeight = 240
 
-    def __init__(self, parent=None):
+    def __init__(self, title='PyQtRibbon', parent=None):
         super().__init__(parent)
         self._categories = []
         self.setFixedHeight(self._ribbonHeight)
 
-        self._titleWidget = RibbonTitleWidget(self)
+        self._titleWidget = RibbonTitleWidget(title, self)
         self._separator = RibbonHorizontalSeparator(width=1, parent=self)
         self._stackedWidget = QtWidgets.QStackedWidget(self)
 
@@ -127,6 +127,20 @@ class Ribbon(QtWidgets.QFrame):
         :param height: The height to set.
         """
         self._titleWidget.setQuickAccessButtonHeight(height)
+
+    def title(self):
+        """Return the title of the ribbon.
+
+        :return: The title of the ribbon.
+        """
+        return self._titleWidget.title()
+
+    def setTitle(self, title: str):
+        """Set the title of the ribbon.
+
+        :param title: The title to set.
+        """
+        self._titleWidget.setTitle(title)
 
     def rightToolBar(self) -> QtWidgets.QToolBar:
         """Return the right toolbar of the ribbon.
