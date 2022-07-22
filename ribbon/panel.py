@@ -617,7 +617,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param alignment: The alignment of the separator.
         :return: The separator.
         """
-        return self.addSeparator(QtCore.Qt.Horizontal, linewidth, rowSpan, colSpan, mode)
+        return self.addSeparator(QtCore.Qt.Horizontal, linewidth, rowSpan, colSpan, mode, alignment)
 
     def addVerticalSeparator(
         self,
@@ -641,6 +641,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addGallery(
         self,
         minimumWidth=800,
+        popupHideOnClick=False,
         rowSpan: int = 6,
         colSpan: int = 1,
         mode=SpaceFindMode.ColumnWise
@@ -648,12 +649,13 @@ class RibbonPanel(QtWidgets.QFrame):
         """Add a gallery to the panel.
 
         :param minimumWidth: The minimum width of the gallery.
+        :param popupHideOnClick: Whether the gallery popup should be hidden when a user clicks on it.
         :param rowSpan: The number of rows the gallery spans.
         :param colSpan: The number of columns the gallery spans.
         :param mode: The mode of the gallery.
         :return: The gallery.
         """
-        gallery = RibbonGallery(minimumWidth, self)
+        gallery = RibbonGallery(minimumWidth, popupHideOnClick, self)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
         self.addWidget(gallery, rowSpan, colSpan, mode)

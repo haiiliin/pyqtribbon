@@ -37,10 +37,14 @@ class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 
 class RibbonGallery(QtWidgets.QFrame):
     _popupWindowSize = QtCore.QSize(500, 500)
+    _buttons: list[RibbonToolButton] = []
+    _popupButtons: list[RibbonToolButton] = []
+    _popupHideOnClick = False
 
-    def __init__(self, minimumWidth=800, parent=None):
+    def __init__(self, minimumWidth=800, popupHideOnClick=False, parent=None):
         super().__init__(parent)
         self.setMinimumWidth(minimumWidth)
+        self._popupHideOnClick = popupHideOnClick
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 0, 0, 0)
@@ -114,6 +118,15 @@ class RibbonGallery(QtWidgets.QFrame):
         """
         self._popupWindowSize = size
 
+    def setSelectedButton(self):
+        """Set the selected button"""
+        button = self.sender()
+        if isinstance(button, RibbonToolButton):
+            row = self._popupButtons.index(button)
+            self._listWidget.scrollTo(self._listWidget.model().index(row, 0), QtWidgets.QAbstractItemView.EnsureVisible)
+            if self._buttons[row].isCheckable():
+                self._buttons[row].setChecked(not self._buttons[row].isChecked())
+
     def _addWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the gallery
 
@@ -136,6 +149,13 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupListWidget.addItem(item)
         self._popupListWidget.setItemWidget(item, widget)
 
+    def setPopupHideOnClick(self, popupHideOnClick: bool):
+        """Set the hide on click flag
+
+        :param popupHideOnClick: hide on click flag
+        """
+        self._popupHideOnClick = popupHideOnClick
+
     def addButton(
         self,
         text: str = None,
@@ -144,6 +164,7 @@ class RibbonGallery(QtWidgets.QFrame):
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        checkable=False,
     ) -> RibbonToolButton:
         button = RibbonToolButton(self)
         popupButton = RibbonToolButton(self._popupWidget)
@@ -165,7 +186,15 @@ class RibbonGallery(QtWidgets.QFrame):
         if statusTip is not None:
             button.setStatusTip(statusTip)
             popupButton.setStatusTip(statusTip)
-        popupButton.clicked.connect(self._popupWidget.hide)
+        if checkable:
+            button.setCheckable(True)
+            popupButton.setCheckable(True)
+        self._buttons.append(button)
+        self._popupButtons.append(popupButton)
+        button.clicked.connect(lambda checked: popupButton.setChecked(checked))
+        if self._popupHideOnClick:
+            popupButton.clicked.connect(self._popupWidget.hide)
+        popupButton.clicked.connect(self.setSelectedButton)
 
         if text is None:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
@@ -186,6 +215,5 @@ class RibbonGallery(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
     ) -> RibbonToolButton:
-        button = self.addButton(text, icon, slot, shortcut, tooltip, statusTip)
-        button.setCheckable(True)
+        button = self.addButton(text, icon, slot, shortcut, tooltip, statusTip, True)
         return button
