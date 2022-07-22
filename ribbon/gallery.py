@@ -134,7 +134,7 @@ class RibbonGallery(QtWidgets.QFrame):
         """
         item = QtWidgets.QListWidgetItem()
         item.setSizeHint(widget.sizeHint())
-        self._listWidget.setSpacing((self.height() - item.sizeHint().height()) / 2)
+        self._listWidget.setSpacing((self.height() - item.sizeHint().height()) // 2)
         self._listWidget.addItem(item)
         self._listWidget.setItemWidget(item, widget)
 
@@ -145,7 +145,7 @@ class RibbonGallery(QtWidgets.QFrame):
         """
         item = QtWidgets.QListWidgetItem()
         item.setSizeHint(widget.sizeHint())
-        self._popupListWidget.setSpacing((self.height() - item.sizeHint().height()) / 2)
+        self._popupListWidget.setSpacing((self.height() - item.sizeHint().height()) // 2)
         self._popupListWidget.addItem(item)
         self._popupListWidget.setItemWidget(item, widget)
 

@@ -134,7 +134,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def rowHeight(self) -> int:
         """Return the height of a row."""
-        return (
+        return int((
             self.size().height() -
             self._mainLayout.contentsMargins().top() -
             self._mainLayout.contentsMargins().bottom() -
@@ -143,7 +143,7 @@ class RibbonPanel(QtWidgets.QFrame):
             self._actionsLayout.contentsMargins().top() -
             self._actionsLayout.contentsMargins().bottom() -
             self._actionsLayout.verticalSpacing() * (self._gridLayoutManager.rows - 1)
-        ) / self._gridLayoutManager.rows
+        ) / self._gridLayoutManager.rows)
 
     def addWidget(
         self,
