@@ -26,6 +26,16 @@ RibbonCategory {
     border-radius: 20px;
 }
 
+RibbonCategoryScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+RibbonCategoryScrollAreaContents {
+    border: none;
+    background-color: transparent;
+}
+
 RibbonPanel {
     border: 2px solid brown;
     border-radius: 20px;
