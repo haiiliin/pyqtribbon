@@ -87,7 +87,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._titleLabel.setFixedHeight(self._tabBarHeight -
                                         self._mainLayout.contentsMargins().top() -
                                         self._mainLayout.contentsMargins().bottom())
-        self._titleLabel.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self._titleLabel.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignBottom)
         self._titleLabel.setText(title)
         font = self._titleLabel.font()
         font.setPointSize(font.pointSize() + 3)
