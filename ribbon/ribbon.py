@@ -119,6 +119,7 @@ class Ribbon(QtWidgets.QFrame):
 
         :param button: The button to add.
         """
+        button.setAutoRaise(True)
         self._titleWidget.quickAccessToolBar().addWidget(button)
 
     def setQuickAccessButtonHeight(self, height: int = 40):
@@ -154,6 +155,7 @@ class Ribbon(QtWidgets.QFrame):
 
         :param button: The button to add.
         """
+        button.setAutoRaise(True)
         self._titleWidget.addRightToolButton(button)
 
     def setRightToolBarHeight(self, height: int = 24):
