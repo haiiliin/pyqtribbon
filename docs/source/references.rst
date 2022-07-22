@@ -5,7 +5,7 @@ API References
 Ribbon Bar
 ----------
 
-.. autoclass:: ribbon.RibbonBar
+.. autoclass:: ribbon.ribbonbar.RibbonBar
    :members:
 
 Ribbon Title
