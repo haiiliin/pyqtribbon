@@ -10,6 +10,12 @@ class RibbonSeparator(QtWidgets.QFrame):
     _orientation: QtCore.Qt.Orientation
 
     def __init__(self, orientation=QtCore.Qt.Vertical, width=6, parent=None) -> None:
+        """Create a new separator.
+
+        :param orientation: The orientation of the separator.
+        :param width: The width of the separator.
+        :param parent: The parent widget.
+        """
         super().__init__(parent=parent)
         self._orientation = orientation
         if orientation == QtCore.Qt.Horizontal:
@@ -52,6 +58,11 @@ class RibbonHorizontalSeparator(RibbonSeparator):
     """Horizontal separator."""
 
     def __init__(self, width: int = 6, parent=None) -> None:
+        """Create a new horizontal separator.
+
+        :param width: The width of the separator.
+        :param parent: The parent widget.
+        """
         super().__init__(QtCore.Qt.Horizontal, width, parent)
 
 
@@ -59,4 +70,9 @@ class RibbonVerticalSeparator(RibbonSeparator):
     """Vertical separator."""
 
     def __init__(self, width: int = 6, parent=None) -> None:
+        """Create a new vertical separator.
+
+        :param width: The width of the separator.
+        :param parent: The parent widget.
+        """
         super().__init__(QtCore.Qt.Vertical, width, parent)
