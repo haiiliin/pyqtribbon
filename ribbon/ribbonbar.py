@@ -15,7 +15,7 @@ class RibbonStyle(IntEnum):
 
 
 class RibbonBar(QtWidgets.QFrame):
-    """The RibbonBar class is top level widget that contains the ribbon.
+    """The RibbonBar class is the top level widget that contains the ribbon.
     """
     #: Signal, The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
