@@ -37,5 +37,6 @@ setuptools.setup(
         'styles/default.qss',
         'styles/debug.qss'
     ])],
+    setup_requires=["cython", "numpy"],
     install_requires=['PyQt5', 'numpy']
 )
