@@ -9,6 +9,14 @@ class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
     pass
 
 
+class RibbonCategoryScrollArea(QtWidgets.QScrollArea):
+    pass
+
+
+class RibbonCategoryScrollAreaContents(QtWidgets.QFrame):
+    pass
+
+
 class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
     displayOptionsButtonClicked = QtCore.pyqtSignal()
 
@@ -18,14 +26,16 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._mainLayout.setContentsMargins(5, 0, 5, 0)
         self._mainLayout.setSpacing(5)
 
-        self._categoryScrollArea = QtWidgets.QScrollArea()
-        self._categoryScrollArea.setStyleSheet("QScrollArea { border: none; background: transparent; }")
-        self._categoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self._categoryScrollArea = RibbonCategoryScrollArea()
+        self._categoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self._categoryScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self._categoryLayout = QtWidgets.QHBoxLayout(self._categoryScrollArea)
+        self._categoryScrollAreaContents = RibbonCategoryScrollAreaContents()
+        self._categoryScrollAreaContents.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self._categoryLayout = QtWidgets.QHBoxLayout(self._categoryScrollAreaContents)
         self._categoryLayout.setContentsMargins(0, 0, 0, 0)
         self._categoryLayout.setSpacing(5)
-        self._categoryLayout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self._categoryLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
+        self._categoryScrollArea.setWidget(self._categoryScrollAreaContents)
 
         self._previousButton = RibbonCategoryLayoutButton(self)
         self._previousButton.setIcon(QtGui.QIcon("icons/backward.png"))
@@ -39,44 +49,50 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._nextButton.setAutoRaise(True)
 
         self._mainLayout.addWidget(self._previousButton, 0, QtCore.Qt.AlignVCenter)
-        self._mainLayout.addWidget(self._categoryScrollArea, 0)
+        self._mainLayout.addWidget(self._categoryScrollArea, 1)
         self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
                                                              QtWidgets.QSizePolicy.Minimum))
-        self._mainLayout.setStretch(2, 1)
         self._mainLayout.addWidget(self._nextButton, 0, QtCore.Qt.AlignVCenter)
 
-        # self.hideScrollPreviousButton()
-        # self.hideScrollNextButton()
+        self.autoSetScrollButtonsVisible()
         self._nextButton.clicked.connect(self.scrollNext)
         self._previousButton.clicked.connect(self.scrollPrevious)
 
-    def showScrollPreviousButton(self):
-        """Show the previous button."""
-        self._previousButton.show()
+    def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
+        super().paintEvent(a0)
+        self.autoSetScrollButtonsVisible()
 
-    def hideScrollPreviousButton(self):
-        """Hide the previous button."""
-        self._previousButton.hide()
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        super().resizeEvent(a0)
+        self.autoSetScrollButtonsVisible()
 
-    def showScrollNextButton(self):
-        """Show the next button."""
-        self._nextButton.show()
-
-    def hideScrollNextButton(self):
-        """Hide the next button."""
-        self._nextButton.hide()
+    def autoSetScrollButtonsVisible(self):
+        """Set the visibility of the scroll buttons.
+        """
+        if (self._categoryScrollArea.horizontalScrollBar().value() >
+                self._categoryScrollArea.horizontalScrollBar().minimum()):
+            self._previousButton.setVisible(True)
+        else:
+            self._previousButton.setVisible(False)
+        if (self._categoryScrollArea.horizontalScrollBar().value() <
+                self._categoryScrollArea.horizontalScrollBar().maximum()):
+            self._nextButton.setVisible(True)
+        else:
+            self._nextButton.setVisible(False)
 
     def scrollPrevious(self):
         """Scroll the category to the previous widget."""
         self._categoryScrollArea.horizontalScrollBar().setValue(
-            self._categoryScrollArea.horizontalScrollBar().value() + 50
+            self._categoryScrollArea.horizontalScrollBar().value() - 50
         )
+        self.autoSetScrollButtonsVisible()
 
     def scrollNext(self):
         """Scroll the category to the next widget."""
         self._categoryScrollArea.horizontalScrollBar().setValue(
-            self._categoryScrollArea.horizontalScrollBar().value() - 50
+            self._categoryScrollArea.horizontalScrollBar().value() + 50
         )
+        self.autoSetScrollButtonsVisible()
 
     def addWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the category layout.
