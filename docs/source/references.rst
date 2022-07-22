@@ -8,16 +8,8 @@ Ribbon Bar
 .. autoclass:: ribbon.RibbonBar
    :members:
 
-
 Ribbon Title
 ------------
-
-
-RibbonTitleWidget
-~~~~~~~~~~~~~~~~~
-
-.. autoclass:: ribbon.titlewidget.RibbonTitleWidget
-   :members:
 
 RibbonApplicationButton
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,6 +17,11 @@ RibbonApplicationButton
 .. autoclass:: ribbon.titlewidget.RibbonApplicationButton
    :members:
 
+RibbonTabBar
+~~~~~~~~~~~~
+
+.. autoclass:: ribbon.tabbar.RibbonTabBar
+   :members:
 
 RibbonTitleLabel
 ~~~~~~~~~~~~~~~~
@@ -32,28 +29,19 @@ RibbonTitleLabel
 .. autoclass:: ribbon.titlewidget.RibbonTitleLabel
    :members:
 
+RibbonTitleWidget
+~~~~~~~~~~~~~~~~~
 
-RibbonTabBar
-~~~~~~~~~~~~
-
-.. autoclass:: ribbon.tabbar.RibbonTabBar
+.. autoclass:: ribbon.titlewidget.RibbonTitleWidget
    :members:
-
 
 Ribbon Category
 ---------------
-
 
 RibbonCategory
 ~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.category.RibbonCategory
-   :members:
-
-CategoryStyle
-~~~~~~~~~~~~~
-
-.. autoclass:: ribbon.category.CategoryStyle
    :members:
 
 RibbonNormalCategory
@@ -68,10 +56,10 @@ RibbonContextCategory
 .. autoclass:: ribbon.category.RibbonContextCategory
    :members:
 
-RibbonCategoryLayoutButton
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+CategoryStyle
+~~~~~~~~~~~~~
 
-.. autoclass:: ribbon.categorylayoutwidget.RibbonCategoryLayoutButton
+.. autoclass:: ribbon.category.CategoryStyle
    :members:
 
 RibbonCategoryScrollArea
@@ -84,6 +72,12 @@ RibbonCategoryScrollAreaContents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.categorylayoutwidget.RibbonCategoryScrollAreaContents
+   :members:
+
+RibbonCategoryLayoutButton 
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.categorylayoutwidget.RibbonCategoryLayoutButton
    :members:
 
 RibbonCategoryLayoutWidget
@@ -101,6 +95,12 @@ RibbonPanel
 .. autoclass:: ribbon.panel.RibbonPanel
    :members:
 
+RibbonPanelItemWidget
+~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.panel.RibbonPanelItemWidget
+   :members:
+
 SpaceFindMode
 ~~~~~~~~~~~~~
 
@@ -111,12 +111,6 @@ GridLayoutManager
 ~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.panel.GridLayoutManager
-   :members:
-
-RibbonPanelItemWidget
-~~~~~~~~~~~~~~~~~~~~~
-
-.. autoclass:: ribbon.panel.RibbonPanelItemWidget
    :members:
 
 Ribbon Gallery
