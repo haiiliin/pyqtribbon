@@ -4,7 +4,9 @@ from .utils import package_source_dir
 
 
 class RibbonCategoryLayoutButton(QtWidgets.QToolButton):
-    """Previous/Next buttons in the gallery"""
+    """Previous/Next buttons in the category when the 
+    sizr is not enough for the widgets.
+    """
     pass
 
 
