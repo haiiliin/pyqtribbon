@@ -2,22 +2,22 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 
 
 class RibbonCategoryLayoutButton(QtWidgets.QToolButton):
-    pass
-
-
-class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
+    """Previous/Next buttons in the gallery"""
     pass
 
 
 class RibbonCategoryScrollArea(QtWidgets.QScrollArea):
+    """Scroll area for the gallery"""
     pass
 
 
 class RibbonCategoryScrollAreaContents(QtWidgets.QFrame):
+    """Scroll area contents for the gallery"""
     pass
 
 
 class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
+    """The category layout widget's category scroll area to arrange the widgets in the category."""
     displayOptionsButtonClicked = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):

@@ -4,6 +4,7 @@ from .ribbonbar import RibbonBar
 
 
 class RibbonMainWindow(QtWidgets.QMainWindow):
+    """Main window with ribbon bar."""
 
     def __init__(self, parent=None):
         super().__init__(parent)

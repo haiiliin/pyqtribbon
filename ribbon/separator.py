@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 
 
 class RibbonSeparator(QtWidgets.QFrame):
+    """The RibbonSeparator is a separator that can be used to separate widgets in a ribbon."""
     _topMargins: int = 4
     _bottomMargins: int = 4
     _leftMargins: int = 4
@@ -19,13 +20,16 @@ class RibbonSeparator(QtWidgets.QFrame):
             self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
 
     def sizeHint(self) -> QtCore.QSize:
+        """Return the size hint."""
         return self.size()
 
     def setTopBottomMargins(self, top: int, bottom: int) -> None:
+        """Set the top and bottom margins."""
         self._topMargins = top
         self._bottomMargins = bottom
 
     def paintEvent(self, event: QtGui.QPaintEvent) -> None:
+        """Paint the separator."""
         painter = QtGui.QPainter(self)
         pen = QtGui.QPen()
         pen.setColor(QtGui.QColor(QtCore.Qt.gray))
@@ -45,12 +49,14 @@ class RibbonSeparator(QtWidgets.QFrame):
 
 
 class RibbonHorizontalSeparator(RibbonSeparator):
+    """Horizontal separator."""
 
     def __init__(self, width: int = 6, parent=None) -> None:
         super().__init__(QtCore.Qt.Horizontal, width, parent)
 
 
 class RibbonVerticalSeparator(RibbonSeparator):
+    """Vertical separator."""
 
     def __init__(self, width: int = 6, parent=None) -> None:
         super().__init__(QtCore.Qt.Vertical, width, parent)

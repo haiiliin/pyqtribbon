@@ -5,24 +5,14 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class ButtonStyle(IntEnum):
+    """Button style."""
     Small = 0
     Medium = 1
     Large = 2
 
 
-class MenuRole(IntEnum):
-    """The role of a menu item.
-
-    The role of a menu item is used to determine the action to be performed
-    when the menu item is selected.
-
-    The separator role is used to indicate that the menu will only be showed when user click on the arrow.
-    """
-    Normal = 0
-    Separate = 1
-
-
 class RibbonToolButton(QtWidgets.QToolButton):
+    """Tool button that is showed in the ribbon."""
     _buttonStyle: ButtonStyle
     _actions: typing.List[QtWidgets.QAction]
 

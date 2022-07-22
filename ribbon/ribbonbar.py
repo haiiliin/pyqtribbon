@@ -7,14 +7,11 @@ from .titlewidget import RibbonTitleWidget
 from .separator import RibbonHorizontalSeparator
 
 
-class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
-    pass
-
-
 class RibbonBar(QtWidgets.QFrame):
-    #: Signal: The help button was clicked.
+    """The RibbonBar class is top level widget that contains the ribbon.
+    """
+    #: Signal, The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
-    #: The signal that is emitted when the display options button is clicked.
 
     #: The categories of the ribbon.
     _categories: typing.List[RibbonCategory] = []

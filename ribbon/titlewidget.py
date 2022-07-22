@@ -4,14 +4,17 @@ from .tabbar import RibbonTabBar
 
 
 class RibbonApplicationButton(QtWidgets.QToolButton):
+    """Application button in the ribbon bar."""
     pass
 
 
 class RibbonTitleLabel(QtWidgets.QLabel):
+    """Title label in the ribbon bar."""
     pass
 
 
 class RibbonTitleWidget(QtWidgets.QFrame):
+    """The title widget of the ribbon."""
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
     collapseRibbonButtonClicked = QtCore.pyqtSignal(bool)

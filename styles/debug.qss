@@ -1,4 +1,4 @@
-RibbonApplicationButton, RibbonDisplayOptionsButton, RibbonPanelOptionButton {
+RibbonApplicationButton, RibbonPanelOptionButton {
     border: 2px solid blue;
     border-radius: 5px;
 }
@@ -9,10 +9,6 @@ QToolBar {
 }
 
 RibbonApplicationButton::menu-indicator {
-    image: none;
-}
-
-RibbonDisplayOptionsButton::menu-indicator {
     image: none;
 }
 

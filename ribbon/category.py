@@ -27,6 +27,7 @@ contextColors = [
 
 
 class RibbonCategory(QtWidgets.QFrame):
+    """The RibbonCategory is the logical grouping that represents the contents of a ribbon tab."""
     #: Title of the category
     _title: str
     #: The ribbon parent of this category
@@ -120,6 +121,7 @@ class RibbonCategory(QtWidgets.QFrame):
 
 
 class RibbonNormalCategory(RibbonCategory):
+    """A normal category."""
 
     def __init__(self, title: str, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Normal, parent=parent)
@@ -133,6 +135,7 @@ class RibbonNormalCategory(RibbonCategory):
 
 
 class RibbonContextCategory(RibbonCategory):
+    """A context category."""
 
     def __init__(self, title: str, color: QtGui.QColor, parent: QtWidgets.QWidget):
         super().__init__(title, CategoryStyle.Context, color=color, parent=parent)

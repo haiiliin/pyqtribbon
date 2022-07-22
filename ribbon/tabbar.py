@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 
 class RibbonTabBar(QtWidgets.QTabBar):
+    """The TabBar for the title widget."""
     #: context category top margin
     _contextCategoryTopMargin = 0
     #: context category dark color height
@@ -17,16 +18,31 @@ class RibbonTabBar(QtWidgets.QTabBar):
                            "QTabBar::tab:!selected {margin-top: 10px; margin-bottom: 5px; }")
 
     def indexOf(self, tabName: str) -> int:
+        """Return the index of the tab with the given name.
+
+        :param tabName: The name of the tab.
+        :return: The index of the tab.
+        """
         for i in range(self.count()):
             if self.tabText(i) == tabName:
                 return i
         return -1
 
     def addTab(self, text: str, color: QtGui.QColor = None) -> int:
+        """Add a new tab to the tab bar.
+
+        :param text: The text of the tab.
+        :param color: The color of the tab.
+        :return: The index of the tab.
+        """
         self._tabColors[text] = color
         return super().addTab(text)
 
     def currentTabColor(self) -> QtGui.QColor:
+        """Current tab color
+
+        :return: Current tab color
+        """
         return self._tabColors[self.tabText(self.currentIndex())]
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:

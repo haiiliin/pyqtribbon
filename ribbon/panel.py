@@ -10,6 +10,7 @@ from .gallery import RibbonGallery
 
 
 class RibbonPanelTitle(QtWidgets.QLabel):
+    """Widget to display the title of a panel."""
     pass
 
 
@@ -22,6 +23,7 @@ class SpaceFindMode(IntEnum):
 
 
 class GridLayoutManager(object):
+    """Grid Layout Manager."""
 
     def __init__(self, rows: int):
         self.rows = rows
@@ -66,6 +68,7 @@ class GridLayoutManager(object):
 
 
 class RibbonPanelItemWidget(QtWidgets.QFrame):
+    """Widget to display a panel item."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -77,14 +80,20 @@ class RibbonPanelItemWidget(QtWidgets.QFrame):
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
     def addWidget(self, widget):
+        """Add a widget to the panel item.
+
+        :param widget: The widget to add.
+        """
         self.layout().addWidget(widget)
 
 
 class RibbonPanelOptionButton(QtWidgets.QToolButton):
+    """Button to display the options of a panel."""
     pass
 
 
 class RibbonPanel(QtWidgets.QFrame):
+    """Panel in the ribbon category."""
     #: maximal number of rows
     _maxRows: int
     #: GridLayout manager to request available cells.
@@ -245,6 +254,22 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a button to the panel.
+        
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param style: The style of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        
+        :return: The button that was added.
+        """
         button = RibbonToolButton(self)
         button.setButtonStyle(style)
         if text:
@@ -287,6 +312,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a small button to the panel.
+            
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addButton(text, icon, ButtonStyle.Small, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
@@ -303,6 +341,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a medium button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addButton(text, icon, ButtonStyle.Medium, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
@@ -319,6 +370,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a large button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addButton(text, icon, ButtonStyle.Large, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
@@ -336,6 +400,20 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a toggle button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param style: The style of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         button = self.addButton(text, icon, style, showText, colSpan,
                                 slot, shortcut, tooltip, statusTip, mode, alignment)
         button.setCheckable(True)
@@ -354,6 +432,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a small toggle button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addToggleButton(
             text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
@@ -371,6 +462,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a medium toggle button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addToggleButton(
             text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
@@ -388,6 +492,19 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonToolButton:
+        """Add a large toggle button to the panel.
+
+        :param text: The text of the button.
+        :param icon: The icon of the button.
+        :param showText: Whether to show the text of the button.
+        :param colSpan: The number of columns the button should span.
+        :param slot: The slot to call when the button is clicked.
+        :param shortcut: The shortcut of the button.
+        :param tooltip: The tooltip of the button.
+        :param statusTip: The status tip of the button.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the button.
+        """
         return self.addToggleButton(
             text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
@@ -400,16 +517,35 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QComboBox:
+        """Add a combo box to the panel.
+
+        :param items: The items of the combo box.
+        :param rowSpan: The number of rows the combo box should span.
+        :param colSpan: The number of columns the combo box should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the combo box.
+        """
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
         self.addWidget(comboBox, rowSpan, colSpan, mode, alignment)
         return comboBox
 
     def addFontComboBox(
-        self, rowSpan: int = 2, colSpan: int = 1, mode=SpaceFindMode.ColumnWise
+        self,
+        rowSpan: int = 2,
+        colSpan: int = 1,
+        mode=SpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QFontComboBox:
+        """Add a font combo box to the panel.
+
+        :param rowSpan: The number of rows the combo box should span.
+        :param colSpan: The number of columns the combo box should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the combo box.
+        """
         comboBox = QtWidgets.QFontComboBox(self)
-        self.addWidget(comboBox, rowSpan, colSpan, mode)
+        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment)
         return comboBox
 
     def addLineEdit(
@@ -419,6 +555,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QLineEdit:
+        """Add a line edit to the panel.
+
+        :param rowSpan: The number of rows the line edit should span.
+        :param colSpan: The number of columns the line edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the line edit.
+        """
         lineEdit = QtWidgets.QLineEdit(self)
         self.addWidget(lineEdit, rowSpan, colSpan, mode, alignment)
         return lineEdit
@@ -430,6 +573,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTextEdit:
+        """Add a text edit to the panel.
+
+        :param rowSpan: The number of rows the text edit should span.
+        :param colSpan: The number of columns the text edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the text edit.
+        """
         textEdit = QtWidgets.QTextEdit(self)
         self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
         return textEdit
@@ -441,6 +591,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QPlainTextEdit:
+        """Add a plain text edit to the panel.
+
+        :param rowSpan: The number of rows the text edit should span.
+        :param colSpan: The number of columns the text edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the text edit.
+        """
         textEdit = QtWidgets.QPlainTextEdit(self)
         self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
         return textEdit
@@ -453,6 +610,14 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QLabel:
+        """Add a label to the panel.
+
+        :param text: The text of the label.
+        :param rowSpan: The number of rows the label should span.
+        :param colSpan: The number of columns the label should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the label.
+        """
         label = QtWidgets.QLabel(self)
         label.setText(text)
         self.addWidget(label, rowSpan, colSpan, mode, alignment)
@@ -465,6 +630,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QProgressBar:
+        """Add a progress bar to the panel.
+
+        :param rowSpan: The number of rows the progress bar should span.
+        :param colSpan: The number of columns the progress bar should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the progress bar.
+        """
         progressBar = QtWidgets.QProgressBar(self)
         self.addWidget(progressBar, rowSpan, colSpan, mode, alignment)
         return progressBar
@@ -476,6 +648,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QSlider:
+        """Add a slider to the panel.
+
+        :param rowSpan: The number of rows the slider should span.
+        :param colSpan: The number of columns the slider should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the slider.
+        """
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
         self.addWidget(slider, rowSpan, colSpan, mode, alignment)
@@ -488,6 +667,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QSpinBox:
+        """Add a spin box to the panel.
+
+        :param rowSpan: The number of rows the spin box should span.
+        :param colSpan: The number of columns the spin box should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the spin box.
+        """
         spinBox = QtWidgets.QSpinBox(self)
         self.addWidget(spinBox, rowSpan, colSpan, mode, alignment)
         return spinBox
@@ -499,6 +685,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QDoubleSpinBox:
+        """Add a double spin box to the panel.
+
+        :param rowSpan: The number of rows the double spin box should span.
+        :param colSpan: The number of columns the double spin box should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the double spin box.
+        """
         doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
         self.addWidget(doubleSpinBox, rowSpan, colSpan, mode, alignment)
         return doubleSpinBox
@@ -510,6 +703,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QDateEdit:
+        """Add a date edit to the panel.
+
+        :param rowSpan: The number of rows the date edit should span.
+        :param colSpan: The number of columns the date edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the date edit.
+        """
         dateEdit = QtWidgets.QDateEdit(self)
         self.addWidget(dateEdit, rowSpan, colSpan, mode, alignment)
         return dateEdit
@@ -521,6 +721,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTimeEdit:
+        """Add a time edit to the panel.
+
+        :param rowSpan: The number of rows the time edit should span.
+        :param colSpan: The number of columns the time edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the time edit.
+        """
         timeEdit = QtWidgets.QTimeEdit(self)
         self.addWidget(timeEdit, rowSpan, colSpan, mode, alignment)
         return timeEdit
@@ -532,6 +739,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QDateTimeEdit:
+        """Add a date time edit to the panel.
+
+        :param rowSpan: The number of rows the date time edit should span.
+        :param colSpan: The number of columns the date time edit should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the date time edit.
+        """
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
         self.addWidget(dateTimeEdit, rowSpan, colSpan, mode, alignment)
         return dateTimeEdit
@@ -543,6 +757,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTableWidget:
+        """Add a table widget to the panel.
+
+        :param rowSpan: The number of rows the table widget should span.
+        :param colSpan: The number of columns the table widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the table widget.
+        """
         tableWidget = QtWidgets.QTableWidget(self)
         self.addWidget(tableWidget, rowSpan, colSpan, mode, alignment)
         return tableWidget
@@ -554,6 +775,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QTreeWidget:
+        """Add a tree widget to the panel.
+
+        :param rowSpan: The number of rows the tree widget should span.
+        :param colSpan: The number of columns the tree widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the tree widget.
+        """
         treeWidget = QtWidgets.QTreeWidget(self)
         self.addWidget(treeWidget, rowSpan, colSpan, mode, alignment)
         return treeWidget
@@ -565,6 +793,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QListWidget:
+        """Add a list widget to the panel.
+
+        :param rowSpan: The number of rows the list widget should span.
+        :param colSpan: The number of columns the list widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the list widget.
+        """
         listWidget = QtWidgets.QListWidget(self)
         self.addWidget(listWidget, rowSpan, colSpan, mode, alignment)
         return listWidget
@@ -576,6 +811,13 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=SpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
     ) -> QtWidgets.QCalendarWidget:
+        """Add a calendar widget to the panel.
+
+        :param rowSpan: The number of rows the calendar widget should span.
+        :param colSpan: The number of columns the calendar widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the calendar widget.
+        """
         calendarWidget = QtWidgets.QCalendarWidget(self)
         self.addWidget(calendarWidget, rowSpan, colSpan, mode, alignment)
         return calendarWidget

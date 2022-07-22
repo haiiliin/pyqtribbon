@@ -56,10 +56,6 @@ RibbonApplicationButton::menu-indicator {
     image: none;
 }
 
-RibbonDisplayOptionsButton::menu-indicator {
-    image: none;
-}
-
 /*QTabBar*/
 
 QTabBar {

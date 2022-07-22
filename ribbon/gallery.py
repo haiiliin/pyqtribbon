@@ -4,6 +4,7 @@ from .toolbutton import RibbonToolButton
 
 
 class RibbonGalleryListWidget(QtWidgets.QListWidget):
+    """Gallery list widget."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -15,20 +16,25 @@ class RibbonGalleryListWidget(QtWidgets.QListWidget):
         self.setIconSize(QtCore.QSize(64, 64))
 
     def resizeEvent(self, e: QtGui.QResizeEvent) -> None:
+        """Resize the list widget."""
         super().resizeEvent(e)
 
     def scrollToNextRow(self) -> None:
+        """Scroll to the next row."""
         self.verticalScrollBar().setValue(self.verticalScrollBar().value() + self.verticalScrollBar().singleStep())
 
     def scrollToPreviousRow(self) -> None:
+        """Scroll to the previous row."""
         self.verticalScrollBar().setValue(self.verticalScrollBar().value() - self.verticalScrollBar().singleStep())
 
 
 class RibbonGalleryButton(QtWidgets.QToolButton):
+    """Gallery button."""
     pass
 
 
 class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
+    """Gallery popup list widget."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -36,6 +42,7 @@ class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 
 
 class RibbonGallery(QtWidgets.QFrame):
+    """A widget that displays a gallery of buttons."""
     _popupWindowSize = QtCore.QSize(500, 500)
     _buttons: list[RibbonToolButton] = []
     _popupButtons: list[RibbonToolButton] = []
@@ -166,6 +173,17 @@ class RibbonGallery(QtWidgets.QFrame):
         statusTip=None,
         checkable=False,
     ) -> RibbonToolButton:
+        """Add a button to the gallery
+
+        :param text: text of the button
+        :param icon: icon of the button
+        :param slot: slot to call when the button is clicked
+        :param shortcut: shortcut of the button
+        :param tooltip: tooltip of the button
+        :param statusTip: status tip of the button
+        :param checkable: checkable flag of the button
+        :return: the button added
+        """
         button = RibbonToolButton(self)
         popupButton = RibbonToolButton(self._popupWidget)
         if text is not None:
@@ -215,5 +233,15 @@ class RibbonGallery(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
     ) -> RibbonToolButton:
+        """Add a toggle button to the gallery
+
+        :param text: text of the button
+        :param icon: icon of the button
+        :param slot: slot to call when the button is clicked
+        :param shortcut: shortcut of the button
+        :param tooltip: tooltip of the button
+        :param statusTip: status tip of the button
+        :return: the button added
+        """
         button = self.addButton(text, icon, slot, shortcut, tooltip, statusTip, True)
         return button
