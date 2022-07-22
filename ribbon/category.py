@@ -44,6 +44,13 @@ class RibbonCategory(QtWidgets.QFrame):
 
     def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, color: QtGui.QColor = None,
                  parent=None):
+        """Create a new category.
+
+        :param title: The title of the category.
+        :param style: The button style of the category.
+        :param color: The color of the context category.
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self._title = title
         self._style = style
@@ -124,6 +131,11 @@ class RibbonNormalCategory(RibbonCategory):
     """A normal category."""
 
     def __init__(self, title: str, parent: QtWidgets.QWidget):
+        """Create a new normal category.
+
+        :param title: The title of the category.
+        :param parent: The parent widget.
+        """
         super().__init__(title, CategoryStyle.Normal, parent=parent)
 
     def setCategoryStyle(self, style: CategoryStyle):
@@ -138,6 +150,12 @@ class RibbonContextCategory(RibbonCategory):
     """A context category."""
 
     def __init__(self, title: str, color: QtGui.QColor, parent: QtWidgets.QWidget):
+        """Create a new context category.
+
+        :param title: The title of the category.
+        :param color: The color of the context category.
+        :param parent: The parent widget.
+        """
         super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
 
     def setCategoryStyle(self, style: CategoryStyle):

@@ -24,6 +24,11 @@ class RibbonBar(QtWidgets.QFrame):
     _ribbonHeight = 240
 
     def __init__(self, title='PyQtRibbon', parent=None):
+        """Create a new ribbon.
+
+        :param title: The title of the ribbon.
+        :param parent: The parent widget of the ribbon.
+        """
         super().__init__(parent)
         self._categories = []
         self.setFixedHeight(self._ribbonHeight)
@@ -174,9 +179,9 @@ class RibbonBar(QtWidgets.QFrame):
         self._titleWidget.removeHelpButton()
 
     def categories(self) -> typing.List[RibbonCategory]:
-        """Return the list of categories of the ribbon.
+        """Return a list of categories of the ribbon.
 
-        :return: The list of categories of the ribbon.
+        :return: A list of categories of the ribbon.
         """
         return self._categories
 

@@ -21,6 +21,10 @@ class RibbonToolButton(QtWidgets.QToolButton):
     _smallButtonIconSize = 32
 
     def __init__(self, parent=None):
+        """Create a new ribbon tool button.
+
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self._actions = []
 

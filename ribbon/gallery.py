@@ -49,6 +49,12 @@ class RibbonGallery(QtWidgets.QFrame):
     _popupHideOnClick = False
 
     def __init__(self, minimumWidth=800, popupHideOnClick=False, parent=None):
+        """Create a gallery.
+
+        :param minimumWidth: minimum width of the gallery
+        :param popupHideOnClick: hide on click flag
+        :param parent: parent widget
+        """
         super().__init__(parent)
         self.setMinimumWidth(minimumWidth)
         self._popupHideOnClick = popupHideOnClick
@@ -97,6 +103,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._moreButton.clicked.connect(self.showPopup)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        """Resize the gallery."""
         self._upButton.setFixedSize(self.height() // 4, self.height() // 3)
         self._downButton.setFixedSize(self.height() // 4, self.height() // 3)
         self._moreButton.setFixedSize(self.height() // 4, self.height() // 3)

@@ -21,6 +21,10 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
     displayOptionsButtonClicked = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
+        """Create a new category layout widget.
+
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 0, 5, 0)
@@ -59,10 +63,12 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._previousButton.clicked.connect(self.scrollPrevious)
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
+        """Override the paint event to draw the background."""
         super().paintEvent(a0)
         self.autoSetScrollButtonsVisible()
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        """Override the resize event to resize the scroll area."""
         super().resizeEvent(a0)
         self.autoSetScrollButtonsVisible()
 

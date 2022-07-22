@@ -12,6 +12,10 @@ class RibbonTabBar(QtWidgets.QTabBar):
     _tabColors = {}
 
     def __init__(self, parent=None):
+        """Create a new tab bar.
+
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self.setDrawBase(False)
         self.setStyleSheet("QTabBar::tab {margin-top: 10px; margin-bottom: 5px; } "
@@ -46,6 +50,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         return self._tabColors[self.tabText(self.currentIndex())]
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
+        """Paint the tab bar."""
         if self.count() == 0:
             super().paintEvent(a0)
         color = self.currentTabColor()

@@ -28,6 +28,11 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _rightButtonHeight = 24
 
     def __init__(self, title='PyQtRibbon', parent=None):
+        """Initialize the ribbon title widget.
+
+        :param title: The title of the ribbon.
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         # Tab bar layout
         self.setFixedHeight(self._tabBarHeight)

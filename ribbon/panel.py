@@ -24,6 +24,10 @@ class GridLayoutManager(object):
     """Grid Layout Manager."""
 
     def __init__(self, rows: int):
+        """Create a new grid layout manager.
+
+        :param rows: The number of rows in the grid layout.
+        """
         self.rows = rows
         self.cells = np.ones((rows, 1), dtype=bool)
 
@@ -69,6 +73,10 @@ class RibbonPanelItemWidget(QtWidgets.QFrame):
     """Widget to display a panel item."""
 
     def __init__(self, parent=None):
+        """Create a new panel item.
+
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self.setLayout(QtWidgets.QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
@@ -107,6 +115,12 @@ class RibbonPanel(QtWidgets.QFrame):
     panelOptionClicked = QtCore.pyqtSignal(bool)
 
     def __init__(self, title: str, maxRows=6, parent=None):
+        """Create a new panel.
+
+        :param title: The title of the panel.
+        :param maxRows: The maximal number of rows in the panel.
+        :param parent: The parent widget.
+        """
         super().__init__(parent)
         self._maxRows = maxRows
         self._gridLayoutManager = GridLayoutManager(self._maxRows)
