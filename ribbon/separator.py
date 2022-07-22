@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 
-class RibbonSeparator(QtWidgets.QWidget):
+class RibbonSeparator(QtWidgets.QFrame):
     _topMargins: int = 4
     _bottomMargins: int = 4
     _leftMargins: int = 4
