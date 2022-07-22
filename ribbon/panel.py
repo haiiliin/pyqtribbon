@@ -80,6 +80,10 @@ class RibbonPanelItemWidget(QtWidgets.QFrame):
         self.layout().addWidget(widget)
 
 
+class RibbonPanelOptionButton(QtWidgets.QToolButton):
+    pass
+
+
 class RibbonPanel(QtWidgets.QFrame):
     #: maximal number of rows
     _maxRows: int
@@ -123,7 +127,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
-        self._panelOption = QtWidgets.QToolButton()
+        self._panelOption = RibbonPanelOptionButton()
         self._panelOption.setAutoRaise(True)
         self._panelOption.setIcon(QtGui.QIcon("icons/linking.png"))
         self._panelOption.setIconSize(QtCore.QSize(16, 16))

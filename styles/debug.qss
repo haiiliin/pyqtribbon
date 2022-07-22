@@ -1,4 +1,9 @@
-QToolButton {
+RibbonApplicationButton, RibbonDisplayOptionsButton, RibbonPanelOptionButton {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+QToolBar {
     border: 2px solid blue;
     border-radius: 5px;
 }
@@ -12,12 +17,12 @@ RibbonDisplayOptionsButton::menu-indicator {
 }
 
 RibbonTabBar {
-    border: 2px solid blue;
+    border: 2px solid purple;
     border-radius: 20px;
 }
 
 RibbonTitleLabel {
-    border: 2px solid blue;
+    border: 2px solid purple;
     border-radius: 20px;
 }
 
