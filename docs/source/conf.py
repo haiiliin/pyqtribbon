@@ -38,9 +38,7 @@ extensions = [
     'sphinx.ext.githubpages',
 ]
 
-autoclass_content = 'both'
 numpydoc_show_inherited_class_members = False
-
 
 # linkcode source
 def linkcode_resolve(domain: str, info: dict):
