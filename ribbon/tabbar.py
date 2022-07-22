@@ -12,6 +12,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setDrawBase(False)
         self.setStyleSheet("QTabBar::tab {margin-top: 10px; margin-bottom: 5px; } "
                            "QTabBar::tab:!selected {margin-top: 10px; margin-bottom: 5px; }")
 
