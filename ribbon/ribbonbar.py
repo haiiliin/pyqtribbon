@@ -11,7 +11,7 @@ class RibbonDisplayOptionsButton(QtWidgets.QToolButton):
     pass
 
 
-class Ribbon(QtWidgets.QFrame):
+class RibbonBar(QtWidgets.QFrame):
     #: Signal: The help button was clicked.
     helpButtonClicked = QtCore.pyqtSignal(bool)
     #: The signal that is emitted when the display options button is clicked.

@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 
-from .ribbon import Ribbon
+from .ribbonbar import RibbonBar
 
 
 class RibbonMainWindow(QtWidgets.QMainWindow):
@@ -10,5 +10,5 @@ class RibbonMainWindow(QtWidgets.QMainWindow):
         self.setCentralWidget(QtWidgets.QWidget(self))
         self.mainLayout = QtWidgets.QVBoxLayout(self.centralWidget())
         self.mainLayout.setContentsMargins(5, 5, 5, 5)
-        self.ribbon = Ribbon()
+        self.ribbon = RibbonBar()
         self.mainLayout.addWidget(self.ribbon)
