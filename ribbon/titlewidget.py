@@ -43,7 +43,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._quickAccessToolBar.setOrientation(QtCore.Qt.Horizontal)
         self._quickAccessToolBar.setMovable(False)
         self._quickAccessToolBar.addWidget(self._applicationButton)
-        self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout()
+        self._quickAccessToolBarWidget = QtWidgets.QWidget()
+        self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout(self._quickAccessToolBarWidget)
         self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
         self._quickAccessToolBarLayout.setSpacing(0)
         self._quickAccessToolBarLayout.addWidget(self._quickAccessToolBar, 0, QtCore.Qt.AlignBottom)
@@ -76,8 +77,11 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
 
-        self._mainLayout.addLayout(self._quickAccessToolBarLayout)
-        self._mainLayout.addWidget(self._tabBar)
+        self._mainLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignBottom)
+        self._mainLayout.addWidget(self._tabBar, 1)
+        self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
+                                                             QtWidgets.QSizePolicy.Preferred))
+        self._mainLayout.setStretch(2, 1)
         self._mainLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
