@@ -42,7 +42,7 @@ class Ribbon(QtWidgets.QFrame):
         self._mainLayout.addWidget(self._titleWidget, 0)
         self._mainLayout.addWidget(self._separator, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
-        self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
+        self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
 
         # Connect signals
         self._titleWidget.helpButtonClicked.connect(self.helpButtonClicked)
