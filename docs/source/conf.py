@@ -38,6 +38,7 @@ extensions = [
     'sphinx.ext.githubpages',
 ]
 
+autoclass_content = 'both'
 numpydoc_show_inherited_class_members = False
 
 
