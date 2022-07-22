@@ -60,7 +60,7 @@ class RibbonBar(QtWidgets.QFrame):
         self._titleWidget.applicationButton().setIcon(icon)
 
     def addApplicationOptionAction(self, action: QtWidgets.QAction):
-        """Add a display option to the category.
+        """Add a display option to the ribbon.
 
         :param action: The action of the display option.
         """
