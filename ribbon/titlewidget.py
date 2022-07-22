@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .tabbar import RibbonTabBar
+from .utils import package_source_dir
 
 
 class RibbonApplicationButton(QtWidgets.QToolButton):
@@ -72,7 +73,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
-        self._helpButton.setIcon(QtGui.QIcon("icons/help.png"))
+        self._helpButton.setIcon(QtGui.QIcon(package_source_dir() + "/icons/help.png"))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)

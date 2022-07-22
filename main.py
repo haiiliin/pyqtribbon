@@ -4,12 +4,10 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 from ribbon import RibbonMainWindow
 
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 8))
     app.setStyle("Windows")
-    app.setStyleSheet(open("styles/default.qss", "r").read())
 
     window = RibbonMainWindow()
     window.setWindowTitle("Ribbon Test")

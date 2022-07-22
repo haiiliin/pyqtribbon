@@ -1,8 +1,8 @@
 import setuptools
- 
+
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
- 
+
 setuptools.setup(
     name="pyqtribbon",
     version="0.1.0",
@@ -19,4 +19,23 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    data_files=[('icons', [
+        'icons/backward.png',
+        'icons/down.png',
+        'icons/forward.png',
+        'icons/help.png',
+        'icons/linking.png',
+        'icons/max.png',
+        'icons/min.png',
+        'icons/more.png',
+        'icons/python.png',
+        'icons/redo.png',
+        'icons/save.png',
+        'icons/undo.png',
+        'icons/up.png',
+    ]), ('styles', [
+        'styles/default.qss',
+        'styles/debug.qss'
+    ])],
+    install_requires=['PyQt5', 'numpy']
 )

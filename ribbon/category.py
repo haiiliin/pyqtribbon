@@ -3,10 +3,10 @@ import typing
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
+from .categorylayoutwidget import RibbonCategoryLayoutWidget
 from .panel import RibbonPanel
 from .separator import RibbonSeparator
 from .typehints import RibbonType
-from .categorylayoutwidget import RibbonCategoryLayoutWidget
 
 
 class CategoryStyle(enum.IntEnum):

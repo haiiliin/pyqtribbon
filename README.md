@@ -4,6 +4,19 @@ PyQtRibbon is a Qt-based application framework for building user interfaces.
 
 - Documentation: [pyqtribbon.haiiliin.com](https://pyqtribbon.haiiliin.com/).
 
+## Installation
+
+`pyqtribbon` is distribued to [PyPI](https://pypi.org/project/pyqtribbon/), you can use pip to install it:
+
+```shell
+pip install pyqtribbon
+```
+
+You can also install the package from source:
+```shell
+pip install git+https://github.com/haiiliin/pyqtribbon.git@main
+```
+
 ## The Ribbon Bar
 
 The ribbon is first introduced by Microsoft in the 2000's. It is a toolbar with a tabbed interface. According to [Microsoft](https://docs.microsoft.com/en-us/cpp/mfc/ribbon-designer-mfc?view=msvc-170):

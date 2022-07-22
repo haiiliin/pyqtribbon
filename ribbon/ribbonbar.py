@@ -1,10 +1,17 @@
 import typing
+from enum import IntEnum
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
-from .titlewidget import RibbonTitleWidget
 from .separator import RibbonHorizontalSeparator
+from .titlewidget import RibbonTitleWidget
+from .utils import package_source_dir
+
+
+class RibbonStyle(IntEnum):
+    Default = 0
+    Debug = 1
 
 
 class RibbonBar(QtWidgets.QFrame):
@@ -52,6 +59,19 @@ class RibbonBar(QtWidgets.QFrame):
         self._titleWidget.tabBar().currentChanged.connect(
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
+        self.setRibbonStyle(RibbonStyle.Default)
+
+    def setRibbonStyle(self, style: RibbonStyle):
+        """Set the style of the ribbon.
+
+        :param style: The style to set.
+        """
+        stylefiles = {
+            RibbonStyle.Default: 'default',
+            RibbonStyle.Debug: 'debug'
+        }
+        if style == RibbonStyle.Default:
+            self.setStyleSheet(open(package_source_dir() + '/' + f"styles/{stylefiles[style]}.qss", "r").read())
 
     def applicationOptionButton(self):
         """Return the application button."""

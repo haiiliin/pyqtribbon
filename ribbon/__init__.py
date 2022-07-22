@@ -5,7 +5,7 @@ from .gallery import RibbonGallery, RibbonGalleryListWidget, RibbonGalleryButton
 from .mainwindow import RibbonMainWindow
 from .panel import RibbonPanel, RibbonPanelTitle, SpaceFindMode, GridLayoutManager, RibbonPanelItemWidget
 from .panel import SpaceFindMode
-from .ribbonbar import RibbonBar
+from .ribbonbar import RibbonBar, RibbonStyle
 from .separator import RibbonSeparator, RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton, RibbonTitleLabel
