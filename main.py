@@ -137,7 +137,7 @@ if __name__ == "__main__":
     showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryVisible(checked))
     showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
 
-    gallery = panel.addGallery()
+    gallery = panel.addGallery(popupHideOnClick=True)
     for i in range(100):
         gallery.addToggleButton(f'item {i+1}', QtGui.QIcon("icons/close.png"))
 
