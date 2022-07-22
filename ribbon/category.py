@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from .panel import RibbonPanel
 from .separator import RibbonSeparator
 from .typehints import RibbonType
+from .categorylayoutwidget import RibbonCategoryLayoutWidget
 
 
 class CategoryStyle(enum.IntEnum):
@@ -49,26 +50,11 @@ class RibbonCategory(QtWidgets.QFrame):
         self._ribbon = parent
         self._color = color
 
-        self._panelWidget = QtWidgets.QWidget()
-        self._panelLayout = QtWidgets.QHBoxLayout(self._panelWidget)
-        self._panelLayout.setContentsMargins(0, 0, 0, 0)
-        self._panelLayout.setSpacing(5)
-        self._panelLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
-            )
-        )
-
+        self._panelLayoutWidget = RibbonCategoryLayoutWidget()
         self._mainLayout = QtWidgets.QHBoxLayout(self)
         self._mainLayout.setSpacing(5)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
-        self._mainLayout.addWidget(self._panelWidget, 0)
-        self._mainLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(
-                10, 10, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred
-            )
-        )
-        self._mainLayout.setStretch(1, 1)
+        self._mainLayout.addWidget(self._panelLayoutWidget, 0)
 
     def title(self) -> str:
         """Return the title of the category."""
@@ -101,8 +87,8 @@ class RibbonCategory(QtWidgets.QFrame):
                              self._mainLayout.contentsMargins().top() -
                              self._mainLayout.contentsMargins().bottom())
         self._panels[title] = panel
-        self._panelLayout.insertWidget(self._panelLayout.count() - 1, panel)
-        self._panelLayout.insertWidget(self._panelLayout.count() - 1, RibbonSeparator(width=10))
+        self._panelLayoutWidget.addWidget(panel)
+        self._panelLayoutWidget.addWidget(RibbonSeparator(width=10))
         return panel
 
     def removePanel(self, title: str):
@@ -110,7 +96,8 @@ class RibbonCategory(QtWidgets.QFrame):
 
         :param title: The title of the panel.
         """
-        self._panelLayout.removeWidget(self._panels[title])
+        # self._panelLayout.removeWidget(self._panels[title])
+        self._panelLayoutWidget.removeWidget(self._panels[title])
         self._panels.pop(title)
 
     def takePanel(self, title: str):

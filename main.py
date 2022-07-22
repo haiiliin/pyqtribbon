@@ -36,8 +36,6 @@ if __name__ == "__main__":
     redoButton.setIcon(QtGui.QIcon("icons/redo.png"))
     ribbon.addQuickAccessButton(redoButton)
 
-    ribbon.addDisplayOptionAction(QtWidgets.QAction("Display Options", window))
-
     category1 = ribbon.addCategory("Category 1")
     panel = category1.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QtGui.QIcon("icons/close.png"))
