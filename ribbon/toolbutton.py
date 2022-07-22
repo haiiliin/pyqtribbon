@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class ButtonStyle(IntEnum):
-    """Button style."""
+    """Button style, Small, Medium, or Large."""
     Small = 0
     Medium = 1
     Large = 2

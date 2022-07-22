@@ -15,9 +15,7 @@ class RibbonPanelTitle(QtWidgets.QLabel):
 
 
 class SpaceFindMode(IntEnum):
-    """
-    SpaceFindMode
-    """
+    """Mode to find available space in a grid layout, ColumnWise or RowWise."""
     ColumnWise = 0
     RowWise = 1
 

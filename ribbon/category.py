@@ -10,7 +10,7 @@ from .categorylayoutwidget import RibbonCategoryLayoutWidget
 
 
 class CategoryStyle(enum.IntEnum):
-    """The buttonStyle of a category."""
+    """The button style of a category."""
     Normal = 0
     Context = 1
 
@@ -32,7 +32,7 @@ class RibbonCategory(QtWidgets.QFrame):
     _title: str
     #: The ribbon parent of this category
     _ribbon: typing.Optional[RibbonType]
-    #: The buttonStyle of the category.
+    #: The button style of the category.
     _style: CategoryStyle
     #: Panels
     _panels: typing.Dict[str, RibbonPanel]
@@ -62,17 +62,17 @@ class RibbonCategory(QtWidgets.QFrame):
         return self._title
 
     def setCategoryStyle(self, style: CategoryStyle):
-        """Set the buttonStyle of the category.
+        """Set the button style of the category.
 
-        :param style: The buttonStyle.
+        :param style: The button style.
         """
         self._style = style
         self.repaint()
 
     def categoryStyle(self):
-        """Return the buttonStyle of the category.
+        """Return the button style of the category.
 
-        :return: The buttonStyle.
+        :return: The button tyle.
         """
         return self._style
 
@@ -127,9 +127,9 @@ class RibbonNormalCategory(RibbonCategory):
         super().__init__(title, CategoryStyle.Normal, parent=parent)
 
     def setCategoryStyle(self, style: CategoryStyle):
-        """Set the buttonStyle of the category.
+        """Set the button style of the category.
 
-        :param style: The buttonStyle.
+        :param style: The button style.
         """
         raise ValueError("You can not set the category style of a normal category.")
 
@@ -141,9 +141,9 @@ class RibbonContextCategory(RibbonCategory):
         super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
 
     def setCategoryStyle(self, style: CategoryStyle):
-        """Set the buttonStyle of the category.
+        """Set the button style of the category.
 
-        :param style: The buttonStyle.
+        :param style: The button style.
         """
         raise ValueError("You can not set the category style of a context category.")
 
