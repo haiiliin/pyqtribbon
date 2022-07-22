@@ -14,8 +14,6 @@ The ribbon is first introduced by Microsoft in the 2000's. It is a toolbar with 
 
 ## Definitions of Ribbon Elements
 
-![ribbon](docs/source/_images/ribbon.png)
-
 - **Application button**: The button that appears on the upper-left corner of a ribbon. The Application button replaces the File menu and is visible even when the ribbon is minimized. When the button is clicked, a menu that has a list of commands is displayed.
 
 - **Quick Access toolbar**: A small, customizable toolbar that displays frequently used commands.
