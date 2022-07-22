@@ -42,6 +42,11 @@ RibbonPanel {
 
 }
 
+RibbonSeparator {
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
 RibbonPanelTitle {
     border: 2px solid green;
     border-radius: 20px;
@@ -88,4 +93,12 @@ QTabBar::tab:selected {
 	color: blue;
 	background: transparent;
 	border-bottom: 3px solid blue;
+}
+
+QToolButton::menu-button {
+	border: 2px solid transparent;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	/* 16px width + 4px for border = 20px allocated above */
+	width: 16px;
 }
