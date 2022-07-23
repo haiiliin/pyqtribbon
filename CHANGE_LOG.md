@@ -49,3 +49,8 @@ The first release which supports:
   ([0886675](https://github.com/haiiliin/pyqtribbon/commit/0886675b2da7d5aacb757a4e955b71e49cc20f1b)).
 
 ## [0.1.7] Update docs
+
+- Add RibbonBar.helpRibbonButton method
+  ([31239b0](https://github.com/haiiliin/pyqtribbon/commit/31239b0b557cc0a91d450be1a7614b518eed02d6)).
+- Add User Manual
+  ([b1c7b37](https://github.com/haiiliin/pyqtribbon/commit/b1c7b37c6e4b11e6b8a5492bf94c4955c16cf2ba)).
