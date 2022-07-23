@@ -59,7 +59,7 @@ RibbonContextCategory
 CategoryStyle
 ~~~~~~~~~~~~~
 
-.. autoclass:: ribbon.category.CategoryStyle
+.. autoclass:: ribbon.category.RibbonCategoryStyle
    :members:
 
 RibbonCategoryScrollArea
@@ -104,13 +104,13 @@ RibbonPanelItemWidget
 SpaceFindMode
 ~~~~~~~~~~~~~
 
-.. autoclass:: ribbon.panel.SpaceFindMode
+.. autoclass:: ribbon.panel.RibbonSpaceFindMode
    :members:
 
 GridLayoutManager
 ~~~~~~~~~~~~~~~~~
 
-.. autoclass:: ribbon.panel.GridLayoutManager
+.. autoclass:: ribbon.panel.RibbonGridLayoutManager
    :members:
 
 Ribbon Gallery
@@ -147,6 +147,12 @@ RibbonToolButton
 ~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.toolbutton.RibbonToolButton
+   :members:
+
+RibbonButtonStyle
+~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.toolbutton.RibbonButtonStyle
    :members:
 
 Ribbon Separator
