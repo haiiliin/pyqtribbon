@@ -42,3 +42,5 @@ The first release which supports:
   ([a8f8f83](https://github.com/haiiliin/pyqtribbon/commit/a8f8f836a200cac3028481d6f046fad3cf1776dd)).
 - Show inheritance class 
   ([1e06989](https://github.com/haiiliin/pyqtribbon/commit/1e06989b57813840e04b2f8f69788c3ee6026274)).
+- Add overloaded methods to be compatible with QWidget
+  ([0886675](https://github.com/haiiliin/pyqtribbon/commit/0886675b2da7d5aacb757a4e955b71e49cc20f1b)).
