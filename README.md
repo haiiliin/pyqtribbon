@@ -1,4 +1,4 @@
-# pyqtribbon
+# PyQtRibbon
 
 PyQtRibbon is a Qt-based application framework for building user interfaces.
 
