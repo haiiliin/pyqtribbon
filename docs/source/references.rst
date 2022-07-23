@@ -2,8 +2,8 @@
 API References
 ==============
 
-Main Window
------------
+Ribbon Main Window
+------------------
 
 .. autoclass:: ribbon.mainwindow.RibbonMainWindow
    :members:
