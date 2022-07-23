@@ -29,3 +29,5 @@ The first release which supports:
 
 - Rename CategoryStyle to RibbonCategoryStyle
   ([c243f50](https://github.com/haiiliin/pyqtribbon/commit/c243f508311271c6309b5c0c4d0f899668e36b6d)).
+- Rename ButtonStyle to RibbonButtonStyle
+  ([c7efad1](https://github.com/haiiliin/pyqtribbon/commit/c7efad1c5a5c43f50ba8deeff57dd53c5b1c17e5)).
