@@ -53,28 +53,29 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """Paint the tab bar."""
         if self.count() == 0:
             super().paintEvent(a0)
-        color = self.currentTabColor()
-        if color is not None:
-            # Tab rectangle
-            tabRect = self.tabRect(self.currentIndex())
-            if self.currentIndex() > 0:
-                tabRect.setLeft(tabRect.left() + 6)
+        else:
+            color = self.currentTabColor()
+            if color is not None:
+                # Tab rectangle
+                tabRect = self.tabRect(self.currentIndex())
+                if self.currentIndex() > 0:
+                    tabRect.setLeft(tabRect.left() + 6)
 
-            tabRect.setHeight(self.height() - 1)
-            tabRect.setTop(self._contextCategoryTopMargin)
+                tabRect.setHeight(self.height() - 1)
+                tabRect.setTop(self._contextCategoryTopMargin)
 
-            # Paint top dark color area
-            painter = QtGui.QPainter(self)
-            painter.setRenderHint(QtGui.QPainter.Antialiasing)
-            painter.setPen(QtCore.Qt.NoPen)
-            painter.setBrush(self.currentTabColor())
-            painter.drawRect(tabRect.x(),
-                             self._contextCategoryTopMargin,
-                             tabRect.width(),
-                             self._contextCategoryDarkColorHeight)
+                # Paint top dark color area
+                painter = QtGui.QPainter(self)
+                painter.setRenderHint(QtGui.QPainter.Antialiasing)
+                painter.setPen(QtCore.Qt.NoPen)
+                painter.setBrush(self.currentTabColor())
+                painter.drawRect(tabRect.x(),
+                                 self._contextCategoryTopMargin,
+                                 tabRect.width(),
+                                 self._contextCategoryDarkColorHeight)
 
-            # Paint rest of the category
-            lightColor = self._contextColor.lighter(190)
-            tabRect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
-            painter.fillRect(tabRect, lightColor)
-        super().paintEvent(a0)
+                # Paint rest of the category
+                lightColor = self._contextColor.lighter(190)
+                tabRect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
+                painter.fillRect(tabRect, lightColor)
+            super().paintEvent(a0)
