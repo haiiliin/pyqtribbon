@@ -6,6 +6,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
 from .separator import RibbonHorizontalSeparator
 from .titlewidget import RibbonTitleWidget
+from .utils import data_file_path
 
 
 class RibbonStyle(IntEnum):
@@ -70,7 +71,7 @@ class RibbonBar(QtWidgets.QFrame):
             RibbonStyle.Debug: 'debug'
         }
         if style == RibbonStyle.Default:
-            self.setStyleSheet(open(f"styles/{stylefiles[style]}.qss", "r").read())
+            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
 
     def applicationOptionButton(self):
         """Return the application button."""
@@ -338,7 +339,7 @@ class RibbonBar(QtWidgets.QFrame):
         if not self._ribbonVisible:
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/up.png'))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/up.png')))
             self._separator.setVisible(True)
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
@@ -348,7 +349,7 @@ class RibbonBar(QtWidgets.QFrame):
         if self._ribbonVisible:
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon('icons/down.png'))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/down.png')))
             self._separator.setVisible(False)
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._titleWidget.tabBarHeight() + 5)

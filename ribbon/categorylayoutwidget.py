@@ -1,5 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
+from ribbon.utils import data_file_path
+
 
 class RibbonCategoryLayoutButton(QtWidgets.QToolButton):
     """Previous/Next buttons in the category when the 
@@ -44,12 +46,12 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._categoryScrollArea.setWidget(self._categoryScrollAreaContents)
 
         self._previousButton = RibbonCategoryLayoutButton(self)
-        self._previousButton.setIcon(QtGui.QIcon("icons/backward.png"))
+        self._previousButton.setIcon(QtGui.QIcon(data_file_path("icons/backward.png")))
         self._previousButton.setIconSize(QtCore.QSize(24, 24))
         self._previousButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._previousButton.setAutoRaise(True)
         self._nextButton = RibbonCategoryLayoutButton(self)
-        self._nextButton.setIcon(QtGui.QIcon("icons/forward.png"))
+        self._nextButton.setIcon(QtGui.QIcon(data_file_path("icons/forward.png")))
         self._nextButton.setIconSize(QtCore.QSize(24, 24))
         self._nextButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._nextButton.setAutoRaise(True)

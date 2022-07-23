@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 
 from .toolbutton import RibbonToolButton
+from .utils import data_file_path
 
 
 class RibbonGalleryListWidget(QtWidgets.QListWidget):
@@ -64,17 +65,17 @@ class RibbonGallery(QtWidgets.QFrame):
         self._mainLayout.setSpacing(5)
 
         self._upButton = RibbonGalleryButton(self)
-        self._upButton.setIcon(QtGui.QIcon("icons/up.png"))
+        self._upButton.setIcon(QtGui.QIcon(data_file_path("icons/up.png")))
         self._upButton.setIconSize(QtCore.QSize(24, 24))
         self._upButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._upButton.setAutoRaise(True)
         self._downButton = RibbonGalleryButton(self)
-        self._downButton.setIcon(QtGui.QIcon("icons/down.png"))
+        self._downButton.setIcon(QtGui.QIcon(data_file_path("icons/down.png")))
         self._downButton.setIconSize(QtCore.QSize(24, 24))
         self._downButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._downButton.setAutoRaise(True)
         self._moreButton = RibbonGalleryButton(self)
-        self._moreButton.setIcon(QtGui.QIcon("icons/more.png"))
+        self._moreButton.setIcon(QtGui.QIcon(data_file_path("icons/more.png")))
         self._moreButton.setIconSize(QtCore.QSize(24, 24))
         self._moreButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._moreButton.setAutoRaise(True)
