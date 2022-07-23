@@ -56,8 +56,8 @@ RibbonContextCategory
 .. autoclass:: ribbon.category.RibbonContextCategory
    :members:
 
-CategoryStyle
-~~~~~~~~~~~~~
+RibbonCategoryStyle
+~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.category.RibbonCategoryStyle
    :members:
@@ -101,14 +101,14 @@ RibbonPanelItemWidget
 .. autoclass:: ribbon.panel.RibbonPanelItemWidget
    :members:
 
-SpaceFindMode
-~~~~~~~~~~~~~
+RibbonSpaceFindMode
+~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.panel.RibbonSpaceFindMode
    :members:
 
-GridLayoutManager
-~~~~~~~~~~~~~~~~~
+RibbonGridLayoutManager
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: ribbon.panel.RibbonGridLayoutManager
    :members:
