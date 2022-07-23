@@ -72,6 +72,8 @@ class RibbonBar(QtWidgets.QFrame):
         }
         if style == RibbonStyle.Default:
             self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
+        elif style == RibbonStyle.Debug:
+            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
 
     def applicationOptionButton(self):
         """Return the application button."""
