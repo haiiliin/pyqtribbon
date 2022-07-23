@@ -5,11 +5,17 @@ API References
 Ribbon Main Window
 ------------------
 
+RibbonMainWindow
+----------------
+
 .. autoclass:: ribbon.mainwindow.RibbonMainWindow
    :members:
 
 Ribbon Bar
 ----------
+
+RibbonBar
+---------
 
 .. autoclass:: ribbon.ribbonbar.RibbonBar
    :members:
