@@ -24,3 +24,8 @@ The first release which supports:
   ([f061618](https://github.com/haiiliin/pyqtribbon/commit/f061618f879c64ef55dfcc831a59093c8fd3f4c8)).
 - Fix setRibbonStyle() bug: not handle the debug style correctly
   ([e218162](https://github.com/haiiliin/pyqtribbon/commit/e2181626d92639834d8a80f8da2f95dc4e6cdb46)).
+
+## [0.1.4]
+
+- Rename CategoryStyle to RibbonCategoryStyle
+  ([c243f50](https://github.com/haiiliin/pyqtribbon/commit/c243f508311271c6309b5c0c4d0f899668e36b6d)).
