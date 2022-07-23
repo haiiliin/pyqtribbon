@@ -40,3 +40,5 @@ The first release which supports:
   ([a39cf03](https://github.com/haiiliin/pyqtribbon/commit/a39cf033fe3e57e941c00f76038761c4d71dd80f)).
 - Add tutorials docs
   ([a8f8f83](https://github.com/haiiliin/pyqtribbon/commit/a8f8f836a200cac3028481d6f046fad3cf1776dd)).
+- Show inheritance class 
+  ([1e06989](https://github.com/haiiliin/pyqtribbon/commit/1e06989b57813840e04b2f8f69788c3ee6026274)).
