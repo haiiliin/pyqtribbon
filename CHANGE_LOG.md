@@ -22,3 +22,5 @@ The first release which supports:
   ([fe7df17](https://github.com/haiiliin/pyqtribbon/commit/fe7df170c520234e172fd03d39b2e81b5b01b991)).
 - Add support to customize the panel options 
   ([f061618](https://github.com/haiiliin/pyqtribbon/commit/f061618f879c64ef55dfcc831a59093c8fd3f4c8)).
+- Fix setRibbonStyle() bug: not handle the debug style correctly
+  ([e218162](https://github.com/haiiliin/pyqtribbon/commit/e2181626d92639834d8a80f8da2f95dc4e6cdb46)).
