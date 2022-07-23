@@ -2,6 +2,12 @@
 API References
 ==============
 
+Main Window
+-----------
+
+.. autoclass:: ribbon.mainwindow.RibbonMainWindow
+   :members:
+
 Ribbon Bar
 ----------
 
