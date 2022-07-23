@@ -6,7 +6,6 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
 from .separator import RibbonHorizontalSeparator
 from .titlewidget import RibbonTitleWidget
-from .utils import package_source_dir
 
 
 class RibbonStyle(IntEnum):
@@ -71,7 +70,7 @@ class RibbonBar(QtWidgets.QFrame):
             RibbonStyle.Debug: 'debug'
         }
         if style == RibbonStyle.Default:
-            self.setStyleSheet(open(package_source_dir() + '/' + f"styles/{stylefiles[style]}.qss", "r").read())
+            self.setStyleSheet(open(f"styles/{stylefiles[style]}.qss", "r").read())
 
     def applicationOptionButton(self):
         """Return the application button."""
