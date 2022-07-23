@@ -137,7 +137,7 @@ class RibbonBar(QtWidgets.QFrame):
         return self._titleWidget.quickAccessToolBar()
 
     def addQuickAccessButton(self, button: QtWidgets.QToolButton):
-        """Add a widget to the quick access bar.
+        """Add a button to the quick access bar.
 
         :param button: The button to add.
         """
