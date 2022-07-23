@@ -13,7 +13,7 @@ if __name__ == "__main__":
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QtGui.QIcon("icons/python.png"))
 
-    ribbon = window.ribbon
+    ribbon = window.ribbonBar()
 
     saveButton = QtWidgets.QToolButton()
     saveButton.setAutoRaise(True)
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)
-    window.mainLayout.addWidget(label, 1)
+    window.layout().addWidget(label, 1)
 
     window.resize(1800, 350)
     window.show()

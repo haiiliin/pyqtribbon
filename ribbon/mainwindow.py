@@ -13,7 +13,15 @@ class RibbonMainWindow(QtWidgets.QMainWindow):
         """
         super().__init__(parent)
         self.setCentralWidget(QtWidgets.QWidget(self))
-        self.mainLayout = QtWidgets.QVBoxLayout(self.centralWidget())
-        self.mainLayout.setContentsMargins(5, 5, 5, 5)
-        self.ribbon = RibbonBar()
-        self.mainLayout.addWidget(self.ribbon)
+        self._mainLayout = QtWidgets.QVBoxLayout(self.centralWidget())
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
+        self._ribbon = RibbonBar()
+        self._mainLayout.addWidget(self._ribbon)
+
+    def ribbonBar(self) -> RibbonBar:
+        """Return the ribbon bar."""
+        return self._ribbon
+
+    def layout(self) -> 'QtWidgets.QVBoxLayout':
+        """Return the main layout."""
+        return self._mainLayout

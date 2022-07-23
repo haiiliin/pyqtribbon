@@ -11,12 +11,12 @@ if __name__ == "__main__":
     window = RibbonMainWindow()
     window.setWindowTitle("Microsoft Word")
     window.setWindowIcon(QtGui.QIcon("examples/word.png"))
-    window.mainLayout.addWidget(QtWidgets.QTextEdit())
-    window.ribbon.setApplicationIcon(QtGui.QIcon("examples/word.png"))
-    window.ribbon.applicationOptionButton().setToolTip("Microsoft Word")
+    window.layout().addWidget(QtWidgets.QTextEdit())
+    window.ribbonBar().setApplicationIcon(QtGui.QIcon("examples/word.png"))
+    window.ribbonBar().applicationOptionButton().setToolTip("Microsoft Word")
 
     # Home category
-    homeCategory = window.ribbon.addCategory("Home")
+    homeCategory = window.ribbonBar().addCategory("Home")
     undoPanel = homeCategory.addPanel("Undo")
     undoPanel.addMediumButton("Undo", icon=QtGui.QIcon("examples/undo.png"))
     undoPanel.addMediumButton("Redo", icon=QtGui.QIcon("examples/redo.png"))
