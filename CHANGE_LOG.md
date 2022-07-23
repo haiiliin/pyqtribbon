@@ -12,7 +12,9 @@ The first release which supports:
 - Gallery
 - And so on ...
 
-## [0.1.1-0.1.2] Fixed bugs of not finding icons/styles files
+## [0.1.1-0.1.2] 
+
+- Fixed bugs of not finding icons/styles files
 
 ## [0.1.3]
 
