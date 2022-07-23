@@ -3,7 +3,7 @@ from enum import IntEnum
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, CategoryStyle, contextColors
+from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonCategoryStyle, contextColors
 from .separator import RibbonHorizontalSeparator
 from .titlewidget import RibbonTitleWidget
 from .utils import data_file_path
@@ -210,7 +210,7 @@ class RibbonBar(QtWidgets.QFrame):
     def addCategory(
         self,
         title: str,
-        style=CategoryStyle.Normal,
+        style=RibbonCategoryStyle.Normal,
         color: QtGui.QColor = None,
     ) -> typing.Union[RibbonNormalCategory, RibbonContextCategory]:
         """Add a new category to the ribbon.
@@ -221,11 +221,11 @@ class RibbonBar(QtWidgets.QFrame):
                       will be used.
         :return: The newly created category.
         """
-        if style == CategoryStyle.Context:
+        if style == RibbonCategoryStyle.Context:
             if color is None:
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
             self._contextCategoryCount += 1
-        category = (RibbonContextCategory(title, color, self) if style == CategoryStyle.Context else
+        category = (RibbonContextCategory(title, color, self) if style == RibbonCategoryStyle.Context else
                     RibbonNormalCategory(title, self))
         category.setFixedHeight(self._ribbonHeight -
                                 self._mainLayout.spacing() * 2 -
@@ -233,11 +233,11 @@ class RibbonBar(QtWidgets.QFrame):
                                 self._mainLayout.contentsMargins().bottom() -
                                 self._titleWidget.height() -
                                 self._separator.height() - 4)  # 4: extra space for drawing lines when debugging
-        if style == CategoryStyle.Normal:
+        if style == RibbonCategoryStyle.Normal:
             self._categories.append(category)
             self._titleWidget.tabBar().addTab(title, color)
             self._stackedWidget.addWidget(category)
-        elif style == CategoryStyle.Context:
+        elif style == RibbonCategoryStyle.Context:
             category.hide()
         return category
 
@@ -247,7 +247,7 @@ class RibbonBar(QtWidgets.QFrame):
         :param title: The title of the category.
         :return: The newly created category.
         """
-        return self.addCategory(title, CategoryStyle.Normal)
+        return self.addCategory(title, RibbonCategoryStyle.Normal)
 
     def addContextCategory(self, title: str, color: QtGui.QColor = None) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
@@ -256,7 +256,7 @@ class RibbonBar(QtWidgets.QFrame):
         :param color: The color of the context category, if None, the default color will be used.
         :return: The newly created category.
         """
-        return self.addCategory(title, CategoryStyle.Context, color)
+        return self.addCategory(title, RibbonCategoryStyle.Context, color)
 
     def showContextCategory(self, category: RibbonContextCategory):
         """Show the given category, if it is not a context category, nothing happens.

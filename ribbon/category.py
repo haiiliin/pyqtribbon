@@ -9,7 +9,7 @@ from .separator import RibbonSeparator
 from .typehints import RibbonType
 
 
-class CategoryStyle(enum.IntEnum):
+class RibbonCategoryStyle(enum.IntEnum):
     """The button style of a category."""
     Normal = 0
     Context = 1
@@ -33,7 +33,7 @@ class RibbonCategory(QtWidgets.QFrame):
     #: The ribbon parent of this category
     _ribbon: typing.Optional[RibbonType]
     #: The button style of the category.
-    _style: CategoryStyle
+    _style: RibbonCategoryStyle
     #: Panels
     _panels: typing.Dict[str, RibbonPanel]
     #: color of the context category
@@ -42,7 +42,7 @@ class RibbonCategory(QtWidgets.QFrame):
     #: The signal that is emitted when the display options button is clicked.
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
-    def __init__(self, title: str, style: CategoryStyle = CategoryStyle.Normal, color: QtGui.QColor = None,
+    def __init__(self, title: str, style: RibbonCategoryStyle = RibbonCategoryStyle.Normal, color: QtGui.QColor = None,
                  parent=None):
         """Create a new category.
 
@@ -68,7 +68,7 @@ class RibbonCategory(QtWidgets.QFrame):
         """Return the title of the category."""
         return self._title
 
-    def setCategoryStyle(self, style: CategoryStyle):
+    def setCategoryStyle(self, style: RibbonCategoryStyle):
         """Set the button style of the category.
 
         :param style: The button style.
@@ -136,9 +136,9 @@ class RibbonNormalCategory(RibbonCategory):
         :param title: The title of the category.
         :param parent: The parent widget.
         """
-        super().__init__(title, CategoryStyle.Normal, parent=parent)
+        super().__init__(title, RibbonCategoryStyle.Normal, parent=parent)
 
-    def setCategoryStyle(self, style: CategoryStyle):
+    def setCategoryStyle(self, style: RibbonCategoryStyle):
         """Set the button style of the category.
 
         :param style: The button style.
@@ -156,9 +156,9 @@ class RibbonContextCategory(RibbonCategory):
         :param color: The color of the context category.
         :param parent: The parent widget.
         """
-        super().__init__(title, CategoryStyle.Context, color=color, parent=parent)
+        super().__init__(title, RibbonCategoryStyle.Context, color=color, parent=parent)
 
-    def setCategoryStyle(self, style: CategoryStyle):
+    def setCategoryStyle(self, style: RibbonCategoryStyle):
         """Set the button style of the category.
 
         :param style: The button style.

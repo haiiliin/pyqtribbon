@@ -1,4 +1,4 @@
-from .category import RibbonCategory, CategoryStyle, RibbonNormalCategory, RibbonContextCategory
+from .category import RibbonCategory, RibbonCategoryStyle, RibbonNormalCategory, RibbonContextCategory
 from .categorylayoutwidget import (RibbonCategoryLayoutWidget, RibbonCategoryLayoutButton, RibbonCategoryScrollArea,
                                    RibbonCategoryScrollAreaContents)
 from .gallery import RibbonGallery, RibbonGalleryListWidget, RibbonGalleryButton, RibbonGalleryPopupListWidget
