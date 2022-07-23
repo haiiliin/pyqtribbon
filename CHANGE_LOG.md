@@ -34,12 +34,15 @@ The first release which supports:
 - Rename SpaceFindMode to RibbonSpaceFindMode, GridLayoutManager to RibbonGridLayoutManager 
   ([6c8e8bc](https://github.com/haiiliin/pyqtribbon/commit/6c8e8bcb10a412a430a9f481380c12a73b6c9984)).
 
-## [0.1.5] 
+## [0.1.5] Update RibbonMainWindows and Add Tutorials
 
 - Update RibbonMainWindow 
   ([a39cf03](https://github.com/haiiliin/pyqtribbon/commit/a39cf033fe3e57e941c00f76038761c4d71dd80f)).
 - Add tutorials docs
   ([a8f8f83](https://github.com/haiiliin/pyqtribbon/commit/a8f8f836a200cac3028481d6f046fad3cf1776dd)).
+  
+## [0.1.6] Show inheritance class and add overloaded constructors
+
 - Show inheritance class 
   ([1e06989](https://github.com/haiiliin/pyqtribbon/commit/1e06989b57813840e04b2f8f69788c3ee6026274)).
 - Add overloaded methods to be compatible with QWidget
