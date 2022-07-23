@@ -42,8 +42,16 @@ class RibbonCategory(QtWidgets.QFrame):
     #: The signal that is emitted when the display options button is clicked.
     displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
 
-    def __init__(self, title: str, style: RibbonCategoryStyle = RibbonCategoryStyle.Normal, color: QtGui.QColor = None,
-                 parent=None):
+    @typing.overload
+    def __init__(self, title: str = '', style: RibbonCategoryStyle = RibbonCategoryStyle.Normal,
+                 color: QtGui.QColor = None, parent=None):
+        pass
+
+    @typing.overload
+    def __init__(self, parent=None):
+        pass
+
+    def __init__(self, *args, **kwargs):
         """Create a new category.
 
         :param title: The title of the category.
@@ -51,6 +59,18 @@ class RibbonCategory(QtWidgets.QFrame):
         :param color: The color of the context category.
         :param parent: The parent widget.
         """
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or
+                                                                     'style' in kwargs or
+                                                                     'color' in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get('title', '')
+            style = args[1] if len(args) > 1 else kwargs.get('style', RibbonCategoryStyle.Normal)
+            color = args[2] if len(args) > 2 else kwargs.get('color', None)
+            parent = args[3] if len(args) > 3 else kwargs.get('parent', None)
+        else:
+            title = ''
+            style = RibbonCategoryStyle.Normal
+            color = None
+            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         self._title = title
         self._style = style

@@ -1,3 +1,5 @@
+import typing
+
 from PyQt5 import QtWidgets, QtGui, QtCore
 
 from .toolbutton import RibbonToolButton
@@ -49,13 +51,30 @@ class RibbonGallery(QtWidgets.QFrame):
     _popupButtons: list[RibbonToolButton] = []
     _popupHideOnClick = False
 
+    @typing.overload
     def __init__(self, minimumWidth=800, popupHideOnClick=False, parent=None):
+        pass
+
+    @typing.overload
+    def __init__(self, parent=None):
+        pass
+
+    def __init__(self, *args, **kwargs):
         """Create a gallery.
 
         :param minimumWidth: minimum width of the gallery
         :param popupHideOnClick: hide on click flag
         :param parent: parent widget
         """
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('minimumWidth' in kwargs or
+                                                                     'popupHideOnClick' in kwargs):
+            minimumWidth = args[0] if len(args) > 0 else kwargs.get('minimumWidth', 800)
+            popupHideOnClick = args[1] if len(args) > 1 else kwargs.get('popupHideOnClick', False)
+            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+        else:
+            minimumWidth = 800
+            popupHideOnClick = False
+            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         self.setMinimumWidth(minimumWidth)
         self._popupHideOnClick = popupHideOnClick

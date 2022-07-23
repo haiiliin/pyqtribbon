@@ -30,12 +30,26 @@ class RibbonBar(QtWidgets.QFrame):
     #: heights of the ribbon elements
     _ribbonHeight = 240
 
-    def __init__(self, title='PyQtRibbon', parent=None):
+    @typing.overload
+    def __init__(self, title: str = '', parent=None):
+        pass
+
+    @typing.overload
+    def __init__(self, parent=None):
+        pass
+
+    def __init__(self, *args, **kwargs):
         """Create a new ribbon.
 
         :param title: The title of the ribbon.
         :param parent: The parent widget of the ribbon.
         """
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or (kwargs and 'title' in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get('title', '')
+            parent = kwargs.get('parent', None)
+        else:
+            title = ''
+            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
         super().__init__(parent)
         self._categories = []
         self.setFixedHeight(self._ribbonHeight)

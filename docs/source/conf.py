@@ -34,11 +34,14 @@ release = '0.1.5'
 extensions = [
     'numpydoc',
     'sphinx.ext.autodoc',
+    'sphinx_toolbox.more_autodoc.overloads',
     'sphinx.ext.linkcode',
     'sphinx.ext.githubpages',
 ]
 
+autodoc_typehints_format = 'short'
 numpydoc_show_inherited_class_members = False
+
 
 # linkcode source
 def linkcode_resolve(domain: str, info: dict):
@@ -84,6 +87,7 @@ def linkcode_resolve(domain: str, info: dict):
         return baseurl
 
     return baseurl + f'#L{lineno}-L{lineno + len(source) - 1}'
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

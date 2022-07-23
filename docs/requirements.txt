@@ -1,4 +1,5 @@
 numpy
 numpydoc
 PyQt5
-sphinx_rtd_theme
+sphinx-rtd-theme
+sphinx-toolbox

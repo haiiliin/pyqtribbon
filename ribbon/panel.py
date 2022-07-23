@@ -115,13 +115,30 @@ class RibbonPanel(QtWidgets.QFrame):
     # Panel options signal
     panelOptionClicked = QtCore.pyqtSignal(bool)
 
-    def __init__(self, title: str, maxRows=6, parent=None):
+    @typing.overload
+    def __init__(self, title: str = '', maxRows: int = 6, parent=None):
+        pass
+
+    @typing.overload
+    def __init__(self, parent=None):
+        pass
+
+    def __init__(self, *args, **kwargs):
         """Create a new panel.
 
         :param title: The title of the panel.
         :param maxRows: The maximal number of rows in the panel.
         :param parent: The parent widget.
         """
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or
+                                                                     'maxRows' in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get('title', '')
+            maxRows = args[1] if len(args) > 1 else kwargs.get('maxRows', 6)
+            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+        else:
+            title = ''
+            maxRows = 6
+            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         self._maxRows = maxRows
         self._gridLayoutManager = RibbonGridLayoutManager(self._maxRows)
