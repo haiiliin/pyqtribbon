@@ -5,7 +5,7 @@ from ribbon.utils import data_file_path
 
 class RibbonCategoryLayoutButton(QtWidgets.QToolButton):
     """Previous/Next buttons in the category when the 
-    sizr is not enough for the widgets.
+    size is not enough for the widgets.
     """
     pass
 
