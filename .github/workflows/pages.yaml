@@ -20,10 +20,6 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-    - name: Installing the library
-      shell: bash -l {0}
-      run: |
-        python setup.py install
     - name: Build and Commit
       uses: sphinx-notes/pages@v2
       with:
