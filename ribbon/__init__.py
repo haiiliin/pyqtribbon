@@ -3,8 +3,8 @@ from .categorylayoutwidget import (RibbonCategoryLayoutWidget, RibbonCategoryLay
                                    RibbonCategoryScrollAreaContents)
 from .gallery import RibbonGallery, RibbonGalleryListWidget, RibbonGalleryButton, RibbonGalleryPopupListWidget
 from .mainwindow import RibbonMainWindow
-from .panel import RibbonPanel, RibbonPanelTitle, SpaceFindMode, GridLayoutManager, RibbonPanelItemWidget
-from .panel import SpaceFindMode
+from .panel import RibbonPanel, RibbonPanelTitle, RibbonSpaceFindMode, RibbonGridLayoutManager, RibbonPanelItemWidget
+from .panel import RibbonSpaceFindMode
 from .ribbonbar import RibbonBar, RibbonStyle
 from .separator import RibbonSeparator, RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .tabbar import RibbonTabBar
