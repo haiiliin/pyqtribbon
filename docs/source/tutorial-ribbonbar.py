@@ -23,7 +23,7 @@ if __name__ == "__main__":
     panel.addLargeButton("A Large Button", QtGui.QIcon(data_file_path("icons/python.png")))
     panel.addMediumButton("A Medium Button", QtGui.QIcon(data_file_path("icons/python.png")))
     panel.addMediumButton("A Medium Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Medium Button", QtGui.QIcon(data_file_path("icons/python.png")))
+    panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
     panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
     panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
     
