@@ -216,7 +216,7 @@ class RibbonBar(QtWidgets.QFrame):
         """Add a new category to the ribbon.
 
         :param title: The title of the category.
-        :param style: The buttonStyle of the category.
+        :param style: The button style of the category.
         :param color: The color of the context category, only used if style is Context, if None, the default color
                       will be used.
         :return: The newly created category.

@@ -37,9 +37,9 @@ class RibbonToolButton(QtWidgets.QToolButton):
         self.triggered.connect(self.setDefaultAction)
 
     def setButtonStyle(self, style: RibbonButtonStyle):
-        """Set the buttonStyle of the button.
+        """Set the button style of the button.
 
-        :param style: The buttonStyle of the button.
+        :param style: The button style of the button.
         """
         self._buttonStyle = style
         if style == RibbonButtonStyle.Small:
