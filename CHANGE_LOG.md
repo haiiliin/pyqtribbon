@@ -12,11 +12,11 @@ The first release which supports:
 - Gallery
 - And so on ...
 
-## [0.1.1-0.1.2] 
+## [0.1.1-0.1.2] Fixed some bugs
 
 - Fixed bugs of not finding icons/styles files
 
-## [0.1.3]
+## [0.1.3] Fixed some bugs
 
 - Fixed bugs: font of popup gallery is not consistent with main window 
   ([fe7df17](https://github.com/haiiliin/pyqtribbon/commit/fe7df170c520234e172fd03d39b2e81b5b01b991)).
@@ -25,7 +25,7 @@ The first release which supports:
 - Fix setRibbonStyle() bug: not handle the debug style correctly
   ([e218162](https://github.com/haiiliin/pyqtribbon/commit/e2181626d92639834d8a80f8da2f95dc4e6cdb46)).
 
-## [0.1.4]
+## [0.1.4] Rename classes to Ribbon-like
 
 - Rename CategoryStyle to RibbonCategoryStyle
   ([c243f50](https://github.com/haiiliin/pyqtribbon/commit/c243f508311271c6309b5c0c4d0f899668e36b6d)).
