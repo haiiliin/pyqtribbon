@@ -30,7 +30,6 @@ if __name__ == "__main__":
     label.setAlignment(QtCore.Qt.AlignCenter)
     
     # Add the ribbon bar and label to the layout
-    window.layout().addWidget(ribbonbar, 0)
     window.layout().addWidget(label, 1)
     
     # Show the window
