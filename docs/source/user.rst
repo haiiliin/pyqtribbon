@@ -2,8 +2,8 @@
 User Manual
 ===========
 
-Instantiating a RibbonBar
--------------------------
+Instantiating a Ribbon Bar
+--------------------------
 
 :py:class:`~ribbon.ribbonbar.RibbonBar` is the main class for creating a ribbon bar. 
 
