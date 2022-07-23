@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
-from .toolbutton import RibbonToolButton, ButtonStyle
+from .toolbutton import RibbonToolButton, RibbonButtonStyle
 from .utils import data_file_path
 
 
@@ -271,7 +271,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
-        style: ButtonStyle = ButtonStyle.Large,
+        style: RibbonButtonStyle = RibbonButtonStyle.Large,
         showText: bool = True,
         colSpan: int = 1,
         slot=None,
@@ -319,7 +319,7 @@ class RibbonPanel(QtWidgets.QFrame):
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.addWidget(
             button,
-            rowSpan=2 if style == ButtonStyle.Small else 3 if style == ButtonStyle.Medium else 6,
+            rowSpan=2 if style == RibbonButtonStyle.Small else 3 if style == RibbonButtonStyle.Medium else 6,
             colSpan=colSpan,
             mode=mode,
             alignment=alignment
@@ -352,7 +352,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         """
-        return self.addButton(text, icon, ButtonStyle.Small, showText, colSpan,
+        return self.addButton(text, icon, RibbonButtonStyle.Small, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addMediumButton(
@@ -381,7 +381,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         """
-        return self.addButton(text, icon, ButtonStyle.Medium, showText, colSpan,
+        return self.addButton(text, icon, RibbonButtonStyle.Medium, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addLargeButton(
@@ -410,14 +410,14 @@ class RibbonPanel(QtWidgets.QFrame):
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         """
-        return self.addButton(text, icon, ButtonStyle.Large, showText, colSpan,
+        return self.addButton(text, icon, RibbonButtonStyle.Large, showText, colSpan,
                               slot, shortcut, tooltip, statusTip, mode, alignment)
 
     def addToggleButton(
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
-        style: ButtonStyle = ButtonStyle.Large,
+        style: RibbonButtonStyle = RibbonButtonStyle.Large,
         showText: bool = True,
         colSpan: int = 1,
         slot=None,
@@ -473,7 +473,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param alignment: The alignment of the button.
         """
         return self.addToggleButton(
-            text, icon, ButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addMediumToggleButton(
@@ -503,7 +503,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param alignment: The alignment of the button.
         """
         return self.addToggleButton(
-            text, icon, ButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addLargeToggleButton(
@@ -533,7 +533,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param alignment: The alignment of the button.
         """
         return self.addToggleButton(
-            text, icon, ButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
         )
 
     def addComboBox(

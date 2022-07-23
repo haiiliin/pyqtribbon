@@ -4,7 +4,7 @@ from enum import IntEnum
 from PyQt5 import QtWidgets, QtCore
 
 
-class ButtonStyle(IntEnum):
+class RibbonButtonStyle(IntEnum):
     """Button style, Small, Medium, or Large."""
     Small = 0
     Medium = 1
@@ -13,7 +13,7 @@ class ButtonStyle(IntEnum):
 
 class RibbonToolButton(QtWidgets.QToolButton):
     """Tool button that is showed in the ribbon."""
-    _buttonStyle: ButtonStyle
+    _buttonStyle: RibbonButtonStyle
     _actions: typing.List[QtWidgets.QAction]
 
     _largeButtonIconSize = 64
@@ -29,28 +29,28 @@ class RibbonToolButton(QtWidgets.QToolButton):
         self._actions = []
 
         # Styles
-        self.setButtonStyle(ButtonStyle.Large)
+        self.setButtonStyle(RibbonButtonStyle.Large)
         self.setAutoRaise(True)
         self.setFocusPolicy(QtCore.Qt.NoFocus)
 
         # Connect signals
         self.triggered.connect(self.setDefaultAction)
 
-    def setButtonStyle(self, style: ButtonStyle):
+    def setButtonStyle(self, style: RibbonButtonStyle):
         """Set the buttonStyle of the button.
 
         :param style: The buttonStyle of the button.
         """
         self._buttonStyle = style
-        if style == ButtonStyle.Small:
+        if style == RibbonButtonStyle.Small:
             height = self._smallButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-        elif style == ButtonStyle.Medium:
+        elif style == RibbonButtonStyle.Medium:
             height = self._mediumButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-        elif style == ButtonStyle.Large:
+        elif style == RibbonButtonStyle.Large:
             height = self._largeButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)

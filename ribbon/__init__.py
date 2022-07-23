@@ -9,6 +9,6 @@ from .ribbonbar import RibbonBar, RibbonStyle
 from .separator import RibbonSeparator, RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton, RibbonTitleLabel
-from .toolbutton import RibbonToolButton, ButtonStyle
+from .toolbutton import RibbonToolButton, RibbonButtonStyle
 
 __version__ = "0.1.0"
