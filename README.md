@@ -3,6 +3,7 @@
 PyQtRibbon is a Qt-based application framework for building user interfaces.
 
 - Documentation: [pyqtribbon.haiiliin.com](https://pyqtribbon.haiiliin.com/).
+- PyPI: [PyPI](https://pypi.org/project/pyqtribbon/).
 - Read the Docs: [readthedocs.org/projects/pyqribbon/](https://readthedocs.org/projects/pyqribbon/).
 
 ## Installation
