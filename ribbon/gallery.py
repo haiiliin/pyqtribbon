@@ -95,6 +95,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._downButton.clicked.connect(self._listWidget.scrollToNextRow)
 
         self._popupWidget = QtWidgets.QWidget()
+        self._popupWidget.setFont(QtWidgets.qApp.font())
         self._popupWidget.setWindowFlags(QtCore.Qt.Popup)
         self._popupLayout = QtWidgets.QVBoxLayout(self._popupWidget)
         self._popupLayout.setContentsMargins(0, 0, 0, 0)
