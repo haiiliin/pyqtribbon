@@ -133,7 +133,6 @@ class RibbonPanel(QtWidgets.QFrame):
         self._mainLayout.setSpacing(5)
 
         # Actions layout
-        # self._actionsWidget = QtWidgets.QWidget(self)
         self._actionsLayout = QtWidgets.QGridLayout()
         self._actionsLayout.setContentsMargins(5, 0, 5, 0)
         self._actionsLayout.setSpacing(5)
@@ -153,10 +152,25 @@ class RibbonPanel(QtWidgets.QFrame):
         self._panelOption.setAutoRaise(True)
         self._panelOption.setIcon(QtGui.QIcon(data_file_path("icons/linking.png")))
         self._panelOption.setIconSize(QtCore.QSize(16, 16))
+        self._panelOption.setToolTip("Panel options")
         self._panelOption.clicked.connect(self.panelOptionClicked)
         self._titleLayout.addWidget(self._panelOption, 0)
 
         self._mainLayout.addWidget(self._titleWidget, 0)
+
+    def panelOptionButton(self) -> RibbonPanelOptionButton:
+        """Return the panel option button.
+
+        :return: The panel option button.
+        """
+        return self._panelOption
+
+    def setPanelOptionToolTip(self, text: str):
+        """Set the tooltip of the panel option button.
+
+        :param text: The tooltip text.
+        """
+        self._panelOption.setToolTip(text)
 
     def rowHeight(self) -> int:
         """Return the height of a row."""
