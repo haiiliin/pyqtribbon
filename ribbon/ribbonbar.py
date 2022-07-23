@@ -202,6 +202,13 @@ class RibbonBar(QtWidgets.QFrame):
         :param height: The height to set.
         """
         self._titleWidget.setRightToolBarHeight(height)
+        
+    def helpRibbonButton(self) -> QtWidgets.QToolButton:
+        """Return the help button of the ribbon.
+
+        :return: The help button of the ribbon.
+        """
+        return self._titleWidget.helpRibbonButton()
 
     def setHelpButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the help button.
@@ -213,6 +220,24 @@ class RibbonBar(QtWidgets.QFrame):
     def removeHelpButton(self):
         """Remove the help button from the ribbon."""
         self._titleWidget.removeHelpButton()
+
+    def collapseRibbonButton(self) -> QtWidgets.QToolButton:
+        """Return the collapse ribbon button.
+
+        :return: The collapse ribbon button.
+        """
+        return self._titleWidget.collapseRibbonButton()
+
+    def setCollapseButtonIcon(self, icon: QtGui.QIcon):
+        """Set the icon of the min button.
+
+        :param icon: The icon to set.
+        """
+        self._titleWidget.setCollapseButtonIcon(icon)
+
+    def removeCollapseButton(self):
+        """Remove the min button from the ribbon."""
+        self._titleWidget.removeCollapseButton()
 
     def categories(self) -> typing.List[RibbonCategory]:
         """Return a list of categories of the ribbon.
@@ -317,24 +342,6 @@ class RibbonBar(QtWidgets.QFrame):
         index = self._categories.index(category)
         self.tabBar().setCurrentIndex(index)
         self._stackedWidget.setCurrentIndex(index)
-
-    def collapseRibbonButton(self) -> QtWidgets.QToolButton:
-        """Return the collapse ribbon button.
-
-        :return: The collapse ribbon button.
-        """
-        return self._titleWidget.collapseRibbonButton()
-
-    def setCollapseButtonIcon(self, icon: QtGui.QIcon):
-        """Set the icon of the min button.
-
-        :param icon: The icon to set.
-        """
-        self._titleWidget.setCollapseButtonIcon(icon)
-
-    def removeCollapseButton(self):
-        """Remove the min button from the ribbon."""
-        self._titleWidget.removeCollapseButton()
 
     def minimumSizeHint(self) -> QtCore.QSize:
         """Return the minimum size hint of the widget.

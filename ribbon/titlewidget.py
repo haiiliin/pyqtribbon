@@ -228,6 +228,13 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._rightButtonHeight = height
         for button in self._rightToolButtons:
             button.setIconSize(QtCore.QSize(height, height))
+            
+    def helpRibbonButton(self) -> QtWidgets.QToolButton:
+        """Return the help ribbon button.
+
+        :return: The help ribbon button.
+        """
+        return self._helpButton
 
     def setHelpButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the help button.
