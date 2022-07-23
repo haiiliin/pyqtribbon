@@ -18,5 +18,7 @@ The first release which supports:
 
 ## [0.1.3]
 
-- Fixed bugs: font of popup gallery is not consistent with main window (fe7df170c520234e172fd03d39b2e81b5b01b991).
-- Add support to customize the panel options (f061618f879c64ef55dfcc831a59093c8fd3f4c8).
+- Fixed bugs: font of popup gallery is not consistent with main window 
+  ([fe7df17](https://github.com/haiiliin/pyqtribbon/commit/fe7df170c520234e172fd03d39b2e81b5b01b991)).
+- Add support to customize the panel options 
+  ([f061618](https://github.com/haiiliin/pyqtribbon/commit/f061618f879c64ef55dfcc831a59093c8fd3f4c8)).
