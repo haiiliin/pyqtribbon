@@ -104,6 +104,7 @@ Setup Right Tool Bar
     RibbonBar.setRightToolBarHeight
     RibbonBar.setHelpButtonIcon
     RibbonBar.removeHelpButton
+    RibbonBar.helpButtonClicked
     RibbonBar.collapseRibbonButton
     RibbonBar.setCollapseButtonIcon
     RibbonBar.removeCollapseButton
@@ -171,6 +172,7 @@ Setup Panel Option Button
 
     RibbonPanel.panelOptionButton
     RibbonPanel.setPanelOptionToolTip
+    RibbonPanel.panelOptionClicked
 
 Add Widgets to Panels
 ~~~~~~~~~~~~~~~~~~~~~

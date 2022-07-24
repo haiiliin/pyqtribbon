@@ -39,9 +39,6 @@ class RibbonCategory(QtWidgets.QFrame):
     #: color of the context category
     _color: typing.Optional[QtGui.QColor]
 
-    #: The signal that is emitted when the display options button is clicked.
-    displayOptionsButtonClicked = QtCore.pyqtSignal(bool)
-
     @typing.overload
     def __init__(self, title: str = '', style: RibbonCategoryStyle = RibbonCategoryStyle.Normal,
                  color: QtGui.QColor = None, parent=None):
