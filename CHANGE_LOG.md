@@ -81,3 +81,9 @@ The first release which supports:
   ([679c04d](https://github.com/haiiliin/pyqtribbon/commit/679c04d04adfe8fe92443fb34b6ac2ed00d40355)).
 - Rename titleText to title
   ([3e48852](https://github.com/haiiliin/pyqtribbon/commit/3e48852cf71e543eda8813b7e8cafdc6bbfcaa84)).
+
+# [0.1.12]
+
+- Update examples and tutorials 
+  ([a37dcdf](https://github.com/haiiliin/pyqtribbon/commit/a37dcdfa8d4eae74bfb6a1186fb63914d35a5c42),
+  [f9a6b55](https://github.com/haiiliin/pyqtribbon/commit/f9a6b55d9da7b17838ff72021f48e7af1a5941d7)).
