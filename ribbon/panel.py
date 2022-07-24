@@ -941,7 +941,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addHorizontalSeparator(
         self,
-        linewidth=6,
+        width=6,
         rowSpan: int = 1,
         colSpan: int = 2,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -949,7 +949,7 @@ class RibbonPanel(QtWidgets.QFrame):
     ) -> RibbonHorizontalSeparator:
         """Add a horizontal separator to the panel.
 
-        :param linewidth: The width of the separator.
+        :param width: The width of the separator.
         :param rowSpan: The number of rows the separator spans.
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
@@ -957,11 +957,11 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The separator.
         """
-        return self.addSeparator(QtCore.Qt.Horizontal, linewidth, rowSpan, colSpan, mode, alignment)
+        return self.addSeparator(QtCore.Qt.Horizontal, width, rowSpan, colSpan, mode, alignment)
 
     def addVerticalSeparator(
         self,
-        linewidth=6,
+        width=6,
         rowSpan: int = 6,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -969,7 +969,7 @@ class RibbonPanel(QtWidgets.QFrame):
     ) -> RibbonVerticalSeparator:
         """Add a vertical separator to the panel.
 
-        :param linewidth: The width of the separator.
+        :param width: The width of the separator.
         :param rowSpan: The number of rows the separator spans.
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
@@ -977,7 +977,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The separator.
         """
-        return self.addSeparator(QtCore.Qt.Vertical, linewidth, rowSpan, colSpan, mode, alignment)
+        return self.addSeparator(QtCore.Qt.Vertical, width, rowSpan, colSpan, mode, alignment)
 
     def addGallery(
         self,
