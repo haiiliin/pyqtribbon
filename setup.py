@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pyqtribbon",
-    version="0.1.7",
+    version="0.1.8",
     author="WANG Hailin",
     author_email="hailin.wang@connect.polyu.hk",
     description="PyQtRibbon is a Qt-based application framework for building user interfaces.",
@@ -15,7 +15,12 @@ setuptools.setup(
     include_package_data=True,
     packages=setuptools.find_packages(),
     classifiers=[
+        "Programming Language :: Python",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
