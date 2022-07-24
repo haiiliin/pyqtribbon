@@ -142,6 +142,13 @@ class RibbonCategory(QtWidgets.QFrame):
         :return: The panel.
         """
         return self._panels[title]
+    
+    def panels(self) -> typing.Dict[str, RibbonPanel]:
+        """Return all panels in the category.
+
+        :return: The panels.
+        """
+        return self._panels
 
 
 class RibbonNormalCategory(RibbonCategory):
@@ -210,7 +217,7 @@ class RibbonContextCategory(RibbonCategory):
 
         :return: Whether the category is shown.
         """
-        return self in self._ribbon.categories()
+        return self.title() in self._ribbon.categories()
 
     def setCategoryVisible(self, state: bool):
         """Set the state of the category.

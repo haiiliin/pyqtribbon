@@ -41,7 +41,7 @@ class RibbonType:
     def setCategoryState(self, category, state):
         ...
 
-    def categories(self) -> typing.List:
+    def categories(self) -> typing.Dict:
         ...
 
     def repaint(self):

@@ -22,7 +22,7 @@ class RibbonBar(QtWidgets.QFrame):
     helpButtonClicked = QtCore.Signal(bool)
 
     #: The categories of the ribbon.
-    _categories: typing.List[RibbonCategory] = []
+    _categories: typing.Dict[str, RibbonCategory] = {}
     _contextCategoryCount = 0
 
     #: Whether the ribbon is visible.
@@ -52,7 +52,7 @@ class RibbonBar(QtWidgets.QFrame):
             title = ''
             parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
         super().__init__(parent)
-        self._categories = []
+        self._categories = {}
         self.setFixedHeight(self._ribbonHeight)
 
         self._titleWidget = RibbonTitleWidget(title, self)
@@ -239,11 +239,19 @@ class RibbonBar(QtWidgets.QFrame):
     def removeCollapseButton(self):
         """Remove the min button from the ribbon."""
         self._titleWidget.removeCollapseButton()
+        
+    def category(self, name: str) -> RibbonCategory:
+        """Return the category with the given name.
 
-    def categories(self) -> typing.List[RibbonCategory]:
+        :param name: The name of the category.
+        :return: The category with the given name.
+        """
+        return self._categories[name]
+
+    def categories(self) -> typing.Dict[str, RibbonCategory]:
         """Return a list of categories of the ribbon.
 
-        :return: A list of categories of the ribbon.
+        :return: A dict of categories of the ribbon.
         """
         return self._categories
 
@@ -261,6 +269,8 @@ class RibbonBar(QtWidgets.QFrame):
                       will be used.
         :return: The newly created category.
         """
+        if title in self._categories:
+            raise ValueError(f"Category with title {title} already exists.")
         if style == RibbonCategoryStyle.Context:
             if color is None:
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
@@ -274,7 +284,7 @@ class RibbonBar(QtWidgets.QFrame):
                                 self._titleWidget.height() -
                                 self._separator.height() - 4)  # 4: extra space for drawing lines when debugging
         if style == RibbonCategoryStyle.Normal:
-            self._categories.append(category)
+            self._categories[title] = category
             self._titleWidget.tabBar().addTab(title, color)
             self._stackedWidget.addWidget(category)
         elif style == RibbonCategoryStyle.Context:
@@ -303,7 +313,7 @@ class RibbonBar(QtWidgets.QFrame):
 
         :param category: The category to show.
         """
-        self._categories.append(category)
+        self._categories[category.title()] = category
         self._titleWidget.tabBar().addTab(category.title(), category.color())
         self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - 1)
         self._stackedWidget.addWidget(category)
@@ -314,7 +324,7 @@ class RibbonBar(QtWidgets.QFrame):
 
         :param category: The category to hide.
         """
-        self._categories.remove(category)
+        self._categories.pop(category.title(), None)
         self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
 
@@ -331,7 +341,7 @@ class RibbonBar(QtWidgets.QFrame):
 
         :param category: The category to remove.
         """
-        index = self._categories.index(category)
+        index = self._titleWidget.tabBar().indexOf(category.title())
         self.tabBar().removeTab(index)
         self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
 
@@ -340,7 +350,7 @@ class RibbonBar(QtWidgets.QFrame):
 
         :param category: The category to set.
         """
-        index = self._categories.index(category)
+        index = self._titleWidget.tabBar().indexOf(category.title())
         self.tabBar().setCurrentIndex(index)
         self._stackedWidget.setCurrentIndex(index)
 

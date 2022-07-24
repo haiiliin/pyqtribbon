@@ -147,8 +147,9 @@ Manage Panels
 
     RibbonCategory.addPanel
     RibbonCategory.removePanel
-    RibbonCategory.panel
     RibbonCategory.takePanel
+    RibbonCategory.panel
+    RibbonCategory.panels
 
 Customize Panels
 ----------------
