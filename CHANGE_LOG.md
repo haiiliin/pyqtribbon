@@ -87,3 +87,5 @@ The first release which supports:
 - Update examples and tutorials 
   ([a37dcdf](https://github.com/haiiliin/pyqtribbon/commit/a37dcdfa8d4eae74bfb6a1186fb63914d35a5c42),
   [f9a6b55](https://github.com/haiiliin/pyqtribbon/commit/f9a6b55d9da7b17838ff72021f48e7af1a5941d7)).
+- Add alignment for addGallery 
+  ([ba6458d](https://github.com/haiiliin/pyqtribbon/commit/ba6458d49d94bc85dc8b8a1434641e58d103c84b)).
