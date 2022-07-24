@@ -3,7 +3,7 @@ import typing
 from PyQt5 import QtCore, QtWidgets
 
 
-class PyQtSignalType(typing.Protocol):
+class PyQtSignalType:
     """This is a protocol for the pyqt signal type."""
 
     def connect(self, slot):
@@ -16,13 +16,13 @@ class PyQtSignalType(typing.Protocol):
         ...
 
 
-class PyQtActionType(typing.Protocol):
+class PyQtActionType:
     """This is a protocol for the pyqt action type."""
 
     triggered: PyQtSignalType
 
 
-class RibbonType(typing.Protocol):
+class RibbonType:
     """
     This is a protocol for the ribbon type for type hints in categories for getting the tabRect.
     """
