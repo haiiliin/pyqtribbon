@@ -3,3 +3,4 @@ numpydoc
 PyQt5
 sphinx-rtd-theme
 sphinx-toolbox
+sphinx-qt-documentation

@@ -37,8 +37,10 @@ extensions = [
     'sphinx_toolbox.more_autodoc.overloads',
     'sphinx.ext.linkcode',
     'sphinx.ext.githubpages',
+    'sphinx_qt_documentation',
 ]
 
+qt_documentation = 'Qt5'
 autodoc_typehints_format = 'short'
 numpydoc_show_inherited_class_members = False
 
