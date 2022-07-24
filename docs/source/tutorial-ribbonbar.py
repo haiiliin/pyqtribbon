@@ -1,37 +1,38 @@
 import sys
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget, QVBoxLayout
+from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtCore import Qt
 
 from ribbon import RibbonBar
 from ribbon.utils import data_file_path
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    app.setFont(QtGui.QFont("Times New Roman", 8))
+    app = QApplication(sys.argv)
+    app.setFont(QFont("Times New Roman", 8))
     
     # Central widget
-    window = QtWidgets.QMainWindow()
-    window.setWindowIcon(QtGui.QIcon(data_file_path("icons/python.png")))
-    centralWidget = QtWidgets.QWidget()
+    window = QMainWindow()
+    window.setWindowIcon(QIcon(data_file_path("icons/python.png")))
+    centralWidget = QWidget()
     window.setCentralWidget(centralWidget)
-    layout = QtWidgets.QVBoxLayout(centralWidget)
+    layout = QVBoxLayout(centralWidget)
     
     # Ribbon bar
     ribbonbar = RibbonBar()
     category = ribbonbar.addCategory("Category 1")
     panel = category.addPanel("Panel 1")
-    panel.addLargeButton("A Large Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addMediumButton("A Medium Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addMediumButton("A Medium Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QtGui.QIcon(data_file_path("icons/python.png")))
+    panel.addLargeButton("A Large Button", QIcon(data_file_path("icons/python.png")))
+    panel.addMediumButton("A Medium Button", QIcon(data_file_path("icons/python.png")))
+    panel.addMediumButton("A Medium Button", QIcon(data_file_path("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
     
     # Display a label in the main window
-    label = QtWidgets.QLabel("Ribbon Test Window")
-    label = QtWidgets.QLabel("Ribbon Test Window")
-    label.setFont(QtGui.QFont("Arial", 20))
-    label.setAlignment(QtCore.Qt.AlignCenter)
+    label = QLabel("Ribbon Test Window")
+    label.setFont(QFont("Arial", 20))
+    label.setAlignment(Qt.AlignCenter)
     
     # Add the ribbon bar and label to the layout
     layout.addWidget(ribbonbar, 0)
