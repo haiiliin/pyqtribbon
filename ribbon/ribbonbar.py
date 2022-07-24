@@ -3,6 +3,7 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
+from . import RibbonTabBar
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonCategoryStyle, contextColors
 from .separator import RibbonHorizontalSeparator
 from .titlewidget import RibbonTitleWidget
@@ -89,7 +90,7 @@ class RibbonBar(QtWidgets.QFrame):
         elif style == RibbonStyle.Debug:
             self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
 
-    def applicationOptionButton(self):
+    def applicationOptionButton(self) -> QtWidgets.QToolButton:
         """Return the application button."""
         return self._titleWidget.applicationButton()
 
@@ -124,7 +125,7 @@ class RibbonBar(QtWidgets.QFrame):
         self._ribbonHeight = height
         self.setFixedHeight(height)
 
-    def tabBar(self):
+    def tabBar(self) -> RibbonTabBar:
         """Return the tab bar of the ribbon.
 
         :return: The tab bar of the ribbon.
@@ -167,7 +168,7 @@ class RibbonBar(QtWidgets.QFrame):
         """
         self._titleWidget.setQuickAccessButtonHeight(height)
 
-    def title(self):
+    def title(self) -> str:
         """Return the title of the ribbon.
 
         :return: The title of the ribbon.

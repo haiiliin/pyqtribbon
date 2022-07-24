@@ -93,7 +93,7 @@ class RibbonCategory(QtWidgets.QFrame):
         self._style = style
         self.repaint()
 
-    def categoryStyle(self):
+    def categoryStyle(self) -> RibbonCategoryStyle:
         """Return the button style of the category.
 
         :return: The button style.
@@ -125,7 +125,7 @@ class RibbonCategory(QtWidgets.QFrame):
         self._panelLayoutWidget.removeWidget(self._panels[title])
         self._panels.pop(title)
 
-    def takePanel(self, title: str):
+    def takePanel(self, title: str) -> RibbonPanel:
         """Remove and return a panel from the category.
 
         :param title: The title of the panel.
@@ -135,7 +135,7 @@ class RibbonCategory(QtWidgets.QFrame):
         self.removePanel(title)
         return panel
 
-    def panel(self, title: str):
+    def panel(self, title: str) -> RibbonPanel:
         """Return a panel from the category.
 
         :param title: The title of the panel.

@@ -112,7 +112,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
 
-    def applicationButton(self):
+    def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
         return self._applicationButton
 
@@ -193,7 +193,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         for button in self._quickAccessButtons:
             button.setIconSize(QtCore.QSize(height, height))
 
-    def title(self):
+    def title(self) -> str:
         """Return the title of the ribbon.
 
         :return: The title of the ribbon.

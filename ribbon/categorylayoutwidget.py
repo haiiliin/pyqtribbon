@@ -118,7 +118,7 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         """
         self._categoryLayout.removeWidget(widget)
 
-    def takeWidget(self, widget: QtWidgets.QWidget):
+    def takeWidget(self, widget: QtWidgets.QWidget) -> QtWidgets.QWidget:
         """Remove and return a widget from the category layout.
 
         :param widget: The widget to remove.
