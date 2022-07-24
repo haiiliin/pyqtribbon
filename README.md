@@ -5,7 +5,7 @@
 [![Pages](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml)
 [![Upload Python Package to PyPI](https://github.com/haiiliin/pyqtribbon/actions/workflows/python-publish-pypi.yml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/python-publish-pypi.yml)
 
-[![PyPI license](https://img.shields.io/pypi/l/pyqtribbon.svg)](https://github.com/haiiliin/abqpy/blob/main/LICENSE)
+[![PyPI license](https://img.shields.io/pypi/l/pyqtribbon.svg)](https://github.com/haiiliin/pyqtribbon/blob/main/LICENSE)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyqtribbon.svg)](https://www.python.org/)
 [![GitHub release](https://img.shields.io/github/release/haiiliin/pyqtribbon.svg)](https://GitHub.com/haiiliin/pyqtribbon/releases/)
 [![PyPI download month](https://img.shields.io/pypi/dm/pyqtribbon.svg)](https://pypi.python.org/pypi/pyqtribbon/)
