@@ -72,5 +72,12 @@ The first release which supports:
 ## [0.1.10] Update docs
 
 - Add type hints for returns
-  ([b1ef8f](https://github.com/haiiliin/pyqtribbon/commit/b1ef8f10377e619634108ce6400897070f40fc55), 
+  ([b1ef8f1](https://github.com/haiiliin/pyqtribbon/commit/b1ef8f10377e619634108ce6400897070f40fc55), 
   [4422772](https://github.com/haiiliin/pyqtribbon/commit/44227722280373a1af89571a8003cc121a4efa70)).
+
+## [0.1.11] Update ribbon.catogories, category.panels, and panel.titleText
+
+- Update catogories to a dict, add panels method
+  ([679c04d](https://github.com/haiiliin/pyqtribbon/commit/679c04d04adfe8fe92443fb34b6ac2ed00d40355)).
+- Rename titleText to title
+  ([3e48852](https://github.com/haiiliin/pyqtribbon/commit/3e48852cf71e543eda8813b7e8cafdc6bbfcaa84)).
