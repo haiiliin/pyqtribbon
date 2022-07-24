@@ -985,7 +985,8 @@ class RibbonPanel(QtWidgets.QFrame):
         popupHideOnClick=False,
         rowSpan: int = 6,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise
+        mode=RibbonSpaceFindMode.ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
     ) -> RibbonGallery:
         """Add a gallery to the panel.
 
@@ -994,13 +995,14 @@ class RibbonPanel(QtWidgets.QFrame):
         :param rowSpan: The number of rows the gallery spans.
         :param colSpan: The number of columns the gallery spans.
         :param mode: The mode of the gallery.
+        :param alignment: The alignment of the gallery.
 
         :return: The gallery.
         """
         gallery = RibbonGallery(minimumWidth, popupHideOnClick, self)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
-        self.addWidget(gallery, rowSpan, colSpan, mode)
+        self.addWidget(gallery, rowSpan, colSpan, mode, alignment)
         return gallery
 
     def setTitle(self, title: str):
