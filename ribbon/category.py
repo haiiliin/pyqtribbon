@@ -1,7 +1,7 @@
 import enum
 import typing
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtGui
 
 from .categorylayoutwidget import RibbonCategoryLayoutWidget
 from .panel import RibbonPanel

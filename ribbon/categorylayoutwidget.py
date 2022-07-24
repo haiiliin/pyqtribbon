@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore, QtGui
 
 from ribbon.utils import data_file_path
 
@@ -22,7 +22,7 @@ class RibbonCategoryScrollAreaContents(QtWidgets.QFrame):
 
 class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
     """The category layout widget's category scroll area to arrange the widgets in the category."""
-    displayOptionsButtonClicked = QtCore.pyqtSignal()
+    displayOptionsButtonClicked = QtCore.Signal()
 
     def __init__(self, parent=None):
         """Create a new category layout widget.

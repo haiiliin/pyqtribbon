@@ -1,6 +1,6 @@
 import typing
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from qtpy import QtWidgets, QtGui, QtCore
 
 from .toolbutton import RibbonToolButton
 from .utils import data_file_path

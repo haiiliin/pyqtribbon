@@ -1,7 +1,7 @@
 import typing
 from enum import IntEnum
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore, QtGui
 
 from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonCategoryStyle, contextColors
 from .separator import RibbonHorizontalSeparator
@@ -17,8 +17,8 @@ class RibbonStyle(IntEnum):
 class RibbonBar(QtWidgets.QFrame):
     """The RibbonBar class is the top level widget that contains the ribbon.
     """
-    #: Signal, The help button was clicked.
-    helpButtonClicked = QtCore.pyqtSignal(bool)
+    #: Signal, the help button was clicked.
+    helpButtonClicked = QtCore.Signal(bool)
 
     #: The categories of the ribbon.
     _categories: typing.List[RibbonCategory] = []

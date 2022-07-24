@@ -1,6 +1,7 @@
 numpy
 numpydoc
 PyQt5
+qtpy
 sphinx-rtd-theme
 sphinx-toolbox
 sphinx-qt-documentation

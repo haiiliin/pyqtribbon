@@ -1,6 +1,6 @@
 import typing
 
-from PyQt5 import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets
 
 
 class PyQtSignalType:

@@ -2,7 +2,7 @@ import typing
 from enum import IntEnum
 
 import numpy as np
-from PyQt5 import QtWidgets, QtGui, QtCore
+from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
@@ -113,7 +113,7 @@ class RibbonPanel(QtWidgets.QFrame):
     _titleHeight: int = 20
 
     # Panel options signal
-    panelOptionClicked = QtCore.pyqtSignal(bool)
+    panelOptionClicked = QtCore.Signal(bool)
 
     @typing.overload
     def __init__(self, title: str = '', maxRows: int = 6, parent=None):

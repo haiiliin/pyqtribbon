@@ -1,7 +1,7 @@
 import typing
 from enum import IntEnum
 
-from PyQt5 import QtWidgets, QtCore
+from qtpy import QtWidgets, QtCore
 
 
 class RibbonButtonStyle(IntEnum):

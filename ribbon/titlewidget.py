@@ -1,6 +1,6 @@
 import typing
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore, QtGui
 
 from .tabbar import RibbonTabBar
 from .utils import data_file_path
@@ -18,9 +18,10 @@ class RibbonTitleLabel(QtWidgets.QLabel):
 
 class RibbonTitleWidget(QtWidgets.QFrame):
     """The title widget of the ribbon."""
-    #: Signal: The help button was clicked.
-    helpButtonClicked = QtCore.pyqtSignal(bool)
-    collapseRibbonButtonClicked = QtCore.pyqtSignal(bool)
+    #: Signal, the help button was clicked.
+    helpButtonClicked = QtCore.Signal(bool)
+    #: Signal, the collapse button wa clicked.
+    collapseRibbonButtonClicked = QtCore.Signal(bool)
 
     #: Buttons
     _quickAccessButtons = []
