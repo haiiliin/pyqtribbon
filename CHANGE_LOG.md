@@ -68,3 +68,9 @@ The first release which supports:
   ([0d45931](https://github.com/haiiliin/pyqtribbon/commit/0d4593159f5ba8e1b8787419f5bd6520ed035582)).
 - Use QApplication.instance() instead of qApp to be compatible with PyQt6
   ([75d3953](https://github.com/haiiliin/pyqtribbon/commit/75d395328541ccea829e2e33012ea4c1cba74628)).
+
+## [0.1.10] Update docs
+
+- Add type hints for returns
+  ([b1ef8f](https://github.com/haiiliin/pyqtribbon/commit/b1ef8f10377e619634108ce6400897070f40fc55), 
+  [4422772](https://github.com/haiiliin/pyqtribbon/commit/44227722280373a1af89571a8003cc121a4efa70)).
