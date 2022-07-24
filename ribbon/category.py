@@ -99,7 +99,7 @@ class RibbonCategory(QtWidgets.QFrame):
     def categoryStyle(self):
         """Return the button style of the category.
 
-        :return: The button tyle.
+        :return: The button style.
         """
         return self._style
 
