@@ -56,6 +56,6 @@ The first release which supports:
   ([b1c7b37](https://github.com/haiiliin/pyqtribbon/commit/b1c7b37c6e4b11e6b8a5492bf94c4955c16cf2ba)).
 ## [0.1.8] Add tests for multiple Python versions
 
-- Add tests 
+- Add tests to support multiple Python versions
   ([a4d9282](https://github.com/haiiliin/pyqtribbon/commit/a4d9282da76bee0a3e625d8f266380d1d8b9a704), 
   [ee7e845](https://github.com/haiiliin/pyqtribbon/commit/ee7e8453f0991b24c163305c388d6da28a2b1747)).
