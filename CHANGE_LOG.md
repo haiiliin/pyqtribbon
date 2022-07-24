@@ -64,3 +64,5 @@ The first release which supports:
 
 - sphinx_qt_documentation
   ([a18a9fa](https://github.com/haiiliin/pyqtribbon/commit/a18a9fac21445e8adfdcca82036254b3277304c8)).
+- Use qtpy to be compatiable with different Qt versions
+  ([0d45931](https://github.com/haiiliin/pyqtribbon/commit/0d4593159f5ba8e1b8787419f5bd6520ed035582)).
