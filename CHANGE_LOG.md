@@ -60,7 +60,7 @@ The first release which supports:
   ([a4d9282](https://github.com/haiiliin/pyqtribbon/commit/a4d9282da76bee0a3e625d8f266380d1d8b9a704), 
   [ee7e845](https://github.com/haiiliin/pyqtribbon/commit/ee7e8453f0991b24c163305c388d6da28a2b1747)).
 
-# [0.1.9]
+## [0.1.9] Fixed bugs of compatibilities  for different Qt versions
 
 - sphinx_qt_documentation
   ([a18a9fa](https://github.com/haiiliin/pyqtribbon/commit/a18a9fac21445e8adfdcca82036254b3277304c8)).
