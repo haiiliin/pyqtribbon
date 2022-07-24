@@ -161,8 +161,8 @@ Setup Title Label
 
 .. autosummary::
 
-    RibbonPanel.titleText
-    RibbonPanel.setTitleText
+    RibbonPanel.title
+    RibbonPanel.setTitle
 
 Setup Panel Option Button
 ~~~~~~~~~~~~~~~~~~~~~~~~~

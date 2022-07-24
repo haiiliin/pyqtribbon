@@ -1003,16 +1003,16 @@ class RibbonPanel(QtWidgets.QFrame):
         self.addWidget(gallery, rowSpan, colSpan, mode)
         return gallery
 
-    def setTitleText(self, text: str):
-        """Set the title text of the panel.
+    def setTitle(self, title: str):
+        """Set the title of the panel.
 
-        :param text: The text to set.
+        :param title: The title to set.
         """
-        self._titleLabel.setText(text)
+        self._titleLabel.setText(title)
 
-    def titleText(self):
-        """Get the title text of the panel.
+    def title(self):
+        """Get the title of the panel.
 
-        :return: The title text.
+        :return: The title.
         """
         return self._titleLabel.text()
