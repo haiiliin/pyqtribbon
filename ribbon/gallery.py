@@ -47,8 +47,8 @@ class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 class RibbonGallery(QtWidgets.QFrame):
     """A widget that displays a gallery of buttons."""
     _popupWindowSize = QtCore.QSize(500, 500)
-    _buttons: list[RibbonToolButton] = []
-    _popupButtons: list[RibbonToolButton] = []
+    _buttons: typing.List[RibbonToolButton] = []
+    _popupButtons: typing.List[RibbonToolButton] = []
     _popupHideOnClick = False
 
     @typing.overload

@@ -1,3 +1,5 @@
+import typing
+
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from .tabbar import RibbonTabBar
@@ -164,7 +166,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         return self._quickAccessToolBar
 
-    def quickAccessButtons(self) -> list[QtWidgets.QToolButton]:
+    def quickAccessButtons(self) -> typing.List[QtWidgets.QToolButton]:
         """Return the quick access buttons of the ribbon.
 
         :return: The quick access buttons of the ribbon.
