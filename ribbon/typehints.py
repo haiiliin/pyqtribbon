@@ -29,9 +29,6 @@ class RibbonType:
     def tabBar(self) -> QtWidgets.QTabBar:
         ...
 
-    def tabRect(self, category) -> QtCore.QRect:
-        ...
-
     def showContextCategory(self, category):
         ...
 

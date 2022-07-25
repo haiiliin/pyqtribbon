@@ -328,14 +328,6 @@ class RibbonBar(QtWidgets.QFrame):
         self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
 
-    def tabRect(self, category: RibbonCategory) -> QtCore.QRect:
-        """Get the rectangle of the tab of the given category.
-
-        :param category: The category to get the tab rectangle of.
-        :return: The rectangle of the tab.
-        """
-        return self.tabBar().tabRect(self._categories.index(category))
-
     def removeCategory(self, category: RibbonCategory):
         """Remove a category from the ribbon.
 
