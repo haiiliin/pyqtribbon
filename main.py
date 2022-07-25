@@ -90,7 +90,7 @@ if __name__ == "__main__":
     panel.addSmallButton("This is a very very very very very long button",
                          icon=QIcon("icons/close.png"), colSpan=3)
 
-    category2 = ribbon.addContextCategory("Category 2")
+    category2 = ribbon.addContextCategory("Context Category 2")
     panel = category2.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QIcon("icons/close.png"))
@@ -131,7 +131,7 @@ if __name__ == "__main__":
 
     panel.addCalendarWidget()
 
-    category3 = ribbon.addContextCategory("Category 3")
+    category3 = ribbon.addContextCategory("Context Category 3")
     panel = category3.addPanel("Panel 1")
     panel.addLargeButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addLargeButton("Button 2", icon=QIcon("icons/close.png"))
