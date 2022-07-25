@@ -4,6 +4,7 @@ from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
 from ribbon import RibbonBar
+from ribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -12,6 +13,7 @@ if __name__ == "__main__":
 
     window = QtWidgets.QMainWindow()
     ribbon = RibbonBar()
+    ribbon.setRibbonStyle(RibbonStyle.Default)
     window.setMenuBar(ribbon)
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QIcon("icons/python.png"))
