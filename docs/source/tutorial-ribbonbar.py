@@ -42,4 +42,3 @@ if __name__ == "__main__":
     window.resize(1800, 350)
     window.show()
     sys.exit(app.exec_())
-    
