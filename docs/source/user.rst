@@ -18,17 +18,6 @@ you can use the `setMenuBar` method of :py:class:`~PyQt5.QtWidgets.QMainWindow` 
     window.setMenuBar(ribbon)
     ...
 
-The following code snippet is a whole example.
-
-.. literalinclude:: tutorial-ribbonbar.py
-    :language: python
-
-It would be rendered as follows:
-
-.. image:: _images/example.png
-    :align: center
-    :width: 100%
-
 Customize Ribbon Bar
 --------------------
 
@@ -215,3 +204,17 @@ Add Widgets to Panels
     RibbonPanel.addHorizontalSeparator
     RibbonPanel.addVerticalSeparator
     RibbonPanel.addGallery
+
+A Complete Example
+------------------
+
+The following code snippet is a complete example.
+
+.. literalinclude:: tutorial-ribbonbar.py
+    :language: python
+
+It would be rendered as follows:
+
+.. image:: _images/example.png
+    :align: center
+    :width: 100%
