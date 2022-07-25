@@ -15,7 +15,7 @@ class RibbonStyle(IntEnum):
     Debug = 1
 
 
-class RibbonBar(QtWidgets.QFrame):
+class RibbonBar(QtWidgets.QMenuBar):
     """The RibbonBar class is the top level widget that contains the ribbon.
     """
     #: Signal, the help button was clicked.
@@ -75,6 +75,54 @@ class RibbonBar(QtWidgets.QFrame):
             lambda index: self._stackedWidget.setCurrentIndex(index)
         )
         self.setRibbonStyle(RibbonStyle.Default)
+
+    def actionAt(self, QPoint):
+        raise NotImplementedError('RibbonBar.actionAt() is not implemented in the ribbon bar.')
+
+    def actionGeometry(self, QAction):
+        raise NotImplementedError('RibbonBar.actionGeometry() is not implemented in the ribbon bar.')
+
+    def activeAction(self):
+        raise NotImplementedError('RibbonBar.activeAction() is not implemented in the ribbon bar.')
+
+    def addMenu(self, *__args):
+        raise NotImplementedError('RibbonBar.addMenu() is not implemented in the ribbon bar.')
+
+    def addAction(self, *__args):
+        raise NotImplementedError('RibbonBar.addAction() is not implemented in the ribbon bar.')
+
+    def addSeparator(self):
+        raise NotImplementedError('RibbonBar.addSeparator() is not implemented in the ribbon bar.')
+
+    def clear(self):
+        raise NotImplementedError('RibbonBar.clear() is not implemented in the ribbon bar.')
+
+    def cornerWidget(self, corner=None):
+        raise NotImplementedError('RibbonBar.cornerWidget() is not implemented in the ribbon bar.')
+
+    def insertMenu(self, QAction, QMenu):
+        raise NotImplementedError('RibbonBar.insertMenu() is not implemented in the ribbon bar.')
+
+    def insertSeparator(self, QAction):
+        raise NotImplementedError('RibbonBar.insertSeparator() is not implemented in the ribbon bar.')
+
+    def isDefaultUp(self):
+        raise NotImplementedError('RibbonBar.isDefaultUp() is not implemented in the ribbon bar.')
+
+    def isNativeMenuBar(self):
+        raise NotImplementedError('RibbonBar.isNativeMenuBar() is not implemented in the ribbon bar.')
+
+    def setActiveAction(self, QAction):
+        raise NotImplementedError('RibbonBar.setActiveAction() is not implemented in the ribbon bar.')
+
+    def setCornerWidget(self, QWidget, corner=None):
+        raise NotImplementedError('RibbonBar.setCornerWidget() is not implemented in the ribbon bar.')
+
+    def setDefaultUp(self, up):
+        raise NotImplementedError('RibbonBar.setDefaultUp() is not implemented in the ribbon bar.')
+
+    def setNativeMenuBar(self, bar):
+        raise NotImplementedError('RibbonBar.setNativeMenuBar() is not implemented in the ribbon bar.')
 
     def setRibbonStyle(self, style: RibbonStyle):
         """Set the style of the ribbon.

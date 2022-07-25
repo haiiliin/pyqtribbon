@@ -2,21 +2,27 @@ import sys
 
 from qtpy import QtWidgets, QtGui
 from qtpy.QtGui import QIcon
-from ribbon import RibbonMainWindow
+from ribbon import RibbonBar
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 8))
-
-    window = RibbonMainWindow()
+    
+    window = QtWidgets.QMainWindow()
     window.setWindowTitle("Microsoft Word")
     window.setWindowIcon(QIcon("word.png"))
-    window.layout().addWidget(QtWidgets.QTextEdit(), 1)
-    window.ribbonBar().setApplicationIcon(QIcon("word.png"))
-    window.ribbonBar().applicationOptionButton().setToolTip("Microsoft Word")
+    centralWidget = QtWidgets.QWidget()
+    window.setCentralWidget(centralWidget)
+    layout = QtWidgets.QVBoxLayout(centralWidget)
+    ribbonbar = RibbonBar()
+    window.setMenuBar(ribbonbar)
+
+    layout.addWidget(QtWidgets.QTextEdit(), 1)
+    ribbonbar.setApplicationIcon(QIcon("word.png"))
+    ribbonbar.applicationOptionButton().setToolTip("Microsoft Word")
 
     # Home category
-    homeCategory = window.ribbonBar().addCategory("Home")
+    homeCategory = ribbonbar.addCategory("Home")
     undoPanel = homeCategory.addPanel("Undo")
     undoPanel.addMediumButton("Undo", icon=QIcon("undo.png"))
     undoPanel.addMediumButton("Redo", icon=QIcon("redo.png"))

@@ -3,18 +3,21 @@ import sys
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
-from ribbon import RibbonMainWindow
+from ribbon import RibbonBar
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 8))
     app.setStyle("Windows")
 
-    window = RibbonMainWindow()
+    window = QtWidgets.QMainWindow()
+    ribbon = RibbonBar()
+    window.setMenuBar(ribbon)
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QIcon("icons/python.png"))
-
-    ribbon = window.ribbonBar()
+    
+    window.setCentralWidget(QtWidgets.QWidget(window))
+    layout = QtWidgets.QVBoxLayout(window.centralWidget())
 
     saveButton = QtWidgets.QToolButton()
     saveButton.setAutoRaise(True)
@@ -142,7 +145,7 @@ if __name__ == "__main__":
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)
-    window.layout().addWidget(label, 1)
+    layout.addWidget(label, 1)
 
     window.resize(1800, 350)
     window.show()

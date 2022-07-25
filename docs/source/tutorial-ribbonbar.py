@@ -20,6 +20,7 @@ if __name__ == "__main__":
     
     # Ribbon bar
     ribbonbar = RibbonBar()
+    window.setMenuBar(ribbonbar)
     category = ribbonbar.addCategory("Category 1")
     panel = category.addPanel("Panel 1")
     panel.addLargeButton("A Large Button", QIcon(data_file_path("icons/python.png")))
@@ -35,7 +36,6 @@ if __name__ == "__main__":
     label.setAlignment(Qt.AlignCenter)
     
     # Add the ribbon bar and label to the layout
-    layout.addWidget(ribbonbar, 0)
     layout.addWidget(label, 1)
     
     # Show the window

@@ -9,10 +9,8 @@ Instantiating a Ribbon Bar
 
 To begin with, you have to initialize your PyQt application.
 
-Using the RibbonBar
-~~~~~~~~~~~~~~~~~~~
-
-:py:class:`~ribbon.ribbonbar.RibbonBar` is  a class that implements a ribbon bar, you can use it to create a ribbon bar.
+:py:class:`~ribbon.ribbonbar.RibbonBar` is inherited from :py:class:`~PyQt5.QtWidgets.QMenuBar`,
+you can use the `setMenuBar` method of :py:class:`~PyQt5.QtWidgets.QMainWindow` to set the ribbon bar as the main menu bar. 
 
 .. literalinclude:: tutorial-ribbonbar.py
     :language: python
