@@ -1,7 +1,6 @@
 
 RibbonBar {
-    border: 1px solid gray;
-    border-radius: 20px;
+    border: 0px solid gray;
     background-color: white;
 }
 
