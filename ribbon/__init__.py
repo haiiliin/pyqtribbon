@@ -2,7 +2,6 @@ from .category import RibbonCategory, RibbonCategoryStyle, RibbonNormalCategory,
 from .categorylayoutwidget import (RibbonCategoryLayoutWidget, RibbonCategoryLayoutButton, RibbonCategoryScrollArea,
                                    RibbonCategoryScrollAreaContents)
 from .gallery import RibbonGallery, RibbonGalleryListWidget, RibbonGalleryButton, RibbonGalleryPopupListWidget
-from .mainwindow import RibbonMainWindow
 from .panel import RibbonPanel, RibbonPanelTitle, RibbonSpaceFindMode, RibbonGridLayoutManager, RibbonPanelItemWidget
 from .panel import RibbonSpaceFindMode
 from .ribbonbar import RibbonBar, RibbonStyle

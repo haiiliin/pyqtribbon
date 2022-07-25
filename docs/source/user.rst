@@ -23,14 +23,6 @@ It would be rendered as follows:
     :align: center
     :width: 100%
 
-Using the RibbonMainWindow
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Alternatively, you can use the :py:class:`~ribbon.mainwindow.RibbonMainWindow` which is a QMainWindow that has a ribbon bar.
-
-.. literalinclude:: tutorial-mainwindow.py
-    :language: python
-
 Customize Ribbon Bar
 --------------------
 

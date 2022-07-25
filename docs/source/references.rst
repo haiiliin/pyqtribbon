@@ -2,16 +2,6 @@
 API References
 ==============
 
-Ribbon Main Window
-------------------
-
-RibbonMainWindow
-~~~~~~~~~~~~~~~~
-
-.. autoclass:: ribbon.mainwindow.RibbonMainWindow
-   :members:
-   :show-inheritance:
-
 Ribbon Bar
 ----------
 
