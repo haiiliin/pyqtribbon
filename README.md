@@ -19,7 +19,7 @@ PyQtRibbon is a Qt-based application framework for building user interfaces.
 
 ## Installation
 
-`pyqtribbon` is distribued to [PyPI](https://pypi.org/project/pyqtribbon/), you can use pip to install it:
+`pyqtribbon` is distributed to [PyPI](https://pypi.org/project/pyqtribbon/), you can use pip to install it:
 
 ```shell
 pip install pyqtribbon
@@ -40,7 +40,7 @@ The ribbon is first introduced by Microsoft in the 2000's. It is a toolbar with 
 
 ## Definitions of Ribbon Elements
 
-- **Application button**: The button that appears on the upper-left corner of a ribbon. The Application button replaces the File menu and is visible even when the ribbon is minimized. When the button is clicked, a menu that has a list of commands is displayed.
+- **Application button**: The button that appears in the upper-left corner of a ribbon. The Application button replaces the File menu and is visible even when the ribbon is minimized. When the button is clicked, a menu that has a list of commands is displayed.
 
 - **Quick Access toolbar**: A small, customizable toolbar that displays frequently used commands.
 
