@@ -365,7 +365,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         titles: typing.List[str],
         color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
     ) -> RibbonContextCategories:
-        """Add a new context category to the ribbon.
+        """Add a group of context categories with the same tab color to the ribbon.
 
         :param name: The name of the context categories.
         :param titles: The title of the category.
@@ -401,6 +401,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         elif isinstance(category, RibbonContextCategories):
             categories = category
             titles = list(categories.keys())
+            self._titleWidget.tabBar().addAssociatedTabs(categories.name(), titles, categories.color())
             self._titleWidget.tabBar().addAssociatedTabs(categories.name(), titles, categories.color())
             self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - len(titles))
             self._stackedWidget.setCurrentWidget(categories[titles[0]])
