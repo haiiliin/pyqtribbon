@@ -453,6 +453,11 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param category: The category to set.
         """
         self._stackedWidget.setCurrentWidget(category)
+        if category.title() in self._titleWidget.tabBar().tabTitles():
+            self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().indexOf(category.title()))
+        else:
+            raise ValueError(f"Category {category.title()} is not in the ribbon, "
+                             f"please show the context category/categories first.")
 
     def currentCategory(self) -> RibbonCategory:
         """Return the current category.
