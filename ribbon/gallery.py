@@ -4,6 +4,12 @@ from qtpy import QtWidgets, QtGui, QtCore
 
 from .toolbutton import RibbonToolButton
 from .utils import data_file_path
+from .separator import RibbonHorizontalSeparator
+from .menu import RibbonPermanentMenu
+
+
+class RibbonPopupWidget(QtWidgets.QFrame):
+    pass
 
 
 class RibbonGalleryListWidget(QtWidgets.QListWidget):
@@ -80,7 +86,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupHideOnClick = popupHideOnClick
 
         self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 0, 0)
+        self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
 
         self._upButton = RibbonGalleryButton(self)
@@ -106,38 +112,62 @@ class RibbonGallery(QtWidgets.QFrame):
         self._scrollButtonLayout.addWidget(self._moreButton)
 
         self._listWidget = RibbonGalleryListWidget()
-        self._listWidget.setStyleSheet("QListWidget { background-color: transparent; }")
         self._mainLayout.addWidget(self._listWidget)
         self._mainLayout.addLayout(self._scrollButtonLayout)
 
         self._upButton.clicked.connect(self._listWidget.scrollToPreviousRow)
         self._downButton.clicked.connect(self._listWidget.scrollToNextRow)
 
-        self._popupWidget = QtWidgets.QWidget()
+        self._popupWidget = RibbonPopupWidget()
         self._popupWidget.setFont(QtWidgets.QApplication.instance().font())
         self._popupWidget.setWindowFlags(QtCore.Qt.Popup)
         self._popupLayout = QtWidgets.QVBoxLayout(self._popupWidget)
-        self._popupLayout.setContentsMargins(0, 0, 0, 0)
+        self._popupLayout.setContentsMargins(5, 5, 5, 5)
+        self._popupLayout.setSpacing(2)
+
         self._popupListWidget = RibbonGalleryPopupListWidget()
         self._popupLayout.addWidget(self._popupListWidget)
+        self._popupLayout.addWidget(RibbonHorizontalSeparator())
+
+        self._popupMenu = RibbonPermanentMenu()
+        self._popupMenu.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self._popupMenu.actionAdded.connect(self._handlePopupAction)
+        self._popupLayout.addWidget(self._popupMenu)
 
         self._moreButton.clicked.connect(self.showPopup)
 
+    def _handlePopupAction(self, action: QtWidgets.QAction) -> None:
+        """Handle a popup action."""
+        if isinstance(action, QtWidgets.QAction):
+            action.triggered.connect(self.hidePopupWidget)
+
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         """Resize the gallery."""
-        self._upButton.setFixedSize(self.height() // 4, self.height() // 3)
-        self._downButton.setFixedSize(self.height() // 4, self.height() // 3)
-        self._moreButton.setFixedSize(self.height() // 4, self.height() // 3)
+        height = self.height() - self._mainLayout.contentsMargins().top() - self._mainLayout.contentsMargins().bottom()
+        self._upButton.setFixedSize(height // 4, height // 3)
+        self._downButton.setFixedSize(height // 4, height // 3)
+        self._moreButton.setFixedSize(height // 4, height // 3)
         super().resizeEvent(a0)
+
+    def popupMenu(self) -> RibbonPermanentMenu:
+        """Return the popup menu."""
+        return self._popupMenu
 
     def showPopup(self):
         """Show the popup window"""
-        self._popupWidget.move(self.mapToGlobal(self._listWidget.geometry().topLeft()))
+        self._popupWidget.move(self.mapToGlobal(self.geometry().topLeft()))
         self._popupWidget.resize(QtCore.QSize(
             max(self.popupWindowSize().width(), self.width()),
             max(self.popupWindowSize().height(), self.height())
         ))
+        self._popupMenu.setFixedWidth(self._popupWidget.width() -
+                                      self._popupLayout.contentsMargins().left() -
+                                      self._popupLayout.contentsMargins().right())
         self._popupWidget.show()
+
+    def hidePopupWidget(self):
+        """Hide the popup window"""
+        self._popupWidget.hide()
 
     def popupWindowSize(self):
         """Return the size of the popup window
@@ -239,7 +269,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupButtons.append(popupButton)
         button.clicked.connect(lambda checked: popupButton.setChecked(checked))
         if self._popupHideOnClick:
-            popupButton.clicked.connect(self._popupWidget.hide)
+            popupButton.clicked.connect(self.hidePopupWidget)
         popupButton.clicked.connect(self.setSelectedButton)
 
         if text is None:
