@@ -100,13 +100,14 @@ class RibbonCategory(QtWidgets.QFrame):
         """
         return self._style
 
-    def addPanel(self, title: str) -> RibbonPanel:
+    def addPanel(self, title: str, showPanelOptionButton=True) -> RibbonPanel:
         """Add a new panel to the category.
 
         :param title: The title of the panel.
+        :param showPanelOptionButton: Whether to show the panel option button.
         :return: The newly created panel.
         """
-        panel = RibbonPanel(title, maxRows=6, parent=self)
+        panel = RibbonPanel(title, maxRows=6, showPanelOptionButton=showPanelOptionButton, parent=self)
         panel.setFixedHeight(self.height() -
                              self._mainLayout.spacing() -
                              self._mainLayout.contentsMargins().top() -

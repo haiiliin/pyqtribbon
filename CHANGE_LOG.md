@@ -82,17 +82,17 @@ The first release which supports:
 - Rename titleText to title
   ([3e48852](https://github.com/haiiliin/pyqtribbon/commit/3e48852cf71e543eda8813b7e8cafdc6bbfcaa84)).
 
-# [0.1.12] Update examples and tutorials 
+# [0.1.12] Update examples and tutorials, Update base class of RibbonBar and remove RibbonMainWindow
 
 - Update examples and tutorials 
   ([a37dcdf](https://github.com/haiiliin/pyqtribbon/commit/a37dcdfa8d4eae74bfb6a1186fb63914d35a5c42),
   [f9a6b55](https://github.com/haiiliin/pyqtribbon/commit/f9a6b55d9da7b17838ff72021f48e7af1a5941d7)).
 - Add alignment for addGallery 
   ([ba6458d](https://github.com/haiiliin/pyqtribbon/commit/ba6458d49d94bc85dc8b8a1434641e58d103c84b)).
-
-# Update base class of RibbonBar and remove RibbonMainWindow
-
 - Update base class of RibbonBar
   ([7bc81bb](https://github.com/haiiliin/pyqtribbon/commit/7bc81bbaf3d8bba5ed3309f5424e353185d1df9e)).
 - Remove RibbonMainWindow 
   ([c47bd6f](https://github.com/haiiliin/pyqtribbon/commit/c47bd6fc797431e7effc7898a53c7039a7bc9356)). 
+
+# [0.2.0] 
+- Add option to customize whether to show the panel option button ([#5](/../../issues/5)).

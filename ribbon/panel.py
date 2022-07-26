@@ -105,6 +105,8 @@ class RibbonPanel(QtWidgets.QFrame):
     _maxRows: int
     #: GridLayout manager to request available cells.
     _gridLayoutManager: RibbonGridLayoutManager
+    #: whether to show the panel option button
+    _showPanelOptionButton: bool
 
     #: widgets that are added to the panel
     _widgets: typing.List[QtWidgets.QWidget] = []
@@ -116,7 +118,7 @@ class RibbonPanel(QtWidgets.QFrame):
     panelOptionClicked = QtCore.Signal(bool)
 
     @typing.overload
-    def __init__(self, title: str = '', maxRows: int = 6, parent=None):
+    def __init__(self, title: str = '', maxRows: int = 6, showPanelOptionButton=True, parent=None):
         pass
 
     @typing.overload
@@ -128,21 +130,25 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :param title: The title of the panel.
         :param maxRows: The maximal number of rows in the panel.
+        :param showPanelOptionButton: Whether to show the panel option button.
         :param parent: The parent widget.
         """
         if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or
                                                                      'maxRows' in kwargs):
             title = args[0] if len(args) > 0 else kwargs.get('title', '')
             maxRows = args[1] if len(args) > 1 else kwargs.get('maxRows', 6)
-            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+            showPanelOptionButton = args[2] if len(args) > 2 else kwargs.get('showPanelOptionButton', True)
+            parent = args[3] if len(args) > 3 else kwargs.get('parent', None)
         else:
             title = ''
             maxRows = 6
+            showPanelOptionButton = True
             parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         self._maxRows = maxRows
         self._gridLayoutManager = RibbonGridLayoutManager(self._maxRows)
         self._widgets = []
+        self._showPanelOptionButton = showPanelOptionButton
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
@@ -165,13 +171,16 @@ class RibbonPanel(QtWidgets.QFrame):
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
-        self._panelOption = RibbonPanelOptionButton()
-        self._panelOption.setAutoRaise(True)
-        self._panelOption.setIcon(QtGui.QIcon(data_file_path("icons/linking.png")))
-        self._panelOption.setIconSize(QtCore.QSize(16, 16))
-        self._panelOption.setToolTip("Panel options")
-        self._panelOption.clicked.connect(self.panelOptionClicked)
-        self._titleLayout.addWidget(self._panelOption, 0)
+
+        # Panel option button
+        if showPanelOptionButton:
+            self._panelOption = RibbonPanelOptionButton()
+            self._panelOption.setAutoRaise(True)
+            self._panelOption.setIcon(QtGui.QIcon(data_file_path("icons/linking.png")))
+            self._panelOption.setIconSize(QtCore.QSize(16, 16))
+            self._panelOption.setToolTip("Panel options")
+            self._panelOption.clicked.connect(self.panelOptionClicked)
+            self._titleLayout.addWidget(self._panelOption, 0)
 
         self._mainLayout.addWidget(self._titleWidget, 0)
 
