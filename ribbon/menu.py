@@ -1,5 +1,6 @@
 import typing
 
+from PyQt5 import QtGui
 from qtpy import QtWidgets, QtCore
 
 
@@ -26,6 +27,7 @@ class RibbonMenu(QtWidgets.QMenu):
             title = ''
             parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(title, parent)
+        self.setFont(QtWidgets.QApplication.instance().font())
 
     def addWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the menu.
@@ -99,3 +101,18 @@ class RibbonMenu(QtWidgets.QMenu):
         label = QtWidgets.QLabel(text)
         label.setAlignment(alignment)
         self.addWidget(label)
+
+
+class RibbonPermanentMenu(RibbonMenu):
+    """
+    A permanent menu.
+    """
+    actionAdded = QtCore.Signal(QtWidgets.QAction)
+
+    def hideEvent(self, a0: QtGui.QHideEvent) -> None:
+        self.show()
+
+    def actionEvent(self, a0: QtGui.QActionEvent) -> None:
+        if a0.type() == QtGui.QActionEvent.ActionAdded:
+            self.actionAdded.emit(a0.action())
+        super().actionEvent(a0)
