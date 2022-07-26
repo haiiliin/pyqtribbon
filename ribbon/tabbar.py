@@ -1,3 +1,5 @@
+import typing
+
 from qtpy import QtWidgets, QtGui, QtCore
 
 
@@ -9,6 +11,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
     _contextCategoryDarkColorHeight = 5
 
     _tabColors = {}
+    _associated_tabs = {}
 
     def __init__(self, parent=None):
         """Create a new tab bar.
@@ -31,7 +34,18 @@ class RibbonTabBar(QtWidgets.QTabBar):
                 return i
         return -1
 
-    def addTab(self, text: str, color: QtGui.QColor = None) -> int:
+    def tabTitles(self) -> typing.List[str]:
+        """Return the titles of all tabs.
+
+        :return: The titles of all tabs.
+        """
+        return [self.tabText(i) for i in range(self.count())]
+
+    def addTab(
+        self,
+        text: str,
+        color: QtGui.QColor = None,
+    ) -> int:
         """Add a new tab to the tab bar.
 
         :param text: The text of the tab.
@@ -41,6 +55,34 @@ class RibbonTabBar(QtWidgets.QTabBar):
         self._tabColors[text] = color
         return super().addTab(text)
 
+    def addAssociatedTabs(
+        self,
+        name: str,
+        texts: typing.List[str],
+        color: QtGui.QColor,
+    ) -> typing.List[int]:
+        """Add associated multiple tabs which have the same color to the tab bar.
+
+        :param name: The name of the context category.
+        :param texts: The texts of the tabs.
+        :param color: The color of the tabs.
+        """
+        self._tabColors[name] = color
+        for text in texts:
+            self._associated_tabs[text] = [t for t in texts if t != text]
+        return [self.addTab(text, color) for text in texts]
+
+    def removeAssociatedTabs(self, titles: typing.List[str]) -> None:
+        """Remove tabs with the given titles.
+
+        :param titles: The titles of the tabs to remove.
+        """
+        for title in titles:
+            self.removeTab(self.indexOf(title))
+            del self._tabColors[title]
+            if title in self._associated_tabs:
+                del self._associated_tabs[title]
+
     def currentTabColor(self) -> QtGui.QColor:
         """Current tab color
 
@@ -48,34 +90,45 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         return self._tabColors[self.tabText(self.currentIndex())]
 
+    def _paintTabRect(self, rect: QtCore.QRect, color: QtGui.QColor) -> None:
+        """Paint the tab rectangle.
+
+        :param rect: The tab rectangle.
+        :param color: The color of the tab.
+        """
+        if self.currentIndex() > 0:
+            rect.setLeft(rect.left())
+
+        rect.setHeight(self.height() - 1)
+        rect.setTop(self._contextCategoryTopMargin)
+
+        # Paint top dark color area
+        painter = QtGui.QPainter(self)
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        painter.setPen(QtCore.Qt.NoPen)
+        color = QtGui.QColor(color)  # in case color is a GlobalColor object
+        painter.setBrush(color)
+        painter.drawRect(rect.x(),
+                         self._contextCategoryTopMargin,
+                         rect.width(),
+                         self._contextCategoryDarkColorHeight)
+
+        # Paint rest of the category
+        lightColor = color.lighter(190)
+        rect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
+        painter.fillRect(rect, lightColor)
+
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         """Paint the tab bar."""
         if self.count() == 0:
             super().paintEvent(a0)
         else:
-            color = self.currentTabColor()
-            if color is not None:
-                # Tab rectangle
-                tabRect = self.tabRect(self.currentIndex())
-                if self.currentIndex() > 0:
-                    tabRect.setLeft(tabRect.left() + 6)
-
-                tabRect.setHeight(self.height() - 1)
-                tabRect.setTop(self._contextCategoryTopMargin)
-
-                # Paint top dark color area
-                painter = QtGui.QPainter(self)
-                painter.setRenderHint(QtGui.QPainter.Antialiasing)
-                painter.setPen(QtCore.Qt.NoPen)
-                color = QtGui.QColor(color)  # in case color is a GlobalColor object
-                painter.setBrush(color)
-                painter.drawRect(tabRect.x(),
-                                 self._contextCategoryTopMargin,
-                                 tabRect.width(),
-                                 self._contextCategoryDarkColorHeight)
-
-                # Paint rest of the category
-                lightColor = color.lighter(190)
-                tabRect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
-                painter.fillRect(tabRect, lightColor)
+            currentTabText = self.tabText(self.currentIndex())
+            currentTabColor = self._tabColors[currentTabText]
+            if currentTabColor is not None:
+                self._paintTabRect(self.tabRect(self.currentIndex()), currentTabColor)
+                if currentTabText in self._associated_tabs and self._associated_tabs[currentTabText]:
+                    for tabText in self._associated_tabs[currentTabText]:
+                        self._paintTabRect(self.tabRect(self.indexOf(tabText)),
+                                           currentTabColor)
             super().paintEvent(a0)
