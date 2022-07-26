@@ -111,6 +111,8 @@ Manage Categories
     RibbonBar.hideContextCategory
     RibbonBar.removeCategory
     RibbonBar.setCurrentCategory
+    RibbonBar.currentCategory
+    RibbonBar.showCategoryByIndex
 
 Customize Categories
 --------------------

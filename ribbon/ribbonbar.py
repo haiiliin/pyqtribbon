@@ -3,7 +3,8 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonCategoryStyle, contextColors
+from .category import (RibbonCategory, RibbonContextCategory, RibbonNormalCategory,
+                       RibbonCategoryStyle, contextColors, RibbonContextCategories)
 from .separator import RibbonHorizontalSeparator
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget
@@ -71,9 +72,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         # Connect signals
         self._titleWidget.helpButtonClicked.connect(self.helpButtonClicked)
         self._titleWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
-        self._titleWidget.tabBar().currentChanged.connect(
-            lambda index: self._stackedWidget.setCurrentIndex(index)
-        )
+        self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)
         self.setRibbonStyle(RibbonStyle.Default)
 
     def actionAt(self, QPoint):
@@ -322,7 +321,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         if style == RibbonCategoryStyle.Context:
             if color is None:
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
-            self._contextCategoryCount += 1
+                self._contextCategoryCount += 1
         category = (RibbonContextCategory(title, color, self) if style == RibbonCategoryStyle.Context else
                     RibbonNormalCategory(title, self))
         category.setFixedHeight(self._ribbonHeight -
@@ -331,10 +330,10 @@ class RibbonBar(QtWidgets.QMenuBar):
                                 self._mainLayout.contentsMargins().bottom() -
                                 self._titleWidget.height() -
                                 self._separator.height() - 4)  # 4: extra space for drawing lines when debugging
+        self._categories[title] = category
+        self._stackedWidget.addWidget(category)
         if style == RibbonCategoryStyle.Normal:
-            self._categories[title] = category
             self._titleWidget.tabBar().addTab(title, color)
-            self._stackedWidget.addWidget(category)
         elif style == RibbonCategoryStyle.Context:
             category.hide()
         return category
@@ -347,7 +346,11 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self.addCategory(title, RibbonCategoryStyle.Normal)
 
-    def addContextCategory(self, title: str, color: QtGui.QColor = None) -> RibbonContextCategory:
+    def addContextCategory(
+        self,
+        title: str,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+    ) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
 
         :param title: The title of the category.
@@ -356,25 +359,74 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self.addCategory(title, RibbonCategoryStyle.Context, color)
 
-    def showContextCategory(self, category: RibbonContextCategory):
-        """Show the given category, if it is not a context category, nothing happens.
+    def addContextCategories(
+        self,
+        name: str,
+        titles: typing.List[str],
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+    ) -> RibbonContextCategories:
+        """Add a new context category to the ribbon.
+
+        :param name: The name of the context categories.
+        :param titles: The title of the category.
+        :param color: The color of the context category, if None, the default color will be used.
+        :return: The newly created category.
+        """
+        if color is None:
+            color = contextColors[self._contextCategoryCount % len(contextColors)]
+            self._contextCategoryCount += 1
+        categories = RibbonContextCategories(
+            name, color, {title: self.addContextCategory(title, color) for title in titles}, self,
+        )
+        return categories
+
+    def showCategoryByIndex(self, index: int):
+        """Show category by tab index
+
+        :param index: tab index
+        """
+        title = self._titleWidget.tabBar().tabText(index)
+        for category in self._categories.values():
+            if category.title() == title:
+                self._stackedWidget.setCurrentWidget(category)
+                break
+
+    def showContextCategory(self, category: typing.Union[RibbonContextCategory, RibbonContextCategories]):
+        """Show the given category or categories, if it is not a context category, nothing happens.
 
         :param category: The category to show.
         """
-        self._categories[category.title()] = category
-        self._titleWidget.tabBar().addTab(category.title(), category.color())
-        self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - 1)
-        self._stackedWidget.addWidget(category)
-        self._stackedWidget.setCurrentIndex(self._titleWidget.tabBar().count() - 1)
+        if isinstance(category, RibbonContextCategory):
+            self._titleWidget.tabBar().addTab(category.title(), category.color())
+            self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - 1)
+            self._stackedWidget.setCurrentWidget(category)
+        elif isinstance(category, RibbonContextCategories):
+            categories = category
+            titles = list(categories.keys())
+            self._titleWidget.tabBar().addAssociatedTabs(categories.name(), titles, categories.color())
+            self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - len(titles))
+            self._stackedWidget.setCurrentWidget(categories[titles[0]])
 
-    def hideContextCategory(self, category: RibbonContextCategory):
-        """Hide the given category, if it is not a context category, nothing happens.
+    def hideContextCategory(self, category: typing.Union[RibbonContextCategory, RibbonContextCategories]):
+        """Hide the given category or categories, if it is not a context category, nothing happens.
 
         :param category: The category to hide.
         """
-        self._categories.pop(category.title(), None)
-        self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
-        self._stackedWidget.removeWidget(category)
+        if isinstance(category, RibbonContextCategory):
+            self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
+        elif isinstance(category, RibbonContextCategories):
+            categories = category
+            for c in categories:
+                self.tabBar().removeTab(self.tabBar().indexOf(c.title()))
+
+    def categoryVisible(self, category: RibbonCategory) -> bool:
+        """Return whether the category is shown.
+
+        :param category: The category to check.
+
+        :return: Whether the category is shown.
+        """
+        return category.title() in self._titleWidget.tabBar().tabTitles()
 
     def removeCategory(self, category: RibbonCategory):
         """Remove a category from the ribbon.
@@ -383,16 +435,29 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         index = self._titleWidget.tabBar().indexOf(category.title())
         self.tabBar().removeTab(index)
-        self._stackedWidget.removeWidget(self._stackedWidget.widget(index))
+        self._stackedWidget.removeWidget(category)
+
+    def removeCategories(self, categories: RibbonContextCategories):
+        """Remove a list of categories from the ribbon.
+
+        :param categories: The categories to remove.
+        """
+        for category in categories.values():
+            self.removeCategory(category)
 
     def setCurrentCategory(self, category: RibbonCategory):
         """Set the current category.
 
         :param category: The category to set.
         """
-        index = self._titleWidget.tabBar().indexOf(category.title())
-        self.tabBar().setCurrentIndex(index)
-        self._stackedWidget.setCurrentIndex(index)
+        self._stackedWidget.setCurrentWidget(category)
+
+    def currentCategory(self) -> RibbonCategory:
+        """Return the current category.
+
+        :return: The current category.
+        """
+        return self._categories[self._titleWidget.tabBar().tabText(self._titleWidget.tabBar().currentIndex())]
 
     def minimumSizeHint(self) -> QtCore.QSize:
         """Return the minimum size hint of the widget.
