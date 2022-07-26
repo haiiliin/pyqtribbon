@@ -16,7 +16,6 @@ class RibbonButtonStyle(IntEnum):
 class RibbonToolButton(QtWidgets.QToolButton):
     """Tool button that is showed in the ribbon."""
     _buttonStyle: RibbonButtonStyle
-    _actions: typing.List[QtWidgets.QAction]
 
     _largeButtonIconSize = 64
     _mediumButtonIconSize = 48
@@ -28,7 +27,6 @@ class RibbonToolButton(QtWidgets.QToolButton):
         :param parent: The parent widget.
         """
         super().__init__(parent)
-        self._actions = []
 
         # Styles
         self.setButtonStyle(RibbonButtonStyle.Large)
