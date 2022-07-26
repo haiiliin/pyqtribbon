@@ -40,7 +40,7 @@ if __name__ == "__main__":
     ribbon.addQuickAccessButton(redoButton)
 
     category1 = ribbon.addCategory("Category 1")
-    panel = category1.addPanel("Panel 1")
+    panel = category1.addPanel("Panel 1", showPanelOptionButton=False)
     panel.addSmallButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QIcon("icons/close.png"))
     panel.addSmallButton("Button 3", icon=QIcon("icons/close.png"))
