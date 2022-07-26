@@ -6,7 +6,9 @@ categories:
   - title: '🚀 Features'
     labels:
       - 'feature'
+      - 'new feature'
       - 'enhancement'
+      - 'customization'
   - title: '🐛 Bug Fixes'
     labels:
       - 'fix'
