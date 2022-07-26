@@ -1,4 +1,3 @@
-import typing
 from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore
@@ -43,14 +42,46 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = self._smallButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+            self.setStyleSheet(
+                """
+                RibbonToolButton::menu-indicator {
+                    subcontrol-origin: padding;
+                    subcontrol-position: right;
+                    right: -5px;
+                }
+                """
+            )
         elif style == RibbonButtonStyle.Medium:
             height = self._mediumButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+            self.setStyleSheet(
+                """
+                RibbonToolButton::menu-indicator {
+                    subcontrol-origin: padding;
+                    subcontrol-position: right;
+                    right: -5px;
+                }
+                """
+            )
         elif style == RibbonButtonStyle.Large:
             height = self._largeButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+            self.setStyleSheet(
+                """
+                RibbonToolButton[popupMode="0"]::menu-indicator {
+                    subcontrol-origin: padding;
+                    subcontrol-position: bottom;
+                    bottom: -5px;
+                }
+                RibbonToolButton[popupMode="2"]::menu-indicator {
+                    subcontrol-origin: padding;
+                    subcontrol-position: bottom;
+                    bottom: -5px;
+                }
+                """
+            )
 
     def buttonStyle(self) -> RibbonButtonStyle:
         """Get the button style of the button.
