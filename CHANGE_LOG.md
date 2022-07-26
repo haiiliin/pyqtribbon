@@ -94,5 +94,4 @@ The first release which supports:
 - Remove RibbonMainWindow 
   ([c47bd6f](https://github.com/haiiliin/pyqtribbon/commit/c47bd6fc797431e7effc7898a53c7039a7bc9356)). 
 
-# [0.2.0] 
-- Add option to customize whether to show the panel option button ([#5](/../../issues/5)).
+- The change log will now be displayed in the release page.
