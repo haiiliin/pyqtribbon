@@ -164,6 +164,13 @@ RibbonGalleryPopupListWidget
    :members:
    :show-inheritance:
 
+RibbonPopupWidget
+~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.gallery.RibbonPopupWidget
+   :members:
+   :show-inheritance:
+
 Ribbon Tool Button
 ------------------
 
@@ -212,5 +219,12 @@ RibbonMenu
 ~~~~~~~~~~
 
 .. autoclass:: ribbon.menu.RibbonMenu
+   :members:
+   :show-inheritance:
+
+RibbonPermanentMenu
+~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.menu.RibbonPermanentMenu
    :members:
    :show-inheritance:
