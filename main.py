@@ -8,8 +8,9 @@ from ribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    app.setFont(QtGui.QFont("Times New Roman", 8))
+    app.setFont(QtGui.QFont("Times New Roman", 10))
     app.setStyle("Windows")
+    app.setStyleSheet(open("styles/default.qss", "r").read())
 
     window = QtWidgets.QMainWindow()
     ribbon = RibbonBar()
@@ -159,6 +160,15 @@ if __name__ == "__main__":
     gallery = panel.addGallery(popupHideOnClick=True)
     for i in range(100):
         gallery.addToggleButton(f'item {i+1}', QIcon("icons/close.png"))
+    popupMenu = gallery.popupMenu()
+    submenu = popupMenu.addMenu(QIcon("icons/close.png"), 'Submenu')
+    submenu.addAction(QIcon("icons/close.png"), "Action 4")
+    popupMenu.addAction(QtGui.QIcon("icons/close.png"), "Action 1")
+    popupMenu.addAction(QtGui.QIcon("icons/close.png"), "Action 2")
+    popupMenu.addSeparator()
+    popupMenu.addWidget(QtWidgets.QLabel("This is a custom widget"))
+    formLayout = popupMenu.addFormLayoutWidget()
+    formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
