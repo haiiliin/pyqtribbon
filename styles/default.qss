@@ -54,6 +54,7 @@ RibbonPopupWidget {
 }
 
 RibbonMenu, QMenu {
+    padding: 5px;
     border: 1px solid gray;
     background-color: white;
 }
