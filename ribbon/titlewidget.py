@@ -31,12 +31,26 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtonHeight = 40
     _rightButtonHeight = 24
 
+    @typing.overload
     def __init__(self, title='PyQtRibbon', parent=None):
+        pass
+
+    @typing.overload
+    def __init__(self, parent=None):
+        pass
+
+    def __init__(self, *args, **kwargs):
         """Initialize the ribbon title widget.
 
         :param title: The title of the ribbon.
         :param parent: The parent widget.
         """
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get('title', 'PyQtRibbon')
+            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
+        else:
+            title = 'PyQtRibbon'
+            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         # Tab bar layout
         self.setFixedHeight(self._tabBarHeight)
