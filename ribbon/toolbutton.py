@@ -52,6 +52,13 @@ class RibbonToolButton(QtWidgets.QToolButton):
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
 
+    def buttonStyle(self) -> RibbonButtonStyle:
+        """Get the button style of the button.
+
+        :return: The button style of the button.
+        """
+        return self._buttonStyle
+
     def addRibbonMenu(self) -> RibbonMenu:
         """Add a ribbon menu for the button.
 
