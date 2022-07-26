@@ -67,6 +67,13 @@ RibbonContextCategory
    :members:
    :show-inheritance:
 
+RibbonContextCategories
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.category.RibbonContextCategories
+   :members:
+   :show-inheritance:
+
 RibbonCategoryStyle
 ~~~~~~~~~~~~~~~~~~~
 
