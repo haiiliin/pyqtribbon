@@ -79,6 +79,18 @@ if __name__ == "__main__":
     saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
     panel.addWidget(saveButton, rowSpan=6)
 
+    saveButton = panel.addLargeButton("Button 11", icon=QIcon("icons/close.png"))
+    menu = saveButton.addRibbonMenu()
+    menu.addAction(QIcon("icons/close.png"), "Action 1")
+    menu.addAction(QIcon("icons/close.png"), "Action 2")
+    menu.addAction(QIcon("icons/close.png"), "Action 3")
+    menu.addSpacing()
+    menu.addLabel("This is a custom widget")
+    formLayout = menu.addFormLayoutWidget()
+    formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
+    saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+    panel.addWidget(saveButton, rowSpan=6)
+
     panel = category1.addPanel("Panel 2")
     panel.addMediumButton("Button 8", icon=QIcon("icons/close.png"))
     panel.addMediumButton("Button 9", icon=QIcon("icons/close.png"))
