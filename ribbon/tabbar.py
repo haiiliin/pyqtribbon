@@ -99,7 +99,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         :param color: The color of the tab.
         """
         if self.currentIndex() > 0:
-            rect.setLeft(rect.left())
+            rect.setRight(rect.right() + 5)
 
         rect.setHeight(self.height() - 1)
         rect.setTop(self._contextCategoryTopMargin)
