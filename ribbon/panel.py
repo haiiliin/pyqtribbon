@@ -21,6 +21,10 @@ class RibbonSpaceFindMode(IntEnum):
     RowWise = 1
 
 
+ColumnWise = RibbonSpaceFindMode.ColumnWise
+RowWise = RibbonSpaceFindMode.RowWise
+
+
 class RibbonGridLayoutManager(object):
     """Grid Layout Manager."""
 

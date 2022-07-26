@@ -16,6 +16,10 @@ class RibbonStyle(IntEnum):
     Debug = 1
 
 
+Debug = RibbonStyle.Debug
+Default = RibbonStyle.Default
+
+
 class RibbonBar(QtWidgets.QMenuBar):
     """The RibbonBar class is the top level widget that contains the ribbon.
     """

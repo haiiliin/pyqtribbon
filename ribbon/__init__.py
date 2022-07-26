@@ -1,5 +1,5 @@
-from .category import RibbonCategoryStyle
-from .panel import RibbonSpaceFindMode
-from .ribbonbar import RibbonBar, RibbonStyle
-from .toolbutton import RibbonButtonStyle
+from .category import RibbonCategoryStyle, Normal, Context
+from .panel import RibbonSpaceFindMode, ColumnWise, RowWise
+from .ribbonbar import RibbonBar, RibbonStyle, Default, Debug
+from .toolbutton import RibbonButtonStyle, Small, Medium, Large
 from .menu import RibbonMenu, RibbonPermanentMenu
