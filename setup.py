@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pyqtribbon",
-    version="0.2.0",
+    version="0.2.1",
     author="WANG Hailin",
     author_email="hailin.wang@connect.polyu.hk",
     description="PyQtRibbon is a Qt-based application framework for building user interfaces.",
