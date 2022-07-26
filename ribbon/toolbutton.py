@@ -3,6 +3,8 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore
 
+from .menu import RibbonMenu
+
 
 class RibbonButtonStyle(IntEnum):
     """Button style, Small, Medium, or Large."""
@@ -51,3 +53,12 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = self._largeButtonIconSize
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+
+    def addRibbonMenu(self) -> RibbonMenu:
+        """Add a ribbon menu for the button.
+
+        :return: The added ribbon menu.
+        """
+        menu = RibbonMenu()
+        self.setMenu(menu)
+        return menu
