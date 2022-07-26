@@ -204,3 +204,13 @@ RibbonVerticalSeparator
 .. autoclass:: ribbon.separator.RibbonVerticalSeparator
    :members:
    :show-inheritance:
+
+Ribbon Menu
+-----------
+
+RibbonMenu
+~~~~~~~~~~
+
+.. autoclass:: ribbon.menu.RibbonMenu
+   :members:
+   :show-inheritance:
