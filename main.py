@@ -48,6 +48,8 @@ if __name__ == "__main__":
     showCategoryButton2 = panel.addMediumToggleButton("Show/Hide Category 2", icon=QIcon("icons/close.png"))
     panel.addVerticalSeparator()
     showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QIcon("icons/close.png"))
+    showCategoryButton45 = panel.addMediumToggleButton("Show/Hide Category 4/5", icon=QIcon("icons/close.png"),
+                                                       colSpan=2, alignment=QtCore.Qt.AlignLeft)
     panel.addLargeButton("Button 6", icon=QIcon("icons/close.png"))
     panel.addVerticalSeparator()
     panel.addMediumButton("Button 7", icon=QIcon("icons/close.png"))
@@ -117,7 +119,7 @@ if __name__ == "__main__":
     panel.addSmallButton("This is a very very very very very long button",
                          icon=QIcon("icons/close.png"), colSpan=3)
 
-    category2 = ribbon.addContextCategory("Context Category 2", color=QtCore.Qt.red)
+    category2 = ribbon.addContextCategory("Context 2", color=QtCore.Qt.red)
     panel = category2.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QIcon("icons/close.png"))
@@ -158,13 +160,13 @@ if __name__ == "__main__":
 
     panel.addCalendarWidget()
 
-    category3 = ribbon.addContextCategory("Context Category 3")
+    category3 = ribbon.addContextCategory("Context 3")
     panel = category3.addPanel("Panel 1")
     panel.addLargeButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addLargeButton("Button 2", icon=QIcon("icons/close.png"))
     panel.addLargeButton("Button 3", icon=QIcon("icons/close.png"))
 
-    showCategoryButton2.clicked.connect(lambda checked: category2.setCategoryVisible(checked))
+    showCategoryButton2.clicked.connect(category2.setCategoryVisible)
     showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
 
     gallery = panel.addGallery(popupHideOnClick=True)
@@ -179,6 +181,19 @@ if __name__ == "__main__":
     popupMenu.addWidget(QtWidgets.QLabel("This is a custom widget"))
     formLayout = popupMenu.addFormLayoutWidget()
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
+
+    categories = ribbon.addContextCategories('name', ['Context 4', 'Context 5'])
+    showCategoryButton45.clicked.connect(categories.setCategoriesVisible)
+
+    panel1 = categories['Context 4'].addPanel('Context 4 Panel 1')
+    panel1.addLargeButton('Button 1', icon=QIcon('icons/close.png'))
+    panel1.addLargeButton('Button 2', icon=QIcon('icons/close.png'))
+    panel1.addLargeButton('Button 3', icon=QIcon('icons/close.png'))
+
+    panel2 = categories['Context 5'].addPanel('Context 5 Panel 1')
+    panel2.addLargeButton('Button 4', icon=QIcon('icons/close.png'))
+    panel2.addLargeButton('Button 5', icon=QIcon('icons/close.png'))
+    panel2.addLargeButton('Button 6', icon=QIcon('icons/close.png'))
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
