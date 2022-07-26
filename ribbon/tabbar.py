@@ -66,6 +66,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         :param name: The name of the context category.
         :param texts: The texts of the tabs.
         :param color: The color of the tabs.
+        :return: The indices of the tabs.
         """
         self._tabColors[name] = color
         for text in texts:
