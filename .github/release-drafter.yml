@@ -1,6 +1,6 @@
 # .github/release-drafter.yml
 
-name-template: 'v$RESOLVED_VERSION 🌈'
+name-template: 'V$RESOLVED_VERSION 🌈'
 tag-template: 'v$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
