@@ -406,7 +406,6 @@ class RibbonBar(QtWidgets.QMenuBar):
             categories = category
             titles = list(categories.keys())
             self._titleWidget.tabBar().addAssociatedTabs(categories.name(), titles, categories.color())
-            self._titleWidget.tabBar().addAssociatedTabs(categories.name(), titles, categories.color())
             self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().count() - len(titles))
             self._stackedWidget.setCurrentWidget(categories[titles[0]])
 

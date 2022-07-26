@@ -79,10 +79,11 @@ class RibbonTabBar(QtWidgets.QTabBar):
         :param titles: The titles of the tabs to remove.
         """
         for title in titles:
-            self.removeTab(self.indexOf(title))
-            del self._tabColors[title]
-            if title in self._associated_tabs:
-                del self._associated_tabs[title]
+            if title in self.tabTitles():
+                self.removeTab(self.indexOf(title))
+                del self._tabColors[title]
+                if title in self._associated_tabs:
+                    del self._associated_tabs[title]
 
     def currentTabColor(self) -> QtGui.QColor:
         """Current tab color
