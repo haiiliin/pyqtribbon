@@ -7,7 +7,6 @@ class RibbonTabBar(QtWidgets.QTabBar):
     _contextCategoryTopMargin = 0
     #: context category dark color height
     _contextCategoryDarkColorHeight = 5
-    _contextColor = QtGui.QColor(255, 0, 0)
 
     _tabColors = {}
 
@@ -68,14 +67,15 @@ class RibbonTabBar(QtWidgets.QTabBar):
                 painter = QtGui.QPainter(self)
                 painter.setRenderHint(QtGui.QPainter.Antialiasing)
                 painter.setPen(QtCore.Qt.NoPen)
-                painter.setBrush(self.currentTabColor())
+                color = QtGui.QColor(color)  # in case color is a GlobalColor object
+                painter.setBrush(color)
                 painter.drawRect(tabRect.x(),
                                  self._contextCategoryTopMargin,
                                  tabRect.width(),
                                  self._contextCategoryDarkColorHeight)
 
                 # Paint rest of the category
-                lightColor = self._contextColor.lighter(190)
+                lightColor = color.lighter(190)
                 tabRect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
                 painter.fillRect(tabRect, lightColor)
             super().paintEvent(a0)

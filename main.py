@@ -117,7 +117,7 @@ if __name__ == "__main__":
     panel.addSmallButton("This is a very very very very very long button",
                          icon=QIcon("icons/close.png"), colSpan=3)
 
-    category2 = ribbon.addContextCategory("Context Category 2")
+    category2 = ribbon.addContextCategory("Context Category 2", color=QtCore.Qt.red)
     panel = category2.addPanel("Panel 1")
     panel.addSmallButton("Button 1", icon=QIcon("icons/close.png"))
     panel.addSmallButton("Button 2", icon=QIcon("icons/close.png"))
