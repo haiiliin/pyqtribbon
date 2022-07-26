@@ -1,6 +1,12 @@
 name: pytest
 
-on: [push]
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'ribbon/**'
+  workflow_dispatch:
 
 jobs:
   build:
