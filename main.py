@@ -97,11 +97,21 @@ if __name__ == "__main__":
     panel.addWidget(saveButton, rowSpan=6)
 
     panel = category1.addPanel("Panel 2")
-    panel.addMediumButton("Button 8", icon=QIcon("icons/close.png"))
+    button = panel.addMediumButton("Button 8", icon=QIcon("icons/close.png"))
+    menu = QtWidgets.QMenu()
+    menu.addAction(QIcon("icons/close.png"), "Action 1")
+    menu.addAction(QIcon("icons/close.png"), "Action 2")
+    menu.addAction(QIcon("icons/close.png"), "Action 3")
+    button.setMenu(menu)
     panel.addMediumButton("Button 9", icon=QIcon("icons/close.png"))
     panel.addSmallButton("This is a very very very very very long button",
                          icon=QIcon("icons/close.png"), colSpan=3)
-    panel.addSmallToggleButton("Button 10", icon=QIcon("icons/close.png"))
+    button = panel.addSmallToggleButton("Button 10", icon=QIcon("icons/close.png"))
+    menu = QtWidgets.QMenu()
+    menu.addAction(QIcon("icons/close.png"), "Action 1")
+    menu.addAction(QIcon("icons/close.png"), "Action 2")
+    menu.addAction(QIcon("icons/close.png"), "Action 3")
+    button.setMenu(menu)
     panel.addSmallToggleButton("Button 11", icon=QIcon("icons/close.png"))
     panel.addSmallToggleButton("Button 12", icon=QIcon("icons/close.png"))
     panel.addSmallButton("This is a very very very very very long button",

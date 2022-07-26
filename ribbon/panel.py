@@ -230,7 +230,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
-        widget.setMaximumHeight(maximumHeight)
+        widget.setFixedHeight(maximumHeight)
         item = RibbonPanelItemWidget(self)
         item.setFixedHeight(maximumHeight)
         item.addWidget(widget)
