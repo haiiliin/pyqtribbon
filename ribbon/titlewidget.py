@@ -107,7 +107,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignBottom)
         self._mainLayout.addWidget(self._tabBar, 1, QtCore.Qt.AlignBottom)
-        self._mainLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignBottom)
+        self._mainLayout.addWidget(self._titleLabel, 0, QtCore.Qt.AlignBottom)
         self._mainLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
 
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
