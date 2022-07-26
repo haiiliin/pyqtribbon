@@ -107,6 +107,7 @@ Manage Categories
     RibbonBar.addCategory
     RibbonBar.addNormalCategory
     RibbonBar.addContextCategory
+    RibbonBar.addContextCategories
     RibbonBar.showContextCategory
     RibbonBar.hideContextCategory
     RibbonBar.removeCategory
