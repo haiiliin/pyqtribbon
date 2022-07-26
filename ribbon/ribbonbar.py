@@ -386,10 +386,8 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param index: tab index
         """
         title = self._titleWidget.tabBar().tabText(index)
-        for category in self._categories.values():
-            if category.title() == title:
-                self._stackedWidget.setCurrentWidget(category)
-                break
+        if title in self._categories:
+            self._stackedWidget.setCurrentWidget(self._categories[title])
 
     def showContextCategory(self, category: typing.Union[RibbonContextCategory, RibbonContextCategories]):
         """Show the given category or categories, if it is not a context category, nothing happens.
