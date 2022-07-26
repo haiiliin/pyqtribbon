@@ -103,11 +103,3 @@ QTabBar::tab:!selected {
 	border-bottom: 0px solid transparent;
 	margin-top: 0px;
 }
-
-QToolButton::menu-button {
-	border: 2px solid transparent;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-	/* 16px width + 4px for border = 20px allocated above */
-	width: 16px;
-}
