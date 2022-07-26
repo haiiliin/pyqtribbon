@@ -44,6 +44,28 @@ RibbonGalleryButton {
 
 RibbonGalleryListWidget {
     border: 0px solid transparent;
+    background-color: white;
+}
+
+RibbonPopupWidget {
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+RibbonMenu, QMenu {
+    border: 1px solid gray;
+    background-color: white;
+}
+
+RibbonPermanentMenu {
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+QMenu:selected {
+    background-color: #e0e0e0;
 }
 
 RibbonApplicationButton {
