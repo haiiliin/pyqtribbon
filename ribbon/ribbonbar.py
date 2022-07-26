@@ -375,6 +375,14 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._categories.pop(category.title(), None)
         self.tabBar().removeTab(self.tabBar().indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
+    def categoryVisible(self, category: RibbonCategory) -> bool:
+        """Return whether the category is shown.
+
+        :param category: The category to check.
+
+        :return: Whether the category is shown.
+        """
+        return category.title() in self._titleWidget.tabBar().tabTitles()
 
     def removeCategory(self, category: RibbonCategory):
         """Remove a category from the ribbon.

@@ -38,6 +38,9 @@ class RibbonType:
     def setCategoryState(self, category, state):
         ...
 
+    def categoryVisible(self, category):
+        ...
+
     def categories(self) -> typing.Dict:
         ...
 

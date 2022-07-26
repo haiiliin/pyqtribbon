@@ -218,14 +218,69 @@ class RibbonContextCategory(RibbonCategory):
 
         :return: Whether the category is shown.
         """
-        return self.title() in self._ribbon.categories()
+        return self._ribbon.categoryVisible(self)
 
-    def setCategoryVisible(self, state: bool):
+    def setCategoryVisible(self, visible: bool):
         """Set the state of the category.
 
-        :param state: The state.
+        :param visible: The state.
         """
-        if state:
+        if visible:
             self.showContextCategory()
         else:
             self.hideContextCategory()
+
+
+class RibbonContextCategories(typing.Dict[str, RibbonContextCategory]):
+    """A list of context categories."""
+    _ribbon: RibbonType
+
+    def __init__(
+        self,
+        name: str,
+        color: QtGui.QColor,
+        categories: typing.Dict[str, RibbonContextCategory],
+        ribbon,
+    ):
+        self._name = name
+        self._color = color
+        self._ribbon = ribbon
+        super().__init__(categories)
+
+    def name(self) -> str:
+        """Return the name of the context categories."""
+        return self._name
+
+    def setName(self, name: str):
+        """Set the name of the context categories."""
+        self._name = name
+
+    def color(self) -> QtGui.QColor:
+        """Return the color of the context categories."""
+        return self._color
+
+    def setColor(self, color: QtGui.QColor):
+        """Set the color of the context categories."""
+        self._color = color
+
+    def showContextCategories(self):
+        """Show the categories"""
+        self._ribbon.showContextCategory(self)
+
+    def hideContextCategories(self):
+        """Hide the categories"""
+        self._ribbon.hideContextCategory(self)
+
+    def categoriesVisible(self) -> bool:
+        """Return whether the categories are shown."""
+        for category in self.values():
+            if category.categoryVisible():
+                return True
+        return False
+
+    def setCategoriesVisible(self, visible: bool):
+        """Set the state of the categories."""
+        if visible:
+            self.showContextCategories()
+        else:
+            self.hideContextCategories()
