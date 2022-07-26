@@ -15,6 +15,10 @@ class RibbonCategoryStyle(enum.IntEnum):
     Context = 1
 
 
+Normal = RibbonCategoryStyle.Normal
+Context = RibbonCategoryStyle.Context
+
+
 #: A list of context category colors
 contextColors = [
     QtGui.QColor(201, 89, 156),  # 玫红

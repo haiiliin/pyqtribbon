@@ -12,6 +12,11 @@ class RibbonButtonStyle(IntEnum):
     Large = 2
 
 
+Small = RibbonButtonStyle.Small
+Medium = RibbonButtonStyle.Medium
+Large = RibbonButtonStyle.Large
+
+
 class RibbonToolButton(QtWidgets.QToolButton):
     """Tool button that is showed in the ribbon."""
     _buttonStyle: RibbonButtonStyle
