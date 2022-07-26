@@ -62,11 +62,9 @@ if __name__ == "__main__":
     panel.addWidget(saveButton, rowSpan=6)
 
     saveButton = panel.addLargeButton("Button 9", icon=QIcon("icons/close.png"))
-    menu = QtWidgets.QMenu()
-    menu.addAction(QIcon("icons/close.png"), "Action 1")
-    menu.addAction(QIcon("icons/close.png"), "Action 2")
-    menu.addAction(QIcon("icons/close.png"), "Action 3")
-    saveButton.setMenu(menu)
+    saveButton.addAction(QtWidgets.QAction(QIcon("icons/close.png"), "Action 1", saveButton))
+    saveButton.addAction(QtWidgets.QAction(QIcon("icons/close.png"), "Action 2", saveButton))
+    saveButton.addAction(QtWidgets.QAction(QIcon("icons/close.png"), "Action 3", saveButton))
     saveButton.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
     panel.addWidget(saveButton, rowSpan=6)
 
