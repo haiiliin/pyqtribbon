@@ -20,12 +20,16 @@ RibbonTabBar::tab {
 }
 
 RibbonTabBar::tab:selected {
-	color: blue;
 	border-bottom: 3px solid blue;
 }
 
-RibbonTabBar::tab:hover:!selected, RibbonTabBar::tab:!selected {
+RibbonTabBar::tab:!selected {
 	border-bottom: none;
+}
+
+RibbonTabBar::tab:hover:!selected {
+    padding-left: 10px;
+	border-bottom: 3px solid gray;
 }
 
 RibbonPopupWidget {
