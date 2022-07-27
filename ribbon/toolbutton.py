@@ -25,6 +25,8 @@ class RibbonToolButton(QtWidgets.QToolButton):
     _mediumButtonIconSize = 48
     _smallButtonIconSize = 32
 
+    _maximumIconSize = 64
+
     def __init__(self, parent=None):
         """Create a new ribbon tool button.
 
@@ -37,6 +39,21 @@ class RibbonToolButton(QtWidgets.QToolButton):
         self.setAutoRaise(True)
         self.setFocusPolicy(QtCore.Qt.NoFocus)
 
+    def setMaximumIconSize(self, size: int):
+        """Set the maximum icon size of the button.
+
+        :param size: The maximum icon size of the button.
+        """
+        self._maximumIconSize = size
+        self.setButtonStyle(self._buttonStyle)
+
+    def maximumIconSize(self) -> int:
+        """Get the maximum icon size of the button.
+
+        :return: The maximum icon size of the button.
+        """
+        return self._maximumIconSize
+
     def setButtonStyle(self, style: RibbonButtonStyle):
         """Set the button style of the button.
 
@@ -45,6 +62,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
         self._buttonStyle = style
         if style == RibbonButtonStyle.Small:
             height = self._smallButtonIconSize
+            height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
             self.setStyleSheet(
@@ -58,6 +76,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
             )
         elif style == RibbonButtonStyle.Medium:
             height = self._mediumButtonIconSize
+            height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
             self.setStyleSheet(
@@ -71,6 +90,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
             )
         elif style == RibbonButtonStyle.Large:
             height = self._largeButtonIconSize
+            height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
             self.setStyleSheet(

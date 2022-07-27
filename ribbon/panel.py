@@ -341,10 +341,16 @@ class RibbonPanel(QtWidgets.QFrame):
             button.setToolTip(tooltip)
         if statusTip:
             button.setStatusTip(statusTip)
-        button.setMaximumHeight(self.height() - self._titleLabel.sizeHint().height() -
-                                self._mainLayout.spacing() -
-                                self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom())
+        maximumHeight = (self.height() - self._titleLabel.sizeHint().height() -
+                         self._mainLayout.spacing() -
+                         self._mainLayout.contentsMargins().top() -
+                         self._mainLayout.contentsMargins().bottom())
+        button.setMaximumHeight(maximumHeight)
+        if style == RibbonButtonStyle.Large:
+            fontSize = max(button.font().pointSize() * 4/3, button.font().pixelSize())
+            arrowSize = fontSize
+            maximumIconSize = max(maximumHeight - fontSize * 2 - arrowSize, 48)
+            button.setMaximumIconSize(maximumIconSize)
         if not showText:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.addWidget(
