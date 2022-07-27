@@ -20,6 +20,20 @@ Debug = RibbonStyle.Debug
 Default = RibbonStyle.Default
 
 
+class RibbonStackedWidget(QtWidgets.QStackedWidget):
+    """Stacked widget that is used to display the ribbon."""
+
+    def __init__(self, parent=None):
+        """Create a new ribbon stacked widget.
+
+        :param parent: The parent widget.
+        """
+        super().__init__(parent)
+        effect = QtWidgets.QGraphicsDropShadowEffect()
+        effect.setOffset(2, 2)
+        self.setGraphicsEffect(effect)
+
+
 class RibbonBar(QtWidgets.QMenuBar):
     """The RibbonBar class is the top level widget that contains the ribbon.
     """
@@ -62,7 +76,7 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         self._titleWidget = RibbonTitleWidget(title, self)
         self._separator = RibbonHorizontalSeparator(width=1, parent=self)
-        self._stackedWidget = QtWidgets.QStackedWidget(self)
+        self._stackedWidget = RibbonStackedWidget(self)
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
