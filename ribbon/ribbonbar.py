@@ -144,14 +144,8 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param style: The style to set.
         """
-        stylefiles = {
-            RibbonStyle.Default: 'default',
-            RibbonStyle.Debug: 'debug'
-        }
-        if style == RibbonStyle.Default:
-            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
-        elif style == RibbonStyle.Debug:
-            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
+        self.setStyleSheet(open(data_file_path(f"styles/base.qss"), "r").read() +
+                           open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read())
 
     def applicationOptionButton(self) -> QtWidgets.QToolButton:
         """Return the application button."""

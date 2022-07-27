@@ -1,128 +1,16 @@
 
 RibbonBar {
-    border: 0px solid gray;
-    background-color: white;
-}
-
-RibbonTabWidget {
-    border: 0px solid transparent;
-    border-radius: 20px;
-}
-
-RibbonCategory {
-    border: 0px solid transparent;
-    border-radius: 20px;
-    background-color: white;
-}
-
-RibbonCategoryScrollArea {
     border: none;
     background-color: transparent;
 }
 
-RibbonCategoryScrollAreaContents {
-    border: none;
+RibbonTitleWidget {
+    border-radius: 10px;
     background-color: transparent;
 }
 
-RibbonPanel {
-    border: 0px solid transparent;
-    border-radius: 20px;
-    background-color: white;
-}
-
-RibbonGallery {
-    border: 1px solid gray;
-    border-radius: 5px;
-    background-color: white;
-}
-
-RibbonGalleryButton {
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
-RibbonGalleryListWidget {
-    border: 0px solid transparent;
-    background-color: white;
-}
-
-RibbonPopupWidget {
-    border: 1px solid gray;
-    border-radius: 5px;
-    background-color: white;
-}
-
-RibbonMenu, QMenu {
-    padding: 5px;
-    border: 1px solid gray;
-    background-color: white;
-}
-
-RibbonPermanentMenu {
+RibbonStackedWidget {
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: white;
-}
-
-QMenu:selected {
-    background-color: #e0e0e0;
-}
-
-RibbonApplicationButton {
-    border: none;
-    padding: 0px;
-}
-
-RibbonApplicationButton::menu-indicator {
-    image: none;
-}
-
-/*QTabBar*/
-
-QTabBar {
-    background-color: transparent;
-	left: 10px;
-}
-
-QTabBar QToolButton {
-    background-color: transparent;
-}
-
-QTabBar::tab {
-	color: gray;
-	border: none;
-	background: transparent;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-left: 6px;
-	margin-bottom: 0px;
-	min-width: 100px;
-	max-width: 250px;
-	min-height: 25px;
-	max-height: 25px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 10px;
-	padding-bottom: 1px;
-}
-
-QTabBar::tab:selected, QTabBar::tab:hover {
-	border-top-left-radius: 0px;
-	border-top-right-radius: 0px;
-}
-
-QTabBar::tab:selected {
-	color: blue;
-	background: transparent;
-	border-bottom: 3px solid blue;
-}
-
-QTabBar::tab:hover:!selected {
-	border-bottom: 0px solid transparent;
-}
-
-QTabBar::tab:!selected {
-	border-bottom: 0px solid transparent;
-	margin-top: 0px;
 }
