@@ -75,7 +75,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._applicationButton.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._applicationButton.setText("PyQtRibbon")
         self._applicationButton.setToolTip("PyQtRibbon")
-        self._applicationMenu = QtWidgets.QMenu(self)
 
         self._quickAccessToolBar = QtWidgets.QToolBar()
         self._quickAccessToolBar.setFixedHeight(self._quickAccessButtonHeight)
@@ -140,27 +139,12 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """Return the application button."""
         return self._applicationButton
 
-    def applicationMenu(self) -> QtWidgets.QMenu:
-        """Return the application menu.
-
-        :return: The application menu.
-        """
-        return self._applicationMenu
-
     def setApplicationIcon(self, icon: QtGui.QIcon):
         """Set the application icon.
 
         :param icon: The icon to set.
         """
         self._applicationButton.setIcon(icon)
-
-    def addApplicationOptionAction(self, action: QtWidgets.QAction):
-        """Add a display option to the category.
-
-        :param action: The action of the display option.
-        """
-        self._applicationMenu.addAction(action)
-        self._applicationButton.setMenu(self._applicationMenu if self._applicationMenu.actions() else None)
 
     def tabBar(self) -> RibbonTabBar:
         """Return the tab bar of the ribbon.

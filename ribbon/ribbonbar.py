@@ -158,15 +158,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         self._titleWidget.applicationButton().setIcon(icon)
 
-    def addApplicationOptionAction(self, action: QtWidgets.QAction):
-        """Add a display option to the ribbon.
-
-        :param action: The action of the display option.
-        """
-        self._titleWidget.applicationMenu().addAction(action)
-        self._titleWidget.applicationButton().setMenu(self._titleWidget.applicationMenu()
-                                                      if self._titleWidget.applicationMenu().actions() else None)
-
     def addFileMenu(self) -> RibbonMenu:
         """Add a file menu to the ribbon."""
         return self.applicationOptionButton().addFileMenu()
