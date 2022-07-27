@@ -105,6 +105,7 @@ Manage Categories
 
     RibbonBar.categories
     RibbonBar.addCategory
+    RibbonBar.addCategoriesBy
     RibbonBar.addNormalCategory
     RibbonBar.addContextCategory
     RibbonBar.addContextCategories
@@ -136,6 +137,7 @@ Manage Panels
 .. autosummary::
 
     RibbonCategory.addPanel
+    RibbonCategory.addPanelsBy
     RibbonCategory.removePanel
     RibbonCategory.takePanel
     RibbonCategory.panel
@@ -173,8 +175,10 @@ Add Widgets to Panels
 .. autosummary::
 
     RibbonPanel.addWidget
+    RibbonPanel.addWidgetsBy
     RibbonPanel.removeWidget
     RibbonPanel.widget
+    RibbonPanel.widgets
     RibbonPanel.addSmallWidget
     RibbonPanel.addMediumWidget
     RibbonPanel.addLargeWidget
