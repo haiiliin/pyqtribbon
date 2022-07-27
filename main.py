@@ -207,9 +207,8 @@ if __name__ == "__main__":
     panel2.addLargeButton('Button 6', icon=QIcon('icons/close.png'))
 
     categories1 = ribbon.addCategoriesBy({
-        'Context 6': {
+        'Category 6': {
             "style": RibbonCategoryStyle.Normal,
-            "color": QtCore.Qt.red,
             "panels": {
                 "Panel 1": {
                     "showPanelOptionButton": True,
