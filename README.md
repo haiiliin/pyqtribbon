@@ -19,7 +19,7 @@ PyQtRibbon is a Qt-based application framework for building user interfaces.
 
 ## Installation
 
-`pyqtribbon` is distributed to [PyPI](https://pypi.org/project/pyqtribbon/), you can use pip to install it:
+PyQtRibbon is distributed to [PyPI](https://pypi.org/project/pyqtribbon/), you can use pip to install it:
 
 ```shell
 pip install pyqtribbon
