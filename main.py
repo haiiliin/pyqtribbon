@@ -10,7 +10,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 10))
     app.setStyle("Windows")
-    app.setStyleSheet(open("styles/default.qss", "r").read())
 
     window = QtWidgets.QMainWindow()
     ribbon = RibbonBar()
