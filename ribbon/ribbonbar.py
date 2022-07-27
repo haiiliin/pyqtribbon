@@ -5,7 +5,6 @@ from qtpy import QtWidgets, QtCore, QtGui
 
 from .category import (RibbonCategory, RibbonContextCategory, RibbonNormalCategory,
                        RibbonCategoryStyle, contextColors, RibbonContextCategories)
-from .separator import RibbonHorizontalSeparator
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget
 from .utils import data_file_path
@@ -18,6 +17,20 @@ class RibbonStyle(IntEnum):
 
 Debug = RibbonStyle.Debug
 Default = RibbonStyle.Default
+
+
+class RibbonStackedWidget(QtWidgets.QStackedWidget):
+    """Stacked widget that is used to display the ribbon."""
+
+    def __init__(self, parent=None):
+        """Create a new ribbon stacked widget.
+
+        :param parent: The parent widget.
+        """
+        super().__init__(parent)
+        effect = QtWidgets.QGraphicsDropShadowEffect()
+        effect.setOffset(2, 2)
+        self.setGraphicsEffect(effect)
 
 
 class RibbonBar(QtWidgets.QMenuBar):
@@ -61,15 +74,13 @@ class RibbonBar(QtWidgets.QMenuBar):
         self.setFixedHeight(self._ribbonHeight)
 
         self._titleWidget = RibbonTitleWidget(title, self)
-        self._separator = RibbonHorizontalSeparator(width=1, parent=self)
-        self._stackedWidget = QtWidgets.QStackedWidget(self)
+        self._stackedWidget = RibbonStackedWidget(self)
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._titleWidget, 0)
-        self._mainLayout.addWidget(self._separator, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
         self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
 
@@ -132,14 +143,8 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param style: The style to set.
         """
-        stylefiles = {
-            RibbonStyle.Default: 'default',
-            RibbonStyle.Debug: 'debug'
-        }
-        if style == RibbonStyle.Default:
-            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
-        elif style == RibbonStyle.Debug:
-            self.setStyleSheet(open(data_file_path(f"styles/{stylefiles[style]}.qss"), "r").read())
+        self.setStyleSheet(open(data_file_path(f"styles/base.qss"), "r").read() +
+                           open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read())
 
     def applicationOptionButton(self) -> QtWidgets.QToolButton:
         """Return the application button."""
@@ -332,8 +337,7 @@ class RibbonBar(QtWidgets.QMenuBar):
                                 self._mainLayout.spacing() * 2 -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom() -
-                                self._titleWidget.height() -
-                                self._separator.height() - 4)  # 4: extra space for drawing lines when debugging
+                                self._titleWidget.height())  # 4: extra space for drawing lines when debugging
         self._categories[title] = category
         self._stackedWidget.addWidget(category)
         if style == RibbonCategoryStyle.Normal:

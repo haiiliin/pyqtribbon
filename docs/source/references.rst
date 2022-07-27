@@ -43,6 +43,15 @@ RibbonTitleWidget
    :members:
    :show-inheritance:
 
+Ribbon Stacked Widget
+
+RibbonStackedWidget
+~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: ribbon.ribbonbar.RibbonStackedWidget
+   :members:
+   :show-inheritance:
+
 Ribbon Category
 ---------------
 
