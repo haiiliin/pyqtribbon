@@ -332,6 +332,13 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         return self._widgets[index]
 
+    def widgets(self) -> typing.List[QtWidgets.QWidget]:
+        """Get all the widgets in the panel.
+
+        :return: A list of all the widgets in the panel.
+        """
+        return self._widgets
+
     def addButton(
         self,
         text: str = None,
