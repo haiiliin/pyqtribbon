@@ -2,13 +2,23 @@ import typing
 
 from qtpy import QtWidgets, QtCore, QtGui
 
+from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
 from .utils import data_file_path
 
 
 class RibbonApplicationButton(QtWidgets.QToolButton):
     """Application button in the ribbon bar."""
-    pass
+
+    def addFileMenu(self) -> RibbonMenu:
+        """Add a new ribbon menu to the application button.
+
+        :return: The new ribbon menu.
+        """
+        menu = RibbonMenu(self)
+        self.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.setMenu(menu)
+        return menu
 
 
 class RibbonTitleLabel(QtWidgets.QLabel):
