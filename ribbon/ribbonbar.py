@@ -338,8 +338,7 @@ class RibbonBar(QtWidgets.QMenuBar):
                                 self._mainLayout.spacing() * 2 -
                                 self._mainLayout.contentsMargins().top() -
                                 self._mainLayout.contentsMargins().bottom() -
-                                self._titleWidget.height() -
-                                self._separator.height() - 4)  # 4: extra space for drawing lines when debugging
+                                self._titleWidget.height())  # 4: extra space for drawing lines when debugging
         self._categories[title] = category
         self._stackedWidget.addWidget(category)
         if style == RibbonCategoryStyle.Normal:
