@@ -78,8 +78,9 @@ class RibbonTabBar(QtWidgets.QTabBar):
 
         :param titles: The titles of the tabs to remove.
         """
+        tabTitles = self.tabTitles()
         for title in titles:
-            if title in self.tabTitles():
+            if title in tabTitles:
                 self.removeTab(self.indexOf(title))
                 del self._tabColors[title]
                 if title in self._associated_tabs:
@@ -98,9 +99,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         :param rect: The tab rectangle.
         :param color: The color of the tab.
         """
-        if self.currentIndex() > 0:
-            rect.setRight(rect.right() + 5)
-
+        rect.setRight(rect.right() + 5)
         rect.setHeight(self.height() - 1)
         rect.setTop(self._contextCategoryTopMargin)
 
@@ -122,9 +121,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         """Paint the tab bar."""
-        if self.count() == 0:
-            super().paintEvent(a0)
-        else:
+        if self.count() > 0:
             currentTabText = self.tabText(self.currentIndex())
             currentTabColor = self._tabColors[currentTabText]
             if currentTabColor is not None:
@@ -133,4 +130,4 @@ class RibbonTabBar(QtWidgets.QTabBar):
                     for tabText in self._associated_tabs[currentTabText]:
                         self._paintTabRect(self.tabRect(self.indexOf(tabText)),
                                            currentTabColor)
-            super().paintEvent(a0)
+        super().paintEvent(a0)
