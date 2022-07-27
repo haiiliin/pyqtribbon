@@ -46,6 +46,7 @@ Setup Application Button
     RibbonBar.applicationOptionButton
     RibbonBar.setApplicationIcon
     RibbonBar.addApplicationOptionAction
+    RibbonBar.addFileMenu
 
 Setup Title
 ~~~~~~~~~~~
