@@ -82,7 +82,7 @@ The first release which supports:
 - Rename titleText to title
   ([3e48852](https://github.com/haiiliin/pyqtribbon/commit/3e48852cf71e543eda8813b7e8cafdc6bbfcaa84)).
 
-# [0.1.12] Update examples and tutorials, Update base class of RibbonBar and remove RibbonMainWindow
+## [0.1.12] Update examples and tutorials, Update base class of RibbonBar and remove RibbonMainWindow
 
 - Update examples and tutorials 
   ([a37dcdf](https://github.com/haiiliin/pyqtribbon/commit/a37dcdfa8d4eae74bfb6a1186fb63914d35a5c42),
@@ -94,4 +94,4 @@ The first release which supports:
 - Remove RibbonMainWindow 
   ([c47bd6f](https://github.com/haiiliin/pyqtribbon/commit/c47bd6fc797431e7effc7898a53c7039a7bc9356)). 
 
-- The change log will now be displayed in the release page.
+## The change log will now be displayed in the release page.
