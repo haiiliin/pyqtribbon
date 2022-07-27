@@ -21,6 +21,18 @@ if __name__ == "__main__":
     window.setCentralWidget(QtWidgets.QWidget(window))
     layout = QtWidgets.QVBoxLayout(window.centralWidget())
 
+    fileMenu = ribbon.applicationOptionButton().addFileMenu()
+    submenu = fileMenu.addMenu(QtGui.QIcon("icons/close.png"), "Submenu")
+    submenu.addAction(QtGui.QIcon("icons/close.png"), "Action 1")
+    submenu.addAction(QtGui.QIcon("icons/close.png"), "Action 2")
+    submenu.addAction(QtGui.QIcon("icons/close.png"), "Action 3")
+    fileMenu.addSeparator()
+    fileMenu.addAction(QtGui.QIcon("icons/close.png"), "New")
+    fileMenu.addAction(QtGui.QIcon("icons/close.png"), "Open")
+    fileMenu.addAction(QtGui.QIcon("icons/close.png"), "Save")
+    fileMenu.addAction(QtGui.QIcon("icons/close.png"), "Save As")
+    fileMenu.addAction(QtGui.QIcon("icons/close.png"), "Close")
+
     saveButton = QtWidgets.QToolButton()
     saveButton.setAutoRaise(True)
     saveButton.setText("Button")
