@@ -3,10 +3,11 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
+from .menu import RibbonMenu
 from .category import (RibbonCategory, RibbonContextCategory, RibbonNormalCategory,
                        RibbonCategoryStyle, contextColors, RibbonContextCategories)
 from .tabbar import RibbonTabBar
-from .titlewidget import RibbonTitleWidget
+from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
 from .utils import data_file_path
 
 
@@ -146,7 +147,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self.setStyleSheet(open(data_file_path(f"styles/base.qss"), "r").read() +
                            open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read())
 
-    def applicationOptionButton(self) -> QtWidgets.QToolButton:
+    def applicationOptionButton(self) -> RibbonApplicationButton:
         """Return the application button."""
         return self._titleWidget.applicationButton()
 
@@ -165,6 +166,10 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._titleWidget.applicationMenu().addAction(action)
         self._titleWidget.applicationButton().setMenu(self._titleWidget.applicationMenu()
                                                       if self._titleWidget.applicationMenu().actions() else None)
+
+    def addFileMenu(self) -> RibbonMenu:
+        """Add a file menu to the ribbon."""
+        return self.applicationOptionButton().addFileMenu()
 
     def ribbonHeight(self) -> int:
         """Get the total height of the ribbon.
