@@ -2,7 +2,7 @@
 User Manual
 ===========
 
-Instantiating a Ribbon Bar
+Instantiate a Ribbon Bar
 --------------------------
 
 :py:class:`~ribbon.ribbonbar.RibbonBar` is inherited from :py:class:`~PyQt5.QtWidgets.QMenuBar`,
