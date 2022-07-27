@@ -215,6 +215,41 @@ class RibbonPanel(QtWidgets.QFrame):
             self._actionsLayout.verticalSpacing() * (self._gridLayoutManager.rows - 1)
         ) / self._gridLayoutManager.rows)
 
+    def addWidgetsBy(
+        self,
+        data: typing.Dict[
+            str,  # type of the widget
+            typing.Dict,  # data of the widget
+        ]
+    ) -> typing.Dict[str, QtWidgets.QWidget]:
+        """Add widgets to the panel.
+
+        :param data: The data to add. The dict is of the form:
+                     {
+                         "widget-name": {
+                             "type": "Button",
+                             "arguments": {
+                                 "key1": "value1",
+                                 "key2": "value2"
+                             }
+                         },
+                     }
+                     Possible types are: Button, SmallButton, MediumButton, LargeButton,
+                     ToggleButton, SmallToggleButton, MediumToggleButton, LargeToggleButton, ComboBox, FontComboBox,
+                     LineEdit, TextEdit, PlainTextEdit, Label, ProgressBar, SpinBox, DoubleSpinBox, DataEdit, TimeEdit,
+                     DateTimeEdit, TableWidget, TreeWidget, ListWidget, CalendarWidget, Separator, HorizontalSeparator,
+                     VerticalSeparator, Gallery.
+        :return: A dictionary of the added widgets.
+        """
+        widgets = {}  # type: typing.Dict[str, QtWidgets.QWidget]
+        for key, widget_data in data.items():
+            type = widget_data.pop('type', '').capitalize()
+            if hasattr(self, 'add' + type):
+                method = getattr(self, 'add' + type)  # type: typing.Callable
+                if method is not None:
+                    widgets[key] = method(**widget_data.get('arguments', {}))
+        return widgets
+
     def addWidget(
         self,
         widget: QtWidgets.QWidget,
@@ -296,6 +331,13 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The widget at the given index.
         """
         return self._widgets[index]
+
+    def widgets(self) -> typing.List[QtWidgets.QWidget]:
+        """Get all the widgets in the panel.
+
+        :return: A list of all the widgets in the panel.
+        """
+        return self._widgets
 
     def addButton(
         self,
