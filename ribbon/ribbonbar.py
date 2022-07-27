@@ -75,7 +75,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         self.setFixedHeight(self._ribbonHeight)
 
         self._titleWidget = RibbonTitleWidget(title, self)
-        self._separator = RibbonHorizontalSeparator(width=1, parent=self)
         self._stackedWidget = RibbonStackedWidget(self)
 
         # Main layout
@@ -83,7 +82,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
         self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._titleWidget, 0)
-        self._mainLayout.addWidget(self._separator, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
         self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
 
