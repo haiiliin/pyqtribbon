@@ -490,7 +490,6 @@ class RibbonBar(QtWidgets.QMenuBar):
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/up.png')))
-            self._separator.setVisible(True)
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
@@ -500,7 +499,6 @@ class RibbonBar(QtWidgets.QMenuBar):
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/down.png')))
-            self._separator.setVisible(False)
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._titleWidget.tabBarHeight() + 5)
 
