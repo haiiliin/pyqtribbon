@@ -104,6 +104,42 @@ class RibbonCategory(QtWidgets.QFrame):
         """
         return self._style
 
+    def addPanelsBy(
+        self,
+        data: typing.Dict[
+            str,   # title of the panel
+            typing.Dict,  # data of the panel
+        ]
+    ) -> typing.Dict[str, RibbonPanel]:
+        """Add panels from a dictionary.
+
+        :param data: The dictionary. The keys are the titles of the panels. The value is a dictionary of
+                     arguments. the argument showPanelOptionButton is a boolean to decide whether to show
+                     the panel option button, the rest arguments are passed to the RibbonPanel.addWidgetsBy() method.
+                     The dict is of the form:
+                     {
+                         "panel-title": {
+                             "showPanelOptionButton": True,
+                             "widgets": {
+                                 "widget-name": {
+                                     "type": "Button",
+                                     "arguments": {
+                                         "key1": "value1",
+                                         "key2": "value2"
+                                     }
+                                 },
+                             }
+                         },
+                      }
+        :return: A dictionary of the newly created panels.
+        """
+        panels = {}
+        for title, panel_data in data.items():
+            showPanelOptionButton = panel_data.get('showPanelOptionButton', True)
+            panels[title] = self.addPanel(title, showPanelOptionButton)
+            panels[title].addWidgetsBy(panel_data.get("widgets", {}))
+        return panels
+
     def addPanel(self, title: str, showPanelOptionButton=True) -> RibbonPanel:
         """Add a new panel to the category.
 
