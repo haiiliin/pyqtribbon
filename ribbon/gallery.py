@@ -9,6 +9,7 @@ from .menu import RibbonPermanentMenu
 
 
 class RibbonPopupWidget(QtWidgets.QFrame):
+    """The popup widget for the gallery widget."""
     pass
 
 
