@@ -2,6 +2,15 @@
 User Manual
 ===========
 
+The RibbonScreenShotWindow Class
+--------------------------------
+
+The RibbonScreenShotWindow class is just for taking a screenshot of the window, the window will be closed 0.1s
+after it is shown. It is just used for documenting the window.
+
+.. autoclass:: ribbon.tests.RibbonScreenShotWindow
+    :members:
+
 Instantiate a Ribbon Bar
 --------------------------
 
@@ -17,6 +26,20 @@ you can use the `setMenuBar` method of :py:class:`~PyQt5.QtWidgets.QMainWindow` 
     ribbon = RibbonBar()
     window.setMenuBar(ribbon)
     ...
+
+Example
+~~~~~~~
+
+For example, using the following code,
+
+.. exec_code::
+    :filename: _screenshots/ribbonbar.py
+
+You can get a window like this:
+
+.. image:: _screenshots/ribbonbar.png
+    :align: center
+    :width: 100%
 
 Customize Ribbon Bar
 --------------------
@@ -96,6 +119,20 @@ Setup Right Tool Bar
     RibbonBar.setCollapseButtonIcon
     RibbonBar.removeCollapseButton
 
+Example
+~~~~~~~
+
+For example, using the following code,
+
+.. exec_code::
+    :filename: _screenshots/ribbonbar-customize.py
+
+You can get a window like this:
+
+.. image:: _screenshots/ribbonbar-customize.png
+    :align: center
+    :width: 100%
+
 Manage Categories
 ~~~~~~~~~~~~~~~~~
 
@@ -142,6 +179,20 @@ Manage Panels
     RibbonCategory.takePanel
     RibbonCategory.panel
     RibbonCategory.panels
+
+Example
+~~~~~~~
+
+For example, using the following code,
+
+.. exec_code::
+    :filename: _screenshots/category.py
+
+You can get a window like this:
+
+.. image:: _screenshots/category.png
+    :align: center
+    :width: 100%
 
 Customize Panels
 ----------------
@@ -211,6 +262,20 @@ Add Widgets to Panels
     RibbonPanel.addHorizontalSeparator
     RibbonPanel.addVerticalSeparator
     RibbonPanel.addGallery
+
+Example
+~~~~~~~
+
+For example, using the following code,
+
+.. exec_code::
+    :filename: _screenshots/panel.py
+
+You can get a window like this:
+
+.. image:: _screenshots/panel.png
+    :align: center
+    :width: 100%
 
 A Complete Example
 ------------------
