@@ -40,6 +40,7 @@ setuptools.setup(
         'icons/undo.png',
         'icons/up.png',
     ]), ('styles', [
+        'styles/base.qss',
         'styles/default.qss',
         'styles/debug.qss'
     ])],
