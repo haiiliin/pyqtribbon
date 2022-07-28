@@ -8,7 +8,7 @@ qApp = None  # type: typing.Optional[QtWidgets.QApplication]
 
 def mkQApp(name=None):
     global qApp
-    qApp = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
+    qApp = QtWidgets.QApplication.instance() or QtWidgets.QApplication(['pyqtribbon'])
     qApp.setFont(QtGui.QFont("Times New Roman", 8))
 
     if name is not None:
