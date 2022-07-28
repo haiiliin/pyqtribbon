@@ -20,6 +20,9 @@ jobs:
     - uses: actions/checkout@master
       with:
         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+    - name: Install the package
+      run: |
+        pip install .
     - name: Build and Commit
       uses: sphinx-notes/pages@v2
       with:
