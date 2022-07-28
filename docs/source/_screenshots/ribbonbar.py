@@ -3,7 +3,7 @@ import sys
 from qtpy import QtWidgets
 
 from ribbon import RibbonBar
-from ribbon.tests import RibbonScreenShotWindow
+from ribbon.screenshotwindow import RibbonScreenShotWindow
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

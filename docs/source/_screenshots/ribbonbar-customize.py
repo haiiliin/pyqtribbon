@@ -1,10 +1,9 @@
 import sys
 
 from qtpy.QtWidgets import QApplication, QToolButton
-from qtpy.QtGui import QIcon
 
 from ribbon import RibbonBar
-from ribbon.tests import RibbonScreenShotWindow
+from ribbon.screenshotwindow import RibbonScreenShotWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

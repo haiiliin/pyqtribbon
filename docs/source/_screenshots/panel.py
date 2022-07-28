@@ -5,7 +5,7 @@ from qtpy.QtGui import QIcon
 from qtpy.QtCore import Qt
 
 from ribbon import RibbonBar
-from ribbon.tests import RibbonScreenShotWindow
+from ribbon.screenshotwindow import RibbonScreenShotWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
