@@ -3,7 +3,7 @@ from qtpy import QtWidgets
 from ribbon import RibbonBar, mkQApp
 
 
-def test_ribbonbar():
+def test_category():
     if __name__ == '__main__':
         app = mkQApp()
         # Central widget
@@ -13,7 +13,10 @@ def test_ribbonbar():
         ribbonbar = RibbonBar()
         window.setMenuBar(ribbonbar)
 
-        assert isinstance(window.menuBar(), RibbonBar)
+        # Add a category
+        category = ribbonbar.addCategory("Category 1")
+        assert category.title() == "Category 1"
+        assert category in ribbonbar.categories().values()
 
         # Show the window
         window.resize(1800, 350)
