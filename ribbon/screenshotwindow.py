@@ -12,7 +12,7 @@ class RibbonScreenShotWindow(QtWidgets.QMainWindow):
         :param fileName: The file name for the screenshot.
         """
         super().__init__(*args, **kwargs)
-        QtCore.QTimer().singleShot(1000, self.close)
+        QtCore.QTimer().singleShot(3000, self.close)
         self.setScreenShotFileName(fileName)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 
