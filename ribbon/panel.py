@@ -194,6 +194,13 @@ class RibbonPanel(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._titleWidget, 0)
 
+    def maximumRows(self) -> int:
+        """Return the maximal number of rows in the panel.
+
+        :return: The maximal number of rows in the panel.
+        """
+        return self._maxRows
+
     def largeRows(self) -> int:
         """Return the number of span rows for large widgets.
 
@@ -214,6 +221,14 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The number of span rows for small widgets.
         """
         return self._smallRows
+
+    def setMaximumRows(self, maxRows: int):
+        """Set the maximal number of rows in the panel.
+
+        :param maxRows: The maximal number of rows in the panel.
+        """
+        raise ValueError('Set the maximum rows when creating the panel, because it is not possible to change it later '
+                         'after some widgets in the panel have been added.')
 
     def setLargeRows(self, rows: int):
         """Set the number of span rows for large widgets.
