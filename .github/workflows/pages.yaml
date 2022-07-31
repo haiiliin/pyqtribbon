@@ -32,6 +32,7 @@ jobs:
       with:
         documentation_path: docs/source
         requirements_path: docs/requirements.txt
+        sphinx_version: 4.5.0
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
