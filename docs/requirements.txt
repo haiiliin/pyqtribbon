@@ -5,4 +5,3 @@ qtpy
 sphinx-rtd-theme
 sphinx-toolbox
 sphinx-qt-documentation
-sphinx-exec-code
