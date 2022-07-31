@@ -106,7 +106,13 @@ class RibbonPanelOptionButton(QtWidgets.QToolButton):
 class RibbonPanel(QtWidgets.QFrame):
     """Panel in the ribbon category."""
     #: maximal number of rows
-    _maxRows: int
+    _maxRows: int = 6
+    #: rows for large widgets
+    _largeRows: int = 6
+    #: rows for medium widgets
+    _mediumRows: int = 3
+    #: rows for small widgets
+    _smallRows: int = 2
     #: GridLayout manager to request available cells.
     _gridLayoutManager: RibbonGridLayoutManager
     #: whether to show the panel option button
@@ -188,6 +194,54 @@ class RibbonPanel(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._titleWidget, 0)
 
+    def largeRows(self) -> int:
+        """Return the number of span rows for large widgets.
+
+        :return: The number of span rows for large widgets.
+        """
+        return self._largeRows
+
+    def mediumRows(self) -> int:
+        """Return the number of span rows for medium widgets.
+
+        :return: The number of span rows for medium widgets.
+        """
+        return self._mediumRows
+
+    def smallRows(self) -> int:
+        """Return the number of span rows for small widgets.
+
+        :return: The number of span rows for small widgets.
+        """
+        return self._smallRows
+
+    def setLargeRows(self, rows: int):
+        """Set the number of span rows for large widgets.
+
+        :param rows: The number of span rows for large widgets.
+        """
+        if not (0 < rows <= self._maxRows):
+            raise ValueError("Invalid number of rows")
+        self._largeRows = rows
+
+    def setMediumRows(self, rows: int):
+        """Set the number of span rows for medium widgets.
+
+        :param rows: The number of span rows for medium widgets.
+        """
+        if not (0 < rows <= self._maxRows):
+            raise ValueError("Invalid number of rows")
+        self._mediumRows = rows
+
+    def setSmallRows(self, rows: int):
+        """Set the number of span rows for small widgets.
+
+        :param rows: The number of span rows for small widgets.
+        """
+        if not (0 < rows <= self._maxRows):
+            raise ValueError("Invalid number of rows")
+        self._smallRows = rows
+
     def panelOptionButton(self) -> RibbonPanelOptionButton:
         """Return the panel option button.
 
@@ -253,7 +307,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addWidget(
         self,
         widget: QtWidgets.QWidget,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -269,7 +323,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
-        widget.setFixedHeight(maximumHeight)
+        widget.setMaximumHeight(maximumHeight)
         item = RibbonPanelItemWidget(self)
         item.addWidget(widget)
         self._actionsLayout.addWidget(
@@ -630,7 +684,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addComboBox(
         self,
         items: typing.List[str],
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -652,7 +706,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addFontComboBox(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -672,7 +726,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addLineEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -692,7 +746,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTextEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -712,7 +766,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addPlainTextEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -733,7 +787,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addLabel(
         self,
         text: str,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -755,7 +809,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addProgressBar(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -775,7 +829,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addSlider(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -796,7 +850,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addSpinBox(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -816,7 +870,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDoubleSpinBox(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -836,7 +890,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDateEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -856,7 +910,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTimeEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -876,7 +930,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDateTimeEdit(
         self,
-        rowSpan: int = 2,
+        rowSpan: int = _smallRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -896,7 +950,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTableWidget(
         self,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -916,7 +970,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTreeWidget(
         self,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -936,7 +990,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addListWidget(
         self,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -956,7 +1010,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addCalendarWidget(
         self,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -978,7 +1032,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         orientation=QtCore.Qt.Vertical,
         width=6,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -1022,7 +1076,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addVerticalSeparator(
         self,
         width=6,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
@@ -1043,7 +1097,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         minimumWidth=800,
         popupHideOnClick=False,
-        rowSpan: int = 6,
+        rowSpan: int = _largeRows,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
