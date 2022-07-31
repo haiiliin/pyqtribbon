@@ -156,6 +156,9 @@ class RibbonPanel(QtWidgets.QFrame):
             parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         self._maxRows = maxRows
+        self._largeRows = maxRows
+        self._mediumRows = max(round(maxRows / 2), 1)
+        self._smallRows = max(round(maxRows / 3), 1)
         self._gridLayoutManager = RibbonGridLayoutManager(self._maxRows)
         self._widgets = []
         self._showPanelOptionButton = showPanelOptionButton
