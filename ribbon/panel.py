@@ -271,7 +271,6 @@ class RibbonPanel(QtWidgets.QFrame):
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         widget.setFixedHeight(maximumHeight)
         item = RibbonPanelItemWidget(self)
-        item.setFixedHeight(maximumHeight)
         item.addWidget(widget)
         self._actionsLayout.addWidget(
             item, row, col, rowSpan, colSpan, alignment
