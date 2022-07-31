@@ -3,7 +3,7 @@ import sys
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
-from ribbon import RibbonBar, RibbonCategoryStyle
+from ribbon import RibbonBar, RibbonCategoryStyle, Large
 from ribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     app.setStyle("Windows")
 
     window = QtWidgets.QMainWindow()
-    ribbon = RibbonBar()
+    ribbon = RibbonBar(maxRows=6)
     ribbon.setRibbonStyle(RibbonStyle.Default)
     window.setMenuBar(ribbon)
     window.setWindowTitle("Ribbon Test")
@@ -73,7 +73,6 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-    panel.addWidget(saveButton, rowSpan=6)
 
     saveButton = panel.addLargeButton("Button 9", icon=QIcon("icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -82,7 +81,6 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
-    panel.addWidget(saveButton, rowSpan=6)
 
     saveButton = panel.addLargeButton("Button 10", icon=QIcon("icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -91,7 +89,6 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
-    panel.addWidget(saveButton, rowSpan=6)
 
     saveButton = panel.addLargeButton("Button 11", icon=QIcon("icons/close.png"))
     menu = saveButton.addRibbonMenu()
@@ -107,7 +104,7 @@ if __name__ == "__main__":
     formLayout = menu.addFormLayoutWidget()
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
     saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-    panel.addWidget(saveButton, rowSpan=6)
+    panel.addWidget(saveButton, rowSpan=Large)
 
     panel = category1.addPanel("Panel 2")
     button = panel.addMediumButton("Button 8", icon=QIcon("icons/close.png"))
@@ -149,7 +146,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-    panel.addWidget(saveButton, rowSpan=6)
+    panel.addWidget(saveButton, rowSpan=Large)
 
     saveButton = panel.addLargeButton("Button 9", icon=QIcon("icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -158,7 +155,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
-    panel.addWidget(saveButton, rowSpan=6)
+    panel.addWidget(saveButton, rowSpan=Large)
 
     saveButton = panel.addLargeButton("Button 10", icon=QIcon("icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -167,7 +164,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
     saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
-    panel.addWidget(saveButton, rowSpan=6)
+    panel.addWidget(saveButton, rowSpan=Large)
 
     panel.addCalendarWidget()
 

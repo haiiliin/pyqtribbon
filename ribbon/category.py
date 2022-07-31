@@ -42,6 +42,8 @@ class RibbonCategory(QtWidgets.QFrame):
     _panels: typing.Dict[str, RibbonPanel]
     #: color of the context category
     _color: typing.Optional[QtGui.QColor]
+    #: Maximum rows
+    _maxRows: int = 6
 
     @typing.overload
     def __init__(self, title: str = '', style: RibbonCategoryStyle = RibbonCategoryStyle.Normal,
@@ -84,6 +86,13 @@ class RibbonCategory(QtWidgets.QFrame):
         self._mainLayout.setSpacing(5)
         self._mainLayout.setContentsMargins(0, 0, 0, 0)
         self._mainLayout.addWidget(self._panelLayoutWidget, 0)
+
+    def setMaximumRows(self, rows: int):
+        """Set the maximum number of rows.
+
+        :param rows: The maximum number of rows.
+        """
+        self._maxRows = rows
 
     def title(self) -> str:
         """Return the title of the category."""
@@ -147,7 +156,7 @@ class RibbonCategory(QtWidgets.QFrame):
         :param showPanelOptionButton: Whether to show the panel option button.
         :return: The newly created panel.
         """
-        panel = RibbonPanel(title, maxRows=6, showPanelOptionButton=showPanelOptionButton, parent=self)
+        panel = RibbonPanel(title, maxRows=self._maxRows, showPanelOptionButton=showPanelOptionButton, parent=self)
         panel.setFixedHeight(self.height() -
                              self._mainLayout.spacing() -
                              self._mainLayout.contentsMargins().top() -

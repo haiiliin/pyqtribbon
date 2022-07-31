@@ -44,6 +44,9 @@ class RibbonBar(QtWidgets.QMenuBar):
     _categories: typing.Dict[str, RibbonCategory] = {}
     _contextCategoryCount = 0
 
+    #: Maximum rows
+    _maxRows = 6
+
     #: Whether the ribbon is visible.
     _ribbonVisible = True
 
@@ -51,7 +54,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     _ribbonHeight = 240
 
     @typing.overload
-    def __init__(self, title: str = '', parent=None):
+    def __init__(self, title: str = '', maxRows=6, parent=None):
         pass
 
     @typing.overload
@@ -62,16 +65,20 @@ class RibbonBar(QtWidgets.QMenuBar):
         """Create a new ribbon.
 
         :param title: The title of the ribbon.
+        :param maxRows: The maximum number of rows.
         :param parent: The parent widget of the ribbon.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or (kwargs and 'title' in kwargs):
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or 'maxRows' in kwargs):
             title = args[0] if len(args) > 0 else kwargs.get('title', '')
-            parent = kwargs.get('parent', None)
+            maxRows = args[1] if len(args) > 1 else kwargs.get('maxRows', 6)
+            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
         else:
             title = ''
+            maxRows = 6
             parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
         super().__init__(parent)
         self._categories = {}
+        self._maxRows = maxRows
         self.setFixedHeight(self._ribbonHeight)
 
         self._titleWidget = RibbonTitleWidget(title, self)
@@ -370,6 +377,7 @@ class RibbonBar(QtWidgets.QMenuBar):
                 self._contextCategoryCount += 1
         category = (RibbonContextCategory(title, color, self) if style == RibbonCategoryStyle.Context else
                     RibbonNormalCategory(title, self))
+        category.setMaximumRows(self._maxRows)
         category.setFixedHeight(self._ribbonHeight -
                                 self._mainLayout.spacing() * 2 -
                                 self._mainLayout.contentsMargins().top() -
