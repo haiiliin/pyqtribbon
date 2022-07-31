@@ -40,3 +40,5 @@ template: |
 
   $CHANGES
 
+  **Full Changelog**: https://github.com/haiiliin/pyqtribbon/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+
