@@ -10,7 +10,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
     #: context category dark color height
     _contextCategoryDarkColorHeight = 5
 
-    _tabColors: dict[str, typing.Union[QtCore.Qt.GlobalColor, QtGui.QColor]] = {}
+    _tabColors: typing.Dict[str, typing.Union[QtCore.Qt.GlobalColor, QtGui.QColor]] = {}
     _associated_tabs = {}
 
     def __init__(self, parent=None):
