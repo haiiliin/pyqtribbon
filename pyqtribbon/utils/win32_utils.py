@@ -20,7 +20,10 @@ def isMaximized(hWnd):
         window handle
     """
     windowPlacement = win32gui.GetWindowPlacement(hWnd)
-    return windowPlacement[1] == win32con.SW_MAXIMIZE if windowPlacement else False
+    if not windowPlacement:
+        return False
+
+    return windowPlacement[1] == win32con.SW_MAXIMIZE
 
 
 def isFullScreen(hWnd):
@@ -58,10 +61,11 @@ def getMonitorInfo(hWnd, dwFlags):
     dwFlags: int
         Determines the return value if the window does not intersect any display monitor
     """
-    if monitor := win32api.MonitorFromWindow(hWnd, dwFlags):
-        return win32api.GetMonitorInfo(monitor)
-    else:
+    monitor = win32api.MonitorFromWindow(hWnd, dwFlags)
+    if not monitor:
         return
+
+    return win32api.GetMonitorInfo(monitor)
 
 
 def getResizeBorderThickness(hWnd):
@@ -201,3 +205,44 @@ class Taskbar:
                 return appbarData.uEdge
 
         return cls.NO_POSITION
+
+
+class WindowsMoveResize:
+    """ Tool class for moving and resizing Mac OS window """
+
+    @staticmethod
+    def startSystemMove(window, globalPos):
+        """ resize window
+
+        Parameters
+        ----------
+        window: QWidget
+            window
+
+        globalPos: QPoint
+            the global point of mouse release event
+        """
+        win32gui.ReleaseCapture()
+        win32api.SendMessage(
+            int(window.winId()),
+            win32con.WM_SYSCOMMAND,
+            win32con.SC_MOVE | win32con.HTCAPTION,
+            0
+        )
+
+    @classmethod
+    def starSystemResize(cls, window, globalPos, edges):
+        """ resize window
+
+        Parameters
+        ----------
+        window: QWidget
+            window
+
+        globalPos: QPoint
+            the global point of mouse release event
+
+        edges: `Qt.Edges`
+            window edges
+        """
+        pass

@@ -1,10 +1,11 @@
+import sys
 import typing
 
 from qtpy import QtWidgets, QtCore, QtGui
 
 from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
-from .utils import data_file_path
+from .utils import data_file_path, startSystemMove
 
 
 class RibbonApplicationButton(QtWidgets.QToolButton):
@@ -24,6 +25,216 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
 class RibbonTitleLabel(QtWidgets.QLabel):
     """Title label in the ribbon bar."""
     pass
+
+
+class TitleBarButton(QtWidgets.QToolButton):
+    """ Title bar button """
+
+    def __init__(self, style=None, parent=None):
+        """
+        Parameters
+        ----------
+        style: dict
+            button style of `normal`,`hover`, and `pressed`. Each state has
+            `color`, `background` and `icon`(close button only) attributes.
+
+        parent:
+            parent widget
+        """
+        super().__init__(parent=parent)
+        self.setCursor(QtCore.Qt.ArrowCursor)
+        self.setFixedSize(46, 32)
+        self._state = 'normal'
+        self._style = {
+            "normal": {
+                "color": (0, 0, 0, 255),
+                'background': (0, 0, 0, 0)
+            },
+            "hover": {
+                "color": (255, 255, 255),
+                'background': (0, 100, 182)
+            },
+            "pressed": {
+                "color": (255, 255, 255),
+                'background': (54, 57, 65)
+            },
+        }
+        self.updateStyle(style)
+        self.setStyleSheet("""
+            QToolButton{
+                background-color: transparent;
+                border: none;
+                margin: 0px;
+            }
+        """)
+
+    def updateStyle(self, style):
+        """ update the style of button
+
+        Parameters
+        ----------
+        style: dict
+            button style of `normal`,`hover`, and `pressed`. Each state has
+            `color`, `background` and `icon`(close button only) attributes.
+        """
+        style = style or {}
+        for k, v in style.items():
+            self._style[k].update(v)
+
+        self.update()
+
+    def setState(self, state):
+        """ set the state of button
+
+        Parameters
+        ----------
+        state: str
+            the state of button, can be `normal`,`hover`, or `pressed`
+        """
+        if state not in ('normal', 'hover', 'pressed'):
+            raise ValueError('The state can only be `normal`,`hover`, or `pressed`')
+
+        self._state = state
+        self.update()
+
+    def enterEvent(self, e):
+        self.setState("hover")
+        super().enterEvent(e)
+
+    def leaveEvent(self, e):
+        self.setState("normal")
+        super().leaveEvent(e)
+
+    def mousePressEvent(self, e):
+        if e.button() != QtCore.Qt.LeftButton:
+            return
+
+        self.setState("pressed")
+        super().mousePressEvent(e)
+
+
+class RibbonMinimizeButton(TitleBarButton):
+    """ Minimize button """
+
+    def paintEvent(self, e):
+        painter = QtGui.QPainter(self)
+
+        # draw background
+        style = self._style[self._state]
+        painter.setBrush(QtGui.QColor(*style['background']))
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.drawRect(self.rect())
+
+        # draw icon
+        painter.setBrush(QtCore.Qt.NoBrush)
+        pen = QtGui.QPen(QtGui.QColor(*style['color']), 1)
+        pen.setCosmetic(True)
+        painter.setPen(pen)
+        painter.drawLine(18, 16, 28, 16)
+
+
+class RibbonMaximizeButton(TitleBarButton):
+    """ Maximize button """
+
+    def __init__(self, style=None, parent=None):
+        super().__init__(style, parent)
+        self.__isMax = False
+
+    def setMaxState(self, isMax):
+        """ update the maximized state and icon """
+        if self.__isMax == isMax:
+            return
+
+        self.__isMax = isMax
+        self.setState("normal")
+
+    def paintEvent(self, e):
+        painter = QtGui.QPainter(self)
+
+        # draw background
+        style = self._style[self._state]
+        painter.setBrush(QtGui.QColor(*style['background']))
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.drawRect(self.rect())
+
+        # draw icon
+        painter.setBrush(QtCore.Qt.NoBrush)
+        pen = QtGui.QPen(QtGui.QColor(*style['color']), 1)
+        pen.setCosmetic(True)
+        painter.setPen(pen)
+
+        r = self.devicePixelRatioF()
+        painter.scale(1/r, 1/r)
+        if not self.__isMax:
+            painter.drawRect(int(18*r), int(11*r), int(10*r), int(10*r))
+        else:
+            painter.drawRect(int(18*r), int(13*r), int(8*r), int(8*r))
+            x0 = int(18*r)+int(2*r)
+            y0 = 13*r
+            dw = int(2*r)
+            path = QtGui.QPainterPath(QtCore.QPointF(x0, y0))
+            path.lineTo(x0, y0-dw)
+            path.lineTo(x0+8*r, y0-dw)
+            path.lineTo(x0+8*r, y0-dw+8*r)
+            path.lineTo(x0+8*r-dw, y0-dw+8*r)
+            painter.drawPath(path)
+
+
+class RibbonCloseButton(TitleBarButton):
+    """ Close button """
+
+    def __init__(self, style=None, parent=None):
+        defaultStyle = {
+            "normal": {
+                'background': (0, 0, 0, 0),
+                "icon": "icons/close_black.svg"
+            },
+            "hover": {
+                'background': (232, 17, 35),
+                "icon": "icons/close_white.svg"
+            },
+            "pressed": {
+                'background': (241, 112, 122),
+                "icon": "icons/close_white.svg"
+            },
+        }
+        super().__init__(defaultStyle, parent)
+        self.updateStyle(style)
+        self.setIconSize(QtCore.QSize(46, 32))
+        self.setIcon(QtGui.QIcon(self._style['normal']['icon']))
+
+    def updateStyle(self, style):
+        super().updateStyle(style)
+        self.setIcon(QtGui.QIcon(self._style[self._state]['icon']))
+
+    def enterEvent(self, e):
+        self.setIcon(QtGui.QIcon(self._style['hover']['icon']))
+        super().enterEvent(e)
+
+    def leaveEvent(self, e):
+        self.setIcon(QtGui.QIcon(self._style['normal']['icon']))
+        super().leaveEvent(e)
+
+    def mousePressEvent(self, e):
+        self.setIcon(QtGui.QIcon(self._style['pressed']['icon']))
+        super().mousePressEvent(e)
+
+    def mouseReleaseEvent(self, e):
+        self.setIcon(QtGui.QIcon(self._style['normal']['icon']))
+        super().mouseReleaseEvent(e)
+
+    def paintEvent(self, e):
+        painter = QtGui.QPainter(self)
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+
+        # draw background
+        style = self._style[self._state]
+        painter.setBrush(QtGui.QColor(*style['background']))
+        painter.setPen(QtCore.Qt.NoPen)
+        painter.drawRect(self.rect())
+
+        # draw icon
+        super().paintEvent(e)
 
 
 class RibbonTitleWidget(QtWidgets.QFrame):
@@ -62,7 +273,10 @@ class RibbonTitleWidget(QtWidgets.QFrame):
             parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         # Tab bar layout
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+
+        # main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 0, 5, 5)
         self._mainLayout.setSpacing(5)
@@ -132,10 +346,67 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         font.setPointSize(font.pointSize() + 3)
         self._titleLabel.setFont(font)
 
+        # Title bar
+        self._minButton = RibbonMinimizeButton()
+        self._maxButton = RibbonMaximizeButton()
+        self._closeButton = RibbonCloseButton()
+        self._minMaxButtonsLayout = QtWidgets.QHBoxLayout()
+        self._minMaxButtonsLayout.setContentsMargins(0, 0, 0, 0)
+        self._minMaxButtonsLayout.setSpacing(0)
+        self._minMaxButtonsLayout.addWidget(self._minButton)
+        self._minMaxButtonsLayout.addWidget(self._maxButton)
+        self._minMaxButtonsLayout.addWidget(self._closeButton)
+
+        # connect signal to slot
+        self._minButton.clicked.connect(self.window().showMinimized)
+        self._maxButton.clicked.connect(self.__toggleMaxState)
+        self._closeButton.clicked.connect(self.window().close)
+
         self._titleLayout.addWidget(self._quickAccessToolBarWidget, 0)
         self._titleLayout.addWidget(self._titleLabel, 1)
+        self._titleLayout.addLayout(self._minMaxButtonsLayout, 0)
         self._tabBarLayout.addWidget(self._tabBar, 1)
         self._tabBarLayout.addWidget(self._rightToolBar, 0)
+
+        self.window().installEventFilter(self)
+
+    def eventFilter(self, obj, e):
+        if obj is self.window():
+            if e.type() == QtCore.QEvent.WindowStateChange:
+                self.maxBtn.setMaxState(self.window().isMaximized())
+                return False
+
+        return super().eventFilter(obj, e)
+
+    def mouseDoubleClickEvent(self, event):
+        """ Toggles the maximization state of the window """
+        if event.button() != QtCore.Qt.LeftButton:
+            return
+
+        self.__toggleMaxState()
+
+    def mouseMoveEvent(self, e):
+        if sys.platform != "win32" or not self._isDragRegion(e.pos()):
+            return
+
+        startSystemMove(self.window(), e.globalPos())
+
+    def mousePressEvent(self, e):
+        if sys.platform == "win32" or e.button() != QtCore.Qt.LeftButton or not self._isDragRegion(e.pos()):
+            return
+
+        startSystemMove(self.window(), e.globalPos())
+
+    def __toggleMaxState(self):
+        """ Toggles the maximization state of the window and change icon """
+        if self.window().isMaximized():
+            self.window().showNormal()
+        else:
+            self.window().showMaximized()
+
+    def _isDragRegion(self, pos):
+        """ Check whether the pressed point belongs to the area where dragging is allowed """
+        return 0 < pos.x() < self.width() - 46 * 3
 
     def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
