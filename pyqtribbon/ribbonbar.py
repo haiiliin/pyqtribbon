@@ -39,6 +39,8 @@ class RibbonBar(QtWidgets.QMenuBar):
     """
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
+    #: Signal, the file button was clicked.
+    fileButtonClicked = QtCore.Signal()
 
     #: The categories of the ribbon.
     _categories: typing.Dict[str, RibbonCategory] = {}
@@ -52,6 +54,9 @@ class RibbonBar(QtWidgets.QMenuBar):
 
     #: heights of the ribbon elements
     _ribbonHeight = 240
+
+    #: current tab index
+    _currentTabIndex = 0
 
     @typing.overload
     def __init__(self, title: str = '', maxRows=6, parent=None):
@@ -359,7 +364,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         title: str,
         style=RibbonCategoryStyle.Normal,
-        color: QtGui.QColor = None,
+        color: QtGui.QColor = QtCore.Qt.blue,
     ) -> typing.Union[RibbonNormalCategory, RibbonContextCategory]:
         """Add a new category to the ribbon.
 
@@ -389,6 +394,9 @@ class RibbonBar(QtWidgets.QMenuBar):
             self._titleWidget.tabBar().addTab(title, color)
         elif style == RibbonCategoryStyle.Context:
             category.hide()
+        if len(self._categories) == 1:
+            self._titleWidget.tabBar().setCurrentIndex(1)
+            self.showCategoryByIndex(1)
         return category
 
     def addNormalCategory(self, title: str) -> RibbonNormalCategory:
@@ -402,7 +410,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def addContextCategory(
         self,
         title: str,
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
     ) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
 
@@ -416,7 +424,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         name: str,
         titles: typing.List[str],
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
     ) -> RibbonContextCategories:
         """Add a group of context categories with the same tab color to the ribbon.
 
@@ -438,7 +446,12 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param index: tab index
         """
-        title = self._titleWidget.tabBar().tabText(index)
+        if index == 0:
+            self.fileButtonClicked.emit()
+            index = self._currentTabIndex
+            self._titleWidget.tabBar().setCurrentIndex(index)
+        self._currentTabIndex = index
+        title = self._titleWidget.tabBar().tabText(index)  # 0 is the file tab
         if title in self._categories:
             self._stackedWidget.setCurrentWidget(self._categories[title])
 

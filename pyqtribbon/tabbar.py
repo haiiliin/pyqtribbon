@@ -10,7 +10,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
     #: context category dark color height
     _contextCategoryDarkColorHeight = 5
 
-    _tabColors = {}
+    _tabColors: dict[str, typing.Union[QtCore.Qt.GlobalColor, QtGui.QColor]] = {}
     _associated_tabs = {}
 
     def __init__(self, parent=None):
@@ -20,8 +20,6 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         super().__init__(parent)
         self.setDrawBase(False)
-        self.setStyleSheet("QTabBar::tab {margin-top: 10px; margin-bottom: 5px; } "
-                           "QTabBar::tab:!selected {margin-top: 10px; margin-bottom: 5px; }")
 
     def indexOf(self, tabName: str) -> int:
         """Return the index of the tab with the given name.
@@ -108,7 +106,8 @@ class RibbonTabBar(QtWidgets.QTabBar):
         painter.setRenderHint(QtGui.QPainter.Antialiasing)
         painter.setPen(QtCore.Qt.NoPen)
         color = QtGui.QColor(color)  # in case color is a GlobalColor object
-        painter.setBrush(color)
+        lightColor = color.lighter(190)
+        painter.setBrush(lightColor)
         painter.drawRect(rect.x(),
                          self._contextCategoryTopMargin,
                          rect.width(),
@@ -125,9 +124,12 @@ class RibbonTabBar(QtWidgets.QTabBar):
             currentTabText = self.tabText(self.currentIndex())
             currentTabColor = self._tabColors[currentTabText]
             if currentTabColor is not None:
-                self._paintTabRect(self.tabRect(self.currentIndex()), currentTabColor)
-                if currentTabText in self._associated_tabs and self._associated_tabs[currentTabText]:
-                    for tabText in self._associated_tabs[currentTabText]:
-                        self._paintTabRect(self.tabRect(self.indexOf(tabText)),
-                                           currentTabColor)
+                self.setStyleSheet("RibbonTabBar::tab:selected {color: %s;}" % QtGui.QColor(currentTabColor).name())
+                # self._paintTabRect(self.tabRect(self.currentIndex()), currentTabColor)
+                # if currentTabText in self._associated_tabs and self._associated_tabs[currentTabText]:
+                #     for tabText in self._associated_tabs[currentTabText]:
+                #         self._paintTabRect(self.tabRect(self.indexOf(tabText)),
+                #                            currentTabColor)
+            else:
+                self.setStyleSheet("RibbonTabBar::tab:selected {color: black;}")
         super().paintEvent(a0)
