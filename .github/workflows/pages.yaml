@@ -4,7 +4,7 @@ on:
     branches:
     - main
     paths:
-    - 'ribbon/**'
+    - 'pyqtribbon/**'
     - 'docs/source/**'
   # pull_request event is required only for autolabeler
   pull_request:

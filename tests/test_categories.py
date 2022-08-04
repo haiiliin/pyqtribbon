@@ -1,8 +1,8 @@
 from qtpy import QtWidgets
 
-from ribbon import RibbonBar, mkQApp
-from ribbon.panel import RibbonPanel
-from ribbon.toolbutton import RibbonToolButton
+from pyqtribbon import RibbonBar, mkQApp
+from pyqtribbon.panel import RibbonPanel
+from pyqtribbon.toolbutton import RibbonToolButton
 
 
 def test_categories():

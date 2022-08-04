@@ -1,6 +1,6 @@
 from qtpy import QtWidgets
 
-from ribbon import RibbonBar, mkQApp
+from pyqtribbon import RibbonBar, mkQApp
 
 
 def test_filemenu():

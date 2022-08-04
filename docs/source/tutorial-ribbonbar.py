@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget, QVBoxLay
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtCore import Qt
 
-from ribbon import RibbonBar
-from ribbon.utils import data_file_path
+from pyqtribbon import RibbonBar
+from pyqtribbon.utils import data_file_path
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

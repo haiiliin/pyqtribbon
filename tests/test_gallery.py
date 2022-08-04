@@ -1,7 +1,7 @@
 from qtpy import QtWidgets
 
-from ribbon import RibbonBar, mkQApp
-from ribbon.gallery import RibbonGallery
+from pyqtribbon import RibbonBar, mkQApp
+from pyqtribbon.gallery import RibbonGallery
 
 
 def test_ribbonbar():
