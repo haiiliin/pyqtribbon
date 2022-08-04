@@ -91,33 +91,6 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         return self._tabColors[self.tabText(self.currentIndex())]
 
-    def _paintTabRect(self, rect: QtCore.QRect, color: QtGui.QColor) -> None:
-        """Paint the tab rectangle.
-
-        :param rect: The tab rectangle.
-        :param color: The color of the tab.
-        """
-        rect.setRight(rect.right() + 5)
-        rect.setHeight(self.height() - 1)
-        rect.setTop(self._contextCategoryTopMargin)
-
-        # Paint top dark color area
-        painter = QtGui.QPainter(self)
-        painter.setRenderHint(QtGui.QPainter.Antialiasing)
-        painter.setPen(QtCore.Qt.NoPen)
-        color = QtGui.QColor(color)  # in case color is a GlobalColor object
-        lightColor = color.lighter(190)
-        painter.setBrush(lightColor)
-        painter.drawRect(rect.x(),
-                         self._contextCategoryTopMargin,
-                         rect.width(),
-                         self._contextCategoryDarkColorHeight)
-
-        # Paint rest of the category
-        lightColor = color.lighter(190)
-        rect -= QtCore.QMargins(0, self._contextCategoryDarkColorHeight, 0, 0)
-        painter.fillRect(rect, lightColor)
-
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         """Paint the tab bar."""
         if self.count() > 0:
@@ -125,11 +98,6 @@ class RibbonTabBar(QtWidgets.QTabBar):
             currentTabColor = self._tabColors[currentTabText]
             if currentTabColor is not None:
                 self.setStyleSheet("RibbonTabBar::tab:selected {color: %s;}" % QtGui.QColor(currentTabColor).name())
-                # self._paintTabRect(self.tabRect(self.currentIndex()), currentTabColor)
-                # if currentTabText in self._associated_tabs and self._associated_tabs[currentTabText]:
-                #     for tabText in self._associated_tabs[currentTabText]:
-                #         self._paintTabRect(self.tabRect(self.indexOf(tabText)),
-                #                            currentTabColor)
             else:
                 self.setStyleSheet("RibbonTabBar::tab:selected {color: black;}")
         super().paintEvent(a0)
