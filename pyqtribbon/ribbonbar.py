@@ -203,7 +203,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self._titleWidget.tabBarHeight()
 
-    def setTabBarHeight(self, height: int = 50):
+    def setTabBarHeight(self, height: int = 70):
         """Set the height of the tab bar.
 
         :param height: The height to set.
@@ -225,7 +225,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         button.setAutoRaise(True)
         self._titleWidget.quickAccessToolBar().addWidget(button)
 
-    def setQuickAccessButtonHeight(self, height: int = 40):
+    def setQuickAccessButtonHeight(self, height: int = 30):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.

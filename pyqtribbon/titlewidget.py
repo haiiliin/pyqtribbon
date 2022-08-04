@@ -37,8 +37,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtons = []
     _rightToolButtons = []
 
-    _tabBarHeight = 60
-    _quickAccessButtonHeight = 40
+    _tabBarHeight = 70
+    _quickAccessButtonHeight = 30
     _rightButtonHeight = 24
 
     @typing.overload
