@@ -3,8 +3,8 @@ import sys
 from qtpy.QtWidgets import QApplication
 from qtpy.QtGui import QIcon
 
-from ribbon import RibbonBar, RibbonCategoryStyle
-from ribbon.screenshotwindow import RibbonScreenShotWindow
+from pyqtribbon import RibbonBar, RibbonCategoryStyle
+from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

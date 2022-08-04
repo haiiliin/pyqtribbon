@@ -1,6 +1,6 @@
 from qtpy import QtWidgets, QtCore, QtGui
 
-from ribbon.utils import data_file_path
+from pyqtribbon.utils import data_file_path
 
 
 class RibbonCategoryLayoutButton(QtWidgets.QToolButton):

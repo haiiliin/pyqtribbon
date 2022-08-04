@@ -2,7 +2,7 @@ import sys
 
 from qtpy import QtWidgets, QtGui
 from qtpy.QtGui import QIcon
-from ribbon import RibbonBar
+from pyqtribbon import RibbonBar
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

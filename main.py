@@ -3,8 +3,8 @@ import sys
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
-from ribbon import RibbonBar, RibbonCategoryStyle, Large
-from ribbon.ribbonbar import RibbonStyle
+from pyqtribbon import RibbonBar, RibbonCategoryStyle, Large
+from pyqtribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
