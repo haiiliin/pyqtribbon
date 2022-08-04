@@ -566,7 +566,7 @@ class RibbonBar(QtWidgets.QMenuBar):
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/down.png')))
             self._stackedWidget.setVisible(False)
-            self.setFixedSize(self.sizeHint().width(), self._titleWidget.tabBarHeight() + 5)
+            self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)
 
     def ribbonVisible(self) -> bool:
         """Get the visibility of the ribbon.
