@@ -79,6 +79,9 @@ Setup Title
 
     RibbonBar.title
     RibbonBar.setTitle
+    RibbonBar.addTitleWidget
+    RibbonBar.insertTitleWidget
+    RibbonBar.removeTitleWidget
 
 Setup Category Tab Bar
 ~~~~~~~~~~~~~~~~~~~~~~
