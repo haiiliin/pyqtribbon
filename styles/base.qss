@@ -1,9 +1,4 @@
 
-RibbonApplicationButton {
-    border: none;
-    padding: 0px;
-}
-
 RibbonApplicationButton::menu-indicator {
     image: none;
 }
@@ -14,7 +9,6 @@ RibbonCategory, RibbonCategoryScrollArea, RibbonCategoryScrollAreaContents {
 }
 
 RibbonTabBar::tab {
-	min-width: 100px;
 	padding-left: 10px;
 	padding-right: 10px;
 }

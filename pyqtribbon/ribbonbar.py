@@ -39,6 +39,8 @@ class RibbonBar(QtWidgets.QMenuBar):
     """
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
+    #: Signal, the file button was clicked.
+    fileButtonClicked = QtCore.Signal()
 
     #: The categories of the ribbon.
     _categories: typing.Dict[str, RibbonCategory] = {}
@@ -52,6 +54,9 @@ class RibbonBar(QtWidgets.QMenuBar):
 
     #: heights of the ribbon elements
     _ribbonHeight = 240
+
+    #: current tab index
+    _currentTabIndex = 0
 
     @typing.overload
     def __init__(self, title: str = '', maxRows=6, parent=None):
@@ -165,6 +170,28 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         self._titleWidget.applicationButton().setIcon(icon)
 
+    def addTitleWidget(self, widget: QtWidgets.QWidget):
+        """Add a widget to the title widget.
+
+        :param widget: The widget to add.
+        """
+        self._titleWidget.addTitleWidget(widget)
+
+    def removeTitleWidget(self, widget: QtWidgets.QWidget):
+        """Remove a widget from the title widget.
+
+        :param widget: The widget to remove.
+        """
+        self._titleWidget.removeTitleWidget(widget)
+
+    def insertTitleWidget(self, index: int, widget: QtWidgets.QWidget):
+        """Insert a widget to the title widget.
+
+        :param index: The index to insert the widget.
+        :param widget: The widget to insert.
+        """
+        self._titleWidget.insertTitleWidget(index, widget)
+
     def addFileMenu(self) -> RibbonMenu:
         """Add a file menu to the ribbon."""
         return self.applicationOptionButton().addFileMenu()
@@ -198,7 +225,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self._titleWidget.tabBarHeight()
 
-    def setTabBarHeight(self, height: int = 50):
+    def setTabBarHeight(self, height: int = 70):
         """Set the height of the tab bar.
 
         :param height: The height to set.
@@ -220,7 +247,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         button.setAutoRaise(True)
         self._titleWidget.quickAccessToolBar().addWidget(button)
 
-    def setQuickAccessButtonHeight(self, height: int = 40):
+    def setQuickAccessButtonHeight(self, height: int = 30):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.
@@ -359,7 +386,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         title: str,
         style=RibbonCategoryStyle.Normal,
-        color: QtGui.QColor = None,
+        color: QtGui.QColor = QtCore.Qt.blue,
     ) -> typing.Union[RibbonNormalCategory, RibbonContextCategory]:
         """Add a new category to the ribbon.
 
@@ -389,6 +416,9 @@ class RibbonBar(QtWidgets.QMenuBar):
             self._titleWidget.tabBar().addTab(title, color)
         elif style == RibbonCategoryStyle.Context:
             category.hide()
+        if len(self._categories) == 1:
+            self._titleWidget.tabBar().setCurrentIndex(1)
+            self.showCategoryByIndex(1)
         return category
 
     def addNormalCategory(self, title: str) -> RibbonNormalCategory:
@@ -402,7 +432,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def addContextCategory(
         self,
         title: str,
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
     ) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
 
@@ -416,7 +446,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         name: str,
         titles: typing.List[str],
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = None,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
     ) -> RibbonContextCategories:
         """Add a group of context categories with the same tab color to the ribbon.
 
@@ -438,7 +468,12 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param index: tab index
         """
-        title = self._titleWidget.tabBar().tabText(index)
+        if index == 0:
+            self.fileButtonClicked.emit()
+            index = self._currentTabIndex
+            self._titleWidget.tabBar().setCurrentIndex(index)
+        self._currentTabIndex = index
+        title = self._titleWidget.tabBar().tabText(index)  # 0 is the file tab
         if title in self._categories:
             self._stackedWidget.setCurrentWidget(self._categories[title])
 
