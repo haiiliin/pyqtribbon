@@ -65,9 +65,17 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         # Tab bar layout
         self.setFixedHeight(self._tabBarHeight)
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        self._mainLayout = QtWidgets.QHBoxLayout(self)
+        self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 0, 5, 5)
         self._mainLayout.setSpacing(5)
+        self._titleLayout = QtWidgets.QHBoxLayout()
+        self._titleLayout.setContentsMargins(0, 0, 0, 0)
+        self._titleLayout.setSpacing(0)
+        self._tabBarLayout = QtWidgets.QHBoxLayout()
+        self._tabBarLayout.setContentsMargins(0, 0, 0, 0)
+        self._tabBarLayout.setSpacing(0)
+        self._mainLayout.addLayout(self._titleLayout)
+        self._mainLayout.addLayout(self._tabBarLayout)
 
         # Application
         self._applicationButton = RibbonApplicationButton()
@@ -77,7 +85,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._applicationButton.setToolTip("PyQtRibbon")
 
         self._quickAccessToolBar = QtWidgets.QToolBar()
-        self._quickAccessToolBar.setFixedHeight(self._quickAccessButtonHeight)
         self._quickAccessToolBar.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._quickAccessToolBar.setOrientation(QtCore.Qt.Horizontal)
         self._quickAccessToolBar.setMovable(False)
@@ -97,6 +104,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._collapseRibbonButton.setIcon(QtGui.QIcon(data_file_path('icons/up.png')))
         self._collapseRibbonButton.setAutoRaise(True)
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
+        self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._helpButton.setIcon(QtGui.QIcon(data_file_path("icons/help.png")))
@@ -115,25 +123,21 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._tabBar.setFont(font)
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
+        self._tabBar.addTab("File")
 
         # Title label
         self._titleLabel = RibbonTitleLabel(self)
         self._titleLabel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        self._titleLabel.setFixedHeight(self._tabBarHeight -
-                                        self._mainLayout.contentsMargins().top() -
-                                        self._mainLayout.contentsMargins().bottom())
-        self._titleLabel.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignBottom)
+        self._titleLabel.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)
         self._titleLabel.setText(title)
         font = self._titleLabel.font()
         font.setPointSize(font.pointSize() + 3)
         self._titleLabel.setFont(font)
 
-        self._mainLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignBottom)
-        self._mainLayout.addWidget(self._tabBar, 1, QtCore.Qt.AlignBottom)
-        self._mainLayout.addWidget(self._titleLabel, 0, QtCore.Qt.AlignBottom)
-        self._mainLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignBottom)
-
-        self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
+        self._titleLayout.addWidget(self._quickAccessToolBarWidget, 0)
+        self._titleLayout.addWidget(self._titleLabel, 1)
+        self._tabBarLayout.addWidget(self._tabBar, 1)
+        self._tabBarLayout.addWidget(self._rightToolBar, 0)
 
     def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
@@ -145,6 +149,28 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :param icon: The icon to set.
         """
         self._applicationButton.setIcon(icon)
+
+    def addTitleWidget(self, widget: QtWidgets.QWidget):
+        """Add a widget to the title layout.
+
+        :param widget: The widget to add.
+        """
+        self._titleLayout.addWidget(widget)
+
+    def insertTitleWidget(self, index: int, widget: QtWidgets.QWidget):
+        """Insert a widget to the title layout.
+
+        :param index: The index to insert the widget.
+        :param widget: The widget to insert.
+        """
+        self._titleLayout.insertWidget(index, widget)
+
+    def removeTitleWidget(self, widget: QtWidgets.QWidget):
+        """Remove a widget from the title layout.
+
+        :param widget: The widget to remove.
+        """
+        self._titleLayout.removeWidget(widget)
 
     def tabBar(self) -> RibbonTabBar:
         """Return the tab bar of the ribbon.
@@ -160,7 +186,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         return self._tabBarHeight
 
-    def setTabBarHeight(self, height: int = 50):
+    def setTabBarHeight(self, height: int = 70):
         """Set the height of the tab bar.
 
         :param height: The height to set.
@@ -191,7 +217,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._quickAccessButtons.append(button)
         self._quickAccessToolBar.addWidget(button)
 
-    def setQuickAccessButtonHeight(self, height: int = 40):
+    def setQuickAccessButtonHeight(self, height: int = 30):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.

@@ -170,6 +170,28 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         self._titleWidget.applicationButton().setIcon(icon)
 
+    def addTitleWidget(self, widget: QtWidgets.QWidget):
+        """Add a widget to the title widget.
+
+        :param widget: The widget to add.
+        """
+        self._titleWidget.addTitleWidget(widget)
+
+    def removeTitleWidget(self, widget: QtWidgets.QWidget):
+        """Remove a widget from the title widget.
+
+        :param widget: The widget to remove.
+        """
+        self._titleWidget.removeTitleWidget(widget)
+
+    def insertTitleWidget(self, index: int, widget: QtWidgets.QWidget):
+        """Insert a widget to the title widget.
+
+        :param index: The index to insert the widget.
+        :param widget: The widget to insert.
+        """
+        self._titleWidget.insertTitleWidget(index, widget)
+
     def addFileMenu(self) -> RibbonMenu:
         """Add a file menu to the ribbon."""
         return self.applicationOptionButton().addFileMenu()
