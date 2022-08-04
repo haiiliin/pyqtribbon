@@ -218,20 +218,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self._titleWidget.tabBar()
 
-    def tabBarHeight(self) -> int:
-        """Get the height of the tab bar.
-
-        :return: The height of the tab bar.
-        """
-        return self._titleWidget.tabBarHeight()
-
-    def setTabBarHeight(self, height: int = 70):
-        """Set the height of the tab bar.
-
-        :param height: The height to set.
-        """
-        self._titleWidget.setTabBarHeight(height)
-
     def quickAccessToolBar(self) -> QtWidgets.QToolBar:
         """Return the quick access toolbar of the ribbon.
 
