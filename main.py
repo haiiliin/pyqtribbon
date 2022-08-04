@@ -3,15 +3,14 @@ import sys
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import RibbonBar, RibbonCategoryStyle, Large
-from pyqtribbon.ribbonbar import RibbonStyle
+from pyqtribbon import RibbonBar, RibbonCategoryStyle, Large, RibbonStyle, RibbonMainWindow
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 10))
     app.setStyle("Windows")
 
-    window = QtWidgets.QMainWindow()
+    window = RibbonMainWindow()
     ribbon = RibbonBar(maxRows=6)
     ribbon.setRibbonStyle(RibbonStyle.Default)
     window.setMenuBar(ribbon)
