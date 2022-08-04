@@ -91,8 +91,6 @@ Setup Category Tab Bar
 .. autosummary::
 
     RibbonBar.tabBar
-    RibbonBar.tabBarHeight
-    RibbonBar.setTabBarHeight
 
 Setup Quick Access Bar
 ~~~~~~~~~~~~~~~~~~~~~~

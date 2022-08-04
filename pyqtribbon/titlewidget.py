@@ -37,7 +37,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtons = []
     _rightToolButtons = []
 
-    _tabBarHeight = 70
     _quickAccessButtonHeight = 30
     _rightButtonHeight = 24
 
@@ -63,7 +62,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
             parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
         super().__init__(parent)
         # Tab bar layout
-        self.setFixedHeight(self._tabBarHeight)
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 0, 5, 5)
@@ -178,21 +176,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :return: The tab bar of the ribbon.
         """
         return self._tabBar
-
-    def tabBarHeight(self) -> int:
-        """Get the height of the tab bar.
-
-        :return: The height of the tab bar.
-        """
-        return self._tabBarHeight
-
-    def setTabBarHeight(self, height: int = 70):
-        """Set the height of the tab bar.
-
-        :param height: The height to set.
-        """
-        self._tabBarHeight = height
-        self.setFixedHeight(height)
 
     def quickAccessToolBar(self) -> QtWidgets.QToolBar:
         """Return the quick access toolbar of the ribbon.

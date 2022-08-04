@@ -218,20 +218,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self._titleWidget.tabBar()
 
-    def tabBarHeight(self) -> int:
-        """Get the height of the tab bar.
-
-        :return: The height of the tab bar.
-        """
-        return self._titleWidget.tabBarHeight()
-
-    def setTabBarHeight(self, height: int = 70):
-        """Set the height of the tab bar.
-
-        :param height: The height to set.
-        """
-        self._titleWidget.setTabBarHeight(height)
-
     def quickAccessToolBar(self) -> QtWidgets.QToolBar:
         """Return the quick access toolbar of the ribbon.
 
@@ -580,7 +566,7 @@ class RibbonBar(QtWidgets.QMenuBar):
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/down.png')))
             self._stackedWidget.setVisible(False)
-            self.setFixedSize(self.sizeHint().width(), self._titleWidget.tabBarHeight() + 5)
+            self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)
 
     def ribbonVisible(self) -> bool:
         """Get the visibility of the ribbon.
