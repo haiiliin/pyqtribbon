@@ -483,7 +483,7 @@ class RibbonPanel(QtWidgets.QFrame):
             fontSize = max(button.font().pointSize() * 4 / 3, button.font().pixelSize())
             arrowSize = fontSize
             maximumIconSize = max(maximumHeight - fontSize * 2 - arrowSize, 48)
-            button.setMaximumIconSize(maximumIconSize)
+            button.setMaximumIconSize(int(maximumIconSize))
         if not showText:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.addWidget(
