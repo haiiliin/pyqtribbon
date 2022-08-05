@@ -1,13 +1,15 @@
+import sys
+
 from qtpy import QtWidgets
 
-from pyqtribbon import RibbonBar, mkQApp
+from pyqtribbon import RibbonBar
 from pyqtribbon.panel import RibbonPanel
 from pyqtribbon.toolbutton import RibbonToolButton
 
 
 def test_categories():
     if __name__ == '__main__':
-        app = mkQApp()
+        app = QtWidgets.QApplication(sys.argv)
         # Central widget
         window = QtWidgets.QMainWindow()
 
@@ -38,3 +40,4 @@ def test_categories():
         # Show the window
         window.resize(1800, 350)
         window.show()
+        sys.exit(app.exec_())

@@ -1,4 +1,3 @@
-from .Qt import *
 from .category import RibbonCategoryStyle, Normal, Context
 from .menu import RibbonMenu, RibbonPermanentMenu
 from .panel import RibbonSpaceFindMode, ColumnWise, RowWise

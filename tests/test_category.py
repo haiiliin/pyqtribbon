@@ -1,11 +1,13 @@
+import sys
+
 from qtpy import QtWidgets
 
-from pyqtribbon import RibbonBar, mkQApp
+from pyqtribbon import RibbonBar
 
 
 def test_category():
     if __name__ == '__main__':
-        app = mkQApp()
+        app = QtWidgets.QApplication(sys.argv)
         # Central widget
         window = QtWidgets.QMainWindow()
 
@@ -21,3 +23,4 @@ def test_category():
         # Show the window
         window.resize(1800, 350)
         window.show()
+        sys.exit(app.exec_())
