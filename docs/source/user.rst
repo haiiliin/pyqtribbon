@@ -33,11 +33,11 @@ Example
 For example, using the following code,
 
 .. exec_code::
-    :filename: _screenshots/ribbonbar.py
+    :filename: _examples/ribbonbar.py
 
 You can get a window like this:
 
-.. image:: _screenshots/ribbonbar.png
+.. image:: _examples/ribbonbar.png
     :align: center
     :width: 100%
 
@@ -126,11 +126,11 @@ Example
 For example, using the following code,
 
 .. exec_code::
-    :filename: _screenshots/ribbonbar-customize.py
+    :filename: _examples/ribbonbar-customize.py
 
 You can get a window like this:
 
-.. image:: _screenshots/ribbonbar-customize.png
+.. image:: _examples/ribbonbar-customize.png
     :align: center
     :width: 100%
 
@@ -187,11 +187,11 @@ Example
 For example, using the following code,
 
 .. exec_code::
-    :filename: _screenshots/category.py
+    :filename: _examples/category.py
 
 You can get a window like this:
 
-.. image:: _screenshots/category.png
+.. image:: _examples/category.png
     :align: center
     :width: 100%
 
@@ -270,11 +270,11 @@ Example
 For example, using the following code,
 
 .. exec_code::
-    :filename: _screenshots/panel.py
+    :filename: _examples/panel.py
 
 You can get a window like this:
 
-.. image:: _screenshots/panel.png
+.. image:: _examples/panel.png
     :align: center
     :width: 100%
 
@@ -283,11 +283,11 @@ A Complete Example
 
 The following code snippet is a complete example.
 
-.. literalinclude:: tutorial-ribbonbar.py
-    :language: python
+.. exec_code::
+    :filename: _examples/tutorial-ribbonbar.py
 
-It would be rendered as follows:
+You can get a window like this:
 
-.. image:: _images/example.png
+.. image:: _examples/tutorial-ribbonbar.png
     :align: center
     :width: 100%

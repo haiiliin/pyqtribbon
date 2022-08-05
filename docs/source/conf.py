@@ -41,7 +41,7 @@ extensions = [
     'sphinx_exec_code',
 ]
 
-exec_code_working_dir = './_screenshots'
+exec_code_working_dir = './_examples'
 
 qt_documentation = 'Qt5'
 autodoc_typehints_format = 'short'
