@@ -8,7 +8,7 @@ The RibbonScreenShotWindow Class
 The :py:class:`~ribbon.screenshotwindow.RibbonScreenShotWindow` class is just for taking a screenshot of the window, 
 the window will be closed 0.1s after it is shown. It is just used for documenting the window.
 
-.. autoclass:: ribbon.screenshotwindow.RibbonScreenShotWindow
+.. autoclass:: pyqtribbon.screenshotwindow.RibbonScreenShotWindow
     :members:
 
 Instantiate a Ribbon Bar
@@ -47,7 +47,7 @@ Customize Ribbon Bar
 General Setups
 ~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -62,7 +62,7 @@ General Setups
 Setup Application Button
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -73,7 +73,7 @@ Setup Application Button
 Setup Title
 ~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -86,7 +86,7 @@ Setup Title
 Setup Category Tab Bar
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -95,7 +95,7 @@ Setup Category Tab Bar
 Setup Quick Access Bar
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -106,7 +106,7 @@ Setup Quick Access Bar
 Setup Right Tool Bar
 ~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -137,7 +137,7 @@ You can get a window like this:
 Manage Categories
 ~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.ribbonbar
+.. currentmodule:: pyqtribbon.ribbonbar
 
 .. autosummary::
 
@@ -160,7 +160,7 @@ Customize Categories
 Setup Styles
 ~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.category
+.. currentmodule:: pyqtribbon.category
 
 .. autosummary::
 
@@ -170,7 +170,7 @@ Setup Styles
 Manage Panels
 ~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.category
+.. currentmodule:: pyqtribbon.category
 
 .. autosummary::
 
@@ -201,7 +201,7 @@ Customize Panels
 Setup Title Label
 ~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.panel
+.. currentmodule:: pyqtribbon.panel
 
 .. autosummary::
 
@@ -211,7 +211,7 @@ Setup Title Label
 Setup Panel Option Button
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.panel
+.. currentmodule:: pyqtribbon.panel
 
 .. autosummary::
 
@@ -222,7 +222,7 @@ Setup Panel Option Button
 Add Widgets to Panels
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. currentmodule:: ribbon.panel
+.. currentmodule:: pyqtribbon.panel
 
 .. autosummary::
 
