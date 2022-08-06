@@ -372,7 +372,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         title: str,
         style=RibbonCategoryStyle.Normal,
-        color: QtGui.QColor = QtCore.Qt.blue,
+        color: QtGui.QColor = None,
     ) -> typing.Union[RibbonNormalCategory, RibbonContextCategory]:
         """Add a new category to the ribbon.
 
