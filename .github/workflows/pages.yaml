@@ -17,6 +17,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    concurrency: pages_staging_environment
     strategy:
       matrix:
         python-version: ['3.10']
