@@ -3,9 +3,9 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from .menu import RibbonMenu
 from .category import (RibbonCategory, RibbonContextCategory, RibbonNormalCategory,
                        RibbonCategoryStyle, contextColors, RibbonContextCategories)
+from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
 from .utils import data_file_path
