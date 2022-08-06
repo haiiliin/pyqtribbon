@@ -1,5 +1,6 @@
 import sys
 
+from qtpy import QtGui
 from qtpy.QtWidgets import QApplication, QToolButton, QMenu, QLabel, QLineEdit
 from qtpy.QtGui import QIcon
 from qtpy.QtCore import Qt
@@ -9,6 +10,7 @@ from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setFont(QtGui.QFont("Times New Roman", 8))
     window = RibbonScreenShotWindow('panel.png')
 
     # Ribbon bar
