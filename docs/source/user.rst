@@ -32,8 +32,7 @@ Example
 
 For example, using the following code,
 
-.. exec_code::
-    :filename: _examples/ribbonbar.py
+.. literalinclude:: _examples/ribbonbar.py
 
 You can get a window like this:
 
@@ -125,8 +124,7 @@ Example
 
 For example, using the following code,
 
-.. exec_code::
-    :filename: _examples/ribbonbar-customize.py
+.. literalinclude:: _examples/ribbonbar-customize.py
 
 You can get a window like this:
 
@@ -186,8 +184,7 @@ Example
 
 For example, using the following code,
 
-.. exec_code::
-    :filename: _examples/category.py
+.. literalinclude:: _examples/category.py
 
 You can get a window like this:
 
@@ -269,8 +266,7 @@ Example
 
 For example, using the following code,
 
-.. exec_code::
-    :filename: _examples/panel.py
+.. literalinclude:: _examples/panel.py
 
 You can get a window like this:
 
@@ -283,8 +279,7 @@ A Complete Example
 
 The following code snippet is a complete example.
 
-.. exec_code::
-    :filename: _examples/tutorial-ribbonbar.py
+.. literalinclude:: _examples/tutorial-ribbonbar.py
 
 You can get a window like this:
 

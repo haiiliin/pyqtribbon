@@ -6,4 +6,3 @@ sphinx==4.5.0
 sphinx-rtd-theme
 sphinx-toolbox
 sphinx-qt-documentation
-sphinx-exec-code

@@ -38,10 +38,7 @@ extensions = [
     'sphinx.ext.linkcode',
     'sphinx.ext.githubpages',
     'sphinx_qt_documentation',
-    'sphinx_exec_code',
 ]
-
-exec_code_working_dir = './_examples'
 
 qt_documentation = 'Qt5'
 autodoc_typehints_format = 'short'

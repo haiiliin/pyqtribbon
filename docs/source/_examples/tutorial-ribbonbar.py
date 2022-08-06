@@ -1,10 +1,11 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtCore import Qt
 
 from pyqtribbon import RibbonBar
+from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
 from pyqtribbon.utils import data_file_path
 
 if __name__ == "__main__":
@@ -12,7 +13,7 @@ if __name__ == "__main__":
     app.setFont(QFont("Times New Roman", 8))
     
     # Central widget
-    window = QMainWindow()
+    window = RibbonScreenShotWindow('tutorial-ribbonbar.png')
     window.setWindowIcon(QIcon(data_file_path("icons/python.png")))
     centralWidget = QWidget()
     window.setCentralWidget(centralWidget)
