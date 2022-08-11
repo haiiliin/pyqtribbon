@@ -357,7 +357,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -391,7 +391,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
         :return: The widget that was added.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -410,7 +410,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -429,7 +429,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -483,7 +483,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -554,7 +554,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -590,7 +590,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -626,7 +626,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -664,7 +664,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -702,7 +702,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -740,7 +740,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -778,7 +778,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -806,7 +806,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the combo box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the combo box.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -833,7 +833,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the combo box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the combo box.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -857,7 +857,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the line edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the line edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -883,7 +883,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the text edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the text edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -909,7 +909,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the text edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the text edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -937,7 +937,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the label should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the label.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -964,7 +964,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the progress bar should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the progress bar.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -990,7 +990,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the slider should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the slider.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1017,7 +1017,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the spin box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the spin box.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1043,7 +1043,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the double spin box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the double spin box.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1069,7 +1069,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the date edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the date edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1095,7 +1095,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the time edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the time edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1121,7 +1121,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the date time edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the date time edit.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1147,7 +1147,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the table widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the table widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1173,7 +1173,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the tree widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the tree widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1199,7 +1199,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the list widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the list widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1225,7 +1225,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the calendar widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the calendar widget.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1255,7 +1255,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1284,7 +1284,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1310,7 +1310,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
@@ -1338,7 +1338,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the gallery spans.
         :param mode: The mode of the gallery.
         :param alignment: The alignment of the gallery.
-        :param fixedHeight: Whether to fix the height of the combo box, it can be a boolean, a percentage or a fixed
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span.
