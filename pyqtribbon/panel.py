@@ -360,17 +360,19 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         widget.setMaximumHeight(maximumHeight)
-        if fixedHeight:
-            fixedHeight = (int(fixedHeight * maximumHeight) if 0 <= fixedHeight <= 1 else
+        if fixedHeight is True or fixedHeight > 0:
+            fixedHeight = (int(fixedHeight * maximumHeight) if 0 < fixedHeight <= 1 else
                            fixedHeight if 1 < fixedHeight < maximumHeight else
                            maximumHeight)
+            fixedHeight = max(fixedHeight, 0.4 * maximumHeight)  # minimum height is 40% of the maximum height
             widget.setFixedHeight(fixedHeight)
         item = RibbonPanelItemWidget(self)
         item.addWidget(widget)
@@ -394,7 +396,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
         return self.addWidget(widget, 2, 1, mode, alignment, fixedHeight)
 
@@ -413,7 +416,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
         return self.addWidget(widget, 3, 1, mode, alignment, fixedHeight)
 
@@ -432,7 +436,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
         return self.addWidget(widget, 6, 1, mode, alignment, fixedHeight)
 
@@ -486,7 +491,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         
         :return: The button that was added.
         """
@@ -557,7 +563,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -593,7 +600,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -629,7 +637,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -667,7 +676,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -705,7 +715,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -743,7 +754,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -781,7 +793,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
@@ -809,7 +822,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The combo box that was added.
         """
@@ -836,7 +850,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         :return: The combo box that was added.
         """
         comboBox = QtWidgets.QFontComboBox(self)
@@ -860,7 +875,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The line edit that was added.
         """
@@ -886,7 +902,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The text edit that was added.
         """
@@ -912,7 +929,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The text edit that was added.
         """
@@ -940,7 +958,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The label that was added.
         """
@@ -967,7 +986,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The progress bar that was added.
         """
@@ -993,7 +1013,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The slider that was added.
         """
@@ -1020,7 +1041,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The spin box that was added.
         """
@@ -1046,7 +1068,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The double spin box that was added.
         """
@@ -1072,7 +1095,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The date edit that was added.
         """
@@ -1098,7 +1122,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The time edit that was added.
         """
@@ -1124,7 +1149,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The date time edit that was added.
         """
@@ -1150,7 +1176,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The table widget that was added.
         """
@@ -1176,7 +1203,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The tree widget that was added.
         """
@@ -1202,7 +1230,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The list widget that was added.
         """
@@ -1228,7 +1257,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The calendar widget that was added.
         """
@@ -1258,7 +1288,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
@@ -1287,7 +1318,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
@@ -1313,7 +1345,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
@@ -1341,7 +1374,8 @@ class RibbonPanel(QtWidgets.QFrame):
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
                             height, when a boolean is given, the height is fixed to the maximum height allowed if the
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
-                            from the height of the maximum height allowed, depends on the number of rows to span.
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The gallery.
         """
