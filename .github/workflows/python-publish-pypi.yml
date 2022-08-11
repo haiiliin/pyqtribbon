@@ -1,6 +1,6 @@
 # .github/workflows/python-publish-pypi.yml
 
-name: Upload to PyPI
+name: PyPI
 
 on:
   release:

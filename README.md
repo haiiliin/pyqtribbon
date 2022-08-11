@@ -10,6 +10,9 @@
 [![PyPI](https://img.shields.io/pypi/v/pyqtribbon)](https://pypi.org/project/pyqtribbon/)
 [![PyPI download month](https://img.shields.io/pypi/dm/pyqtribbon.svg)](https://pypi.org/project/pyqtribbon/)
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/haiiliin/pyqtribbon.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/haiiliin/pyqtribbon/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/haiiliin/pyqtribbon.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/haiiliin/pyqtribbon/context:python)
+
 PyQtRibbon is a Qt-based application framework for building user interfaces.
 
 - GitHub Repository: [github.com/haiiliin/pyqtribbon](https://github.com/haiiliin/pyqtribbon/).
