@@ -64,8 +64,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         # Tab bar layout
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 5, 5)
-        self._mainLayout.setSpacing(5)
+        self._mainLayout.setContentsMargins(0, 0, 0, 0)
+        self._mainLayout.setSpacing(0)
         self._titleLayout = QtWidgets.QHBoxLayout()
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
         self._titleLayout.setSpacing(0)

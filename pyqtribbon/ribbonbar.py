@@ -92,7 +92,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
         self._mainLayout.setContentsMargins(5, 5, 5, 5)
-        self._mainLayout.setSpacing(5)
+        self._mainLayout.setSpacing(0)
         self._mainLayout.addWidget(self._titleWidget, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
         self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
