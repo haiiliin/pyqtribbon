@@ -171,7 +171,7 @@ class RibbonPanel(QtWidgets.QFrame):
         # Actions layout
         self._actionsLayout = QtWidgets.QGridLayout()
         self._actionsLayout.setContentsMargins(5, 0, 5, 0)
-        self._actionsLayout.setSpacing(5)
+        self._actionsLayout.setSpacing(0)
         self._mainLayout.addLayout(self._actionsLayout, 1)
 
         # Title layout
@@ -348,6 +348,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ):
         """Add a widget to the panel.
 
@@ -356,12 +357,23 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         self._widgets.append(widget)
         row, col = self._gridLayoutManager.request_cells(rowSpan, colSpan, mode)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         widget.setMaximumHeight(maximumHeight)
+        if fixedHeight is True or fixedHeight > 0:
+            fixedHeight = (int(fixedHeight * maximumHeight) if 0 < fixedHeight <= 1 else
+                           fixedHeight if 1 < fixedHeight < maximumHeight else
+                           maximumHeight)
+            fixedHeight = max(fixedHeight, 0.4 * maximumHeight)  # minimum height is 40% of the maximum height
+            widget.setFixedHeight(fixedHeight)
         item = RibbonPanelItemWidget(self)
         item.addWidget(widget)
         self._actionsLayout.addWidget(
@@ -373,6 +385,7 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ):
         """Add a small widget to the panel.
 
@@ -380,36 +393,53 @@ class RibbonPanel(QtWidgets.QFrame):
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
         :return: The widget that was added.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 2, 1, mode, alignment)
+        return self.addWidget(widget, 2, 1, mode, alignment, fixedHeight)
 
     def addMediumWidget(
         self,
         widget: QtWidgets.QWidget,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ):
         """Add a medium widget to the panel.
 
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 3, 1, mode, alignment)
+        return self.addWidget(widget, 3, 1, mode, alignment, fixedHeight)
 
     def addLargeWidget(
         self,
         widget: QtWidgets.QWidget,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ):
         """Add a large widget to the panel.
 
         :param widget: The widget to add.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 6, 1, mode, alignment)
+        return self.addWidget(widget, 6, 1, mode, alignment, fixedHeight)
 
     def removeWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the panel."""
@@ -443,6 +473,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a button to the panel.
         
@@ -457,6 +488,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         
         :return: The button that was added.
         """
@@ -493,7 +529,8 @@ class RibbonPanel(QtWidgets.QFrame):
                      self.defaultRowSpan(Large)),
             colSpan=colSpan,
             mode=mode,
-            alignment=alignment
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
         return button
 
@@ -509,6 +546,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a small button to the panel.
             
@@ -522,11 +560,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addButton(text, icon, RibbonButtonStyle.Small, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode, alignment)
+                              slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight)
 
     def addMediumButton(
         self,
@@ -540,6 +583,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a medium button to the panel.
 
@@ -553,11 +597,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addButton(text, icon, RibbonButtonStyle.Medium, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode, alignment)
+                              slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight)
 
     def addLargeButton(
         self,
@@ -571,6 +620,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a large button to the panel.
 
@@ -584,11 +634,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addButton(text, icon, RibbonButtonStyle.Large, showText, colSpan,
-                              slot, shortcut, tooltip, statusTip, mode, alignment)
+                              slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight)
 
     def addToggleButton(
         self,
@@ -603,6 +658,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a toggle button to the panel.
 
@@ -617,11 +673,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         button = self.addButton(text, icon, style, showText, colSpan,
-                                slot, shortcut, tooltip, statusTip, mode, alignment)
+                                slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight)
         button.setCheckable(True)
         return button
 
@@ -637,6 +698,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a small toggle button to the panel.
 
@@ -650,11 +712,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addToggleButton(
-            text, icon, RibbonButtonStyle.Small, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Small, showText, colSpan,
+            slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight,
         )
 
     def addMediumToggleButton(
@@ -669,6 +737,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a medium toggle button to the panel.
 
@@ -682,11 +751,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addToggleButton(
-            text, icon, RibbonButtonStyle.Medium, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Medium, showText, colSpan,
+            slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight,
         )
 
     def addLargeToggleButton(
@@ -701,6 +776,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton:
         """Add a large toggle button to the panel.
 
@@ -714,11 +790,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param statusTip: The status tip of the button.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The button that was added.
         """
         return self.addToggleButton(
-            text, icon, RibbonButtonStyle.Large, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment
+            text, icon, RibbonButtonStyle.Large, showText,
+            colSpan, slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight,
         )
 
     def addComboBox(
@@ -728,6 +810,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QComboBox:
         """Add a combo box to the panel.
 
@@ -736,13 +819,18 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the combo box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the combo box.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The combo box that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
-        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment)
+        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment, fixedHeight)
         return comboBox
 
     def addFontComboBox(
@@ -751,6 +839,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QFontComboBox:
         """Add a font combo box to the panel.
 
@@ -758,11 +847,15 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the combo box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the combo box.
-
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
         :return: The combo box that was added.
         """
         comboBox = QtWidgets.QFontComboBox(self)
-        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment)
+        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment, fixedHeight)
         return comboBox
 
     def addLineEdit(
@@ -771,6 +864,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QLineEdit:
         """Add a line edit to the panel.
 
@@ -778,12 +872,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the line edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the line edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The line edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         lineEdit = QtWidgets.QLineEdit(self)
-        self.addWidget(lineEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(lineEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return lineEdit
 
     def addTextEdit(
@@ -792,6 +891,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTextEdit:
         """Add a text edit to the panel.
 
@@ -799,12 +899,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the text edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the text edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The text edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         textEdit = QtWidgets.QTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return textEdit
 
     def addPlainTextEdit(
@@ -813,6 +918,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QPlainTextEdit:
         """Add a plain text edit to the panel.
 
@@ -820,12 +926,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the text edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the text edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The text edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         textEdit = QtWidgets.QPlainTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return textEdit
 
     def addLabel(
@@ -835,6 +946,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QLabel:
         """Add a label to the panel.
 
@@ -843,13 +955,18 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the label should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the label.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The label that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         label = QtWidgets.QLabel(self)
         label.setText(text)
-        self.addWidget(label, rowSpan, colSpan, mode, alignment)
+        self.addWidget(label, rowSpan, colSpan, mode, alignment, fixedHeight)
         return label
 
     def addProgressBar(
@@ -858,6 +975,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QProgressBar:
         """Add a progress bar to the panel.
 
@@ -865,12 +983,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the progress bar should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the progress bar.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The progress bar that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         progressBar = QtWidgets.QProgressBar(self)
-        self.addWidget(progressBar, rowSpan, colSpan, mode, alignment)
+        self.addWidget(progressBar, rowSpan, colSpan, mode, alignment, fixedHeight)
         return progressBar
 
     def addSlider(
@@ -879,6 +1002,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QSlider:
         """Add a slider to the panel.
 
@@ -886,13 +1010,18 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the slider should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the slider.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The slider that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
-        self.addWidget(slider, rowSpan, colSpan, mode, alignment)
+        self.addWidget(slider, rowSpan, colSpan, mode, alignment, fixedHeight)
         return slider
 
     def addSpinBox(
@@ -901,6 +1030,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QSpinBox:
         """Add a spin box to the panel.
 
@@ -908,12 +1038,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the spin box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the spin box.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The spin box that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         spinBox = QtWidgets.QSpinBox(self)
-        self.addWidget(spinBox, rowSpan, colSpan, mode, alignment)
+        self.addWidget(spinBox, rowSpan, colSpan, mode, alignment, fixedHeight)
         return spinBox
 
     def addDoubleSpinBox(
@@ -922,6 +1057,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDoubleSpinBox:
         """Add a double spin box to the panel.
 
@@ -929,12 +1065,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the double spin box should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the double spin box.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The double spin box that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
-        self.addWidget(doubleSpinBox, rowSpan, colSpan, mode, alignment)
+        self.addWidget(doubleSpinBox, rowSpan, colSpan, mode, alignment, fixedHeight)
         return doubleSpinBox
 
     def addDateEdit(
@@ -943,6 +1084,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDateEdit:
         """Add a date edit to the panel.
 
@@ -950,12 +1092,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the date edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the date edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The date edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         dateEdit = QtWidgets.QDateEdit(self)
-        self.addWidget(dateEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(dateEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return dateEdit
 
     def addTimeEdit(
@@ -964,6 +1111,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTimeEdit:
         """Add a time edit to the panel.
 
@@ -971,12 +1119,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the time edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the time edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The time edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         timeEdit = QtWidgets.QTimeEdit(self)
-        self.addWidget(timeEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(timeEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return timeEdit
 
     def addDateTimeEdit(
@@ -985,6 +1138,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDateTimeEdit:
         """Add a date time edit to the panel.
 
@@ -992,12 +1146,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the date time edit should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the date time edit.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The date time edit that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
-        self.addWidget(dateTimeEdit, rowSpan, colSpan, mode, alignment)
+        self.addWidget(dateTimeEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
         return dateTimeEdit
 
     def addTableWidget(
@@ -1006,6 +1165,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTableWidget:
         """Add a table widget to the panel.
 
@@ -1013,12 +1173,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the table widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the table widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The table widget that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         tableWidget = QtWidgets.QTableWidget(self)
-        self.addWidget(tableWidget, rowSpan, colSpan, mode, alignment)
+        self.addWidget(tableWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
         return tableWidget
 
     def addTreeWidget(
@@ -1027,6 +1192,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTreeWidget:
         """Add a tree widget to the panel.
 
@@ -1034,12 +1200,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the tree widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the tree widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The tree widget that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         treeWidget = QtWidgets.QTreeWidget(self)
-        self.addWidget(treeWidget, rowSpan, colSpan, mode, alignment)
+        self.addWidget(treeWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
         return treeWidget
 
     def addListWidget(
@@ -1048,6 +1219,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QListWidget:
         """Add a list widget to the panel.
 
@@ -1055,12 +1227,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the list widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the list widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The list widget that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         listWidget = QtWidgets.QListWidget(self)
-        self.addWidget(listWidget, rowSpan, colSpan, mode, alignment)
+        self.addWidget(listWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
         return listWidget
 
     def addCalendarWidget(
@@ -1069,6 +1246,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QCalendarWidget:
         """Add a calendar widget to the panel.
 
@@ -1076,12 +1254,17 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the calendar widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the calendar widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The calendar widget that was added.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         calendarWidget = QtWidgets.QCalendarWidget(self)
-        self.addWidget(calendarWidget, rowSpan, colSpan, mode, alignment)
+        self.addWidget(calendarWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
         return calendarWidget
 
     def addSeparator(
@@ -1092,6 +1275,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]:
         """Add a separator to the panel.
 
@@ -1101,13 +1285,18 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         separator = (RibbonHorizontalSeparator(width) if orientation == QtCore.Qt.Horizontal else
                      RibbonVerticalSeparator(width))
-        self.addWidget(separator, rowSpan, colSpan, mode, alignment)
+        self.addWidget(separator, rowSpan, colSpan, mode, alignment, fixedHeight)
         return separator
 
     def addHorizontalSeparator(
@@ -1117,6 +1306,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 2,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonHorizontalSeparator:
         """Add a horizontal separator to the panel.
 
@@ -1125,11 +1315,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
-        return self.addSeparator(QtCore.Qt.Horizontal, width, rowSpan, colSpan, mode, alignment)
+        return self.addSeparator(QtCore.Qt.Horizontal, width, rowSpan, colSpan, mode, alignment, fixedHeight)
 
     def addVerticalSeparator(
         self,
@@ -1138,6 +1333,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonVerticalSeparator:
         """Add a vertical separator to the panel.
 
@@ -1146,11 +1342,16 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the separator spans.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the separator.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The separator.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
-        return self.addSeparator(QtCore.Qt.Vertical, width, rowSpan, colSpan, mode, alignment)
+        return self.addSeparator(QtCore.Qt.Vertical, width, rowSpan, colSpan, mode, alignment, fixedHeight)
 
     def addGallery(
         self,
@@ -1160,6 +1361,7 @@ class RibbonPanel(QtWidgets.QFrame):
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonGallery:
         """Add a gallery to the panel.
 
@@ -1169,6 +1371,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param colSpan: The number of columns the gallery spans.
         :param mode: The mode of the gallery.
         :param alignment: The alignment of the gallery.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The 
+                            minimum height is 40% of the maximum height allowed.
 
         :return: The gallery.
         """
@@ -1176,7 +1383,7 @@ class RibbonPanel(QtWidgets.QFrame):
         gallery = RibbonGallery(minimumWidth, popupHideOnClick, self)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
-        self.addWidget(gallery, rowSpan, colSpan, mode, alignment)
+        self.addWidget(gallery, rowSpan, colSpan, mode, alignment, fixedHeight)
         return gallery
 
     def setTitle(self, title: str):

@@ -15,6 +15,7 @@ if __name__ == "__main__":
     window.setCentralWidget(centralWidget)
     layout = QtWidgets.QVBoxLayout(centralWidget)
     ribbonbar = RibbonBar()
+    ribbonbar.setRibbonHeight(160)
     window.setMenuBar(ribbonbar)
 
     layout.addWidget(QtWidgets.QTextEdit(), 1)
