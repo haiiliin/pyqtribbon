@@ -23,7 +23,8 @@ copyright = '2022, WANG Hailin'
 author = 'WANG Hailin'
 
 # The full version, including alpha/beta/rc tags
-release = '0.4.0'
+import pyqtribbon
+release = version = pyqtribbon.__version__
 
 
 # -- General configuration ---------------------------------------------------
