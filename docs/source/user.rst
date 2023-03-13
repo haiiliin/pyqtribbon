@@ -20,13 +20,11 @@ you can use the `setMenuBar` method of :py:class:`~PyQt5.QtWidgets.QMainWindow` 
 
 .. code-block:: python
 
-    ...
     from pyqtribbon import RibbonBar
 
     window = QtWidgets.QMainWindow()
     ribbon = RibbonBar()
     window.setMenuBar(ribbon)
-    ...
 
 Example
 ~~~~~~~
