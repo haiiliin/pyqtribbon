@@ -1,6 +1,9 @@
 numpydoc
 PyQt5
 sphinx
+sphinx-codeautolink
+sphinx-copybutton
+sphinx-hoverxref
 sphinx-rtd-theme
 sphinx-toolbox
 sphinx-qt-documentation
