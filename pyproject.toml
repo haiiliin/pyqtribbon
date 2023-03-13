@@ -10,7 +10,7 @@ name = "pyqtribbon"
 authors = [
   { name="WANG Hailin", email="hailin.wang@connect.polyu.hk" },
 ]
-description = "PyQtRibbon is a Qt-based application framework for building user interfaces"
+description = "Ribbon Bar for PyQt or PySide applications"
 readme = "README.md"
 dynamic = ["version", "dependencies", "optional-dependencies"]
 requires-python = ">=3.7"

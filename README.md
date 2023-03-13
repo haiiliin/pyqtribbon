@@ -10,7 +10,7 @@
 [![PyPI](https://img.shields.io/pypi/v/pyqtribbon)](https://pypi.org/project/pyqtribbon/)
 [![PyPI download month](https://img.shields.io/pypi/dm/pyqtribbon.svg)](https://pypi.org/project/pyqtribbon/)
 
-PyQtRibbon is a Qt-based application framework for building user interfaces.
+Ribbon Bar for PyQt or PySide applications.
 
 - GitHub Repository: [github.com/haiiliin/pyqtribbon](https://github.com/haiiliin/pyqtribbon/).
 - Documentation: [pyqtribbon.haiiliin.com/en/stable](https://pyqtribbon.haiiliin.com/en/stable/).
