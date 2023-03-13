@@ -34,6 +34,9 @@ classifiers = [
 [tool.setuptools]
 packages = ['pyqtribbon']
 
+[tool.setuptools.package-data]
+pyqtribbon = ["icons/*", "styles/*"]
+
 [tool.setuptools.dynamic.dependencies]
 file = ["requirements.txt"]
 
