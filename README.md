@@ -3,15 +3,12 @@
 [![Documentation Status](https://readthedocs.org/projects/pyqribbon/badge/?version=latest)](https://pyqtribbon.haiiliin.com/en/latest/?badge=latest)
 [![Pytest](https://github.com/haiiliin/pyqtribbon/actions/workflows/pytest.yaml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/pytest.yaml)
 [![Pages](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml)
-[![Upload Python Package to PyPI](https://github.com/haiiliin/pyqtribbon/actions/workflows/python-publish-pypi.yml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/python-publish-pypi.yml)
+[![PyPI](https://github.com/haiiliin/pyqtribbon/actions/workflows/publish.yml/badge.svg)](https://pypi.org/project/pyqtribbon/)
 
 [![PyPI license](https://img.shields.io/pypi/l/pyqtribbon.svg)](https://github.com/haiiliin/pyqtribbon/blob/main/LICENSE)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyqtribbon.svg)](https://www.python.org/)
 [![PyPI](https://img.shields.io/pypi/v/pyqtribbon)](https://pypi.org/project/pyqtribbon/)
 [![PyPI download month](https://img.shields.io/pypi/dm/pyqtribbon.svg)](https://pypi.org/project/pyqtribbon/)
-
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/haiiliin/pyqtribbon.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/haiiliin/pyqtribbon/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/haiiliin/pyqtribbon.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/haiiliin/pyqtribbon/context:python)
 
 PyQtRibbon is a Qt-based application framework for building user interfaces.
 
