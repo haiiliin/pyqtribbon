@@ -34,10 +34,11 @@ release = version = pyqtribbon.__version__
 # ones.
 extensions = [
     'hoverxref.extension',
-    'numpydoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.linkcode',
+    'sphinx.ext.napoleon',
     'sphinx.ext.githubpages',
     'sphinx_copybutton',
     'sphinx_codeautolink',
