@@ -1,0 +1,50 @@
+# pyproject.toml, for more information about configuration options, see
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyqtribbon"
+authors = [
+  { name="WANG Hailin", email="hailin.wang@connect.polyu.hk" },
+]
+description = "PyQtRibbon is a Qt-based application framework for building user interfaces"
+readme = "README.md"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+]
+
+[project.urls]
+"GitHub" = "https://github.com/haiiliin/pyqtribbon"
+"Documentation" = "https://pyqtribbon.haiiliin.com/en/latest/"
+
+[tool.setuptools]
+packages = ['pyqtribbon']
+
+[tool.setuptools.dynamic.dependencies]
+file = ["requirements.txt"]
+
+[tool.setuptools.dynamic.optional-dependencies.dev]
+file = ["requirements-dev.txt"]
+
+[tool.setuptools.dynamic.optional-dependencies.docs]
+file = ["docs/requirements.txt"]
+
+[tool.setuptools_scm]
+root = "."
+version_scheme = "post-release"
+write_to = "pyqtribbon/_version.py"
+fallback_version = "0.0.0-unknown"
