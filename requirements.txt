@@ -1,3 +1,2 @@
 numpy
-PyQt5
 qtpy

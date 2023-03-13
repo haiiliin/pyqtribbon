@@ -132,3 +132,5 @@ dmypy.json
 .idea/
 .vscode/
 .vs/
+
+pyqtribbon/_version.py
