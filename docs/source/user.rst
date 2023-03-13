@@ -10,6 +10,7 @@ the window will be closed 0.1s after it is shown. It is just used for documentin
 
 .. autoclass:: pyqtribbon.screenshotwindow.RibbonScreenShotWindow
     :members:
+    :noindex:
 
 Instantiate a Ribbon Bar
 --------------------------

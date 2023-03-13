@@ -33,6 +33,7 @@ release = version = pyqtribbon.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'autoapi.extension',
     'hoverxref.extension',
     'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
@@ -93,6 +94,12 @@ hoverxref_intersphinx = [
     'python',
     'readthedocs',
 ]
+
+# sphinx-autoapi configuration
+autoapi_dirs = ['../../pyqtribbon']
+
+# sphinx.ext.autodoc configuration
+autoclass_content = 'both'
 
 
 # linkcode source
