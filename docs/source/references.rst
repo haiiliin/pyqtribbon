@@ -46,7 +46,7 @@ RibbonTitleWidget
 Ribbon Stacked Widget
 
 RibbonStackedWidget
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. autoclass:: pyqtribbon.ribbonbar.RibbonStackedWidget
    :members:
@@ -93,28 +93,28 @@ RibbonCategoryStyle
 RibbonCategoryScrollArea
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: pyqtribbon.categorylayoutwidget.RibbonCategoryScrollArea
+.. autoclass:: pyqtribbon.category.RibbonCategoryScrollArea
    :members:
    :show-inheritance:
 
 RibbonCategoryScrollAreaContents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: pyqtribbon.categorylayoutwidget.RibbonCategoryScrollAreaContents
+.. autoclass:: pyqtribbon.category.RibbonCategoryScrollAreaContents
    :members:
    :show-inheritance:
 
 RibbonCategoryLayoutButton 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: pyqtribbon.categorylayoutwidget.RibbonCategoryLayoutButton
+.. autoclass:: pyqtribbon.category.RibbonCategoryLayoutButton
    :members:
    :show-inheritance:
 
 RibbonCategoryLayoutWidget
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autoclass:: pyqtribbon.categorylayoutwidget.RibbonCategoryLayoutWidget
+.. autoclass:: pyqtribbon.category.RibbonCategoryLayoutWidget
    :members:
    :show-inheritance:
 
