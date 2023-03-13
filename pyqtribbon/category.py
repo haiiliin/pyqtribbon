@@ -251,20 +251,23 @@ class RibbonCategory(QtWidgets.QFrame):
                      arguments. the argument showPanelOptionButton is a boolean to decide whether to show
                      the panel option button, the rest arguments are passed to the RibbonPanel.addWidgetsBy() method.
                      The dict is of the form:
-                     {
-                         "panel-title": {
-                             "showPanelOptionButton": True,
-                             "widgets": {
-                                 "widget-name": {
-                                     "type": "Button",
-                                     "arguments": {
-                                         "key1": "value1",
-                                         "key2": "value2"
-                                     }
-                                 },
-                             }
-                         },
-                      }
+
+                     .. code-block:: python
+
+                        {
+                            "panel-title": {
+                                "showPanelOptionButton": True,
+                                "widgets": {
+                                    "widget-name": {
+                                        "type": "Button",
+                                        "arguments": {
+                                            "key1": "value1",
+                                            "key2": "value2"
+                                        }
+                                    },
+                                }
+                            },
+                        }
         :return: A dictionary of the newly created panels.
         """
         panels = {}

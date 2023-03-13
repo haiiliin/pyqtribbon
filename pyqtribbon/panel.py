@@ -316,20 +316,24 @@ class RibbonPanel(QtWidgets.QFrame):
         """Add widgets to the panel.
 
         :param data: The data to add. The dict is of the form:
-                     {
-                         "widget-name": {
-                             "type": "Button",
-                             "arguments": {
-                                 "key1": "value1",
-                                 "key2": "value2"
-                             }
-                         },
-                     }
-                     Possible types are: Button, SmallButton, MediumButton, LargeButton,
-                     ToggleButton, SmallToggleButton, MediumToggleButton, LargeToggleButton, ComboBox, FontComboBox,
-                     LineEdit, TextEdit, PlainTextEdit, Label, ProgressBar, SpinBox, DoubleSpinBox, DataEdit, TimeEdit,
-                     DateTimeEdit, TableWidget, TreeWidget, ListWidget, CalendarWidget, Separator, HorizontalSeparator,
-                     VerticalSeparator, Gallery.
+
+            .. code-block:: python
+
+                {
+                    "widget-name": {
+                        "type": "Button",
+                        "arguments": {
+                            "key1": "value1",
+                            "key2": "value2"
+                        }
+                    },
+                }
+
+            Possible types are: Button, SmallButton, MediumButton, LargeButton,
+            ToggleButton, SmallToggleButton, MediumToggleButton, LargeToggleButton, ComboBox, FontComboBox,
+            LineEdit, TextEdit, PlainTextEdit, Label, ProgressBar, SpinBox, DoubleSpinBox, DataEdit, TimeEdit,
+            DateTimeEdit, TableWidget, TreeWidget, ListWidget, CalendarWidget, Separator, HorizontalSeparator,
+            VerticalSeparator, Gallery.
         :return: A dictionary of the added widgets.
         """
         widgets = {}  # type: typing.Dict[str, QtWidgets.QWidget]
