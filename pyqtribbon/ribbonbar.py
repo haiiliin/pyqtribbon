@@ -338,26 +338,28 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param data: The dict of categories. The dict is of the form:
 
-                     {
-                         "category-title": {
-                             "style": RibbonCategoryStyle.Normal,
-                             "color": QtCore.Qt.red,
-                             "panels":
-                                 "panel-title": {
-                                     "showPanelOptionButton": True,
-                                     "widgets": {
-                                         "widget-name": {
-                                             "type": "Button",
-                                             "arguments": {
-                                                 "key1": "value1",
-                                                 "key2": "value2"
-                                             }
-                                         },
-                                     }
-                                 },
-                             },
-                         }
-                     }
+            .. code-block:: python
+            
+                {
+                    "category-title": {
+                        "style": RibbonCategoryStyle.Normal,
+                        "color": QtCore.Qt.red,
+                        "panels":
+                            "panel-title": {
+                                "showPanelOptionButton": True,
+                                "widgets": {
+                                    "widget-name": {
+                                        "type": "Button",
+                                        "arguments": {
+                                            "key1": "value1",
+                                            "key2": "value2"
+                                        }
+                                    },
+                                }
+                            },
+                        },
+                    }
+                }
         :return: A dict of categories of the ribbon.
         """
         categories = {}
