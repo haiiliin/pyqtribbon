@@ -344,7 +344,7 @@ class RibbonBar(QtWidgets.QMenuBar):
                     "category-title": {
                         "style": RibbonCategoryStyle.Normal,
                         "color": QtCore.Qt.red,
-                        "panels":
+                        "panels": {
                             "panel-title": {
                                 "showPanelOptionButton": True,
                                 "widgets": {

@@ -33,17 +33,73 @@ release = version = pyqtribbon.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'numpydoc',
+    'autoapi.extension',
+    'hoverxref.extension',
+    'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
-    'sphinx_toolbox.more_autodoc.overloads',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.linkcode',
+    'sphinx.ext.napoleon',
     'sphinx.ext.githubpages',
+    'sphinx_copybutton',
+    'sphinx_codeautolink',
+    'sphinx_toolbox.more_autodoc.overloads',
     'sphinx_qt_documentation',
 ]
 
 qt_documentation = 'Qt5'
 autodoc_typehints_format = 'short'
 numpydoc_show_inherited_class_members = False
+
+# sphinx.ext.intersphinx configuration 
+intersphinx_mapping = {
+    'jinjia2': ('https://jinja.palletsprojects.com/en/3.0.x/', None),
+    'matplotlib': ('https://matplotlib.org/stable/', None),
+    'numpy': ('https://numpy.org/doc/stable/', None),
+    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+    'pytest': ('https://pytest.org/en/stable/', None),
+    'python': ('https://docs.python.org/3/', None),
+    'readthedocs': ('https://docs.readthedocs.io/en/stable/', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/', None),
+}
+
+# Hoverxref configuration
+hoverxref_auto_ref = True
+hoverxref_domains = ["py"]
+hoverxref_roles = [
+    'numref',
+    'confval',
+    'setting',
+    "option",
+    "doc",  # Documentation pages
+    "term",  # Glossary terms
+]
+hoverxref_role_types = {
+    "doc": "modal",  # for whole docs
+    "mod": "modal",  # for Python Sphinx Domain
+    "class": "tooltip",  # for Python Sphinx Domain
+    "func": "tooltip",  # for Python Sphinx Domain
+    "meth": "tooltip",  # for Python Sphinx Domain
+    "attr": "tooltip",  # for Python Sphinx Domain
+    "exc": "tooltip",  # for Python Sphinx Domain
+    "obj": "tooltip",  # for Python Sphinx Domain
+    "ref": "tooltip",  # for hoverxref_auto_ref config
+    "confval": "tooltip",  # for custom object
+    "term": "tooltip",  # for glossaries
+    "numref": "tooltip", 
+}
+hoverxref_intersphinx = [
+    'numpy',
+    'pytest',
+    'python',
+    'readthedocs',
+]
+
+# sphinx-autoapi configuration
+autoapi_dirs = ['../../pyqtribbon']
+
+# sphinx.ext.autodoc configuration
+autoclass_content = 'both'
 
 
 # linkcode source

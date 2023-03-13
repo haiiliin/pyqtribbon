@@ -20,7 +20,7 @@ PyQtRibbon is a Qt-based application framework for building user interfaces.
    getting-started
    ribbon
    user
-   references
+   autoapi/index
 
 Indices and tables
 ==================
