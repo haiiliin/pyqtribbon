@@ -13,7 +13,7 @@ from .menu import RibbonMenu
 from .qtpy import QtWidgets, QtCore, QtGui
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
-from .utils import data_file_path
+from .utils import DataFile
 
 
 class RibbonStyle(IntEnum):
@@ -162,8 +162,8 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param style: The style to set.
         """
         self.setStyleSheet(
-            open(data_file_path(f"styles/base.qss"), "r").read()
-            + open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read()
+            open(DataFile(f"styles/base.qss"), "r").read()
+            + open(DataFile(f"styles/{style.name.lower()}.qss"), "r").read()
         )
 
     def applicationOptionButton(self) -> RibbonApplicationButton:
@@ -574,7 +574,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         if not self._ribbonVisible:
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path("icons/up.png")))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(DataFile("icons/up.png")))
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
@@ -583,7 +583,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         if self._ribbonVisible:
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path("icons/down.png")))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(DataFile("icons/down.png")))
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)
 

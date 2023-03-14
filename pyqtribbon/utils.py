@@ -1,7 +1,7 @@
 import os
 
 
-def data_file_path(filename):
+def DataFile(filename):
     """Return the path to a data file.
 
     :param filename: The filename of the data file.

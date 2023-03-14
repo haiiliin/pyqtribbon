@@ -7,7 +7,7 @@ from .gallery import RibbonGallery
 from .qtpy import QtWidgets, QtGui, QtCore
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
-from .utils import data_file_path
+from .utils import DataFile
 
 
 class RibbonPanelTitle(QtWidgets.QLabel):
@@ -189,7 +189,7 @@ class RibbonPanel(QtWidgets.QFrame):
         if showPanelOptionButton:
             self._panelOption = RibbonPanelOptionButton()
             self._panelOption.setAutoRaise(True)
-            self._panelOption.setIcon(QtGui.QIcon(data_file_path("icons/linking.png")))
+            self._panelOption.setIcon(QtGui.QIcon(DataFile("icons/linking.png")))
             self._panelOption.setIconSize(QtCore.QSize(16, 16))
             self._panelOption.setToolTip("Panel options")
             self._panelOption.clicked.connect(self.panelOptionClicked)  # type: ignore

@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 
 from pyqtribbon import RibbonBar
 from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
-from pyqtribbon.utils import data_file_path
+from pyqtribbon.utils import DataFile
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -14,7 +14,7 @@ if __name__ == "__main__":
     
     # Central widget
     window = RibbonScreenShotWindow('tutorial-ribbonbar.png')
-    window.setWindowIcon(QIcon(data_file_path("icons/python.png")))
+    window.setWindowIcon(QIcon(DataFile("icons/python.png")))
     centralWidget = QWidget()
     window.setCentralWidget(centralWidget)
     layout = QVBoxLayout(centralWidget)
@@ -24,12 +24,12 @@ if __name__ == "__main__":
     window.setMenuBar(ribbonbar)
     category = ribbonbar.addCategory("Category 1")
     panel = category.addPanel("Panel 1")
-    panel.addLargeButton("A Large Button", QIcon(data_file_path("icons/python.png")))
-    panel.addMediumButton("A Medium Button", QIcon(data_file_path("icons/python.png")))
-    panel.addMediumButton("A Medium Button", QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
-    panel.addSmallButton("A Small Button", QIcon(data_file_path("icons/python.png")))
+    panel.addLargeButton("A Large Button", QIcon(DataFile("icons/python.png")))
+    panel.addMediumButton("A Medium Button", QIcon(DataFile("icons/python.png")))
+    panel.addMediumButton("A Medium Button", QIcon(DataFile("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(DataFile("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(DataFile("icons/python.png")))
+    panel.addSmallButton("A Small Button", QIcon(DataFile("icons/python.png")))
     
     # Display a label in the main window
     label = QLabel("Ribbon Test Window")
@@ -40,6 +40,6 @@ if __name__ == "__main__":
     layout.addWidget(label, 1)
     
     # Show the window
-    window.resize(1800, 350)
+    window.resize(1800, 350)  # type: ignore
     window.show()
     sys.exit(app.exec_())
