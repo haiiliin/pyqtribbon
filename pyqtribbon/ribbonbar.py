@@ -162,7 +162,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param style: The style to set.
         """
         self.setStyleSheet(
-            open(DataFile(f"styles/base.qss"), "r").read()
+            open(DataFile("styles/base.qss"), "r").read()
             + open(DataFile(f"styles/{style.name.lower()}.qss"), "r").read()
         )
 

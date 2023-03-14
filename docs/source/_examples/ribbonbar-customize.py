@@ -17,12 +17,12 @@ if __name__ == '__main__':
 
     # Title of the ribbon
     ribbonbar.setTitle('This is my custom title')
-    
+
     # Quick Access Bar
     qbutton = QToolButton()
     qbutton.setText('Quick Button')
     ribbonbar.addQuickAccessButton(qbutton)
-    
+
     # Right toolbar
     rbutton = QToolButton()
     rbutton.setText('Right Button')

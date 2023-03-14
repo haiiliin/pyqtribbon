@@ -1,2 +1,5 @@
 coveralls
+flake8
 PyQt5
+pytest
+pytest-cov

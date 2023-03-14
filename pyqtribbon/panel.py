@@ -51,8 +51,8 @@ class RibbonGridLayoutManager(object):
         if mode == RibbonSpaceFindMode.ColumnWise:
             for row in range(self.cells.shape[0] - rowSpan + 1):
                 for col in range(self.cells.shape[1] - colSpan + 1):
-                    if self.cells[row : row + rowSpan, col : col + colSpan].all():
-                        self.cells[row : row + rowSpan, col : col + colSpan] = False
+                    if self.cells[row: row + rowSpan, col: col + colSpan].all():
+                        self.cells[row: row + rowSpan, col: col + colSpan] = False
                         return row, col
         else:
             for col in range(self.cells.shape[1]):
@@ -69,7 +69,7 @@ class RibbonGridLayoutManager(object):
             cols -= 1
             colSpan1 -= 1
         self.cells = np.append(self.cells, np.ones((self.rows, colSpan1), dtype=bool), axis=1)
-        self.cells[:rowSpan, cols : cols + colSpan] = False
+        self.cells[:rowSpan, cols: cols + colSpan] = False
         return 0, cols
 
 

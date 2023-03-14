@@ -15,12 +15,12 @@ if __name__ == '__main__':
     # Ribbon bar
     ribbonbar = RibbonBar()
     window.setMenuBar(ribbonbar)
-    
+
     # Categories
     category1 = ribbonbar.addCategory('Category 1')
     panel1 = category1.addPanel('Panel 1')
     panel1.addLargeButton('Large Button 1', QIcon('python.png'))
-    
+
     category2 = ribbonbar.addContextCategory('Category 2')
     panel12 = category2.addPanel('Panel 2')
     panel12.addLargeButton('Large Button 2', QIcon('python.png'))

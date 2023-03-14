@@ -13,8 +13,9 @@
 import inspect
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
+import pyqtribbon
 
+sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -23,7 +24,6 @@ copyright = '2022, WANG Hailin'
 author = 'WANG Hailin'
 
 # The full version, including alpha/beta/rc tags
-import pyqtribbon
 release = version = pyqtribbon.__version__
 
 
@@ -51,7 +51,7 @@ qt_documentation = 'Qt5'
 autodoc_typehints_format = 'short'
 numpydoc_show_inherited_class_members = False
 
-# sphinx.ext.intersphinx configuration 
+# sphinx.ext.intersphinx configuration
 intersphinx_mapping = {
     'jinjia2': ('https://jinja.palletsprojects.com/en/3.0.x/', None),
     'matplotlib': ('https://matplotlib.org/stable/', None),
@@ -86,7 +86,7 @@ hoverxref_role_types = {
     "ref": "tooltip",  # for hoverxref_auto_ref config
     "confval": "tooltip",  # for custom object
     "term": "tooltip",  # for glossaries
-    "numref": "tooltip", 
+    "numref": "tooltip",
 }
 hoverxref_intersphinx = [
     'numpy',

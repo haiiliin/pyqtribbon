@@ -7,7 +7,7 @@ from .separator import RibbonSeparator
 from .utils import DataFile
 
 if typing.TYPE_CHECKING:
-    from .ribbonbar import RibbonBar
+    from .ribbonbar import RibbonBar  # noqa: F401
 
 
 class RibbonCategoryStyle(enum.IntEnum):

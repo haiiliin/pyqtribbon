@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # Ribbon bar
     ribbonbar = RibbonBar()
     window.setMenuBar(ribbonbar)
-    
+
     category1 = ribbonbar.addCategory("Category 1")
     panel = category1.addPanel("Panel 1", showPanelOptionButton=False)
     panel.addSmallButton("Button 1", icon=QIcon("python.png"))
@@ -25,8 +25,7 @@ if __name__ == '__main__':
     panel.addMediumToggleButton("Show/Hide Category 2", icon=QIcon("python.png"))
     panel.addVerticalSeparator()
     panel.addMediumToggleButton("Show/Hide Category 3", icon=QIcon("python.png"))
-    panel.addMediumToggleButton("Show/Hide Category 4/5", icon=QIcon("python.png"),
-                                                       colSpan=2, alignment=Qt.AlignLeft)
+    panel.addMediumToggleButton("Show/Hide Category 4/5", icon=QIcon("python.png"), colSpan=2, alignment=Qt.AlignLeft)
     panel.addLargeButton("Button 4", icon=QIcon("python.png"))
     panel.addVerticalSeparator()
     panel.addMediumButton("Button 5", icon=QIcon("python.png"))

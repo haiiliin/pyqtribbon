@@ -17,7 +17,7 @@ if __name__ == "__main__":
     window.setMenuBar(ribbon)
     window.setWindowTitle("Ribbon Test")
     window.setWindowIcon(QIcon("pyqtribbon/icons/python.png"))
-    
+
     window.setCentralWidget(QtWidgets.QWidget(window))
     layout = QtWidgets.QVBoxLayout(window.centralWidget())
 
@@ -47,7 +47,8 @@ if __name__ == "__main__":
     showCategoryButton2 = panel.addMediumToggleButton("Show/Hide Category 2", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addVerticalSeparator()
     showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QIcon("pyqtribbon/icons/close.png"))
-    showCategoryButton45 = panel.addMediumToggleButton("Show/Hide Category 4/5", icon=QIcon("pyqtribbon/icons/close.png"),
+    showCategoryButton45 = panel.addMediumToggleButton("Show/Hide Category 4/5",
+                                                       icon=QIcon("pyqtribbon/icons/close.png"),
                                                        colSpan=2, alignment=QtCore.Qt.AlignLeft)
     panel.addLargeButton("Button 6", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addVerticalSeparator()

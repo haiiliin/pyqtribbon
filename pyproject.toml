@@ -52,6 +52,12 @@ version_scheme = "post-release"
 write_to = "pyqtribbon/_version.py"
 fallback_version = "0.0.0-unknown"
 
+[tool.pytest.ini_options]
+testpaths = ["pyqtribbon", "tests"]
+addopts = """\
+    -rf -s --cov=pyqtribbon --cov-report=xml --cov-report=html --cov-report=term-missing --doctest-modules \
+    """
+
 [tool.black]
 line-length = 120
 target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
