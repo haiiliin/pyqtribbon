@@ -3,10 +3,12 @@ import typing
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from pyqtribbon.utils import data_file_path
+from .utils import data_file_path
 from .panel import RibbonPanel
 from .separator import RibbonSeparator
-from .typehints import RibbonType
+
+if typing.TYPE_CHECKING:
+    from .ribbonbar import RibbonBar
 
 
 class RibbonCategoryStyle(enum.IntEnum):
@@ -90,8 +92,8 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._mainLayout.addWidget(self._nextButton, 0, QtCore.Qt.AlignVCenter)
 
         self.autoSetScrollButtonsVisible()
-        self._nextButton.clicked.connect(self.scrollNext)
-        self._previousButton.clicked.connect(self.scrollPrevious)
+        self._nextButton.clicked.connect(self.scrollNext)  # type: ignore
+        self._previousButton.clicked.connect(self.scrollPrevious)  # type: ignore
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         """Override the paint event to draw the background."""
@@ -203,7 +205,7 @@ class RibbonCategory(QtWidgets.QFrame):
         self._title = title
         self._style = style
         self._panels = {}
-        self._ribbon = parent
+        self._ribbon = parent  # type: RibbonBar
         self._color = color
 
         self._panelLayoutWidget = RibbonCategoryLayoutWidget()
