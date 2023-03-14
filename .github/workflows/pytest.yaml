@@ -15,6 +15,10 @@ on:
   #   types: [opened, reopened, synchronize]
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
 
@@ -42,6 +46,7 @@ jobs:
       - name: Test with pytest
         run: pytest
       - name: Upload coverage to coveralls
+        if: ${{ matrix.python-version == '3.11' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
