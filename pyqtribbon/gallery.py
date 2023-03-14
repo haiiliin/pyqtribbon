@@ -1,8 +1,7 @@
 import typing
 
-from qtpy import QtWidgets, QtGui, QtCore
-
 from .menu import RibbonPermanentMenu
+from .qtpy import QtWidgets, QtGui, QtCore
 from .separator import RibbonHorizontalSeparator
 from .toolbutton import RibbonToolButton
 from .utils import data_file_path

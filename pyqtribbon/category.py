@@ -1,9 +1,8 @@
 import enum
 import typing
 
-from qtpy import QtWidgets, QtCore, QtGui
-
 from .panel import RibbonPanel
+from .qtpy import QtWidgets, QtCore, QtGui
 from .separator import RibbonSeparator
 from .utils import data_file_path
 

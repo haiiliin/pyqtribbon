@@ -2,9 +2,9 @@ import typing
 from enum import IntEnum
 
 import numpy as np
-from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
+from .qtpy import QtWidgets, QtGui, QtCore
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
 from .utils import data_file_path

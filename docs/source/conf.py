@@ -97,7 +97,7 @@ hoverxref_intersphinx = [
 
 # sphinx-autoapi configuration
 autoapi_dirs = ['../../pyqtribbon']
-autoapi_ignore = ["*version.py"]
+autoapi_ignore = ["*version.py", "*qtpy.py"]
 
 # sphinx.ext.autodoc configuration
 autoclass_content = 'both'

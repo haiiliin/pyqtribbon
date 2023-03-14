@@ -1,8 +1,6 @@
 import typing
 from enum import IntEnum
 
-from qtpy import QtWidgets, QtCore, QtGui
-
 from .category import (
     RibbonCategory,
     RibbonContextCategory,
@@ -12,6 +10,7 @@ from .category import (
     RibbonContextCategories,
 )
 from .menu import RibbonMenu
+from .qtpy import QtWidgets, QtCore, QtGui
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
 from .utils import data_file_path

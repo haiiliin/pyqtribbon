@@ -1,8 +1,7 @@
 import typing
 
-from qtpy import QtWidgets, QtCore, QtGui
-
 from .menu import RibbonMenu
+from .qtpy import QtWidgets, QtCore, QtGui
 from .tabbar import RibbonTabBar
 from .utils import data_file_path
 

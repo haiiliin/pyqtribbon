@@ -1,8 +1,7 @@
 from enum import IntEnum
 
-from qtpy import QtWidgets, QtCore
-
 from .menu import RibbonMenu
+from .qtpy import QtWidgets, QtCore
 
 
 class RibbonButtonStyle(IntEnum):
