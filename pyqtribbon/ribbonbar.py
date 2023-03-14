@@ -3,8 +3,14 @@ from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from .category import (RibbonCategory, RibbonContextCategory, RibbonNormalCategory,
-                       RibbonCategoryStyle, contextColors, RibbonContextCategories)
+from .category import (
+    RibbonCategory,
+    RibbonContextCategory,
+    RibbonNormalCategory,
+    RibbonCategoryStyle,
+    contextColors,
+    RibbonContextCategories,
+)
 from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
@@ -35,8 +41,8 @@ class RibbonStackedWidget(QtWidgets.QStackedWidget):
 
 
 class RibbonBar(QtWidgets.QMenuBar):
-    """The RibbonBar class is the top level widget that contains the ribbon.
-    """
+    """The RibbonBar class is the top level widget that contains the ribbon."""
+
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
     #: Signal, the file button was clicked.
@@ -59,7 +65,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     _currentTabIndex = 0
 
     @typing.overload
-    def __init__(self, title: str = '', maxRows=6, parent=None):
+    def __init__(self, title: str = "", maxRows=6, parent=None):
         pass
 
     @typing.overload
@@ -73,14 +79,14 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param maxRows: The maximum number of rows.
         :param parent: The parent widget of the ribbon.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or 'maxRows' in kwargs):
-            title = args[0] if len(args) > 0 else kwargs.get('title', '')
-            maxRows = args[1] if len(args) > 1 else kwargs.get('maxRows', 6)
-            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("title" in kwargs or "maxRows" in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get("title", "")
+            maxRows = args[1] if len(args) > 1 else kwargs.get("maxRows", 6)
+            parent = args[2] if len(args) > 2 else kwargs.get("parent", None)
         else:
-            title = ''
+            title = ""
             maxRows = 6
-            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
+            parent = args[1] if len(args) > 1 else kwargs.get("parent", None)
         super().__init__(parent)
         self._categories = {}
         self._maxRows = maxRows
@@ -100,64 +106,66 @@ class RibbonBar(QtWidgets.QMenuBar):
         # Connect signals
         self._titleWidget.helpButtonClicked.connect(self.helpButtonClicked)
         self._titleWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
-        self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)
+        self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)  # type: ignore
         self.setRibbonStyle(RibbonStyle.Default)
 
     def actionAt(self, QPoint):
-        raise NotImplementedError('RibbonBar.actionAt() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.actionAt() is not implemented in the ribbon bar.")
 
     def actionGeometry(self, QAction):
-        raise NotImplementedError('RibbonBar.actionGeometry() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.actionGeometry() is not implemented in the ribbon bar.")
 
     def activeAction(self):
-        raise NotImplementedError('RibbonBar.activeAction() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.activeAction() is not implemented in the ribbon bar.")
 
     def addMenu(self, *__args):
-        raise NotImplementedError('RibbonBar.addMenu() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.addMenu() is not implemented in the ribbon bar.")
 
     def addAction(self, *__args):
-        raise NotImplementedError('RibbonBar.addAction() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.addAction() is not implemented in the ribbon bar.")
 
     def addSeparator(self):
-        raise NotImplementedError('RibbonBar.addSeparator() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.addSeparator() is not implemented in the ribbon bar.")
 
     def clear(self):
-        raise NotImplementedError('RibbonBar.clear() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.clear() is not implemented in the ribbon bar.")
 
     def cornerWidget(self, corner=None):
-        raise NotImplementedError('RibbonBar.cornerWidget() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.cornerWidget() is not implemented in the ribbon bar.")
 
     def insertMenu(self, QAction, QMenu):
-        raise NotImplementedError('RibbonBar.insertMenu() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.insertMenu() is not implemented in the ribbon bar.")
 
     def insertSeparator(self, QAction):
-        raise NotImplementedError('RibbonBar.insertSeparator() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.insertSeparator() is not implemented in the ribbon bar.")
 
     def isDefaultUp(self):
-        raise NotImplementedError('RibbonBar.isDefaultUp() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.isDefaultUp() is not implemented in the ribbon bar.")
 
     def isNativeMenuBar(self):
-        raise NotImplementedError('RibbonBar.isNativeMenuBar() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.isNativeMenuBar() is not implemented in the ribbon bar.")
 
     def setActiveAction(self, QAction):
-        raise NotImplementedError('RibbonBar.setActiveAction() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.setActiveAction() is not implemented in the ribbon bar.")
 
     def setCornerWidget(self, QWidget, corner=None):
-        raise NotImplementedError('RibbonBar.setCornerWidget() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.setCornerWidget() is not implemented in the ribbon bar.")
 
     def setDefaultUp(self, up):
-        raise NotImplementedError('RibbonBar.setDefaultUp() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.setDefaultUp() is not implemented in the ribbon bar.")
 
     def setNativeMenuBar(self, bar):
-        raise NotImplementedError('RibbonBar.setNativeMenuBar() is not implemented in the ribbon bar.')
+        raise NotImplementedError("RibbonBar.setNativeMenuBar() is not implemented in the ribbon bar.")
 
     def setRibbonStyle(self, style: RibbonStyle):
         """Set the style of the ribbon.
 
         :param style: The style to set.
         """
-        self.setStyleSheet(open(data_file_path(f"styles/base.qss"), "r").read() +
-                           open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read())
+        self.setStyleSheet(
+            open(data_file_path(f"styles/base.qss"), "r").read()
+            + open(data_file_path(f"styles/{style.name.lower()}.qss"), "r").read()
+        )
 
     def applicationOptionButton(self) -> RibbonApplicationButton:
         """Return the application button."""
@@ -275,7 +283,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param height: The height to set.
         """
         self._titleWidget.setRightToolBarHeight(height)
-        
+
     def helpRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the help button of the ribbon.
 
@@ -311,7 +319,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def removeCollapseButton(self):
         """Remove the min button from the ribbon."""
         self._titleWidget.removeCollapseButton()
-        
+
     def category(self, name: str) -> RibbonCategory:
         """Return the category with the given name.
 
@@ -330,16 +338,16 @@ class RibbonBar(QtWidgets.QMenuBar):
     def addCategoriesBy(
         self,
         data: typing.Dict[
-            str,   # title of the category
+            str,  # title of the category
             typing.Dict,  # data of the category
-        ]
+        ],
     ) -> typing.Dict[str, RibbonCategory]:
         """Add categories from a dict.
 
         :param data: The dict of categories. The dict is of the form:
 
             .. code-block:: python
-            
+
                 {
                     "category-title": {
                         "style": RibbonCategoryStyle.Normal,
@@ -390,14 +398,19 @@ class RibbonBar(QtWidgets.QMenuBar):
             if color is None:
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
                 self._contextCategoryCount += 1
-        category = (RibbonContextCategory(title, color, self) if style == RibbonCategoryStyle.Context else
-                    RibbonNormalCategory(title, self))
+        category = (
+            RibbonContextCategory(title, color, self)
+            if style == RibbonCategoryStyle.Context
+            else RibbonNormalCategory(title, self)
+        )
         category.setMaximumRows(self._maxRows)
-        category.setFixedHeight(self._ribbonHeight -
-                                self._mainLayout.spacing() * 2 -
-                                self._mainLayout.contentsMargins().top() -
-                                self._mainLayout.contentsMargins().bottom() -
-                                self._titleWidget.height())  # 4: extra space for drawing lines when debugging
+        category.setFixedHeight(
+            self._ribbonHeight
+            - self._mainLayout.spacing() * 2
+            - self._mainLayout.contentsMargins().top()
+            - self._mainLayout.contentsMargins().bottom()
+            - self._titleWidget.height()
+        )  # 4: extra space for drawing lines when debugging
         self._categories[title] = category
         self._stackedWidget.addWidget(category)
         if style == RibbonCategoryStyle.Normal:
@@ -447,7 +460,10 @@ class RibbonBar(QtWidgets.QMenuBar):
             color = contextColors[self._contextCategoryCount % len(contextColors)]
             self._contextCategoryCount += 1
         categories = RibbonContextCategories(
-            name, color, {title: self.addContextCategory(title, color) for title in titles}, self,
+            name,
+            color,
+            {title: self.addContextCategory(title, color) for title in titles},
+            self,
         )
         return categories
 
@@ -528,8 +544,10 @@ class RibbonBar(QtWidgets.QMenuBar):
         if category.title() in self._titleWidget.tabBar().tabTitles():
             self._titleWidget.tabBar().setCurrentIndex(self._titleWidget.tabBar().indexOf(category.title()))
         else:
-            raise ValueError(f"Category {category.title()} is not in the ribbon, "
-                             f"please show the context category/categories first.")
+            raise ValueError(
+                f"Category {category.title()} is not in the ribbon, "
+                f"please show the context category/categories first."
+            )
 
     def currentCategory(self) -> RibbonCategory:
         """Return the current category.
@@ -546,7 +564,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         return QtCore.QSize(super().minimumSizeHint().width(), self._ribbonHeight)
 
     def _collapseButtonClicked(self):
-        self.tabBar().currentChanged.connect(self.showRibbon)
+        self.tabBar().currentChanged.connect(self.showRibbon)  # type: ignore
         if self._stackedWidget.isVisible():
             self.hideRibbon()
         else:
@@ -557,7 +575,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         if not self._ribbonVisible:
             self._ribbonVisible = True
             self.collapseRibbonButton().setToolTip("Collapse Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/up.png')))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path("icons/up.png")))
             self._stackedWidget.setVisible(True)
             self.setFixedSize(self.sizeHint())
 
@@ -566,7 +584,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         if self._ribbonVisible:
             self._ribbonVisible = False
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
-            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path('icons/down.png')))
+            self.collapseRibbonButton().setIcon(QtGui.QIcon(data_file_path("icons/down.png")))
             self._stackedWidget.setVisible(False)
             self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)
 

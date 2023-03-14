@@ -1,13 +1,11 @@
 import typing
 
-from PyQt5 import QtGui
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets, QtCore, QtGui
 
 
 class RibbonMenu(QtWidgets.QMenu):
-
     @typing.overload
-    def __init__(self, title: str = '', parent=None):
+    def __init__(self, title: str = "", parent=None):
         pass
 
     @typing.overload
@@ -20,12 +18,12 @@ class RibbonMenu(QtWidgets.QMenu):
         :param title: The title of the menu.
         :param parent: The parent widget.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs):
-            title = args[0] if len(args) > 0 else kwargs.get('title', '')
-            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("title" in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get("title", "")
+            parent = args[1] if len(args) > 1 else kwargs.get("parent", None)
         else:
-            title = ''
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            title = ""
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(title, parent)
         self.setFont(QtWidgets.QApplication.instance().font())
 
@@ -92,7 +90,7 @@ class RibbonMenu(QtWidgets.QMenu):
         spacer.setFixedHeight(spacing)
         self.addWidget(spacer)
 
-    def addLabel(self, text: str = '', alignment: QtCore.Qt.Alignment = QtCore.Qt.AlignLeft):
+    def addLabel(self, text: str = "", alignment: QtCore.Qt.Alignment = QtCore.Qt.AlignLeft):
         """Add a label to the menu.
 
         :param text: The text of the label.
@@ -107,6 +105,7 @@ class RibbonPermanentMenu(RibbonMenu):
     """
     A permanent menu.
     """
+
     actionAdded = QtCore.Signal(QtWidgets.QAction)
 
     def hideEvent(self, a0: QtGui.QHideEvent) -> None:

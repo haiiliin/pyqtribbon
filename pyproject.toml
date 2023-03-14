@@ -51,3 +51,8 @@ root = "."
 version_scheme = "post-release"
 write_to = "pyqtribbon/_version.py"
 fallback_version = "0.0.0-unknown"
+
+[tool.black]
+line-length = 120
+target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+include = '(pyqtribbon/.*\.py|tests/.*\.py)'

@@ -23,11 +23,13 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
 
 class RibbonTitleLabel(QtWidgets.QLabel):
     """Title label in the ribbon bar."""
+
     pass
 
 
 class RibbonTitleWidget(QtWidgets.QFrame):
     """The title widget of the ribbon."""
+
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
     #: Signal, the collapse button wa clicked.
@@ -41,7 +43,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _rightButtonHeight = 24
 
     @typing.overload
-    def __init__(self, title='PyQtRibbon', parent=None):
+    def __init__(self, title="PyQtRibbon", parent=None):
         pass
 
     @typing.overload
@@ -54,12 +56,12 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :param title: The title of the ribbon.
         :param parent: The parent widget.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs):
-            title = args[0] if len(args) > 0 else kwargs.get('title', 'PyQtRibbon')
-            parent = args[1] if len(args) > 1 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("title" in kwargs):
+            title = args[0] if len(args) > 0 else kwargs.get("title", "PyQtRibbon")
+            parent = args[1] if len(args) > 1 else kwargs.get("parent", None)
         else:
-            title = 'PyQtRibbon'
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            title = "PyQtRibbon"
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent)
         # Tab bar layout
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
@@ -77,7 +79,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         # Application
         self._applicationButton = RibbonApplicationButton()
-        self._applicationButton.setIcon(QtGui.QIcon(data_file_path('icons/python.png')))
+        self._applicationButton.setIcon(QtGui.QIcon(data_file_path("icons/python.png")))
         self._applicationButton.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._applicationButton.setText("PyQtRibbon")
         self._applicationButton.setToolTip("PyQtRibbon")
@@ -99,16 +101,16 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._rightToolBar.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._collapseRibbonButton = QtWidgets.QToolButton(self)
         self._collapseRibbonButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
-        self._collapseRibbonButton.setIcon(QtGui.QIcon(data_file_path('icons/up.png')))
+        self._collapseRibbonButton.setIcon(QtGui.QIcon(data_file_path("icons/up.png")))
         self._collapseRibbonButton.setAutoRaise(True)
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
-        self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)
+        self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)  # type: ignore
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._helpButton.setIcon(QtGui.QIcon(data_file_path("icons/help.png")))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
-        self._helpButton.clicked.connect(self.helpButtonClicked)
+        self._helpButton.clicked.connect(self.helpButtonClicked)  # type: ignore
         self.addRightToolButton(self._collapseRibbonButton)
         self.addRightToolButton(self._helpButton)
 
@@ -248,7 +250,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._rightButtonHeight = height
         for button in self._rightToolButtons:
             button.setIconSize(QtCore.QSize(height, height))
-            
+
     def helpRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the help ribbon button.
 
@@ -284,4 +286,3 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :return: The collapse ribbon button.
         """
         return self._collapseRibbonButton
-    

@@ -3,9 +3,9 @@ import typing
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from .utils import data_file_path
 from .panel import RibbonPanel
 from .separator import RibbonSeparator
+from .utils import data_file_path
 
 if typing.TYPE_CHECKING:
     from .ribbonbar import RibbonBar
@@ -13,6 +13,7 @@ if typing.TYPE_CHECKING:
 
 class RibbonCategoryStyle(enum.IntEnum):
     """The button style of a category."""
+
     Normal = 0
     Context = 1
 
@@ -36,21 +37,25 @@ class RibbonCategoryLayoutButton(QtWidgets.QToolButton):
     """Previous/Next buttons in the category when the
     size is not enough for the widgets.
     """
+
     pass
 
 
 class RibbonCategoryScrollArea(QtWidgets.QScrollArea):
     """Scroll area for the gallery"""
+
     pass
 
 
 class RibbonCategoryScrollAreaContents(QtWidgets.QFrame):
     """Scroll area contents for the gallery"""
+
     pass
 
 
 class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
     """The category layout widget's category scroll area to arrange the widgets in the category."""
+
     displayOptionsButtonClicked = QtCore.Signal()
 
     def __init__(self, parent=None):
@@ -87,8 +92,9 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._previousButton, 0, QtCore.Qt.AlignVCenter)
         self._mainLayout.addWidget(self._categoryScrollArea, 1)
-        self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
-                                                             QtWidgets.QSizePolicy.Minimum))
+        self._mainLayout.addSpacerItem(
+            QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        )
         self._mainLayout.addWidget(self._nextButton, 0, QtCore.Qt.AlignVCenter)
 
         self.autoSetScrollButtonsVisible()
@@ -106,24 +112,15 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self.autoSetScrollButtonsVisible()
 
     def autoSetScrollButtonsVisible(self):
-        """Set the visibility of the scroll buttons.
-        """
-        if (self._categoryScrollArea.horizontalScrollBar().value() >
-                self._categoryScrollArea.horizontalScrollBar().minimum()):
-            self._previousButton.setVisible(True)
-        else:
-            self._previousButton.setVisible(False)
-        if (self._categoryScrollArea.horizontalScrollBar().value() <
-                self._categoryScrollArea.horizontalScrollBar().maximum()):
-            self._nextButton.setVisible(True)
-        else:
-            self._nextButton.setVisible(False)
+        """Set the visibility of the scroll buttons."""
+        horizontalScrollBar = self._categoryScrollArea.horizontalScrollBar()
+        self._previousButton.setVisible(horizontalScrollBar.value() > horizontalScrollBar.minimum())
+        self._nextButton.setVisible(horizontalScrollBar.value() < horizontalScrollBar.maximum())
 
     def scrollPrevious(self):
         """Scroll the category to the previous widget."""
-        self._categoryScrollArea.horizontalScrollBar().setValue(
-            self._categoryScrollArea.horizontalScrollBar().value() - 50
-        )
+        horizontalScrollBar = self._categoryScrollArea.horizontalScrollBar()
+        horizontalScrollBar.setValue(horizontalScrollBar.value() - 50)
         self.autoSetScrollButtonsVisible()
 
     def scrollNext(self):
@@ -159,10 +156,9 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
 class RibbonCategory(QtWidgets.QFrame):
     """The RibbonCategory is the logical grouping that represents the contents of a ribbon tab."""
+
     #: Title of the category
     _title: str
-    #: The ribbon parent of this category
-    _ribbon: typing.Optional[RibbonType]
     #: The button style of the category.
     _style: RibbonCategoryStyle
     #: Panels
@@ -173,8 +169,13 @@ class RibbonCategory(QtWidgets.QFrame):
     _maxRows: int = 6
 
     @typing.overload
-    def __init__(self, title: str = '', style: RibbonCategoryStyle = RibbonCategoryStyle.Normal,
-                 color: QtGui.QColor = None, parent=None):
+    def __init__(
+        self,
+        title: str = "",
+        style: RibbonCategoryStyle = RibbonCategoryStyle.Normal,
+        color: QtGui.QColor = None,
+        parent=None,
+    ):
         pass
 
     @typing.overload
@@ -189,18 +190,18 @@ class RibbonCategory(QtWidgets.QFrame):
         :param color: The color of the context category.
         :param parent: The parent widget.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('title' in kwargs or
-                                                                     'style' in kwargs or
-                                                                     'color' in kwargs):
-            title = args[0] if len(args) > 0 else kwargs.get('title', '')
-            style = args[1] if len(args) > 1 else kwargs.get('style', RibbonCategoryStyle.Normal)
-            color = args[2] if len(args) > 2 else kwargs.get('color', None)
-            parent = args[3] if len(args) > 3 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or (
+            "title" in kwargs or "style" in kwargs or "color" in kwargs
+        ):
+            title = args[0] if len(args) > 0 else kwargs.get("title", "")
+            style = args[1] if len(args) > 1 else kwargs.get("style", RibbonCategoryStyle.Normal)
+            color = args[2] if len(args) > 2 else kwargs.get("color", None)
+            parent = args[3] if len(args) > 3 else kwargs.get("parent", None)
         else:
-            title = ''
+            title = ""
             style = RibbonCategoryStyle.Normal
             color = None
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent)
         self._title = title
         self._style = style
@@ -243,9 +244,9 @@ class RibbonCategory(QtWidgets.QFrame):
     def addPanelsBy(
         self,
         data: typing.Dict[
-            str,   # title of the panel
+            str,  # title of the panel
             typing.Dict,  # data of the panel
-        ]
+        ],
     ) -> typing.Dict[str, RibbonPanel]:
         """Add panels from a dictionary.
 
@@ -274,7 +275,7 @@ class RibbonCategory(QtWidgets.QFrame):
         """
         panels = {}
         for title, panel_data in data.items():
-            showPanelOptionButton = panel_data.get('showPanelOptionButton', True)
+            showPanelOptionButton = panel_data.get("showPanelOptionButton", True)
             panels[title] = self.addPanel(title, showPanelOptionButton)
             panels[title].addWidgetsBy(panel_data.get("widgets", {}))
         return panels
@@ -287,10 +288,12 @@ class RibbonCategory(QtWidgets.QFrame):
         :return: The newly created panel.
         """
         panel = RibbonPanel(title, maxRows=self._maxRows, showPanelOptionButton=showPanelOptionButton, parent=self)
-        panel.setFixedHeight(self.height() -
-                             self._mainLayout.spacing() -
-                             self._mainLayout.contentsMargins().top() -
-                             self._mainLayout.contentsMargins().bottom())
+        panel.setFixedHeight(
+            self.height()
+            - self._mainLayout.spacing()
+            - self._mainLayout.contentsMargins().top()
+            - self._mainLayout.contentsMargins().bottom()
+        )
         self._panels[title] = panel
         self._panelLayoutWidget.addWidget(panel)
         self._panelLayoutWidget.addWidget(RibbonSeparator(width=10))
@@ -322,7 +325,7 @@ class RibbonCategory(QtWidgets.QFrame):
         :return: The panel.
         """
         return self._panels[title]
-    
+
     def panels(self) -> typing.Dict[str, RibbonPanel]:
         """Return all panels in the category.
 
@@ -412,7 +415,6 @@ class RibbonContextCategory(RibbonCategory):
 
 class RibbonContextCategories(typing.Dict[str, RibbonContextCategory]):
     """A list of context categories."""
-    _ribbon: RibbonType
 
     def __init__(
         self,
@@ -459,7 +461,4 @@ class RibbonContextCategories(typing.Dict[str, RibbonContextCategory]):
 
     def setCategoriesVisible(self, visible: bool):
         """Set the state of the categories."""
-        if visible:
-            self.showContextCategories()
-        else:
-            self.hideContextCategories()
+        self.showContextCategories() if visible else self.hideContextCategories()

@@ -5,6 +5,7 @@ from qtpy import QtCore, QtWidgets, QtGui
 
 class RibbonSeparator(QtWidgets.QFrame):
     """The RibbonSeparator is a separator that can be used to separate widgets in a ribbon."""
+
     _topMargins: int = 4
     _bottomMargins: int = 4
     _leftMargins: int = 4
@@ -26,15 +27,14 @@ class RibbonSeparator(QtWidgets.QFrame):
         :param width: The width of the separator.
         :param parent: The parent widget.
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('orientation' in kwargs or
-                                                                     'width' in kwargs):
-            orientation = args[0] if len(args) > 0 else kwargs.get('orientation', QtCore.Qt.Vertical)
-            width = args[1] if len(args) > 1 else kwargs.get('width', 6)
-            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("orientation" in kwargs or "width" in kwargs):
+            orientation = args[0] if len(args) > 0 else kwargs.get("orientation", QtCore.Qt.Vertical)
+            width = args[1] if len(args) > 1 else kwargs.get("width", 6)
+            parent = args[2] if len(args) > 2 else kwargs.get("parent", None)
         else:
             orientation = QtCore.Qt.Vertical
             width = 6
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent=parent)
         self._orientation = orientation
         if orientation == QtCore.Qt.Horizontal:

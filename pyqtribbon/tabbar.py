@@ -5,6 +5,7 @@ from qtpy import QtWidgets, QtGui, QtCore
 
 class RibbonTabBar(QtWidgets.QTabBar):
     """The TabBar for the title widget."""
+
     #: context category top margin
     _contextCategoryTopMargin = 0
     #: context category dark color height
@@ -39,11 +40,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         return [self.tabText(i) for i in range(self.count())]
 
-    def addTab(
-        self,
-        text: str,
-        color: QtGui.QColor = None,
-    ) -> int:
+    def addTab(self, text: str, color: QtGui.QColor = None) -> int:
         """Add a new tab to the tab bar.
 
         :param text: The text of the tab.
@@ -53,12 +50,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         self._tabColors[text] = color
         return super().addTab(text)
 
-    def addAssociatedTabs(
-        self,
-        name: str,
-        texts: typing.List[str],
-        color: QtGui.QColor,
-    ) -> typing.List[int]:
+    def addAssociatedTabs(self, name: str, texts: typing.List[str], color: QtGui.QColor) -> typing.List[int]:
         """Add associated multiple tabs which have the same color to the tab bar.
 
         :param name: The name of the context category.

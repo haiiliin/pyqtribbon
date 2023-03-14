@@ -10,6 +10,7 @@ from .utils import data_file_path
 
 class RibbonPopupWidget(QtWidgets.QFrame):
     """The popup widget for the gallery widget."""
+
     pass
 
 
@@ -40,6 +41,7 @@ class RibbonGalleryListWidget(QtWidgets.QListWidget):
 
 class RibbonGalleryButton(QtWidgets.QToolButton):
     """Gallery button."""
+
     pass
 
 
@@ -53,6 +55,7 @@ class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 
 class RibbonGallery(QtWidgets.QFrame):
     """A widget that displays a gallery of buttons."""
+
     _popupWindowSize = QtCore.QSize(500, 500)
     _buttons: typing.List[RibbonToolButton] = []
     _popupButtons: typing.List[RibbonToolButton] = []
@@ -73,15 +76,16 @@ class RibbonGallery(QtWidgets.QFrame):
         :param popupHideOnClick: hide on click flag
         :param parent: parent widget
         """
-        if (args and not isinstance(args[0], QtWidgets.QWidget)) or ('minimumWidth' in kwargs or
-                                                                     'popupHideOnClick' in kwargs):
-            minimumWidth = args[0] if len(args) > 0 else kwargs.get('minimumWidth', 800)
-            popupHideOnClick = args[1] if len(args) > 1 else kwargs.get('popupHideOnClick', False)
-            parent = args[2] if len(args) > 2 else kwargs.get('parent', None)
+        if (args and not isinstance(args[0], QtWidgets.QWidget)) or (
+            "minimumWidth" in kwargs or "popupHideOnClick" in kwargs
+        ):
+            minimumWidth = args[0] if len(args) > 0 else kwargs.get("minimumWidth", 800)
+            popupHideOnClick = args[1] if len(args) > 1 else kwargs.get("popupHideOnClick", False)
+            parent = args[2] if len(args) > 2 else kwargs.get("parent", None)
         else:
             minimumWidth = 800
             popupHideOnClick = False
-            parent = args[0] if len(args) > 0 else kwargs.get('parent', None)
+            parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent)
         self.setMinimumWidth(minimumWidth)
         self._popupHideOnClick = popupHideOnClick
@@ -116,8 +120,8 @@ class RibbonGallery(QtWidgets.QFrame):
         self._mainLayout.addWidget(self._listWidget)
         self._mainLayout.addLayout(self._scrollButtonLayout)
 
-        self._upButton.clicked.connect(self._listWidget.scrollToPreviousRow)
-        self._downButton.clicked.connect(self._listWidget.scrollToNextRow)
+        self._upButton.clicked.connect(self._listWidget.scrollToPreviousRow)  # type: ignore
+        self._downButton.clicked.connect(self._listWidget.scrollToNextRow)  # type: ignore
 
         self._popupWidget = RibbonPopupWidget()
         self._popupWidget.setFont(QtWidgets.QApplication.instance().font())
@@ -135,12 +139,12 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupMenu.actionAdded.connect(self._handlePopupAction)
         self._popupLayout.addWidget(self._popupMenu)
 
-        self._moreButton.clicked.connect(self.showPopup)
+        self._moreButton.clicked.connect(self.showPopup)  # type: ignore
 
     def _handlePopupAction(self, action: QtWidgets.QAction) -> None:
         """Handle a popup action."""
         if isinstance(action, QtWidgets.QAction):
-            action.triggered.connect(self.hidePopupWidget)
+            action.triggered.connect(self.hidePopupWidget)  # type: ignore
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         """Resize the gallery."""
@@ -157,13 +161,16 @@ class RibbonGallery(QtWidgets.QFrame):
     def showPopup(self):
         """Show the popup window"""
         self._popupWidget.move(self.mapToGlobal(self.geometry().topLeft()))
-        self._popupWidget.resize(QtCore.QSize(
-            max(self.popupWindowSize().width(), self.width()),
-            max(self.popupWindowSize().height(), self.height())
-        ))
-        self._popupMenu.setFixedWidth(self._popupWidget.width() -
-                                      self._popupLayout.contentsMargins().left() -
-                                      self._popupLayout.contentsMargins().right())
+        self._popupWidget.resize(
+            QtCore.QSize(
+                max(self.popupWindowSize().width(), self.width()), max(self.popupWindowSize().height(), self.height())
+            )
+        )
+        self._popupMenu.setFixedWidth(
+            self._popupWidget.width()
+            - self._popupLayout.contentsMargins().left()
+            - self._popupLayout.contentsMargins().right()
+        )
         self._popupWidget.show()
 
     def hidePopupWidget(self):
@@ -252,8 +259,8 @@ class RibbonGallery(QtWidgets.QFrame):
             button.setIcon(icon)
             popupButton.setIcon(icon)
         if slot is not None:
-            button.clicked.connect(slot)
-            popupButton.clicked.connect(slot)
+            button.clicked.connect(slot)  # type: ignore
+            popupButton.clicked.connect(slot)  # type: ignore
         if shortcut is not None:
             button.setShortcut(shortcut)
             popupButton.setShortcut(shortcut)
@@ -268,10 +275,10 @@ class RibbonGallery(QtWidgets.QFrame):
             popupButton.setCheckable(True)
         self._buttons.append(button)
         self._popupButtons.append(popupButton)
-        button.clicked.connect(lambda checked: popupButton.setChecked(checked))
+        button.clicked.connect(lambda checked: popupButton.setChecked(checked))  # type: ignore
         if self._popupHideOnClick:
-            popupButton.clicked.connect(self.hidePopupWidget)
-        popupButton.clicked.connect(self.setSelectedButton)
+            popupButton.clicked.connect(self.hidePopupWidget)  # type: ignore
+        popupButton.clicked.connect(self.setSelectedButton)  # type: ignore
 
         if text is None:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)

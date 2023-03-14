@@ -2,11 +2,11 @@ from qtpy import QtWidgets, QtCore
 
 
 class RibbonScreenShotWindow(QtWidgets.QMainWindow):
-    """This class is just for taking a screenshot of the window, the window will be closed 0.1s after it is shown.
-    """
-    _fileName = 'shot.jpg'
+    """This class is just for taking a screenshot of the window, the window will be closed 0.1s after it is shown."""
 
-    def __init__(self, fileName: str = 'shot.jpg', *args, **kwargs):
+    _fileName = "shot.jpg"
+
+    def __init__(self, fileName: str = "shot.jpg", *args, **kwargs):
         """Initialize the class.
 
         :param fileName: The file name for the screenshot.
@@ -24,8 +24,7 @@ class RibbonScreenShotWindow(QtWidgets.QMainWindow):
         self._fileName = fileName
 
     def takeScreenShot(self):
-        """Take a screenshot of the window.
-        """
+        """Take a screenshot of the window."""
         screen = QtWidgets.QApplication.primaryScreen()
         screenshot = screen.grabWindow(self.winId())
         screenshot.save(self._fileName)

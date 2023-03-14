@@ -7,6 +7,7 @@ from .menu import RibbonMenu
 
 class RibbonButtonStyle(IntEnum):
     """Button style, Small, Medium, or Large."""
+
     Small = 0
     Medium = 1
     Large = 2
@@ -19,6 +20,7 @@ Large = RibbonButtonStyle.Large
 
 class RibbonToolButton(QtWidgets.QToolButton):
     """Tool button that is showed in the ribbon."""
+
     _buttonStyle: RibbonButtonStyle
 
     _largeButtonIconSize = 64

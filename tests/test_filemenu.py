@@ -6,7 +6,7 @@ from pyqtribbon import RibbonBar
 
 
 def test_filemenu():
-    if __name__ == '__main__':
+    if __name__ == "__main__":
         app = QtWidgets.QApplication(sys.argv)
         # Central widget
         window = QtWidgets.QMainWindow()
