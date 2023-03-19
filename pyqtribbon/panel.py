@@ -2,9 +2,9 @@ import typing
 from enum import IntEnum
 
 import numpy as np
+from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
-from .qtpy import QtWidgets, QtGui, QtCore
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
 from .utils import DataFile
@@ -387,7 +387,7 @@ class RibbonPanel(QtWidgets.QFrame):
             widget.setFixedHeight(fixedHeight)
         item = RibbonPanelItemWidget(self)
         item.addWidget(widget)
-        self._actionsLayout.addWidget(item, row, col, rowSpan, colSpan, alignment)
+        self._actionsLayout.addWidget(item, row, col, rowSpan, colSpan, alignment)  # type: ignore
 
     def addSmallWidget(
         self,

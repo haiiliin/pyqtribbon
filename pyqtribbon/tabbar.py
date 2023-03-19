@@ -1,6 +1,6 @@
 import typing
 
-from .qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtWidgets, QtGui, QtCore
 
 
 class RibbonTabBar(QtWidgets.QTabBar):

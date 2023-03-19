@@ -1,7 +1,8 @@
 import typing
 
+from qtpy import QtWidgets, QtGui, QtCore
+
 from .menu import RibbonPermanentMenu
-from .qtpy import QtWidgets, QtGui, QtCore
 from .separator import RibbonHorizontalSeparator
 from .toolbutton import RibbonToolButton
 from .utils import DataFile
@@ -123,7 +124,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._downButton.clicked.connect(self._listWidget.scrollToNextRow)  # type: ignore
 
         self._popupWidget = RibbonPopupWidget()
-        self._popupWidget.setFont(QtWidgets.QApplication.instance().font())
+        self._popupWidget.setFont(QtWidgets.QApplication.instance().font())  # type: ignore
         self._popupWidget.setWindowFlags(QtCore.Qt.Popup)
         self._popupLayout = QtWidgets.QVBoxLayout(self._popupWidget)
         self._popupLayout.setContentsMargins(5, 5, 5, 5)

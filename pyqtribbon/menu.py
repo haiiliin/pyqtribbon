@@ -1,6 +1,6 @@
 import typing
 
-from .qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore, QtGui
 
 
 class RibbonMenu(QtWidgets.QMenu):
@@ -25,7 +25,7 @@ class RibbonMenu(QtWidgets.QMenu):
             title = ""
             parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(title, parent)
-        self.setFont(QtWidgets.QApplication.instance().font())
+        self.setFont(QtWidgets.QApplication.instance().font())  # type: ignore
 
     def addWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the menu.
@@ -113,5 +113,5 @@ class RibbonPermanentMenu(RibbonMenu):
 
     def actionEvent(self, a0: QtGui.QActionEvent) -> None:
         if a0.type() == QtGui.QActionEvent.ActionAdded:
-            self.actionAdded.emit(a0.action())
+            self.actionAdded.emit(a0.action())  # type: ignore
         super().actionEvent(a0)

@@ -1,6 +1,8 @@
 import typing
 from enum import IntEnum
 
+from qtpy import QtWidgets, QtCore, QtGui
+
 from .category import (
     RibbonCategory,
     RibbonContextCategory,
@@ -10,7 +12,6 @@ from .category import (
     RibbonContextCategories,
 )
 from .menu import RibbonMenu
-from .qtpy import QtWidgets, QtCore, QtGui
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
 from .utils import DataFile
@@ -472,7 +473,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param index: tab index
         """
         if index == 0:
-            self.fileButtonClicked.emit()
+            self.fileButtonClicked.emit()  # type: ignore
             index = self._currentTabIndex
             self._titleWidget.tabBar().setCurrentIndex(index)
         self._currentTabIndex = index
