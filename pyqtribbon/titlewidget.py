@@ -128,7 +128,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         # Title label
         self._titleLabel = RibbonTitleLabel(self)
         self._titleLabel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        self._titleLabel.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)
+        self._titleLabel.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)  # type: ignore
         self._titleLabel.setText(title)
         font = self._titleLabel.font()
         font.setPointSize(font.pointSize() + 3)
