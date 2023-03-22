@@ -43,7 +43,7 @@ version-resolver:
       - 'patch'
   default: patch
 template: |
-  ## Changes (Remember to update the version in docs/source/conf.py, setup.py, and ribbon/\_\_init\_\_.py and delete this before publishing the release!)
+  ## Changes
 
   $CHANGES
 
