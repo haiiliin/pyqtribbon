@@ -45,8 +45,6 @@ class RibbonBar(QtWidgets.QMenuBar):
 
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
-    #: Signal, the file button was clicked.
-    fileButtonClicked = QtCore.Signal()
 
     #: The categories of the ribbon.
     _categories: typing.Dict[str, RibbonCategory] = {}
@@ -59,13 +57,13 @@ class RibbonBar(QtWidgets.QMenuBar):
     _ribbonVisible = True
 
     #: heights of the ribbon elements
-    _ribbonHeight = 200
+    _ribbonHeight = 180
 
     #: current tab index
     _currentTabIndex = 0
 
     @typing.overload
-    def __init__(self, title: str = "", maxRows=6, parent=None):
+    def __init__(self, title: str = "Ribbon Bar Title", maxRows=6, parent=None):
         pass
 
     @typing.overload
@@ -80,7 +78,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         :param parent: The parent widget of the ribbon.
         """
         if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("title" in kwargs or "maxRows" in kwargs):
-            title = args[0] if len(args) > 0 else kwargs.get("title", "")
+            title = args[0] if len(args) > 0 else kwargs.get("title", "Ribbon Bar Title")
             maxRows = args[1] if len(args) > 1 else kwargs.get("maxRows", 6)
             parent = args[2] if len(args) > 2 else kwargs.get("parent", None)
         else:
@@ -472,10 +470,6 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param index: tab index
         """
-        if index == 0:
-            self.fileButtonClicked.emit()  # type: ignore
-            index = self._currentTabIndex
-            self._titleWidget.tabBar().setCurrentIndex(index)
         self._currentTabIndex = index
         title = self._titleWidget.tabBar().tabText(index)  # 0 is the file tab
         if title in self._categories:

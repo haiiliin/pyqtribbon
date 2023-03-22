@@ -65,17 +65,9 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         super().__init__(parent)
         # Tab bar layout
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
-        self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(0, 0, 0, 0)
-        self._mainLayout.setSpacing(0)
-        self._titleLayout = QtWidgets.QHBoxLayout()
-        self._titleLayout.setContentsMargins(0, 0, 0, 0)
-        self._titleLayout.setSpacing(0)
-        self._tabBarLayout = QtWidgets.QHBoxLayout()
+        self._tabBarLayout = QtWidgets.QHBoxLayout(self)
         self._tabBarLayout.setContentsMargins(0, 0, 0, 0)
         self._tabBarLayout.setSpacing(0)
-        self._mainLayout.addLayout(self._titleLayout)
-        self._mainLayout.addLayout(self._tabBarLayout)
 
         # Application
         self._applicationButton = RibbonApplicationButton()
@@ -123,7 +115,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._tabBar.setFont(font)
         self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
         self._tabBar.setDocumentMode(True)
-        self._tabBar.addTab("File")
 
         # Title label
         self._titleLabel = RibbonTitleLabel(self)
@@ -134,10 +125,10 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         font.setPointSize(font.pointSize() + 3)
         self._titleLabel.setFont(font)
 
-        self._titleLayout.addWidget(self._quickAccessToolBarWidget, 0)
-        self._titleLayout.addWidget(self._titleLabel, 1)
-        self._tabBarLayout.addWidget(self._tabBar, 1)
-        self._tabBarLayout.addWidget(self._rightToolBar, 0)
+        self._tabBarLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignVCenter)
+        self._tabBarLayout.addWidget(self._tabBar, 0, QtCore.Qt.AlignVCenter)
+        self._tabBarLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignVCenter)
+        self._tabBarLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignVCenter)
 
     def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
@@ -155,7 +146,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         :param widget: The widget to add.
         """
-        self._titleLayout.addWidget(widget)
+        self._tabBarLayout.addWidget(widget)
 
     def insertTitleWidget(self, index: int, widget: QtWidgets.QWidget):
         """Insert a widget to the title layout.
@@ -163,14 +154,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :param index: The index to insert the widget.
         :param widget: The widget to insert.
         """
-        self._titleLayout.insertWidget(index, widget)
+        self._tabBarLayout.insertWidget(index, widget)
 
     def removeTitleWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the title layout.
 
         :param widget: The widget to remove.
         """
-        self._titleLayout.removeWidget(widget)
+        self._tabBarLayout.removeWidget(widget)
 
     def tabBar(self) -> RibbonTabBar:
         """Return the tab bar of the ribbon.
