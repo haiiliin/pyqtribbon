@@ -81,12 +81,12 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
         self._previousButton = RibbonCategoryLayoutButton(self)
         self._previousButton.setIcon(QtGui.QIcon(DataFile("icons/backward.png")))
-        self._previousButton.setIconSize(QtCore.QSize(24, 24))
+        self._previousButton.setIconSize(QtCore.QSize(12, 12))
         self._previousButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._previousButton.setAutoRaise(True)
         self._nextButton = RibbonCategoryLayoutButton(self)
         self._nextButton.setIcon(QtGui.QIcon(DataFile("icons/forward.png")))
-        self._nextButton.setIconSize(QtCore.QSize(24, 24))
+        self._nextButton.setIconSize(QtCore.QSize(12, 12))
         self._nextButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._nextButton.setAutoRaise(True)
 
@@ -115,6 +115,8 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         horizontalScrollBar = self._categoryScrollArea.horizontalScrollBar()
         self._previousButton.setVisible(horizontalScrollBar.value() > horizontalScrollBar.minimum())
         self._nextButton.setVisible(horizontalScrollBar.value() < horizontalScrollBar.maximum())
+        self._previousButton.setIconSize(QtCore.QSize(12, self.size().height() - 15))
+        self._nextButton.setIconSize(QtCore.QSize(12, self.size().height() - 15))
 
     def scrollPrevious(self):
         """Scroll the category to the previous widget."""
