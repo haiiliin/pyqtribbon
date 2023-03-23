@@ -92,9 +92,8 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
         self._mainLayout.addWidget(self._previousButton, 0, QtCore.Qt.AlignVCenter)
         self._mainLayout.addWidget(self._categoryScrollArea, 1)
-        self._mainLayout.addSpacerItem(
-            QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        )
+        self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
+                                                             QtWidgets.QSizePolicy.Minimum))  # fmt: skip
         self._mainLayout.addWidget(self._nextButton, 0, QtCore.Qt.AlignVCenter)
 
         self.autoSetScrollButtonsVisible()
@@ -154,7 +153,7 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         return widget
 
 
-class RibbonCategory(QtWidgets.QFrame):
+class RibbonCategory(RibbonCategoryLayoutWidget):
     """The RibbonCategory is the logical grouping that represents the contents of a ribbon tab."""
 
     #: Title of the category
@@ -209,11 +208,7 @@ class RibbonCategory(QtWidgets.QFrame):
         self._ribbon = parent  # type: RibbonBar
         self._color = color
 
-        self._panelLayoutWidget = RibbonCategoryLayoutWidget()
-        self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setSpacing(5)
-        self._mainLayout.setContentsMargins(0, 0, 0, 0)
-        self._mainLayout.addWidget(self._panelLayoutWidget, 0)
+        super().__init__(parent)
 
     def setMaximumRows(self, rows: int):
         """Set the maximum number of rows.
@@ -295,8 +290,8 @@ class RibbonCategory(QtWidgets.QFrame):
             - self._mainLayout.contentsMargins().bottom()
         )
         self._panels[title] = panel
-        self._panelLayoutWidget.addWidget(panel)
-        self._panelLayoutWidget.addWidget(RibbonSeparator(width=10))
+        self.addWidget(panel)  # type: ignore
+        self.addWidget(RibbonSeparator(width=10))  # type: ignore
         return panel
 
     def removePanel(self, title: str):
@@ -305,7 +300,7 @@ class RibbonCategory(QtWidgets.QFrame):
         :param title: The title of the panel.
         """
         # self._panelLayout.removeWidget(self._panels[title])
-        self._panelLayoutWidget.removeWidget(self._panels[title])
+        self.removeWidget(self._panels[title])
         self._panels.pop(title)
 
     def takePanel(self, title: str) -> RibbonPanel:
