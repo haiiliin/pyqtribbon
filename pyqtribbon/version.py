@@ -13,6 +13,7 @@ def _get_version():
     # a warning from setuptools_scm.
     root = Path(__file__).resolve().parents[1]
     if (root / ".git").exists() and not (root / ".git/shallow").exists():
+        # noinspection PyBroadException
         try:
             import setuptools_scm
 

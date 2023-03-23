@@ -68,11 +68,11 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._mainLayout.setContentsMargins(5, 0, 5, 0)
         self._mainLayout.setSpacing(5)
 
-        self._categoryScrollArea = RibbonCategoryScrollArea()
+        self._categoryScrollArea = RibbonCategoryScrollArea()  # type: ignore
         self._categoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self._categoryScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self._categoryScrollAreaContents = RibbonCategoryScrollAreaContents()
-        self._categoryScrollAreaContents.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self._categoryScrollAreaContents = RibbonCategoryScrollAreaContents()  # type: ignore
+        self._categoryScrollAreaContents.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)  # type: ignore
         self._categoryLayout = QtWidgets.QHBoxLayout(self._categoryScrollAreaContents)
         self._categoryLayout.setContentsMargins(0, 0, 0, 0)
         self._categoryLayout.setSpacing(5)

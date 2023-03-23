@@ -128,7 +128,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def clear(self):
         raise NotImplementedError("RibbonBar.clear() is not implemented in the ribbon bar.")
 
-    def cornerWidget(self, corner=None):
+    def cornerWidget(self, corner=None, *args, **kwargs):
         raise NotImplementedError("RibbonBar.cornerWidget() is not implemented in the ribbon bar.")
 
     def insertMenu(self, QAction, QMenu):
@@ -146,7 +146,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def setActiveAction(self, QAction):
         raise NotImplementedError("RibbonBar.setActiveAction() is not implemented in the ribbon bar.")
 
-    def setCornerWidget(self, QWidget, corner=None):
+    def setCornerWidget(self, QWidget, corner=None, *args, **kwargs):
         raise NotImplementedError("RibbonBar.setCornerWidget() is not implemented in the ribbon bar.")
 
     def setDefaultUp(self, up):
@@ -580,7 +580,7 @@ class RibbonBar(QtWidgets.QMenuBar):
             self.collapseRibbonButton().setToolTip("Expand Ribbon")
             self.collapseRibbonButton().setIcon(QtGui.QIcon(DataFile("icons/down.png")))
             self._stackedWidget.setVisible(False)
-            self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)
+            self.setFixedSize(self.sizeHint().width(), self._titleWidget.size().height() + 5)  # type: ignore
 
     def ribbonVisible(self) -> bool:
         """Get the visibility of the ribbon.

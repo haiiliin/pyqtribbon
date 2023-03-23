@@ -87,7 +87,7 @@ class RibbonPanelItemWidget(QtWidgets.QFrame):
         self.layout().setSpacing(0)
         self.layout().setAlignment(QtCore.Qt.AlignCenter)
         self.layout().setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
-        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)  # type: ignore
 
     def addWidget(self, widget):
         """Add a widget to the panel item.
@@ -180,14 +180,14 @@ class RibbonPanel(QtWidgets.QFrame):
         self._titleLayout = QtWidgets.QHBoxLayout(self._titleWidget)
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
         self._titleLayout.setSpacing(5)
-        self._titleLabel = RibbonPanelTitle()
+        self._titleLabel = RibbonPanelTitle()  # type: ignore
         self._titleLabel.setText(title)
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
 
         # Panel option button
         if showPanelOptionButton:
-            self._panelOption = RibbonPanelOptionButton()
+            self._panelOption = RibbonPanelOptionButton()  # type: ignore
             self._panelOption.setAutoRaise(True)
             self._panelOption.setIcon(QtGui.QIcon(DataFile("icons/linking.png")))
             self._panelOption.setIconSize(QtCore.QSize(16, 16))

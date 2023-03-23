@@ -64,13 +64,13 @@ class RibbonTitleWidget(QtWidgets.QFrame):
             parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent)
         # Tab bar layout
-        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)  # type: ignore
         self._tabBarLayout = QtWidgets.QHBoxLayout(self)
         self._tabBarLayout.setContentsMargins(0, 0, 0, 0)
         self._tabBarLayout.setSpacing(0)
 
         # Application
-        self._applicationButton = RibbonApplicationButton()
+        self._applicationButton = RibbonApplicationButton()  # type: ignore
         self._applicationButton.setIcon(QtGui.QIcon(DataFile("icons/python.png")))
         self._applicationButton.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._applicationButton.setText("PyQtRibbon")
@@ -109,7 +109,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         # category tab bar
         self._tabBar = RibbonTabBar(self)
         self._tabBar.setExpanding(False)
-        self._tabBar.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self._tabBar.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)  # type: ignore
         font = self._tabBar.font()
         font.setPointSize(font.pointSize() + 3)
         self._tabBar.setFont(font)
@@ -118,7 +118,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         # Title label
         self._titleLabel = RibbonTitleLabel(self)
-        self._titleLabel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        self._titleLabel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)  # type: ignore
         self._titleLabel.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)  # type: ignore
         self._titleLabel.setText(title)
         font = self._titleLabel.font()

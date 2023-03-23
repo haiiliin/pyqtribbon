@@ -123,7 +123,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._upButton.clicked.connect(self._listWidget.scrollToPreviousRow)  # type: ignore
         self._downButton.clicked.connect(self._listWidget.scrollToNextRow)  # type: ignore
 
-        self._popupWidget = RibbonPopupWidget()
+        self._popupWidget = RibbonPopupWidget()  # type: ignore
         self._popupWidget.setFont(QtWidgets.QApplication.instance().font())  # type: ignore
         self._popupWidget.setWindowFlags(QtCore.Qt.Popup)
         self._popupLayout = QtWidgets.QVBoxLayout(self._popupWidget)
@@ -135,7 +135,7 @@ class RibbonGallery(QtWidgets.QFrame):
         self._popupLayout.addWidget(RibbonHorizontalSeparator())
 
         self._popupMenu = RibbonPermanentMenu()
-        self._popupMenu.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self._popupMenu.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)  # type: ignore
         self._popupMenu.actionAdded.connect(self._handlePopupAction)
         self._popupLayout.addWidget(self._popupMenu)
 
@@ -149,9 +149,9 @@ class RibbonGallery(QtWidgets.QFrame):
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         """Resize the gallery."""
         height = self.height() - self._mainLayout.contentsMargins().top() - self._mainLayout.contentsMargins().bottom()
-        self._upButton.setFixedSize(height // 4, height // 3)
-        self._downButton.setFixedSize(height // 4, height // 3)
-        self._moreButton.setFixedSize(height // 4, height // 3)
+        self._upButton.setFixedSize(height // 4, height // 3)  # type: ignore
+        self._downButton.setFixedSize(height // 4, height // 3)  # type: ignore
+        self._moreButton.setFixedSize(height // 4, height // 3)  # type: ignore
         super().resizeEvent(a0)
 
     def popupMenu(self) -> RibbonPermanentMenu:
@@ -247,7 +247,7 @@ class RibbonGallery(QtWidgets.QFrame):
         :param shortcut: shortcut of the button
         :param tooltip: tooltip of the button
         :param statusTip: status tip of the button
-        :param checkable: checkable flag of the button
+        :param checkable: checkable flag of the button.
         :return: the button added
         """
         button = RibbonToolButton(self)
@@ -306,7 +306,7 @@ class RibbonGallery(QtWidgets.QFrame):
         :param slot: slot to call when the button is clicked
         :param shortcut: shortcut of the button
         :param tooltip: tooltip of the button
-        :param statusTip: status tip of the button
+        :param statusTip: status tip of the button.
         :return: the button added
         """
         button = self.addButton(text, icon, slot, shortcut, tooltip, statusTip, True)

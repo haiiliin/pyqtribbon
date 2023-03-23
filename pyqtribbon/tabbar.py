@@ -40,7 +40,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         return [self.tabText(i) for i in range(self.count())]
 
-    def addTab(self, text: str, color: QtGui.QColor = None) -> int:
+    def addTab(self, text: str, color: QtGui.QColor = None, *args, **kwargs) -> int:
         """Add a new tab to the tab bar.
 
         :param text: The text of the tab.
