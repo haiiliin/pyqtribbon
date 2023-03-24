@@ -10,12 +10,9 @@ from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small
 
-
 class RibbonPanelTitle(QtWidgets.QLabel): ...
 
 class RibbonSpaceFindMode(IntEnum):
-    """Mode to find available space in a grid layout, ColumnWise or RowWise."""
-
     ColumnWise = 0
     RowWise = 1
 
@@ -23,8 +20,6 @@ ColumnWise = ColumnWise
 RowWise = RibbonSpaceFindMode.RowWise
 
 class RibbonGridLayoutManager(object):
-    """Grid Layout Manager."""
-
     rows: int
     cells: np.ndarray
 
@@ -32,39 +27,23 @@ class RibbonGridLayoutManager(object):
     def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=ColumnWise): ...
 
 class RibbonPanelItemWidget(QtWidgets.QFrame):
-    """Widget to display a panel item."""
-
     def __init__(self, parent=None): ...
     def addWidget(self, widget): ...
 
-class RibbonPanelOptionButton(QtWidgets.QToolButton):
-    """Button to display the options of a panel."""
-
-    pass
+class RibbonPanelOptionButton(QtWidgets.QToolButton): ...
 
 class RibbonPanel(QtWidgets.QFrame):
-    """Panel in the ribbon category."""
-
-    #: maximal number of rows
     _maxRows: int = 6
-    #: rows for large widgets
     _largeRows: int = 6
-    #: rows for medium widgets
     _mediumRows: int = 3
-    #: rows for small widgets
     _smallRows: int = 2
-    #: GridLayout manager to request available cells.
     _gridLayoutManager: RibbonGridLayoutManager
-    #: whether to show the panel option button
     _showPanelOptionButton: bool
 
-    #: widgets that are added to the panel
     _widgets: typing.List[QtWidgets.QWidget] = []
 
-    # height of the title widget
     _titleHeight: int = 20
 
-    # Panel options signal
     panelOptionClicked = QtCore.Signal(bool)
 
     _mainLayout: QtWidgets.QVBoxLayout
