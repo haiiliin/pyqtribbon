@@ -517,8 +517,7 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param category: The category to remove.
         """
-        index = self._titleWidget.tabBar().indexOf(category.title())
-        self.tabBar().removeTab(index)
+        self.tabBar().removeTab(self._titleWidget.tabBar().indexOf(category.title()))
         self._stackedWidget.removeWidget(category)
 
     def removeCategories(self, categories: RibbonContextCategories):
@@ -559,10 +558,7 @@ class RibbonBar(QtWidgets.QMenuBar):
 
     def _collapseButtonClicked(self):
         self.tabBar().currentChanged.connect(self.showRibbon)  # type: ignore
-        if self._stackedWidget.isVisible():
-            self.hideRibbon()
-        else:
-            self.showRibbon()
+        self.hideRibbon() if self._stackedWidget.isVisible() else self.showRibbon()
 
     def showRibbon(self):
         """Show the ribbon."""
@@ -594,7 +590,4 @@ class RibbonBar(QtWidgets.QMenuBar):
 
         :param visible: True to show the ribbon, False to hide it.
         """
-        if visible:
-            self.showRibbon()
-        else:
-            self.hideRibbon()
+        self.showRibbon() if visible else self.hideRibbon()

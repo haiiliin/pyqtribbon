@@ -64,41 +64,47 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         :param parent: The parent widget.
         """
         super().__init__(parent)
-        self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 5, 0)
-        self._mainLayout.setSpacing(5)
 
-        self._categoryScrollArea = RibbonCategoryScrollArea()  # type: ignore
-        self._categoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self._categoryScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        # Contents of the category scroll area
         self._categoryScrollAreaContents = RibbonCategoryScrollAreaContents()  # type: ignore
         self._categoryScrollAreaContents.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)  # type: ignore
         self._categoryLayout = QtWidgets.QHBoxLayout(self._categoryScrollAreaContents)
         self._categoryLayout.setContentsMargins(0, 0, 0, 0)
         self._categoryLayout.setSpacing(5)
         self._categoryLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
+
+        # Category scroll area
+        self._categoryScrollArea = RibbonCategoryScrollArea()  # type: ignore
+        self._categoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self._categoryScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self._categoryScrollArea.setWidget(self._categoryScrollAreaContents)
 
+        # Previous/Next buttons
         self._previousButton = RibbonCategoryLayoutButton(self)
         self._previousButton.setIcon(QtGui.QIcon(DataFile("icons/backward.png")))
         self._previousButton.setIconSize(QtCore.QSize(12, 12))
         self._previousButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._previousButton.setAutoRaise(True)
+        self._previousButton.clicked.connect(self.scrollPrevious)  # type: ignore
         self._nextButton = RibbonCategoryLayoutButton(self)
         self._nextButton.setIcon(QtGui.QIcon(DataFile("icons/forward.png")))
         self._nextButton.setIconSize(QtCore.QSize(12, 12))
         self._nextButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self._nextButton.setAutoRaise(True)
+        self._nextButton.clicked.connect(self.scrollNext)  # type: ignore
 
+        # Add the widgets to the main layout
+        self._mainLayout = QtWidgets.QHBoxLayout(self)
+        self._mainLayout.setContentsMargins(5, 0, 5, 0)
+        self._mainLayout.setSpacing(5)
         self._mainLayout.addWidget(self._previousButton, 0, QtCore.Qt.AlignVCenter)
         self._mainLayout.addWidget(self._categoryScrollArea, 1)
         self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,
                                                              QtWidgets.QSizePolicy.Minimum))  # fmt: skip
         self._mainLayout.addWidget(self._nextButton, 0, QtCore.Qt.AlignVCenter)
 
+        # Auto set the visibility of the scroll buttons
         self.autoSetScrollButtonsVisible()
-        self._nextButton.clicked.connect(self.scrollNext)  # type: ignore
-        self._previousButton.clicked.connect(self.scrollPrevious)  # type: ignore
 
     def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
         """Override the paint event to draw the background."""
