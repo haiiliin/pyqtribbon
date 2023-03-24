@@ -475,11 +475,12 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         style: RibbonButtonStyle = RibbonButtonStyle.Large,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -490,11 +491,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param icon: The icon of the button.
         :param style: The style of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -555,11 +556,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -569,11 +571,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -589,14 +591,14 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Small,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addMediumButton(
@@ -604,11 +606,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -618,11 +621,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -638,14 +641,14 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Medium,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addLargeButton(
@@ -653,11 +656,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -667,11 +671,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -687,14 +691,14 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Large,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addToggleButton(
@@ -703,11 +707,12 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         style: RibbonButtonStyle = RibbonButtonStyle.Large,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -718,11 +723,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param icon: The icon of the button.
         :param style: The style of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -734,7 +739,18 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The button that was added.
         """
         button = self.addButton(
-            text, icon, style, showText, colSpan, slot, shortcut, tooltip, statusTip, mode, alignment, fixedHeight
+            text,
+            icon,
+            style,
+            showText,
+            slot,
+            shortcut,
+            tooltip,
+            statusTip,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
         button.setCheckable(True)
         return button
@@ -744,11 +760,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -758,11 +775,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -778,14 +795,14 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Small,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addMediumToggleButton(
@@ -793,11 +810,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -807,11 +825,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -827,14 +845,14 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Medium,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addLargeToggleButton(
@@ -842,11 +860,12 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        colSpan: int = 1,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -856,11 +875,11 @@ class RibbonPanel(QtWidgets.QFrame):
         :param text: The text of the button.
         :param icon: The icon of the button.
         :param showText: Whether to show the text of the button.
-        :param colSpan: The number of columns the button should span.
         :param slot: The slot to call when the button is clicked.
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param colSpan: The number of columns the button should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the button.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -876,19 +895,20 @@ class RibbonPanel(QtWidgets.QFrame):
             icon,
             RibbonButtonStyle.Large,
             showText,
-            colSpan,
             slot,
             shortcut,
             tooltip,
             statusTip,
-            mode,
-            alignment,
-            fixedHeight,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
         )
 
     def addComboBox(
         self,
         items: typing.List[str],
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -918,6 +938,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addFontComboBox(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -943,6 +964,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addLineEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -970,6 +992,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTextEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -997,6 +1020,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addPlainTextEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1025,6 +1049,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addLabel(
         self,
         text: str,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1054,6 +1079,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addProgressBar(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1081,6 +1107,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addSlider(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1109,6 +1136,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addSpinBox(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1136,6 +1164,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDoubleSpinBox(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1163,6 +1192,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDateEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1190,6 +1220,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTimeEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1217,6 +1248,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addDateTimeEdit(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1244,6 +1276,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTableWidget(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1271,6 +1304,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addTreeWidget(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1298,6 +1332,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addListWidget(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1325,6 +1360,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
     def addCalendarWidget(
         self,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1354,6 +1390,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         orientation=QtCore.Qt.Vertical,
         width=6,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1386,6 +1423,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addHorizontalSeparator(
         self,
         width=6,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 2,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1408,11 +1446,20 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The separator.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
-        return self.addSeparator(QtCore.Qt.Horizontal, width, rowSpan, colSpan, mode, alignment, fixedHeight)
+        return self.addSeparator(
+            QtCore.Qt.Horizontal,
+            width,
+            rowSpan=rowSpan,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
+        )
 
     def addVerticalSeparator(
         self,
         width=6,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -1435,12 +1482,21 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The separator.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
-        return self.addSeparator(QtCore.Qt.Vertical, width, rowSpan, colSpan, mode, alignment, fixedHeight)
+        return self.addSeparator(
+            QtCore.Qt.Vertical,
+            width,
+            rowSpan=rowSpan,
+            colSpan=colSpan,
+            mode=mode,
+            alignment=alignment,
+            fixedHeight=fixedHeight,
+        )
 
     def addGallery(
         self,
         minimumWidth=800,
         popupHideOnClick=False,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
