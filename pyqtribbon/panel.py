@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import functools
+import re
 from enum import IntEnum
 from typing import List, Callable, overload, Any, Union, Dict
 
@@ -498,6 +499,28 @@ class RibbonPanel(QtWidgets.QFrame):
         initializer(widget, *args, **kwargs) if initializer else None
         return self.addWidget(widget, **ribbon_kwargs)
 
+    def __getattr__(self, method: str) -> Callable:
+        """Get the dynamic method `add[Small|Medium|Large][Widget]`.
+
+        :param method: The name of the method to get.
+        :return: The method of the widget to add.
+        """
+        # Match the method name
+        match = re.match(r"add(Small|Medium|Large)(\w+)", method)
+        assert match, "Invalid method name"
+
+        # Get the widget class and the size
+        size = match.group(1)
+        base_method_name = f"add{match.group(2)}"
+        assert hasattr(self, base_method_name), f"Invalid method name {base_method_name}"
+
+        # Get the base method
+        base_method = getattr(self, base_method_name)
+        rowSpan = Small if size == "Small" else Medium if size == "Medium" else Large
+
+        # Create the new method
+        return functools.partial(base_method, rowSpan=rowSpan)
+
     addComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
     addFontComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QFontComboBox)
     addLineEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QLineEdit)
@@ -511,8 +534,7 @@ class RibbonPanel(QtWidgets.QFrame):
     addDateEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateEdit)
     addTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTimeEdit)
     addDateTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateTimeEdit)
-    addTabWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTabWidget, rowSpan=Large)
-    addTreeWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTreeWidget, rowSpan=Large)
+    addTableWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTableWidget, rowSpan=Large)
     addListWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
     addCalendarWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
 
