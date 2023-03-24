@@ -163,8 +163,8 @@ if __name__ == "__main__":
     panel.addLargeButton("Button 2", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addLargeButton("Button 3", icon=QIcon("pyqtribbon/icons/close.png"))
 
-    showCategoryButton2.clicked.connect(category2.setCategoryVisible)
-    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
+    showCategoryButton2.clicked.connect(category2.setCategoryVisible)  # type: ignore
+    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))  # type: ignore
 
     gallery = panel.addGallery(popupHideOnClick=True)
     for i in range(100):
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
 
     categories = ribbon.addContextCategories('name', ['Context 4', 'Context 5'])
-    showCategoryButton45.clicked.connect(categories.setCategoriesVisible)
+    showCategoryButton45.clicked.connect(categories.setCategoriesVisible)  # type: ignore
 
     panel1 = categories['Context 4'].addPanel('Context 4 Panel 1')
     panel1.addLargeButton('Button 1', icon=QIcon('pyqtribbon/icons/close.png'))
