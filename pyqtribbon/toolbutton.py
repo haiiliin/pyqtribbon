@@ -1,11 +1,11 @@
-from enum import IntEnum
+from enum import Enum
 
 from qtpy import QtWidgets, QtCore
 
 from .menu import RibbonMenu
 
 
-class RibbonButtonStyle(IntEnum):
+class RibbonButtonStyle(Enum):
     """Button style, Small, Medium, or Large."""
 
     Small = 0

@@ -6,8 +6,7 @@ from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
 from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
-from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
-from .utils import DataFile
+from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small
 
 class RibbonPanelTitle(QtWidgets.QLabel): ...
 
@@ -17,7 +16,7 @@ class RibbonSpaceFindMode(IntEnum):
     ColumnWise = 0
     RowWise = 1
 
-ColumnWise = RibbonSpaceFindMode.ColumnWise
+ColumnWise = ColumnWise
 RowWise = RibbonSpaceFindMode.RowWise
 
 class RibbonGridLayoutManager(object):
@@ -27,7 +26,7 @@ class RibbonGridLayoutManager(object):
     cells: np.ndarray
 
     def __init__(self, rows: int): ...
-    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=RibbonSpaceFindMode.ColumnWise): ...
+    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=ColumnWise): ...
 
 class RibbonPanelItemWidget(QtWidgets.QFrame):
     """Widget to display a panel item."""
@@ -96,7 +95,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ): ...
@@ -105,7 +104,7 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ): ...
@@ -114,7 +113,7 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ): ...
@@ -123,7 +122,7 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ): ...
@@ -134,15 +133,15 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
-        style: RibbonButtonStyle = RibbonButtonStyle.Large,
         showText: bool = True,
         slot=None,
         shortcut=None,
         tooltip=None,
         statusTip=None,
         *,
+        style: RibbonButtonStyle = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -157,7 +156,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -172,7 +171,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -187,7 +186,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -195,7 +194,7 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         text: str = None,
         icon: QtGui.QIcon = None,
-        style: RibbonButtonStyle = RibbonButtonStyle.Large,
+        style: RibbonButtonStyle = Large,
         showText: bool = True,
         slot=None,
         shortcut=None,
@@ -203,7 +202,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -218,7 +217,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -233,7 +232,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -248,7 +247,7 @@ class RibbonPanel(QtWidgets.QFrame):
         statusTip=None,
         *,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonToolButton: ...
@@ -258,7 +257,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QComboBox: ...
@@ -267,7 +266,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QFontComboBox: ...
@@ -276,7 +275,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QLineEdit: ...
@@ -285,7 +284,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTextEdit: ...
@@ -294,7 +293,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QPlainTextEdit: ...
@@ -304,7 +303,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QLabel: ...
@@ -313,7 +312,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QProgressBar: ...
@@ -322,7 +321,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QSlider: ...
@@ -331,7 +330,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QSpinBox: ...
@@ -340,7 +339,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDoubleSpinBox: ...
@@ -349,7 +348,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDateEdit: ...
@@ -358,7 +357,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTimeEdit: ...
@@ -367,7 +366,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QDateTimeEdit: ...
@@ -376,7 +375,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTableWidget: ...
@@ -385,7 +384,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QTreeWidget: ...
@@ -394,7 +393,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QListWidget: ...
@@ -403,7 +402,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> QtWidgets.QCalendarWidget: ...
@@ -414,7 +413,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]: ...
@@ -424,7 +423,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 2,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonHorizontalSeparator: ...
@@ -434,7 +433,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonVerticalSeparator: ...
@@ -445,7 +444,7 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=RibbonSpaceFindMode.ColumnWise,
+        mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
     ) -> RibbonGallery: ...
