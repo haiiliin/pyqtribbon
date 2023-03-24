@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing
 from enum import IntEnum
 
@@ -5,8 +7,9 @@ import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
-from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
+from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small
+
 
 class RibbonPanelTitle(QtWidgets.QLabel): ...
 
@@ -98,7 +101,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ): ...
+    ) -> QtWidgets.QWidget | typing.Any: ...
     def addSmallWidget(
         self,
         widget: QtWidgets.QWidget,
@@ -107,7 +110,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ): ...
+    ) -> QtWidgets.QWidget | typing.Any: ...
     def addMediumWidget(
         self,
         widget: QtWidgets.QWidget,
@@ -116,7 +119,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ): ...
+    ) -> QtWidgets.QWidget | typing.Any: ...
     def addLargeWidget(
         self,
         widget: QtWidgets.QWidget,
@@ -125,7 +128,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ): ...
+    ) -> QtWidgets.QWidget | typing.Any: ...
     def removeWidget(self, widget: QtWidgets.QWidget): ...
     def widget(self, index: int) -> QtWidgets.QWidget: ...
     def widgets(self) -> typing.List[QtWidgets.QWidget]: ...
@@ -416,7 +419,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]: ...
+    ) -> RibbonSeparator: ...
     def addHorizontalSeparator(
         self,
         width=6,
@@ -426,7 +429,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ) -> RibbonHorizontalSeparator: ...
+    ) -> RibbonSeparator: ...
     def addVerticalSeparator(
         self,
         width=6,
@@ -436,7 +439,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ) -> RibbonVerticalSeparator: ...
+    ) -> RibbonSeparator: ...
     def addGallery(
         self,
         minimumWidth=800,

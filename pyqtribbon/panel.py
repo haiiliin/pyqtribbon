@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing
 from enum import IntEnum
 
@@ -5,7 +7,7 @@ import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
 
 from .gallery import RibbonGallery
-from .separator import RibbonHorizontalSeparator, RibbonVerticalSeparator
+from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
 from .utils import DataFile
 
@@ -357,7 +359,7 @@ class RibbonPanel(QtWidgets.QFrame):
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
-    ):
+    ) -> QtWidgets.QWidget | typing.Any:
         """Add a widget to the panel.
 
         :param widget: The widget to add.
@@ -370,6 +372,7 @@ class RibbonPanel(QtWidgets.QFrame):
                             value is True, when a percentage is given (0 < percentage < 1) the height is calculated
                             from the height of the maximum height allowed, depends on the number of rows to span. The
                             minimum height is 40% of the maximum height allowed.
+        :return: The added widget.
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         self._widgets.append(widget)
@@ -389,8 +392,9 @@ class RibbonPanel(QtWidgets.QFrame):
         item = RibbonPanelItemWidget(self)
         item.addWidget(widget)
         self._actionsLayout.addWidget(item, row, col, rowSpan, colSpan, alignment)  # type: ignore
+        return widget
 
-    def addSmallWidget(self, widget: QtWidgets.QWidget, **kwargs):
+    def addSmallWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
         """Add a small widget to the panel.
 
         :param widget: The widget to add.
@@ -400,7 +404,7 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = Small
         return self.addWidget(widget, **kwargs)
 
-    def addMediumWidget(self, widget: QtWidgets.QWidget, **kwargs):
+    def addMediumWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
         """Add a medium widget to the panel.
 
         :param widget: The widget to add.
@@ -410,7 +414,7 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = Medium
         return self.addWidget(widget, **kwargs)
 
-    def addLargeWidget(self, widget: QtWidgets.QWidget, **kwargs):
+    def addLargeWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
         """Add a large widget to the panel.
 
         :param widget: The widget to add.
@@ -588,8 +592,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
-        self.addWidget(comboBox, **kwargs)
-        return comboBox
+        return self.addWidget(comboBox, **kwargs)
 
     def addFontComboBox(self, **kwargs) -> QtWidgets.QFontComboBox:
         """Add a font combo box to the panel.
@@ -598,9 +601,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The combo box that was added.
         """
-        comboBox = QtWidgets.QFontComboBox(self)
-        self.addWidget(comboBox, **kwargs)
-        return comboBox
+        return self.addWidget(QtWidgets.QFontComboBox(self), **kwargs)
 
     def addLineEdit(self, **kwargs) -> QtWidgets.QLineEdit:
         """Add a line edit to the panel.
@@ -609,9 +610,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The line edit that was added.
         """
-        lineEdit = QtWidgets.QLineEdit(self)
-        self.addWidget(lineEdit, **kwargs)
-        return lineEdit
+        return self.addWidget(QtWidgets.QLineEdit(self), **kwargs)
 
     def addTextEdit(self, **kwargs) -> QtWidgets.QTextEdit:
         """Add a text edit to the panel.
@@ -620,9 +619,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The text edit that was added.
         """
-        textEdit = QtWidgets.QTextEdit(self)
-        self.addWidget(textEdit, **kwargs)
-        return textEdit
+        return self.addWidget(QtWidgets.QTextEdit(self), **kwargs)
 
     def addPlainTextEdit(self, **kwargs) -> QtWidgets.QPlainTextEdit:
         """Add a plain text edit to the panel.
@@ -631,9 +628,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The text edit that was added.
         """
-        textEdit = QtWidgets.QPlainTextEdit(self)
-        self.addWidget(textEdit, **kwargs)
-        return textEdit
+        return self.addWidget(QtWidgets.QPlainTextEdit(self), **kwargs)
 
     def addLabel(self, text: str, **kwargs) -> QtWidgets.QLabel:
         """Add a label to the panel.
@@ -643,8 +638,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         label = QtWidgets.QLabel(self)
         label.setText(text)
-        self.addWidget(label, **kwargs)
-        return label
+        return self.addWidget(label, **kwargs)
 
     def addProgressBar(self, **kwargs) -> QtWidgets.QProgressBar:
         """Add a progress bar to the panel.
@@ -653,9 +647,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The progress bar that was added.
         """
-        progressBar = QtWidgets.QProgressBar(self)
-        self.addWidget(progressBar, **kwargs)
-        return progressBar
+        return self.addWidget(QtWidgets.QProgressBar(self), **kwargs)
 
     def addSlider(self, **kwargs) -> QtWidgets.QSlider:
         """Add a slider to the panel.
@@ -665,8 +657,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
-        self.addWidget(slider, **kwargs)
-        return slider
+        return self.addWidget(slider, **kwargs)
 
     def addSpinBox(self, **kwargs) -> QtWidgets.QSpinBox:
         """Add a spin box to the panel.
@@ -674,9 +665,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
         :return: The spin box that was added.
         """
-        spinBox = QtWidgets.QSpinBox(self)
-        self.addWidget(spinBox, **kwargs)
-        return spinBox
+        return self.addWidget(QtWidgets.QSpinBox(self), **kwargs)
 
     def addDoubleSpinBox(self, **kwargs) -> QtWidgets.QDoubleSpinBox:
         """Add a double spin box to the panel.
@@ -684,9 +673,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
         :return: The double spin box that was added.
         """
-        doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
-        self.addWidget(doubleSpinBox, **kwargs)
-        return doubleSpinBox
+        return self.addWidget(QtWidgets.QDoubleSpinBox(self), **kwargs)
 
     def addDateEdit(self, **kwargs) -> QtWidgets.QDateEdit:
         """Add a date edit to the panel.
@@ -695,9 +682,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The date edit that was added.
         """
-        dateEdit = QtWidgets.QDateEdit(self)
-        self.addWidget(dateEdit, **kwargs)
-        return dateEdit
+        return self.addWidget(QtWidgets.QDateEdit(self), **kwargs)
 
     def addTimeEdit(self, **kwargs) -> QtWidgets.QTimeEdit:
         """Add a time edit to the panel.
@@ -706,9 +691,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The time edit that was added.
         """
-        timeEdit = QtWidgets.QTimeEdit(self)
-        self.addWidget(timeEdit, **kwargs)
-        return timeEdit
+        return self.addWidget(QtWidgets.QTimeEdit(self), **kwargs)
 
     def addDateTimeEdit(self, **kwargs) -> QtWidgets.QDateTimeEdit:
         """Add a date time edit to the panel.
@@ -717,9 +700,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :return: The date time edit that was added.
         """
-        dateTimeEdit = QtWidgets.QDateTimeEdit(self)
-        self.addWidget(dateTimeEdit, **kwargs)
-        return dateTimeEdit
+        return self.addWidget(QtWidgets.QDateTimeEdit(self), **kwargs)
 
     def addTableWidget(self, **kwargs) -> QtWidgets.QTableWidget:
         """Add a table widget to the panel.
@@ -729,9 +710,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The table widget that was added.
         """
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        tableWidget = QtWidgets.QTableWidget(self)
-        self.addWidget(tableWidget, **kwargs)
-        return tableWidget
+        return self.addWidget(QtWidgets.QTableWidget(self), **kwargs)
 
     def addTreeWidget(self, **kwargs) -> QtWidgets.QTreeWidget:
         """Add a tree widget to the panel.
@@ -741,9 +720,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The tree widget that was added.
         """
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        treeWidget = QtWidgets.QTreeWidget(self)
-        self.addWidget(treeWidget, **kwargs)
-        return treeWidget
+        return self.addWidget(QtWidgets.QTreeWidget(self), **kwargs)
 
     def addListWidget(self, **kwargs) -> QtWidgets.QListWidget:
         """Add a list widget to the panel.
@@ -753,9 +730,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The list widget that was added.
         """
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        listWidget = QtWidgets.QListWidget(self)
-        self.addWidget(listWidget, **kwargs)
-        return listWidget
+        return self.addWidget(QtWidgets.QListWidget(self), **kwargs)
 
     def addCalendarWidget(self, **kwargs) -> QtWidgets.QCalendarWidget:
         """Add a calendar widget to the panel.
@@ -765,13 +740,9 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The calendar widget that was added.
         """
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        calendarWidget = QtWidgets.QCalendarWidget(self)
-        self.addWidget(calendarWidget, **kwargs)
-        return calendarWidget
+        return self.addWidget(QtWidgets.QCalendarWidget(self), **kwargs)
 
-    def addSeparator(
-        self, orientation=QtCore.Qt.Vertical, width=6, **kwargs
-    ) -> typing.Union[RibbonHorizontalSeparator, RibbonVerticalSeparator]:
+    def addSeparator(self, orientation=QtCore.Qt.Vertical, width=6, **kwargs) -> RibbonSeparator:
         """Add a separator to the panel.
 
         :param orientation: The orientation of the separator.
@@ -781,13 +752,9 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The separator.
         """
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        separator = (
-            RibbonHorizontalSeparator(width) if orientation == QtCore.Qt.Horizontal else RibbonVerticalSeparator(width)
-        )
-        self.addWidget(separator, **kwargs)
-        return separator
+        return self.addWidget(RibbonSeparator(orientation, width), **kwargs)
 
-    def addHorizontalSeparator(self, width=6, **kwargs) -> RibbonHorizontalSeparator:
+    def addHorizontalSeparator(self, width=6, **kwargs) -> RibbonSeparator:
         """Add a horizontal separator to the panel.
 
         :param width: The width of the separator.
@@ -798,7 +765,7 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = Small if "rowSpan" not in kwargs else kwargs["rowSpan"]
         return self.addSeparator(QtCore.Qt.Horizontal, width, **kwargs)
 
-    def addVerticalSeparator(self, width=6, **kwargs) -> RibbonVerticalSeparator:
+    def addVerticalSeparator(self, width=6, **kwargs) -> RibbonSeparator:
         """Add a vertical separator to the panel.
 
         :param width: The width of the separator.
@@ -823,8 +790,7 @@ class RibbonPanel(QtWidgets.QFrame):
         gallery = RibbonGallery(minimumWidth, popupHideOnClick, self)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
-        self.addWidget(gallery, **kwargs)
-        return gallery
+        return self.addWidget(gallery, **kwargs)
 
     def setTitle(self, title: str):
         """Set the title of the panel.
