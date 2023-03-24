@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum import IntEnum
-from typing import List, Callable, overload, Any, Union, Dict
+from typing import List, Callable, overload, Any, Union, Dict, Iterable
 
 import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
@@ -244,7 +244,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def __getattr__(self, method: str) -> Callable: ...
     def addComboBox(
         self,
-        items: List[str],
+        items: Iterable[str],
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
