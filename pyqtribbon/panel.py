@@ -351,6 +351,7 @@ class RibbonPanel(QtWidgets.QFrame):
     def addWidget(
         self,
         widget: QtWidgets.QWidget,
+        *,
         rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
@@ -392,6 +393,8 @@ class RibbonPanel(QtWidgets.QFrame):
     def addSmallWidget(
         self,
         widget: QtWidgets.QWidget,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -399,6 +402,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """Add a small widget to the panel.
 
         :param widget: The widget to add.
+        :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
         :return: The widget that was added.
@@ -408,11 +412,15 @@ class RibbonPanel(QtWidgets.QFrame):
                             from the height of the maximum height allowed, depends on the number of rows to span. The
                             minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 2, 1, mode, alignment, fixedHeight)
+        return self.addWidget(
+            widget, rowSpan=self.smallRows(), colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
 
     def addMediumWidget(
         self,
         widget: QtWidgets.QWidget,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -420,6 +428,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """Add a medium widget to the panel.
 
         :param widget: The widget to add.
+        :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -428,11 +437,15 @@ class RibbonPanel(QtWidgets.QFrame):
                             from the height of the maximum height allowed, depends on the number of rows to span. The
                             minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 3, 1, mode, alignment, fixedHeight)
+        return self.addWidget(
+            widget, rowSpan=self.mediumRows(), colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
 
     def addLargeWidget(
         self,
         widget: QtWidgets.QWidget,
+        *,
+        colSpan: int = 1,
         mode=RibbonSpaceFindMode.ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
         fixedHeight: typing.Union[bool, float] = False,
@@ -440,6 +453,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """Add a large widget to the panel.
 
         :param widget: The widget to add.
+        :param colSpan: The number of columns the widget should span.
         :param mode: The mode to find spaces.
         :param alignment: The alignment of the widget.
         :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
@@ -448,7 +462,9 @@ class RibbonPanel(QtWidgets.QFrame):
                             from the height of the maximum height allowed, depends on the number of rows to span. The
                             minimum height is 40% of the maximum height allowed.
         """
-        return self.addWidget(widget, 6, 1, mode, alignment, fixedHeight)
+        return self.addWidget(
+            widget, rowSpan=self.largeRows(), colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
 
     def removeWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the panel."""
@@ -933,7 +949,9 @@ class RibbonPanel(QtWidgets.QFrame):
         rowSpan = self.defaultRowSpan(rowSpan)
         comboBox = QtWidgets.QComboBox(self)
         comboBox.addItems(items)
-        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            comboBox, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return comboBox
 
     def addFontComboBox(
@@ -959,7 +977,9 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The combo box that was added.
         """
         comboBox = QtWidgets.QFontComboBox(self)
-        self.addWidget(comboBox, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            comboBox, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return comboBox
 
     def addLineEdit(
@@ -987,7 +1007,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         lineEdit = QtWidgets.QLineEdit(self)
-        self.addWidget(lineEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            lineEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return lineEdit
 
     def addTextEdit(
@@ -1015,7 +1037,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         textEdit = QtWidgets.QTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            textEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return textEdit
 
     def addPlainTextEdit(
@@ -1043,7 +1067,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         textEdit = QtWidgets.QPlainTextEdit(self)
-        self.addWidget(textEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            textEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return textEdit
 
     def addLabel(
@@ -1074,7 +1100,7 @@ class RibbonPanel(QtWidgets.QFrame):
         rowSpan = self.defaultRowSpan(rowSpan)
         label = QtWidgets.QLabel(self)
         label.setText(text)
-        self.addWidget(label, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(label, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight)
         return label
 
     def addProgressBar(
@@ -1102,7 +1128,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         progressBar = QtWidgets.QProgressBar(self)
-        self.addWidget(progressBar, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            progressBar, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return progressBar
 
     def addSlider(
@@ -1131,7 +1159,9 @@ class RibbonPanel(QtWidgets.QFrame):
         rowSpan = self.defaultRowSpan(rowSpan)
         slider = QtWidgets.QSlider(self)
         slider.setOrientation(QtCore.Qt.Horizontal)
-        self.addWidget(slider, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            slider, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return slider
 
     def addSpinBox(
@@ -1159,7 +1189,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         spinBox = QtWidgets.QSpinBox(self)
-        self.addWidget(spinBox, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            spinBox, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return spinBox
 
     def addDoubleSpinBox(
@@ -1187,7 +1219,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         doubleSpinBox = QtWidgets.QDoubleSpinBox(self)
-        self.addWidget(doubleSpinBox, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            doubleSpinBox, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return doubleSpinBox
 
     def addDateEdit(
@@ -1215,7 +1249,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         dateEdit = QtWidgets.QDateEdit(self)
-        self.addWidget(dateEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            dateEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return dateEdit
 
     def addTimeEdit(
@@ -1243,7 +1279,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         timeEdit = QtWidgets.QTimeEdit(self)
-        self.addWidget(timeEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            timeEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return timeEdit
 
     def addDateTimeEdit(
@@ -1271,7 +1309,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         dateTimeEdit = QtWidgets.QDateTimeEdit(self)
-        self.addWidget(dateTimeEdit, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            dateTimeEdit, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return dateTimeEdit
 
     def addTableWidget(
@@ -1299,7 +1339,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         tableWidget = QtWidgets.QTableWidget(self)
-        self.addWidget(tableWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            tableWidget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return tableWidget
 
     def addTreeWidget(
@@ -1327,7 +1369,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         treeWidget = QtWidgets.QTreeWidget(self)
-        self.addWidget(treeWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            treeWidget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return treeWidget
 
     def addListWidget(
@@ -1355,7 +1399,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         listWidget = QtWidgets.QListWidget(self)
-        self.addWidget(listWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            listWidget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return listWidget
 
     def addCalendarWidget(
@@ -1383,7 +1429,9 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         rowSpan = self.defaultRowSpan(rowSpan)
         calendarWidget = QtWidgets.QCalendarWidget(self)
-        self.addWidget(calendarWidget, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            calendarWidget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return calendarWidget
 
     def addSeparator(
@@ -1417,7 +1465,9 @@ class RibbonPanel(QtWidgets.QFrame):
         separator = (
             RibbonHorizontalSeparator(width) if orientation == QtCore.Qt.Horizontal else RibbonVerticalSeparator(width)
         )
-        self.addWidget(separator, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            separator, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return separator
 
     def addHorizontalSeparator(
@@ -1523,7 +1573,9 @@ class RibbonPanel(QtWidgets.QFrame):
         gallery = RibbonGallery(minimumWidth, popupHideOnClick, self)
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
-        self.addWidget(gallery, rowSpan, colSpan, mode, alignment, fixedHeight)
+        self.addWidget(
+            gallery, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
         return gallery
 
     def setTitle(self, title: str):
