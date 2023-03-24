@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import typing
+import functools
 from enum import IntEnum
+from typing import List, Callable, overload, Any, Union, Dict
 
 import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
@@ -122,7 +123,7 @@ class RibbonPanel(QtWidgets.QFrame):
     _showPanelOptionButton: bool
 
     #: widgets that are added to the panel
-    _widgets: typing.List[QtWidgets.QWidget] = []
+    _widgets: List[QtWidgets.QWidget] = []
 
     # height of the title widget
     _titleHeight: int = 20
@@ -130,11 +131,11 @@ class RibbonPanel(QtWidgets.QFrame):
     # Panel options signal
     panelOptionClicked = QtCore.Signal(bool)
 
-    @typing.overload
+    @overload
     def __init__(self, title: str = "", maxRows: int = 6, showPanelOptionButton=True, parent=None):
         pass
 
-    @typing.overload
+    @overload
     def __init__(self, parent=None):
         pass
 
@@ -261,7 +262,7 @@ class RibbonPanel(QtWidgets.QFrame):
         assert 0 < rows <= self._maxRows, "Invalid number of rows"
         self._smallRows = rows
 
-    def defaultRowSpan(self, rowSpan: typing.Union[int, RibbonButtonStyle]) -> int:
+    def defaultRowSpan(self, rowSpan: Union[int, RibbonButtonStyle]) -> int:
         """Return the number of span rows for the given widget type.
 
         :param rowSpan: row span or type.
@@ -308,13 +309,7 @@ class RibbonPanel(QtWidgets.QFrame):
             / self._gridLayoutManager.rows
         )
 
-    def addWidgetsBy(
-        self,
-        data: typing.Dict[
-            str,  # type of the widget
-            typing.Dict,  # data of the widget
-        ],
-    ) -> typing.Dict[str, QtWidgets.QWidget]:
+    def addWidgetsBy(self, data: Dict[str, Dict]) -> Dict[str, QtWidgets.QWidget]:
         """Add widgets to the panel.
 
         :param data: The data to add. The dict is of the form:
@@ -338,11 +333,11 @@ class RibbonPanel(QtWidgets.QFrame):
             VerticalSeparator, Gallery.
         :return: A dictionary of the added widgets.
         """
-        widgets = {}  # type: typing.Dict[str, QtWidgets.QWidget]
+        widgets = {}  # type: Dict[str, QtWidgets.QWidget]
         for key, widget_data in data.items():
             type = widget_data.pop("type", "").capitalize()
             if hasattr(self, "add" + type):
-                method = getattr(self, "add" + type)  # type: typing.Callable
+                method = getattr(self, "add" + type)  # type: Callable
                 if method is not None:
                     widgets[key] = method(**widget_data.get("arguments", {}))
         return widgets
@@ -351,12 +346,12 @@ class RibbonPanel(QtWidgets.QFrame):
         self,
         widget: QtWidgets.QWidget,
         *,
-        rowSpan: typing.Union[int, RibbonButtonStyle] = Small,
+        rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode=ColumnWise,
         alignment=QtCore.Qt.AlignCenter,
-        fixedHeight: typing.Union[bool, float] = False,
-    ) -> QtWidgets.QWidget | typing.Any:
+        fixedHeight: Union[bool, float] = False,
+    ) -> QtWidgets.QWidget | Any:
         """Add a widget to the panel.
 
         :param widget: The widget to add.
@@ -391,35 +386,9 @@ class RibbonPanel(QtWidgets.QFrame):
         self._actionsLayout.addWidget(item, row, col, rowSpan, colSpan, alignment)  # type: ignore
         return widget
 
-    def addSmallWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
-        """Add a small widget to the panel.
-
-        :param widget: The widget to add.
-        :param kwargs: keyword arguments passed to the :meth:`addWidget` method.
-        :return: The widget that was added.
-        """
-        kwargs["rowSpan"] = Small
-        return self.addWidget(widget, **kwargs)
-
-    def addMediumWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
-        """Add a medium widget to the panel.
-
-        :param widget: The widget to add.
-        :param kwargs: keyword arguments passed to the :meth:`addWidget` method.
-        :return: The widget that was added.
-        """
-        kwargs["rowSpan"] = Medium
-        return self.addWidget(widget, **kwargs)
-
-    def addLargeWidget(self, widget: QtWidgets.QWidget, **kwargs) -> QtWidgets.QWidget | typing.Any:
-        """Add a large widget to the panel.
-
-        :param widget: The widget to add.
-        :param kwargs: keyword arguments passed to the :meth:`addWidget` method.
-        :return: The widget that was added.
-        """
-        kwargs["rowSpan"] = Large
-        return self.addWidget(widget, **kwargs)
+    addSmallWidget = functools.partialmethod(addWidget, rowSpan=Small)
+    addMediumWidget = functools.partialmethod(addWidget, rowSpan=Medium)
+    addLargeWidget = functools.partialmethod(addWidget, rowSpan=Large)
 
     def removeWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the panel."""
@@ -433,7 +402,7 @@ class RibbonPanel(QtWidgets.QFrame):
         """
         return self._widgets[index]
 
-    def widgets(self) -> typing.List[QtWidgets.QWidget]:
+    def widgets(self) -> List[QtWidgets.QWidget]:
         """Get all the widgets in the panel.
 
         :return: A list of all the widgets in the panel.
@@ -445,10 +414,11 @@ class RibbonPanel(QtWidgets.QFrame):
         text: str = None,
         icon: QtGui.QIcon = None,
         showText: bool = True,
-        slot=None,
-        shortcut=None,
-        tooltip=None,
-        statusTip=None,
+        slot: Callable = None,
+        shortcut: QtGui.QKeySequence = None,
+        tooltip: str = None,
+        statusTip: str = None,
+        checkable: bool = False,
         *,
         rowSpan: RibbonButtonStyle = Large,
         **kwargs,
@@ -462,6 +432,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
+        :param checkable: Whether the button is checkable.
         :param rowSpan: The type of the button corresponding to the number of rows it should span.
         :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
 
@@ -492,6 +463,7 @@ class RibbonPanel(QtWidgets.QFrame):
             button.setMaximumIconSize(int(maximumIconSize))
         if not showText:
             button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        button.setCheckable(checkable)
         kwargs["rowSpan"] = (
             self.defaultRowSpan(Small)
             if style == Small
@@ -502,236 +474,47 @@ class RibbonPanel(QtWidgets.QFrame):
         self.addWidget(button, **kwargs)
         return button
 
-    def addSmallButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a small button to the panel.
+    addSmallButton = functools.partialmethod(addButton, rowSpan=Small)
+    addMediumButton = functools.partialmethod(addButton, rowSpan=Medium)
+    addLargeButton = functools.partialmethod(addButton, rowSpan=Large)
+    addToggleButton = functools.partialmethod(addButton, checkable=True)
+    addSmallToggleButton = functools.partialmethod(addToggleButton, rowSpan=Small)
+    addMediumToggleButton = functools.partialmethod(addToggleButton, rowSpan=Medium)
+    addLargeToggleButton = functools.partialmethod(addToggleButton, rowSpan=Large)
 
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
-        :return: The button that was added.
+    ribbonArguments = ["rowSpan", "colSpan", "mode", "alignment", "fixedHeight"]
+
+    def addAnyWidget(self, *args, cls, initializer: Callable = None, **kwargs) -> QtWidgets.QWidget:
+        """Add any widget to the panel.
+
+        :param args: The arguments to pass to the initializer.
+        :param cls: The class of the widget to add.
+        :param initializer: The initializer of the widget to add, the first argument must be the widget.
+        :param kwargs: The keyword arguments to pass to the initializer and to control the properties of the widget
+                       on the ribbon bar.
         """
-        kwargs["rowSpan"] = Small
-        return self.addButton(*args, **kwargs)
+        ribbon_kwargs = {k: kwargs.pop(k) for k in self.ribbonArguments if k in kwargs}
+        widget = cls(self)
+        initializer(widget, *args, **kwargs) if initializer else None
+        return self.addWidget(widget, **ribbon_kwargs)
 
-    def addMediumButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a medium button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
-        :return: The button that was added.
-        """
-        kwargs["rowSpan"] = Medium
-        return self.addButton(*args, **kwargs)
-
-    def addLargeButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a large button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
-        :return: The button that was added.
-        """
-        kwargs["rowSpan"] = Large
-        return self.addButton(*args, **kwargs)
-
-    def addToggleButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a toggle button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
-
-        :return: The button that was added.
-        """
-        button = self.addButton(*args, **kwargs)
-        button.setCheckable(True)
-        return button
-
-    def addSmallToggleButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a small toggle button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addSmallButton`.
-
-        :return: The button that was added.
-        """
-        button = self.addSmallButton(*args, **kwargs)
-        button.setCheckable(True)
-        return button
-
-    def addMediumToggleButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a medium toggle button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addMediumButton`.
-
-        :return: The button that was added.
-        """
-        button = self.addMediumButton(*args, **kwargs)
-        button.setCheckable(True)
-        return button
-
-    def addLargeToggleButton(self, *args, **kwargs) -> RibbonToolButton:
-        """Add a large toggle button to the panel.
-
-        :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addLargeButton`.
-
-        :return: The button that was added.
-        """
-        button = self.addLargeButton(*args, **kwargs)
-        button.setCheckable(True)
-        return button
-
-    def addComboBox(self, items: typing.List[str], **kwargs) -> QtWidgets.QComboBox:
-        """Add a combo box to the panel.
-
-        :param items: The items of the combo box.
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The combo box that was added.
-        """
-        comboBox = QtWidgets.QComboBox(self)
-        comboBox.addItems(items)
-        return self.addWidget(comboBox, **kwargs)
-
-    def addFontComboBox(self, **kwargs) -> QtWidgets.QFontComboBox:
-        """Add a font combo box to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The combo box that was added.
-        """
-        return self.addWidget(QtWidgets.QFontComboBox(self), **kwargs)
-
-    def addLineEdit(self, **kwargs) -> QtWidgets.QLineEdit:
-        """Add a line edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The line edit that was added.
-        """
-        return self.addWidget(QtWidgets.QLineEdit(self), **kwargs)
-
-    def addTextEdit(self, **kwargs) -> QtWidgets.QTextEdit:
-        """Add a text edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The text edit that was added.
-        """
-        return self.addWidget(QtWidgets.QTextEdit(self), **kwargs)
-
-    def addPlainTextEdit(self, **kwargs) -> QtWidgets.QPlainTextEdit:
-        """Add a plain text edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The text edit that was added.
-        """
-        return self.addWidget(QtWidgets.QPlainTextEdit(self), **kwargs)
-
-    def addLabel(self, text: str, **kwargs) -> QtWidgets.QLabel:
-        """Add a label to the panel.
-
-        :param text: The text of the label.
-        :return: The label that was added.
-        """
-        label = QtWidgets.QLabel(self)
-        label.setText(text)
-        return self.addWidget(label, **kwargs)
-
-    def addProgressBar(self, **kwargs) -> QtWidgets.QProgressBar:
-        """Add a progress bar to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The progress bar that was added.
-        """
-        return self.addWidget(QtWidgets.QProgressBar(self), **kwargs)
-
-    def addSlider(self, **kwargs) -> QtWidgets.QSlider:
-        """Add a slider to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-        :return: The slider that was added.
-        """
-        slider = QtWidgets.QSlider(self)
-        slider.setOrientation(QtCore.Qt.Horizontal)
-        return self.addWidget(slider, **kwargs)
-
-    def addSpinBox(self, **kwargs) -> QtWidgets.QSpinBox:
-        """Add a spin box to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-        :return: The spin box that was added.
-        """
-        return self.addWidget(QtWidgets.QSpinBox(self), **kwargs)
-
-    def addDoubleSpinBox(self, **kwargs) -> QtWidgets.QDoubleSpinBox:
-        """Add a double spin box to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-        :return: The double spin box that was added.
-        """
-        return self.addWidget(QtWidgets.QDoubleSpinBox(self), **kwargs)
-
-    def addDateEdit(self, **kwargs) -> QtWidgets.QDateEdit:
-        """Add a date edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The date edit that was added.
-        """
-        return self.addWidget(QtWidgets.QDateEdit(self), **kwargs)
-
-    def addTimeEdit(self, **kwargs) -> QtWidgets.QTimeEdit:
-        """Add a time edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The time edit that was added.
-        """
-        return self.addWidget(QtWidgets.QTimeEdit(self), **kwargs)
-
-    def addDateTimeEdit(self, **kwargs) -> QtWidgets.QDateTimeEdit:
-        """Add a date time edit to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The date time edit that was added.
-        """
-        return self.addWidget(QtWidgets.QDateTimeEdit(self), **kwargs)
-
-    def addTableWidget(self, **kwargs) -> QtWidgets.QTableWidget:
-        """Add a table widget to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The table widget that was added.
-        """
-        kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addWidget(QtWidgets.QTableWidget(self), **kwargs)
-
-    def addTreeWidget(self, **kwargs) -> QtWidgets.QTreeWidget:
-        """Add a tree widget to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The tree widget that was added.
-        """
-        kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addWidget(QtWidgets.QTreeWidget(self), **kwargs)
-
-    def addListWidget(self, **kwargs) -> QtWidgets.QListWidget:
-        """Add a list widget to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The list widget that was added.
-        """
-        kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addWidget(QtWidgets.QListWidget(self), **kwargs)
-
-    def addCalendarWidget(self, **kwargs) -> QtWidgets.QCalendarWidget:
-        """Add a calendar widget to the panel.
-
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The calendar widget that was added.
-        """
-        kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addWidget(QtWidgets.QCalendarWidget(self), **kwargs)
+    addComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
+    addFontComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QFontComboBox)
+    addLineEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QLineEdit)
+    addTextEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTextEdit)
+    addPlainTextEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QPlainTextEdit)
+    addLabel = functools.partialmethod(addAnyWidget, cls=QtWidgets.QLabel, initializer=QtWidgets.QLabel.setText)
+    addProgressBar = functools.partialmethod(addAnyWidget, cls=QtWidgets.QProgressBar)
+    addSlider = functools.partialmethod(addAnyWidget, cls=QtWidgets.QSlider)
+    addSpinBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QSpinBox)
+    addDoubleSpinBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDoubleSpinBox)
+    addDateEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateEdit)
+    addTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTimeEdit)
+    addDateTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateTimeEdit)
+    addTabWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTabWidget, rowSpan=Large)
+    addTreeWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTreeWidget, rowSpan=Large)
+    addListWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
+    addCalendarWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
 
     def addSeparator(self, orientation=QtCore.Qt.Vertical, width=6, **kwargs) -> RibbonSeparator:
         """Add a separator to the panel.
@@ -745,27 +528,8 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
         return self.addWidget(RibbonSeparator(orientation, width), **kwargs)
 
-    def addHorizontalSeparator(self, width=6, **kwargs) -> RibbonSeparator:
-        """Add a horizontal separator to the panel.
-
-        :param width: The width of the separator.
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The separator.
-        """
-        kwargs["rowSpan"] = Small if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addSeparator(QtCore.Qt.Horizontal, width, **kwargs)
-
-    def addVerticalSeparator(self, width=6, **kwargs) -> RibbonSeparator:
-        """Add a vertical separator to the panel.
-
-        :param width: The width of the separator.
-        :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
-
-        :return: The separator.
-        """
-        kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
-        return self.addSeparator(QtCore.Qt.Vertical, width, **kwargs)
+    addHorizontalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Horizontal)
+    addVerticalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Vertical)
 
     def addGallery(self, minimumWidth=800, popupHideOnClick=False, **kwargs) -> RibbonGallery:
         """Add a gallery to the panel.
