@@ -242,8 +242,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :param rows: The number of span rows for large widgets.
         """
-        if not (0 < rows <= self._maxRows):
-            raise ValueError("Invalid number of rows")
+        assert rows <= self._maxRows, "Invalid number of rows"
         self._largeRows = rows
 
     def setMediumRows(self, rows: int):
@@ -251,8 +250,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :param rows: The number of span rows for medium widgets.
         """
-        if not (0 < rows <= self._maxRows):
-            raise ValueError("Invalid number of rows")
+        assert 0 < rows <= self._maxRows, "Invalid number of rows"
         self._mediumRows = rows
 
     def setSmallRows(self, rows: int):
@@ -260,8 +258,7 @@ class RibbonPanel(QtWidgets.QFrame):
 
         :param rows: The number of span rows for small widgets.
         """
-        if not (0 < rows <= self._maxRows):
-            raise ValueError("Invalid number of rows")
+        assert 0 < rows <= self._maxRows, "Invalid number of rows"
         self._smallRows = rows
 
     def defaultRowSpan(self, rowSpan: typing.Union[int, RibbonButtonStyle]) -> int:
@@ -474,18 +471,12 @@ class RibbonPanel(QtWidgets.QFrame):
         style = rowSpan
         button = RibbonToolButton(self)
         button.setButtonStyle(style)
-        if text:
-            button.setText(text)
-        if icon:
-            button.setIcon(icon)
-        if slot:
-            button.clicked.connect(slot)  # type: ignore
-        if shortcut:
-            button.setShortcut(shortcut)
-        if tooltip:
-            button.setToolTip(tooltip)
-        if statusTip:
-            button.setStatusTip(statusTip)
+        button.setText(text) if text else None
+        button.setIcon(icon) if icon else None
+        button.clicked.connect(slot) if slot else None  # type: ignore
+        button.setShortcut(shortcut) if shortcut else None
+        button.setToolTip(tooltip) if tooltip else None
+        button.setStatusTip(statusTip) if statusTip else None
         maximumHeight = (
             self.height()
             - self._titleLabel.sizeHint().height()
