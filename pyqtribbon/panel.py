@@ -449,7 +449,7 @@ class RibbonPanel(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         *,
-        style: RibbonButtonStyle = Large,
+        rowSpan: RibbonButtonStyle = Large,
         **kwargs,
     ) -> RibbonToolButton:
         """Add a button to the panel.
@@ -461,11 +461,13 @@ class RibbonPanel(QtWidgets.QFrame):
         :param shortcut: The shortcut of the button.
         :param tooltip: The tooltip of the button.
         :param statusTip: The status tip of the button.
-        :param style: The style of the button.
+        :param rowSpan: The type of the button corresponding to the number of rows it should span.
         :param kwargs: keyword arguments to control the properties of the widget on the ribbon bar.
 
         :return: The button that was added.
         """
+        assert isinstance(rowSpan, RibbonButtonStyle), "rowSpan must be an instance of RibbonButtonStyle"
+        style = rowSpan
         button = RibbonToolButton(self)
         button.setButtonStyle(style)
         if text:
@@ -511,7 +513,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
         :return: The button that was added.
         """
-        kwargs["style"] = Small
+        kwargs["rowSpan"] = Small
         return self.addButton(*args, **kwargs)
 
     def addMediumButton(self, *args, **kwargs) -> RibbonToolButton:
@@ -520,7 +522,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
         :return: The button that was added.
         """
-        kwargs["style"] = Medium
+        kwargs["rowSpan"] = Medium
         return self.addButton(*args, **kwargs)
 
     def addLargeButton(self, *args, **kwargs) -> RibbonToolButton:
@@ -529,7 +531,7 @@ class RibbonPanel(QtWidgets.QFrame):
         :param args, kwargs: Arguments and keyword arguments to pass to :meth:`addButton`.
         :return: The button that was added.
         """
-        kwargs["style"] = Large
+        kwargs["rowSpan"] = Large
         return self.addButton(*args, **kwargs)
 
     def addToggleButton(self, *args, **kwargs) -> RibbonToolButton:
