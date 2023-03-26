@@ -2,7 +2,6 @@
 
 [![Documentation Status](https://readthedocs.org/projects/pyqribbon/badge/?version=latest)](https://pyqtribbon.haiiliin.com/en/stable/?badge=latest)
 [![Pytest](https://github.com/haiiliin/pyqtribbon/actions/workflows/pytest.yaml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/pytest.yaml)
-[![Pages](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/pages.yaml)
 [![PyPI](https://github.com/haiiliin/pyqtribbon/actions/workflows/publish.yml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/publish.yml)
 [![Coverage Status](https://coveralls.io/repos/github/haiiliin/pyqtribbon/badge.svg?branch=main)](https://coveralls.io/github/haiiliin/pyqtribbon?branch=main)
 
