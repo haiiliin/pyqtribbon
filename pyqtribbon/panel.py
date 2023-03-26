@@ -524,6 +524,7 @@ class RibbonPanel(QtWidgets.QFrame):
     addTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTimeEdit)
     addDateTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateTimeEdit)
     addTableWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTableWidget, rowSpan=Large)
+    addTreeWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTreeWidget, rowSpan=Large)
     addListWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
     addCalendarWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
 
