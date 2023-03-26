@@ -3,7 +3,7 @@ import sys
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import RibbonBar, RibbonCategoryStyle, Large
+from pyqtribbon import RibbonBar, Large, Normal
 from pyqtribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
@@ -194,7 +194,7 @@ if __name__ == "__main__":
 
     categories1 = ribbon.addCategoriesBy({
         'Category 6': {
-            "style": RibbonCategoryStyle.Normal,
+            "style": Normal,
             "panels": {
                 "Panel 1": {
                     "showPanelOptionButton": True,
