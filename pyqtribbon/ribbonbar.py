@@ -103,7 +103,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._autoHideRibbon = autoHide
 
     def eventFilter(self, a0: QtCore.QObject, a1: QtCore.QEvent) -> bool:
-        if self._autoHideRibbon and self.ribbonVisible() and a1.type() == QtCore.QEvent.MouseButtonPress:
+        if self._autoHideRibbon and a1.type() == QtCore.QEvent.HoverMove:
             self.setRibbonVisible(self.underMouse())
         return super().eventFilter(a0, a1)
 
