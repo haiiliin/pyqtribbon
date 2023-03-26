@@ -30,6 +30,9 @@ class RibbonBar(QtWidgets.QMenuBar):
     #: Signal, the help button was clicked.
     helpButtonClicked = QtCore.Signal(bool)
 
+    #: hide the ribbon bar automatically when the mouse press outside the ribbon bar
+    _autoHideRibbon = False
+
     #: The categories of the ribbon.
     _categories: typing.Dict[str, RibbonCategory] = {}
     _contextCategoryCount = 0
@@ -90,6 +93,19 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._titleWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
         self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)  # type: ignore
         self.setRibbonStyle(RibbonStyle.Default)
+        self.setMouseTracking(True)
+
+    def setAutoHideRibbon(self, autoHide: bool):
+        """Set whether the ribbon bar is automatically hidden when the mouse is pressed outside the ribbon bar.
+
+        :param autoHide: Whether the ribbon bar is automatically hidden.
+        """
+        self._autoHideRibbon = autoHide
+
+    def eventFilter(self, a0: QtCore.QObject, a1: QtCore.QEvent) -> bool:
+        if self._autoHideRibbon and a1.type() == QtCore.QEvent.HoverMove:
+            self.setRibbonVisible(self.underMouse())
+        return super().eventFilter(a0, a1)
 
     def actionAt(self, QPoint):
         raise NotImplementedError("RibbonBar.actionAt() is not implemented in the ribbon bar.")
