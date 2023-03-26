@@ -1,29 +1,13 @@
 import typing
-from enum import IntEnum
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from .category import (
-    RibbonCategory,
-    RibbonContextCategory,
-    RibbonNormalCategory,
-    RibbonCategoryStyle,
-    contextColors,
-    RibbonContextCategories,
-)
+from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonContextCategories
+from .constants import RibbonStyle, RibbonCategoryStyle, contextColors
 from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
 from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
 from .utils import DataFile
-
-
-class RibbonStyle(IntEnum):
-    Default = 0
-    Debug = 1
-
-
-Debug = RibbonStyle.Debug
-Default = RibbonStyle.Default
 
 
 class RibbonStackedWidget(QtWidgets.QStackedWidget):

@@ -2,15 +2,15 @@ from __future__ import annotations
 
 import functools
 import re
-from enum import IntEnum
 from typing import List, Callable, overload, Any, Union, Dict
 
 import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
 
+from .constants import ColumnWise, RibbonButtonStyle, Large, Medium, Small
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
-from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small, Medium
+from .toolbutton import RibbonToolButton
 from .utils import DataFile
 
 
@@ -18,17 +18,6 @@ class RibbonPanelTitle(QtWidgets.QLabel):
     """Widget to display the title of a panel."""
 
     pass
-
-
-class RibbonSpaceFindMode(IntEnum):
-    """Mode to find available space in a grid layout, ColumnWise or RowWise."""
-
-    ColumnWise = 0
-    RowWise = 1
-
-
-ColumnWise = RibbonSpaceFindMode.ColumnWise
-RowWise = RibbonSpaceFindMode.RowWise
 
 
 class RibbonGridLayoutManager(object):

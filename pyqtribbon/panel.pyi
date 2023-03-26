@@ -1,23 +1,17 @@
 from __future__ import annotations
 
-from enum import IntEnum
 from typing import List, Callable, overload, Any, Union, Dict, Iterable
 
 import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
 
+from .constants import ColumnWise, RibbonButtonStyle, Large, Small
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
-from .toolbutton import RibbonToolButton, RibbonButtonStyle, Large, Small
+from .toolbutton import RibbonToolButton
+
 
 class RibbonPanelTitle(QtWidgets.QLabel): ...
-
-class RibbonSpaceFindMode(IntEnum):
-    ColumnWise = 0
-    RowWise = 1
-
-ColumnWise = ColumnWise
-RowWise = RibbonSpaceFindMode.RowWise
 
 class RibbonGridLayoutManager(object):
     rows: int

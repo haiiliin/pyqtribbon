@@ -1,21 +1,7 @@
-from enum import Enum
-
 from qtpy import QtWidgets, QtCore
 
+from .constants import RibbonButtonStyle
 from .menu import RibbonMenu
-
-
-class RibbonButtonStyle(Enum):
-    """Button style, Small, Medium, or Large."""
-
-    Small = 0
-    Medium = 1
-    Large = 2
-
-
-Small = RibbonButtonStyle.Small
-Medium = RibbonButtonStyle.Medium
-Large = RibbonButtonStyle.Large
 
 
 class RibbonToolButton(QtWidgets.QToolButton):
