@@ -474,16 +474,18 @@ class RibbonPanel(QtWidgets.QFrame):
 
     ribbonArguments = ["rowSpan", "colSpan", "mode", "alignment", "fixedHeight"]
 
-    def addAnyWidget(self, *args, cls, initializer: Callable = None, **kwargs) -> QtWidgets.QWidget:
+    def _addAnyWidget(self, *args, **kwargs) -> QtWidgets.QWidget:
         """Add any widget to the panel.
 
-        :param args: The arguments to pass to the initializer.
-        :param cls: The class of the widget to add.
-        :param initializer: The initializer of the widget to add, the first argument must be the widget.
+        :param args: The arguments passed to the initializer.
         :param kwargs: The keyword arguments to pass to the initializer and to control the properties of the widget
-                       on the ribbon bar.
+                       on the ribbon bar. The keyword argument `cls` must be provided to specify the class of the widget
+                       to add, the keyword argument `initializer` can be provided to specify the initializer function
+                       of the widget to add, keyword arguments `rowSpan`, `colSpan`, `mode`, `alignment`, `fixedHeight`
+                       are passed to the `addWidget` method, other keyword arguments are passed to the initializer
         """
         ribbon_kwargs = {k: kwargs.pop(k) for k in self.ribbonArguments if k in kwargs}
+        cls, initializer = kwargs.pop("cls"), kwargs.pop("initializer", None)
         widget = cls(self)
         initializer(widget, *args, **kwargs) if initializer else None
         return self.addWidget(widget, **ribbon_kwargs)
@@ -510,23 +512,23 @@ class RibbonPanel(QtWidgets.QFrame):
         # Create the new method
         return functools.partial(base_method, rowSpan=rowSpan)
 
-    addComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
-    addFontComboBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QFontComboBox)
-    addLineEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QLineEdit)
-    addTextEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTextEdit)
-    addPlainTextEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QPlainTextEdit)
-    addLabel = functools.partialmethod(addAnyWidget, cls=QtWidgets.QLabel, initializer=QtWidgets.QLabel.setText)
-    addProgressBar = functools.partialmethod(addAnyWidget, cls=QtWidgets.QProgressBar)
-    addSlider = functools.partialmethod(addAnyWidget, cls=QtWidgets.QSlider)
-    addSpinBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QSpinBox)
-    addDoubleSpinBox = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDoubleSpinBox)
-    addDateEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateEdit)
-    addTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTimeEdit)
-    addDateTimeEdit = functools.partialmethod(addAnyWidget, cls=QtWidgets.QDateTimeEdit)
-    addTableWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTableWidget, rowSpan=Large)
-    addTreeWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QTreeWidget, rowSpan=Large)
-    addListWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
-    addCalendarWidget = functools.partialmethod(addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
+    addComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
+    addFontComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QFontComboBox)
+    addLineEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QLineEdit)
+    addTextEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTextEdit)
+    addPlainTextEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QPlainTextEdit)
+    addLabel = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QLabel, initializer=QtWidgets.QLabel.setText)
+    addProgressBar = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QProgressBar)
+    addSlider = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QSlider)
+    addSpinBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QSpinBox)
+    addDoubleSpinBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QDoubleSpinBox)
+    addDateEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QDateEdit)
+    addTimeEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTimeEdit)
+    addDateTimeEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QDateTimeEdit)
+    addTableWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTableWidget, rowSpan=Large)
+    addTreeWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTreeWidget, rowSpan=Large)
+    addListWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
+    addCalendarWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
 
     def addSeparator(self, orientation=QtCore.Qt.Vertical, width=6, **kwargs) -> RibbonSeparator:
         """Add a separator to the panel.

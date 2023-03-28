@@ -234,7 +234,18 @@ class RibbonPanel(QtWidgets.QFrame):
 
     ribbonArguments = ["rowSpan", "colSpan", "mode", "alignment", "fixedHeight"]
 
-    def addAnyWidget(self, *args, cls, initializer: Callable = None, **kwargs) -> QtWidgets.QWidget: ...
+    def _addAnyWidget(
+        self,
+        *args,
+        cls,
+        initializer: Callable = None,
+        rowSpan: Union[int, RibbonButtonStyle] = Small,
+        colSpan: int = 1,
+        mode=ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: Union[bool, float] = False,
+        **kwargs,
+    ) -> QtWidgets.QWidget: ...
     def __getattr__(self, method: str) -> Callable: ...
     def addComboBox(
         self,
