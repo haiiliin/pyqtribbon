@@ -38,7 +38,9 @@ pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 |   3.8    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |   3.9    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |   3.10   | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   3.11   | :white_check_mark:  | :white_check_mark: |        :x:         | :white_check_mark: |
+|   3.11   | :white_check_mark:  | :white_check_mark: |      :x: [^1]       | :white_check_mark: |
+
+[^1]: PySide2 does not support Python 3.11 yet.
 
 ## The Ribbon Bar
 
