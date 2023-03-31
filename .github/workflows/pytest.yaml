@@ -33,7 +33,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get install libgl1
+          sudo apt-get update && sudo apt-get install libegl1:i386
           python -m pip install --upgrade pip
           pip install .[dev,${{ matrix.pyqt-version }}]
       - name: Lint with flake8
