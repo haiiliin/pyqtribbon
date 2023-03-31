@@ -1,1 +1,2 @@
 PySide6
+PySide6-Essentials
