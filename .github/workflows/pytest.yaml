@@ -47,7 +47,7 @@ jobs:
       - name: Test with pytest
         run: pytest
       - name: Upload coverage to coveralls
-        if: ${{ matrix.python-version == '3.11' }}
+        if: ${{ matrix.python-version == '3.11' && matrix.pyqt-version == 'PyQt6' && github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
