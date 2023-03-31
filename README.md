@@ -30,6 +30,16 @@ You can also install the package from source:
 pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 ```
 
+## Compatible Python and PyQt/PySide Versions
+
+| Python Version | PyQt5 | PyQt6 | PySide2 | PySide6 |
+|----------------|-------|-------|---------|---------|
+| 3.7            | Yes   | Yes   | Yes     | Yes     |
+| 3.8            | Yes   | Yes   | Yes     | Yes     |
+| 3.9            | Yes   | Yes   | Yes     | Yes     |
+| 3.10           | Yes   | Yes   | Yes     | Yes     |
+| 3.11           | Yes   | Yes   | No      | Yes     |
+
 ## The Ribbon Bar
 
 The ribbon is first introduced by Microsoft in the 2000's. It is a toolbar with a tabbed interface. According to [Microsoft](https://docs.microsoft.com/en-us/cpp/mfc/ribbon-designer-mfc?view=msvc-170):
