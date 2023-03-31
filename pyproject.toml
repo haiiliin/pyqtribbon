@@ -38,13 +38,15 @@ packages = ['pyqtribbon']
 pyqtribbon = ["icons/*", "styles/*"]
 
 [tool.setuptools.dynamic.dependencies]
-file = ["requirements.txt"]
+file = ["requirements/deps.txt"]
 
-[tool.setuptools.dynamic.optional-dependencies.dev]
-file = ["requirements-dev.txt"]
-
-[tool.setuptools.dynamic.optional-dependencies.docs]
-file = ["docs/requirements.txt"]
+[tool.setuptools.dynamic.optional-dependencies]
+dev.file = ["requirements/dev.txt"]
+docs.file = ["docs/requirements.txt"]
+PyQt5.file = ["requirements/PyQt5.txt"]
+PyQt6.file = ["requirements/PyQt6.txt"]
+PySide2.file = ["requirements/PySide2.txt"]
+PySide6.file = ["requirements/PySide6.txt"]
 
 [tool.setuptools_scm]
 root = "."

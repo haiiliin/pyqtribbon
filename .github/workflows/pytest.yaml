@@ -18,10 +18,15 @@ concurrency:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        pyqt-version: ["PyQt5", "PyQt6", "PySide2", "PySide6"]
+        exclude:
+          - python-version: "3.11"
+            pyqt-version: "PySide2"
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install .[dev]
+          pip install .[dev,${{ matrix.pyqt-version }}]
       - name: Lint with flake8
         run: flake8 --exit-zero
       - name: Build the package
@@ -42,7 +47,7 @@ jobs:
       - name: Test with pytest
         run: pytest
       - name: Upload coverage to coveralls
-        if: ${{ matrix.python-version == '3.11' }}
+        if: ${{ matrix.python-version == '3.11' && matrix.pyqt-version == 'PyQt6' && github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
