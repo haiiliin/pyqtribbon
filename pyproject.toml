@@ -38,7 +38,7 @@ packages = ['pyqtribbon']
 pyqtribbon = ["icons/*", "styles/*"]
 
 [tool.setuptools.dynamic.dependencies]
-file = ["requirements.txt"]
+file = ["requirements/deps.txt"]
 
 [tool.setuptools.dynamic.optional-dependencies]
 dev.file = ["requirements/dev.txt"]
