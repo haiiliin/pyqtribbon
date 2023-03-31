@@ -194,8 +194,6 @@ class RibbonCategory(RibbonCategoryLayoutWidget):
         self._ribbon = parent  # type: RibbonBar
         self._color = color
 
-        super().__init__(parent)
-
     def setMaximumRows(self, rows: int):
         """Set the maximum number of rows.
 
