@@ -32,13 +32,13 @@ pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 
 ## Compatible Python and PyQt/PySide Versions
 
-| Python Version | PyQt5 | PyQt6 | PySide2 | PySide6 |
-|----------------|-------|-------|---------|---------|
-| 3.7            | Yes   | Yes   | Yes     | Yes     |
-| 3.8            | Yes   | Yes   | Yes     | Yes     |
-| 3.9            | Yes   | Yes   | Yes     | Yes     |
-| 3.10           | Yes   | Yes   | Yes     | Yes     |
-| 3.11           | Yes   | Yes   | No      | Yes     |
+| Python   | PyQt5               |   PyQt6            |  PySide2           |  PySide6           |
+|:--------:|:-------------------:|:------------------:|:------------------:|:------------------:|
+|   3.7    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.8    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.9    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.10   | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.11   | :white_check_mark:  | :white_check_mark: |        :x:         | :white_check_mark: |
 
 ## The Ribbon Bar
 
