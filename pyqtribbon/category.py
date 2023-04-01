@@ -6,6 +6,7 @@ from .constants import RibbonCategoryStyle
 from .panel import RibbonPanel
 from .separator import RibbonSeparator
 from .utils import DataFile
+from .qt import mkQApp
 
 if typing.TYPE_CHECKING:
     from .ribbonbar import RibbonBar  # noqa: F401
@@ -140,7 +141,21 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
 
 class RibbonCategory(RibbonCategoryLayoutWidget):
-    """The RibbonCategory is the logical grouping that represents the contents of a ribbon tab."""
+    """The RibbonCategory is the logical grouping that represents the contents of a ribbon tab.
+
+    Examples
+    --------
+    Create a new category.
+    >>> app = mkQApp()
+    >>> category = RibbonCategory("Category")
+    >>> assert category.title() == "Category"
+
+    Add a panel to the category.
+    >>> p = category.addPanel("Panel")
+    >>> assert p.title() == "Panel"
+    >>> assert category.panel("Panel") is p and p in category.panels().values()
+    >>> assert category.takePanel("Panel") is p
+    """
 
     #: Title of the category
     _title: str
