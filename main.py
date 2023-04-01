@@ -192,56 +192,6 @@ if __name__ == "__main__":
     panel2.addLargeButton('Button 5', icon=QIcon('pyqtribbon/icons/close.png'))
     panel2.addLargeButton('Button 6', icon=QIcon('pyqtribbon/icons/close.png'))
 
-    categories1 = ribbon.addCategoriesBy({
-        'Category 6': {
-            "style": Normal,
-            "panels": {
-                "Panel 1": {
-                    "showPanelOptionButton": True,
-                    "widgets": {
-                        "Button 1": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                        "Button 2": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 2",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                    }
-                },
-                "Panel 2": {
-                    "showPanelOptionButton": True,
-                    "widgets": {
-                        "Button 3": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 3",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                        "Button 4": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 4",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                    }
-                },
-            }
-        }
-    })
-
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
     label.setAlignment(QtCore.Qt.AlignCenter)

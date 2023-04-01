@@ -332,49 +332,6 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         return self._categories
 
-    def addCategoriesBy(
-        self,
-        data: typing.Dict[
-            str,  # title of the category
-            typing.Dict,  # data of the category
-        ],
-    ) -> typing.Dict[str, RibbonCategory]:
-        """Add categories from a dict.
-
-        :param data: The dict of categories. The dict is of the form:
-
-            .. code-block:: python
-
-                {
-                    "category-title": {
-                        "style": RibbonCategoryStyle.Normal,
-                        "color": QtCore.Qt.red,
-                        "panels": {
-                            "panel-title": {
-                                "showPanelOptionButton": True,
-                                "widgets": {
-                                    "widget-name": {
-                                        "type": "Button",
-                                        "arguments": {
-                                            "key1": "value1",
-                                            "key2": "value2"
-                                        }
-                                    },
-                                }
-                            },
-                        },
-                    }
-                }
-        :return: A dict of categories of the ribbon.
-        """
-        categories = {}
-        for title, category_data in data.items():
-            style = category_data.get("style", RibbonCategoryStyle.Normal)
-            color = category_data.get("color", None)
-            categories[title] = self.addCategory(title, style, color)
-            categories[title].addPanelsBy(category_data.get("panels", {}))
-        return categories
-
     def addCategory(
         self,
         title: str,

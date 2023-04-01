@@ -25,28 +25,6 @@ if __name__ == '__main__':
     panel12 = category2.addPanel('Panel 2')
     panel12.addLargeButton('Large Button 2', QIcon('python.png'))
 
-    categories = ribbonbar.addCategoriesBy({
-        'Category 6': {
-            "style": RibbonCategoryStyle.Normal,
-            "panels": {
-                "Panel 1": {
-                    "showPanelOptionButton": True,
-                    "widgets": {
-                        "Button 1": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("python.png"),
-                                "text": "Button",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                    }
-                },
-            }
-        }
-    })
-    ribbonbar.setCurrentCategory(categories['Category 6'])
-
     # Show the window
     window.resize(1000, 250)
     window.show()

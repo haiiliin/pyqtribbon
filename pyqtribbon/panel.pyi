@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Callable, overload, Any, Union, Dict, Iterable
+from typing import List, Callable, overload, Any, Union, Iterable
 
 import numpy as np
 from qtpy import QtWidgets, QtGui, QtCore
@@ -64,7 +64,6 @@ class RibbonPanel(QtWidgets.QFrame):
     def panelOptionButton(self) -> RibbonPanelOptionButton: ...
     def setPanelOptionToolTip(self, text: str): ...
     def rowHeight(self) -> int: ...
-    def addWidgetsBy(self, data: Dict[str, Dict]) -> Dict[str, QtWidgets.QWidget]: ...
     def addWidget(
         self,
         widget: QtWidgets.QWidget,
