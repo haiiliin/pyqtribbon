@@ -6,6 +6,7 @@ from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
 from .utils import DataFile
 
+import time
 
 class RibbonApplicationButton(QtWidgets.QToolButton):
     """Application button in the ribbon bar."""
@@ -129,6 +130,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._tabBarLayout.addWidget(self._tabBar, 0, QtCore.Qt.AlignVCenter)
         self._tabBarLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignVCenter)
         self._tabBarLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignVCenter)
+
+        self.press_time = 0
 
     def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
@@ -282,6 +285,12 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     def mousePressEvent(self, e):
         self.start_point = e.globalPos()
         self.window_point = self.parentWidget().parentWidget().frameGeometry().topLeft()
+        if (time.time() - self.press_time) < 0.8:
+            if self.parentWidget().parentWidget().isMaximized():
+                self.parentWidget().parentWidget().showNormal()
+            else:
+                self.parentWidget().parentWidget().showMaximized()
+        self.press_time = time.time()
 
     def mouseMoveEvent(self, e):
         relpos = e.globalPos() - self.start_point
