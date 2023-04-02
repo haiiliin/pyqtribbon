@@ -286,3 +286,9 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     def mouseMoveEvent(self, e):
         relpos = e.globalPos() - self.start_point
         self.parentWidget().parentWidget().move(self.window_point + relpos)
+
+    def mouseDoubleClickEvent(self, e):
+        if self.parentWidget().parentWidget().isMaximized():
+            self.parentWidget().parentWidget().showNormal()
+        else:
+            self.parentWidget().parentWidget().showMaximized()
