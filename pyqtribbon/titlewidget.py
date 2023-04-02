@@ -277,3 +277,18 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :return: The collapse ribbon button.
         """
         return self._collapseRibbonButton
+
+    # 标题栏拖动
+    def mousePressEvent(self, e):
+        self.start_point = e.globalPos()
+        self.window_point = self.parentWidget().parentWidget().frameGeometry().topLeft()
+
+    def mouseMoveEvent(self, e):
+        self.ismoving = True
+        relpos = e.globalPos() - self.start_point
+        self.parentWidget().parentWidget().move(self.window_point + relpos)
+
+    def mouseReleaseEvent(self, e):
+        if not self.ismoving:
+            self.close()
+        self.ismoving = False
