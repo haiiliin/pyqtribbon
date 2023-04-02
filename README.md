@@ -32,7 +32,7 @@ pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 
 ## Compatible Python and PyQt/PySide Versions
 
-| [Python][py] | [PyQt5][PyQt5]      | [PyQt6][PyQt6]     | [PySide2](PySide2) | [PySide6](PySide6) |
+| [Python][py] | [PyQt5][PyQt5]      | [PyQt6][PyQt6]     | [PySide2][PySide2] | [PySide6][PySide6] |
 |:------------:|:-------------------:|:------------------:|:------------------:|:------------------:|
 |   3.7        | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |   3.8        | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
