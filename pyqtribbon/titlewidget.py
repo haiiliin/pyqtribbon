@@ -294,6 +294,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def mouseMoveEvent(self, e):
         relpos = e.globalPos() - self.start_point
+        self.parentWidget().parentWidget().windowHandle().startSystemMove() # 增加移动动画 
         self.parentWidget().parentWidget().move(self.window_point + relpos)
 
     def mouseDoubleClickEvent(self, e):
