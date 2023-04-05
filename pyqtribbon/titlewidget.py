@@ -12,6 +12,7 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
 
     def addFileMenu(self) -> RibbonMenu:
         """Add a new ribbon menu to the application button.
+
         :return: The new ribbon menu.
         """
         menu = RibbonMenu(self)
@@ -51,6 +52,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def __init__(self, *args, **kwargs):
         """Initialize the ribbon title widget.
+
         :param title: The title of the ribbon.
         :param parent: The parent widget.
         """
@@ -134,18 +136,21 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def setApplicationIcon(self, icon: QtGui.QIcon):
         """Set the application icon.
+
         :param icon: The icon to set.
         """
         self._applicationButton.setIcon(icon)
 
     def addTitleWidget(self, widget: QtWidgets.QWidget):
         """Add a widget to the title layout.
+
         :param widget: The widget to add.
         """
         self._tabBarLayout.addWidget(widget)
 
     def insertTitleWidget(self, index: int, widget: QtWidgets.QWidget):
         """Insert a widget to the title layout.
+
         :param index: The index to insert the widget.
         :param widget: The widget to insert.
         """
@@ -153,30 +158,35 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def removeTitleWidget(self, widget: QtWidgets.QWidget):
         """Remove a widget from the title layout.
+
         :param widget: The widget to remove.
         """
         self._tabBarLayout.removeWidget(widget)
 
     def tabBar(self) -> RibbonTabBar:
         """Return the tab bar of the ribbon.
+
         :return: The tab bar of the ribbon.
         """
         return self._tabBar
 
     def quickAccessToolBar(self) -> QtWidgets.QToolBar:
         """Return the quick access toolbar of the ribbon.
+
         :return: The quick access toolbar of the ribbon.
         """
         return self._quickAccessToolBar
 
     def quickAccessButtons(self) -> typing.List[QtWidgets.QToolButton]:
         """Return the quick access buttons of the ribbon.
+
         :return: The quick access buttons of the ribbon.
         """
         return self._quickAccessButtons
 
     def addQuickAccessButton(self, button: QtWidgets.QToolButton):
         """Add a widget to the quick access bar.
+
         :param button: The button to add.
         """
         button.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
@@ -185,6 +195,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def setQuickAccessButtonHeight(self, height: int = 30):
         """Set the height of the quick access buttons.
+
         :param height: The height to set.
         """
         self._quickAccessButtonHeight = height
@@ -194,24 +205,28 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def title(self) -> str:
         """Return the title of the ribbon.
+
         :return: The title of the ribbon.
         """
         return self._titleLabel.text()
 
     def setTitle(self, title: str):
         """Set the title of the ribbon.
+
         :param title: The title to set.
         """
         self._titleLabel.setText(title)
 
     def rightToolBar(self) -> QtWidgets.QToolBar:
         """Return the right toolbar of the ribbon.
+
         :return: The right toolbar of the ribbon.
         """
         return self._rightToolBar
 
     def addRightToolButton(self, button: QtWidgets.QToolButton):
         """Add a widget to the right button bar.
+
         :param button: The button to add.
         """
         button.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
@@ -220,6 +235,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def setRightToolBarHeight(self, height: int = 24):
         """Set the height of the right buttons.
+
         :param height: The height to set.
         """
         self._rightButtonHeight = height
@@ -228,12 +244,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def helpRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the help ribbon button.
+
         :return: The help ribbon button.
         """
         return self._helpButton
 
     def setHelpButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the help button.
+
         :param icon: The icon to set.
         """
         self._helpButton.setIcon(icon)
@@ -244,6 +262,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def setCollapseButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the min button.
+
         :param icon: The icon to set.
         """
         self._collapseRibbonButton.setIcon(icon)
@@ -254,6 +273,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def collapseRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the collapse ribbon button.
+
         :return: The collapse ribbon button.
         """
         return self._collapseRibbonButton
@@ -266,7 +286,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     def mouseMoveEvent(self, e):
         relpos = e.globalPos() - self.start_point
         self.parentWidget().parentWidget().move(self.window_point + relpos)
-        self.parentWidget().parentWidget().windowHandle().startSystemMove() # 增加移动动画(mac无法使用)
+        self.parentWidget().parentWidget().windowHandle().startSystemMove()  # 增加移动动画(mac无法使用)
 
     def mouseDoubleClickEvent(self, e):
         mainwindow = self.parentWidget().parentWidget()
