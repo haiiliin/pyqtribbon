@@ -32,14 +32,19 @@ pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 
 ## Compatible Python and PyQt/PySide Versions
 
-| Python   | PyQt5               |   PyQt6            |  PySide2           |  PySide6           |
-|:--------:|:-------------------:|:------------------:|:------------------:|:------------------:|
-|   3.7    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   3.8    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   3.9    | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   3.10   | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-|   3.11   | :white_check_mark:  | :white_check_mark: |      :x: [^1]       | :white_check_mark: |
+| [Python][py] | [PyQt5][PyQt5]      | [PyQt6][PyQt6]     | [PySide2][PySide2] | [PySide6][PySide6] |
+|:------------:|:-------------------:|:------------------:|:------------------:|:------------------:|
+|   3.7        | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.8        | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.9        | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.10       | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+|   3.11       | :white_check_mark:  | :white_check_mark: |      :x: [^1]      | :white_check_mark: |
 
+[py]: https://www.python.org/
+[PyQt5]: https://pypi.org/project/PyQt5/
+[PyQt6]: https://pypi.org/project/PyQt6/
+[PySide2]: https://pypi.org/project/PySide2/
+[PySide6]: https://pypi.org/project/PySide6/
 [^1]: PySide2 does not support Python 3.11 yet.
 
 ## The Ribbon Bar
