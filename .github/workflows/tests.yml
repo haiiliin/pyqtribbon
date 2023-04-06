@@ -1,4 +1,4 @@
-name: tox
+name: tests
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     - main
     paths:
     - 'pyqtribbon/**'
-    - '.github/workflows/test.yml'
+    - '.github/workflows/tests.yml'
   pull_request:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
