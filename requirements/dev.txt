@@ -4,4 +4,3 @@ pytest
 pytest-cov
 pytest-qt
 tox
-tox-gh-actions
