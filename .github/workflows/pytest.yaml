@@ -36,9 +36,3 @@ jobs:
           pip install tox tox-gh-actions coveralls
       - name: Test with tox
         run: tox
-      - name: Upload coverage to coveralls
-        if: ${{ matrix.python-version == '3.11' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          coveralls --service=github
