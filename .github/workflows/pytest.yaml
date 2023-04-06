@@ -22,10 +22,6 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
-        pyqt-version: ["PyQt5", "PyQt6", "PySide2", "PySide6"]
-        exclude:
-          - python-version: "3.11"
-            pyqt-version: "PySide2"
       fail-fast: false
 
     steps:
@@ -43,7 +39,7 @@ jobs:
       - name: Test with tox
         run: tox
       - name: Upload coverage to coveralls
-        if: ${{ matrix.python-version == '3.11' && matrix.pyqt-version == 'PyQt6' && github.event_name == 'push' }}
+        if: ${{ matrix.python-version == '3.11' && github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
