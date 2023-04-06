@@ -1,5 +1,5 @@
 coveralls
-coverage>=7.0.0
+coverage
 flake8
 pytest
 pytest-cov
