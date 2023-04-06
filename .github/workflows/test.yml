@@ -1,4 +1,4 @@
-name: pytest
+name: tox
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     - main
     paths:
     - 'pyqtribbon/**'
-    - '.github/workflows/pytest.yaml'
+    - '.github/workflows/test.yml'
   pull_request:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
@@ -16,13 +16,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-
-    runs-on: windows-latest
+  tox:
     strategy:
       matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
       fail-fast: false
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
