@@ -283,15 +283,21 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         return self._collapseRibbonButton
 
+    def topLevelWidget(self) -> QtWidgets.QWidget:
+        widget = self
+        while widget.parentWidget():
+            widget = widget.parentWidget()
+        return widget
+
     def mousePressEvent(self, e):
         self._start_point = e.globalPos()
-        self._window_point = self.parentWidget().parentWidget().frameGeometry().topLeft()
+        self._window_point = self.topLevelWidget().frameGeometry().topLeft()
 
     def mouseMoveEvent(self, e):
         relpos = e.globalPos() - self._start_point if self._start_point else None
-        self.parentWidget().parentWidget().move(self._window_point + relpos) if self._window_point and relpos else None
-        self.parentWidget().parentWidget().windowHandle().startSystemMove()
+        self.topLevelWidget().move(self._window_point + relpos) if self._window_point and relpos else None
+        self.topLevelWidget().windowHandle().startSystemMove()
 
     def mouseDoubleClickEvent(self, e):
-        mainwindow = self.parentWidget().parentWidget()
+        mainwindow = self.topLevelWidget()
         mainwindow.showNormal() if mainwindow.isMaximized() else mainwindow.showMaximized()
