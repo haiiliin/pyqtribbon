@@ -42,6 +42,11 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtonHeight = 30
     _rightButtonHeight = 24
 
+    # Mouse move events
+    _start_point = None
+    _window_point = None
+
+
     @typing.overload
     def __init__(self, title="PyQtRibbon", parent=None):
         pass
@@ -278,15 +283,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         return self._collapseRibbonButton
 
-    # 标题栏拖动
     def mousePressEvent(self, e):
-        self.start_point = e.globalPos()
-        self.window_point = self.parentWidget().parentWidget().frameGeometry().topLeft()
+        self._start_point = e.globalPos()
+        self._window_point = self.parentWidget().parentWidget().frameGeometry().topLeft()
 
     def mouseMoveEvent(self, e):
-        relpos = e.globalPos() - self.start_point
-        self.parentWidget().parentWidget().move(self.window_point + relpos)
-        self.parentWidget().parentWidget().windowHandle().startSystemMove()  # 增加移动动画(mac无法使用)
+        relpos = e.globalPos() - self._start_point if self._start_point else None
+        self.parentWidget().parentWidget().move(self._window_point + relpos) if self._window_point and relpos else None
+        self.parentWidget().parentWidget().windowHandle().startSystemMove()
 
     def mouseDoubleClickEvent(self, e):
         mainwindow = self.parentWidget().parentWidget()
