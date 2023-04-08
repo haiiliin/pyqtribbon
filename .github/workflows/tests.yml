@@ -40,8 +40,7 @@ jobs:
           pip install tox coveralls
       - name: Install libegl on Ubuntu
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get install libegl1 libegl1-mesa libxcb-xinerama0
+        run: sudo apt-get install libegl1 libegl1-mesa
       - name: Test with tox
         run: tox
         env:
