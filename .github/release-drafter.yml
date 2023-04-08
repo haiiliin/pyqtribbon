@@ -17,9 +17,13 @@ categories:
       - 'fix'
       - 'bugfix'
       - 'bug'
-      - 'test'
   - title: '🧰 Maintenance'
-    label: 'chore'
+    labels:
+      - 'chore'
+      - 'maintenance'
+      - 'refactor'
+      - 'test'
+      - 'tests'
   - title: '📝 Documentation'
     labels:
       - 'documentation'
