@@ -56,9 +56,7 @@ fallback_version = "0.0.0-unknown"
 
 [tool.pytest.ini_options]
 testpaths = ["pyqtribbon", "tests"]
-addopts = """\
-    -rf -s --cov=pyqtribbon --cov-report=xml --cov-report=html --cov-report=term-missing --doctest-modules \
-    """
+addopts = "-rf -s --cov=pyqtribbon --cov-report=xml --cov-report=html --cov-report=term-missing --doctest-modules"
 
 [tool.black]
 line-length = 120
