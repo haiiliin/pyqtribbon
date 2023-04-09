@@ -90,7 +90,7 @@ class RibbonMenu(QtWidgets.QMenu):
         spacer.setFixedHeight(spacing)
         self.addWidget(spacer)
 
-    def addLabel(self, text: str = "", alignment = QtCore.Qt.AlignLeft):
+    def addLabel(self, text: str = "", alignment=QtCore.Qt.AlignLeft):
         """Add a label to the menu.
 
         :param text: The text of the label.
