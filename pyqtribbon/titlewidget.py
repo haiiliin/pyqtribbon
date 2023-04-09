@@ -289,11 +289,11 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         return widget
 
     def mousePressEvent(self, e: QtGui.QMouseEvent):
-        self._start_point = e.globalPosition().toPoint()
+        self._start_point = e.pos()
         self._window_point = self.topLevelWidget().frameGeometry().topLeft()
 
     def mouseMoveEvent(self, e: QtGui.QMouseEvent):
-        relpos = e.globalPosition().toPoint() - self._start_point if self._start_point else None
+        relpos = e.pos() - self._start_point if self._start_point else None
         self.topLevelWidget().move(self._window_point + relpos) if self._window_point and relpos else None
         self.topLevelWidget().windowHandle().startSystemMove()
 
