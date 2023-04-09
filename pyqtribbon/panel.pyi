@@ -10,7 +10,6 @@ from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton
 
-
 class RibbonPanelTitle(QtWidgets.QLabel): ...
 
 class RibbonGridLayoutManager(object):

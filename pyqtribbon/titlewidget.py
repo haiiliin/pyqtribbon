@@ -46,7 +46,6 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _start_point = None
     _window_point = None
 
-
     @typing.overload
     def __init__(self, title="PyQtRibbon", parent=None):
         pass
