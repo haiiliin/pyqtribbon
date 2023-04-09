@@ -180,7 +180,7 @@ if __name__ == "__main__":
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
 
     categories = ribbon.addContextCategories('name', ['Context 4', 'Context 5'])
-    showCategoryButton45.clicked.connect(categories.setCategoriesVisible)  # type: ignore
+    showCategoryButton45.clicked.connect(lambda v: categories.setCategoriesVisible(v))  # PySide2 Bug: use lambda
 
     panel1 = categories['Context 4'].addPanel('Context 4 Panel 1')
     panel1.addLargeButton('Button 1', icon=QIcon('pyqtribbon/icons/close.png'))
