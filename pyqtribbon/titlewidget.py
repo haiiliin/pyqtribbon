@@ -288,15 +288,15 @@ class RibbonTitleWidget(QtWidgets.QFrame):
             widget = widget.parentWidget()
         return widget
 
-    def mousePressEvent(self, e):
-        self._start_point = e.globalPos()
+    def mousePressEvent(self, e: QtGui.QMouseEvent):
+        self._start_point = e.pos()
         self._window_point = self.topLevelWidget().frameGeometry().topLeft()
 
-    def mouseMoveEvent(self, e):
-        relpos = e.globalPos() - self._start_point if self._start_point else None
+    def mouseMoveEvent(self, e: QtGui.QMouseEvent):
+        relpos = e.pos() - self._start_point if self._start_point else None
         self.topLevelWidget().move(self._window_point + relpos) if self._window_point and relpos else None
         self.topLevelWidget().windowHandle().startSystemMove()
 
-    def mouseDoubleClickEvent(self, e):
+    def mouseDoubleClickEvent(self, e: QtGui.QMouseEvent):
         mainwindow = self.topLevelWidget()
         mainwindow.showNormal() if mainwindow.isMaximized() else mainwindow.showMaximized()
