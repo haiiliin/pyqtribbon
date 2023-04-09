@@ -111,7 +111,7 @@ class RibbonPermanentMenu(RibbonMenu):
     def hideEvent(self, a0: QtGui.QHideEvent) -> None:
         self.show()
 
-    def actionEvent(self, a0: QtGui.QActionEvent) -> None:
-        if a0.type() == QtGui.QActionEvent.ActionAdded:
-            self.actionAdded.emit(a0.action())  # type: ignore
-        super().actionEvent(a0)
+    def addAction(self, *args, **kwargs) -> QtWidgets.QAction:
+        action = super().addAction(*args, **kwargs)
+        self.actionAdded.emit(action)
+        return action
