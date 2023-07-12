@@ -33,7 +33,6 @@ release = version = pyqtribbon.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'autoapi.extension',
     'hoverxref.extension',
     'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
@@ -45,6 +44,7 @@ extensions = [
     'sphinx_codeautolink',
     'sphinx_toolbox.more_autodoc.overloads',
     'sphinx_qt_documentation',
+    'sphinxcontrib.apidoc',
 ]
 
 qt_documentation = 'Qt5'
@@ -95,10 +95,13 @@ hoverxref_intersphinx = [
     'readthedocs',
 ]
 
-# sphinx-autoapi configuration
-autoapi_options = ['members', 'show-inheritance', 'show-module-summary', 'special-members']
-autoapi_dirs = ['../../pyqtribbon']
-autoapi_ignore = ["*_version.py"]
+# sphinxcontrib-apidoc configuration
+apidoc_module_dir = "../../pyqtribbon"
+apidoc_output_dir = "apidoc"
+apidoc_excluded_paths = []
+apidoc_separate_modules = True
+apidoc_toc_file = False
+apidoc_extra_args = ["-d 1"]
 
 # sphinx.ext.autodoc configuration
 autoclass_content = 'both'

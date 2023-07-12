@@ -1,6 +1,6 @@
 PyQt5
 sphinx
-sphinx-autoapi
+sphinxcontrib-apidoc
 sphinx-codeautolink
 sphinx-copybutton
 sphinx-hoverxref
