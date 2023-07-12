@@ -20,6 +20,7 @@ Ribbon Bar for PyQt or PySide applications.
    getting-started
    ribbon
    user
+   apidoc
 
 Indices and tables
 ==================

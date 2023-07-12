@@ -134,3 +134,4 @@ dmypy.json
 .vs/
 
 pyqtribbon/_version.py
+docs/source/apidoc
