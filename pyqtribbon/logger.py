@@ -13,7 +13,6 @@ log.addHandler(logging.StreamHandler(stream=sys.stdout))
 
 
 class UncaughtHook(QtCore.QObject):
-
     def __init__(self, *args, **kwargs):
         super(UncaughtHook, self).__init__(*args, **kwargs)
 
