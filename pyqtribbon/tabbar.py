@@ -20,7 +20,10 @@ class RibbonTabBar(QtWidgets.QTabBar):
         :param parent: The parent widget.
         """
         super().__init__(parent)
+
+        self.currentChanged.connect(self.changeColor)
         self.setDrawBase(False)
+        
 
     def indexOf(self, tabName: str) -> int:
         """Return the index of the tab with the given name.
@@ -83,13 +86,13 @@ class RibbonTabBar(QtWidgets.QTabBar):
         """
         return self._tabColors[self.tabText(self.currentIndex())]
 
-    def paintEvent(self, a0: QtGui.QPaintEvent) -> None:
-        """Paint the tab bar."""
+    def changeColor(self, inx: int) -> None:
+        """Change tab's color."""
+        
         if self.count() > 0:
-            currentTabText = self.tabText(self.currentIndex())
+            currentTabText = self.tabText(inx)
             currentTabColor = self._tabColors[currentTabText]
             if currentTabColor is not None:
                 self.setStyleSheet("RibbonTabBar::tab:selected {color: %s;}" % QtGui.QColor(currentTabColor).name())
             else:
                 self.setStyleSheet("RibbonTabBar::tab:selected {color: black;}")
-        super().paintEvent(a0)
