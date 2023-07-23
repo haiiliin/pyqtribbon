@@ -1,0 +1,16 @@
+repos:
+
+- repo: https://github.com/psf/black
+  rev: 23.3.0
+  hooks:
+    - id: black
+      args:
+        - --line-length=120
+        - --include='(pyqtribbon/.*\.py|tests/.*\.py|docs/source/conf\.py)'
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+    - id: isort
+      args:
+        - --profile=black
