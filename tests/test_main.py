@@ -1,8 +1,8 @@
 from pytestqt.qtbot import QtBot
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import RibbonBar, Large, Normal
+from pyqtribbon import Large, Normal, RibbonBar
 from pyqtribbon.ribbonbar import RibbonStyle
 
 

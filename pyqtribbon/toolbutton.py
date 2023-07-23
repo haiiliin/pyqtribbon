@@ -1,4 +1,4 @@
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from .constants import RibbonButtonStyle
 from .menu import RibbonMenu

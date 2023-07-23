@@ -7,7 +7,6 @@ import traceback
 
 from qtpy import QtCore, QtWidgets
 
-
 log = logging.getLogger(__name__)
 log.addHandler(logging.StreamHandler(stream=sys.stdout))
 

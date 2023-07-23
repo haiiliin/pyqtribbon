@@ -1,14 +1,14 @@
 import sys
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 
 from pyqtribbon import RibbonBar
 from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 8))
-    window = RibbonScreenShotWindow('ribbonbar.png')
+    window = RibbonScreenShotWindow("ribbonbar.png")
 
     # Ribbon bar
     ribbonbar = RibbonBar()

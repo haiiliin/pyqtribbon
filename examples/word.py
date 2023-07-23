@@ -1,7 +1,8 @@
 import sys
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 from qtpy.QtGui import QIcon
+
 from pyqtribbon import RibbonBar
 
 if __name__ == "__main__":
@@ -30,8 +31,8 @@ if __name__ == "__main__":
 
     clipboardPanel = homeCategory.addPanel("Clipboard")
     pasteButton = clipboardPanel.addLargeButton("Paste", icon=QIcon("paste.png"), tooltip="Paste")
-    pasteButton.addAction(QtWidgets.QAction(QIcon('paste-special.png'), "Paste Special"))
-    pasteButton.addAction(QtWidgets.QAction(QIcon('paste-as-text.png'), "Paste as Text"))
+    pasteButton.addAction(QtWidgets.QAction(QIcon("paste-special.png"), "Paste Special"))
+    pasteButton.addAction(QtWidgets.QAction(QIcon("paste-as-text.png"), "Paste as Text"))
     clipboardPanel.addSmallButton("Cut", icon=QIcon("cut.png"), showText=False, tooltip="Cut")
     clipboardPanel.addSmallButton("Copy", icon=QIcon("copy.png"), showText=False, tooltip="Copy")
     clipboardPanel.addSmallButton("Painter", icon=QIcon("painter.png"), showText=False, tooltip="Format Painter")
@@ -41,17 +42,21 @@ if __name__ == "__main__":
     fontPanel.addSmallToggleButton("Bold", icon=QIcon("bold.png"), showText=False, tooltip="Bold")
     fontPanel.addSmallToggleButton("Italic", icon=QIcon("italic.png"), showText=False, tooltip="Italic")
     fontPanel.addSmallToggleButton("Underline", icon=QIcon("underline.png"), showText=False, tooltip="Underline")
-    fontPanel.addSmallToggleButton("Strikethrough", icon=QIcon("strikethrough.png"), showText=False,
-                                   tooltip="Strikethrough")
+    fontPanel.addSmallToggleButton(
+        "Strikethrough", icon=QIcon("strikethrough.png"), showText=False, tooltip="Strikethrough"
+    )
     fontPanel.addSmallToggleButton("Superscript", icon=QIcon("superscript.png"), showText=False, tooltip="Superscript")
     fontPanel.addSmallToggleButton("Subscript", icon=QIcon("subscript.png"), showText=False, tooltip="Subscript")
-    fontSizeComboBox = fontPanel.addComboBox(['8', '9', '10'], rowSpan=3, colSpan=2)
-    fontPanel.addSmallToggleButton("Increase Font Size", icon=QIcon("increase-font.png"),
-                                   showText=False, tooltip="Increase Font Size")
-    fontPanel.addSmallToggleButton("Decrease Font Size", icon=QIcon("decrease-font.png"),
-                                   showText=False, tooltip="Decrease Font Size")
-    fontPanel.addSmallToggleButton("Decrease Font Size", icon=QIcon("decrease-font.png"),
-                                   showText=False, tooltip="Decrease Font Size")
+    fontSizeComboBox = fontPanel.addComboBox(["8", "9", "10"], rowSpan=3, colSpan=2)
+    fontPanel.addSmallToggleButton(
+        "Increase Font Size", icon=QIcon("increase-font.png"), showText=False, tooltip="Increase Font Size"
+    )
+    fontPanel.addSmallToggleButton(
+        "Decrease Font Size", icon=QIcon("decrease-font.png"), showText=False, tooltip="Decrease Font Size"
+    )
+    fontPanel.addSmallToggleButton(
+        "Decrease Font Size", icon=QIcon("decrease-font.png"), showText=False, tooltip="Decrease Font Size"
+    )
 
     window.resize(1500, 1000)
     window.show()

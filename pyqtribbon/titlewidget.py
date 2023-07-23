@@ -1,6 +1,6 @@
 import typing
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 from .menu import RibbonMenu
 from .tabbar import RibbonTabBar

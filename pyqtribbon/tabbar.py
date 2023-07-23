@@ -1,6 +1,6 @@
 import typing
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 
 
 class RibbonTabBar(QtWidgets.QTabBar):
@@ -23,7 +23,6 @@ class RibbonTabBar(QtWidgets.QTabBar):
 
         self.currentChanged.connect(self.changeColor)
         self.setDrawBase(False)
-        
 
     def indexOf(self, tabName: str) -> int:
         """Return the index of the tab with the given name.
@@ -88,7 +87,7 @@ class RibbonTabBar(QtWidgets.QTabBar):
 
     def changeColor(self, inx: int) -> None:
         """Change tab's color."""
-        
+
         if self.count() > 0:
             currentTabText = self.tabText(inx)
             currentTabColor = self._tabColors[currentTabText]

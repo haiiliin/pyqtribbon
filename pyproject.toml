@@ -61,4 +61,7 @@ addopts = "-rf -s --cov=pyqtribbon --cov-report=xml --cov-report=html --cov-repo
 [tool.black]
 line-length = 120
 target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
-include = '(pyqtribbon/.*\.py|tests/.*\.py)'
+include = '(pyqtribbon/.*\.py|tests/.*\.py|docs/source/conf\.py)'
+
+[tool.isort]
+profile = "black"

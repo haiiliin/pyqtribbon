@@ -13,15 +13,16 @@
 import inspect
 import os
 import sys
+
 import pyqtribbon
 
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath("../../"))
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyqtribbon'
-copyright = '2022, WANG Hailin'
-author = 'WANG Hailin'
+project = "pyqtribbon"
+copyright = "2022, WANG Hailin"
+author = "WANG Hailin"
 
 # The full version, including alpha/beta/rc tags
 release = version = pyqtribbon.__version__
@@ -33,43 +34,43 @@ release = version = pyqtribbon.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'hoverxref.extension',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.linkcode',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.githubpages',
-    'sphinx_copybutton',
-    'sphinx_codeautolink',
-    'sphinx_toolbox.more_autodoc.overloads',
-    'sphinx_qt_documentation',
-    'sphinxcontrib.apidoc',
+    "hoverxref.extension",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.linkcode",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.githubpages",
+    "sphinx_copybutton",
+    "sphinx_codeautolink",
+    "sphinx_toolbox.more_autodoc.overloads",
+    "sphinx_qt_documentation",
+    "sphinxcontrib.apidoc",
 ]
 
-qt_documentation = 'Qt5'
-autodoc_typehints_format = 'short'
+qt_documentation = "Qt5"
+autodoc_typehints_format = "short"
 numpydoc_show_inherited_class_members = False
 
 # sphinx.ext.intersphinx configuration
 intersphinx_mapping = {
-    'jinjia2': ('https://jinja.palletsprojects.com/en/3.0.x/', None),
-    'matplotlib': ('https://matplotlib.org/stable/', None),
-    'numpy': ('https://numpy.org/doc/stable/', None),
-    'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
-    'pytest': ('https://pytest.org/en/stable/', None),
-    'python': ('https://docs.python.org/3/', None),
-    'readthedocs': ('https://docs.readthedocs.io/en/stable/', None),
-    'scipy': ('https://docs.scipy.org/doc/scipy/', None),
+    "jinjia2": ("https://jinja.palletsprojects.com/en/3.0.x/", None),
+    "matplotlib": ("https://matplotlib.org/stable/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "pytest": ("https://pytest.org/en/stable/", None),
+    "python": ("https://docs.python.org/3/", None),
+    "readthedocs": ("https://docs.readthedocs.io/en/stable/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
 }
 
 # Hoverxref configuration
 hoverxref_auto_ref = True
 hoverxref_domains = ["py"]
 hoverxref_roles = [
-    'numref',
-    'confval',
-    'setting',
+    "numref",
+    "confval",
+    "setting",
     "option",
     "doc",  # Documentation pages
     "term",  # Glossary terms
@@ -89,10 +90,10 @@ hoverxref_role_types = {
     "numref": "tooltip",
 }
 hoverxref_intersphinx = [
-    'numpy',
-    'pytest',
-    'python',
-    'readthedocs',
+    "numpy",
+    "pytest",
+    "python",
+    "readthedocs",
 ]
 
 # sphinxcontrib-apidoc configuration
@@ -104,7 +105,7 @@ apidoc_toc_file = False
 apidoc_extra_args = ["-d 1"]
 
 # sphinx.ext.autodoc configuration
-autoclass_content = 'both'
+autoclass_content = "both"
 
 
 # linkcode source
@@ -126,21 +127,21 @@ def linkcode_resolve(domain: str, info: dict):
     -------
     source url of the object
     """
-    if domain != 'py':
+    if domain != "py":
         return None
 
-    modname = info['module']
-    fullname = info['fullname']
+    modname = info["module"]
+    fullname = info["fullname"]
 
-    filename = modname.replace('.', '/')
-    baseurl = f'https://github.com/haiiliin/pyqtribbon/blob/main/{filename}.py'
+    filename = modname.replace(".", "/")
+    baseurl = f"https://github.com/haiiliin/pyqtribbon/blob/main/{filename}.py"
 
     submod = sys.modules.get(modname)
     if submod is None:
         return baseurl
 
     obj = submod
-    for part in fullname.split('.'):
+    for part in fullname.split("."):
         try:
             obj = getattr(obj, part)
         except Exception:
@@ -150,11 +151,11 @@ def linkcode_resolve(domain: str, info: dict):
     except Exception:
         return baseurl
 
-    return baseurl + f'#L{lineno}-L{lineno + len(source) - 1}'
+    return baseurl + f"#L{lineno}-L{lineno + len(source) - 1}"
 
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -167,9 +168,9 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]

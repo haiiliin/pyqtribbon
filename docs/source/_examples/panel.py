@@ -1,17 +1,17 @@
 import sys
 
 from qtpy import QtGui
-from qtpy.QtWidgets import QApplication, QToolButton, QMenu, QLabel, QLineEdit
-from qtpy.QtGui import QIcon
 from qtpy.QtCore import Qt
+from qtpy.QtGui import QIcon
+from qtpy.QtWidgets import QApplication, QLabel, QLineEdit, QMenu, QToolButton
 
 from pyqtribbon import RibbonBar
 from pyqtribbon.screenshotwindow import RibbonScreenShotWindow
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setFont(QtGui.QFont("Times New Roman", 8))
-    window = RibbonScreenShotWindow('panel.png')
+    window = RibbonScreenShotWindow("panel.png")
 
     # Ribbon bar
     ribbonbar = RibbonBar()
@@ -42,9 +42,9 @@ if __name__ == '__main__':
 
     gallery = panel.addGallery(minimumWidth=500, popupHideOnClick=True)
     for i in range(100):
-        gallery.addToggleButton(f'item {i+1}', QIcon("python.png"))
+        gallery.addToggleButton(f"item {i+1}", QIcon("python.png"))
     popupMenu = gallery.popupMenu()
-    submenu = popupMenu.addMenu(QIcon("python.png"), 'Submenu')
+    submenu = popupMenu.addMenu(QIcon("python.png"), "Submenu")
     submenu.addAction(QIcon("python.png"), "Action 4")
     popupMenu.addAction(QIcon("python.png"), "Action 1")
     popupMenu.addAction(QIcon("python.png"), "Action 2")
