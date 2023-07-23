@@ -1,9 +1,9 @@
 import sys
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import RibbonBar, Large, Normal
+from pyqtribbon import Large, Normal, RibbonBar
 from pyqtribbon.ribbonbar import RibbonStyle
 
 if __name__ == "__main__":
@@ -47,9 +47,9 @@ if __name__ == "__main__":
     showCategoryButton2 = panel.addMediumToggleButton("Show/Hide Category 2", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addVerticalSeparator()
     showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QIcon("pyqtribbon/icons/close.png"))
-    showCategoryButton45 = panel.addMediumToggleButton("Show/Hide Category 4/5",
-                                                       icon=QIcon("pyqtribbon/icons/close.png"),
-                                                       colSpan=2, alignment=QtCore.Qt.AlignLeft)
+    showCategoryButton45 = panel.addMediumToggleButton(
+        "Show/Hide Category 4/5", icon=QIcon("pyqtribbon/icons/close.png"), colSpan=2, alignment=QtCore.Qt.AlignLeft
+    )
     panel.addLargeButton("Button 6", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addVerticalSeparator()
     panel.addMediumButton("Button 7", icon=QIcon("pyqtribbon/icons/close.png"))
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
-    submenu = menu.addMenu(QIcon("pyqtribbon/icons/close.png"), 'Submenu')
+    submenu = menu.addMenu(QIcon("pyqtribbon/icons/close.png"), "Submenu")
     submenu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 4")
     submenu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 5")
     submenu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 6")
@@ -103,8 +103,9 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     button.setMenu(menu)
     panel.addMediumButton("Button 9", icon=QIcon("pyqtribbon/icons/close.png"))
-    panel.addSmallButton("This is a very very very very very long button",
-                         icon=QIcon("pyqtribbon/icons/close.png"), colSpan=3)
+    panel.addSmallButton(
+        "This is a very very very very very long button", icon=QIcon("pyqtribbon/icons/close.png"), colSpan=3
+    )
     button = panel.addSmallToggleButton("Button 10", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = QtWidgets.QMenu()
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1")
@@ -113,8 +114,9 @@ if __name__ == "__main__":
     button.setMenu(menu)
     panel.addSmallToggleButton("Button 11", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addSmallToggleButton("Button 12", icon=QIcon("pyqtribbon/icons/close.png"))
-    panel.addSmallButton("This is a very very very very very long button",
-                         icon=QIcon("pyqtribbon/icons/close.png"), colSpan=3)
+    panel.addSmallButton(
+        "This is a very very very very very long button", icon=QIcon("pyqtribbon/icons/close.png"), colSpan=3
+    )
 
     category2 = ribbon.addContextCategory("Context 2")
     panel = category2.addPanel("Panel 1")
@@ -168,9 +170,9 @@ if __name__ == "__main__":
 
     gallery = panel.addGallery(popupHideOnClick=True)
     for i in range(100):
-        gallery.addToggleButton(f'item {i+1}', QIcon("pyqtribbon/icons/close.png"))
+        gallery.addToggleButton(f"item {i+1}", QIcon("pyqtribbon/icons/close.png"))
     popupMenu = gallery.popupMenu()
-    submenu = popupMenu.addMenu(QIcon("pyqtribbon/icons/close.png"), 'Submenu')
+    submenu = popupMenu.addMenu(QIcon("pyqtribbon/icons/close.png"), "Submenu")
     submenu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 4")
     popupMenu.addAction(QtGui.QIcon("pyqtribbon/icons/close.png"), "Action 1")
     popupMenu.addAction(QtGui.QIcon("pyqtribbon/icons/close.png"), "Action 2")
@@ -179,68 +181,70 @@ if __name__ == "__main__":
     formLayout = popupMenu.addFormLayoutWidget()
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
 
-    categories = ribbon.addContextCategories('name', ['Context 4', 'Context 5'])
+    categories = ribbon.addContextCategories("name", ["Context 4", "Context 5"])
     showCategoryButton45.clicked.connect(lambda v: categories.setCategoriesVisible(v))  # PySide2 Bug: use lambda
 
-    panel1 = categories['Context 4'].addPanel('Context 4 Panel 1')
-    panel1.addLargeButton('Button 1', icon=QIcon('pyqtribbon/icons/close.png'))
-    panel1.addLargeButton('Button 2', icon=QIcon('pyqtribbon/icons/close.png'))
-    panel1.addLargeButton('Button 3', icon=QIcon('pyqtribbon/icons/close.png'))
+    panel1 = categories["Context 4"].addPanel("Context 4 Panel 1")
+    panel1.addLargeButton("Button 1", icon=QIcon("pyqtribbon/icons/close.png"))
+    panel1.addLargeButton("Button 2", icon=QIcon("pyqtribbon/icons/close.png"))
+    panel1.addLargeButton("Button 3", icon=QIcon("pyqtribbon/icons/close.png"))
 
-    panel2 = categories['Context 5'].addPanel('Context 5 Panel 1')
-    panel2.addLargeButton('Button 4', icon=QIcon('pyqtribbon/icons/close.png'))
-    panel2.addLargeButton('Button 5', icon=QIcon('pyqtribbon/icons/close.png'))
-    panel2.addLargeButton('Button 6', icon=QIcon('pyqtribbon/icons/close.png'))
+    panel2 = categories["Context 5"].addPanel("Context 5 Panel 1")
+    panel2.addLargeButton("Button 4", icon=QIcon("pyqtribbon/icons/close.png"))
+    panel2.addLargeButton("Button 5", icon=QIcon("pyqtribbon/icons/close.png"))
+    panel2.addLargeButton("Button 6", icon=QIcon("pyqtribbon/icons/close.png"))
 
-    categories1 = ribbon.addCategoriesBy({
-        'Category 6': {
-            "style": Normal,
-            "panels": {
-                "Panel 1": {
-                    "showPanelOptionButton": True,
-                    "widgets": {
-                        "Button 1": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button",
-                                "tooltip": "This is a tooltip",
-                            }
+    categories1 = ribbon.addCategoriesBy(
+        {
+            "Category 6": {
+                "style": Normal,
+                "panels": {
+                    "Panel 1": {
+                        "showPanelOptionButton": True,
+                        "widgets": {
+                            "Button 1": {
+                                "type": "Button",
+                                "arguments": {
+                                    "icon": QIcon("pyqtribbon/icons/close.png"),
+                                    "text": "Button",
+                                    "tooltip": "This is a tooltip",
+                                },
+                            },
+                            "Button 2": {
+                                "type": "Button",
+                                "arguments": {
+                                    "icon": QIcon("pyqtribbon/icons/close.png"),
+                                    "text": "Button 2",
+                                    "tooltip": "This is a tooltip",
+                                },
+                            },
                         },
-                        "Button 2": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 2",
-                                "tooltip": "This is a tooltip",
-                            }
+                    },
+                    "Panel 2": {
+                        "showPanelOptionButton": True,
+                        "widgets": {
+                            "Button 3": {
+                                "type": "Button",
+                                "arguments": {
+                                    "icon": QIcon("pyqtribbon/icons/close.png"),
+                                    "text": "Button 3",
+                                    "tooltip": "This is a tooltip",
+                                },
+                            },
+                            "Button 4": {
+                                "type": "Button",
+                                "arguments": {
+                                    "icon": QIcon("pyqtribbon/icons/close.png"),
+                                    "text": "Button 4",
+                                    "tooltip": "This is a tooltip",
+                                },
+                            },
                         },
-                    }
-                },
-                "Panel 2": {
-                    "showPanelOptionButton": True,
-                    "widgets": {
-                        "Button 3": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 3",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                        "Button 4": {
-                            "type": "Button",
-                            "arguments": {
-                                "icon": QIcon("pyqtribbon/icons/close.png"),
-                                "text": "Button 4",
-                                "tooltip": "This is a tooltip",
-                            }
-                        },
-                    }
+                    },
                 },
             }
         }
-    })
+    )
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))

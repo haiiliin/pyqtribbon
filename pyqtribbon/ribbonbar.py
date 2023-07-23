@@ -1,12 +1,17 @@
 import typing
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from .category import RibbonCategory, RibbonContextCategory, RibbonNormalCategory, RibbonContextCategories
-from .constants import RibbonStyle, RibbonCategoryStyle, contextColors
+from .category import (
+    RibbonCategory,
+    RibbonContextCategories,
+    RibbonContextCategory,
+    RibbonNormalCategory,
+)
+from .constants import RibbonCategoryStyle, RibbonStyle, contextColors
 from .menu import RibbonMenu
 from .tabbar import RibbonTabBar
-from .titlewidget import RibbonTitleWidget, RibbonApplicationButton
+from .titlewidget import RibbonApplicationButton, RibbonTitleWidget
 from .utils import DataFile
 
 

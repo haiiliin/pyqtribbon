@@ -1,6 +1,6 @@
 import typing
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 
 class RibbonSeparator(QtWidgets.QFrame):

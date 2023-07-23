@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import functools
 import re
-from typing import List, Callable, overload, Any, Union, Dict
+from typing import Any, Callable, Dict, List, Union, overload
 
 import numpy as np
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 
-from .constants import ColumnWise, RibbonButtonStyle, Large, Medium, Small
+from .constants import ColumnWise, Large, Medium, RibbonButtonStyle, Small
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton

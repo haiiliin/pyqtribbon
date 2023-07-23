@@ -1,6 +1,6 @@
 import typing
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 from .constants import RibbonCategoryStyle
 from .panel import RibbonPanel

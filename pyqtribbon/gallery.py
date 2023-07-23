@@ -1,6 +1,6 @@
 import typing
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 
 from .menu import RibbonPermanentMenu
 from .separator import RibbonHorizontalSeparator
