@@ -10,7 +10,7 @@ Ribbon Bar for PyQt or PySide applications.
 
 - GitHub Repository: `github.com/haiiliin/pyqtribbon <https://github.com/haiiliin/pyqtribbon>`_.
 - PyPI: `pypi.org/project/pyqtribbon <https://pypi.org/project/pyqtribbon/>`_.
-- Documentation: `pyqtribbon.haiiliin.com/en/stable <https://pyqtribbon.haiiliin.com/en/stable/>`_.
+- Documentation: `pyqribbon.readthedocs.io/en/stable <https://pyqribbon.readthedocs.io/en/stable/>`_.
 - Read the Docs: `readthedocs.org/projects/pyqtribbon <https://readthedocs.org/projects/pyqribbon/>`_.
 
 .. toctree::

@@ -1,6 +1,6 @@
 # PyQtRibbon
 
-[![Documentation Status](https://readthedocs.org/projects/pyqribbon/badge/?version=latest)](https://pyqtribbon.haiiliin.com/en/stable/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/pyqribbon/badge/?version=latest)](https://pyqribbon.readthedocs.io/en/stable/?badge=latest)
 [![Tests](https://github.com/haiiliin/pyqtribbon/actions/workflows/tests.yml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/tests.yml)
 [![PyPI](https://github.com/haiiliin/pyqtribbon/actions/workflows/publish.yml/badge.svg)](https://github.com/haiiliin/pyqtribbon/actions/workflows/publish.yml)
 [![Coverage Status](https://coveralls.io/repos/github/haiiliin/pyqtribbon/badge.svg?branch=main)](https://coveralls.io/github/haiiliin/pyqtribbon?branch=main)
@@ -13,7 +13,7 @@
 Ribbon Bar for PyQt or PySide applications.
 
 - GitHub Repository: [github.com/haiiliin/pyqtribbon](https://github.com/haiiliin/pyqtribbon/).
-- Documentation: [pyqtribbon.haiiliin.com/en/stable](https://pyqtribbon.haiiliin.com/en/stable/).
+- Documentation: [pyqribbon.readthedocs.io/en/stable](https://pyqribbon.readthedocs.io/en/stable/).
 - Python Package Index: [pypi.org/project/pyqtribbon](https://pypi.org/project/pyqtribbon/).
 - Read the Docs: [readthedocs.org/projects/pyqribbon](https://readthedocs.org/projects/pyqribbon/).
 

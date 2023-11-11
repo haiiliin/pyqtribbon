@@ -29,7 +29,7 @@ classifiers = [
 
 [project.urls]
 "GitHub" = "https://github.com/haiiliin/pyqtribbon"
-"Documentation" = "https://pyqtribbon.haiiliin.com/en/stable/"
+"Documentation" = "https://pyqribbon.readthedocs.io/en/stable/"
 
 [tool.setuptools]
 packages = ['pyqtribbon']
