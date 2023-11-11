@@ -1,7 +1,0 @@
-coveralls
-coverage
-flake8
-pytest
-pytest-cov
-pytest-qt
-tox
