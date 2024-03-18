@@ -365,9 +365,7 @@ class RibbonPanel(QtWidgets.QFrame):
             fixedHeight = (
                 int(fixedHeight * maximumHeight)
                 if 0 < fixedHeight <= 1
-                else fixedHeight
-                if 1 < fixedHeight < maximumHeight
-                else maximumHeight
+                else fixedHeight if 1 < fixedHeight < maximumHeight else maximumHeight
             )
             fixedHeight = max(fixedHeight, 0.4 * maximumHeight)  # minimum height is 40% of the maximum height
             widget.setFixedHeight(fixedHeight)
@@ -457,9 +455,7 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = (
             self.defaultRowSpan(Small)
             if style == Small
-            else self.defaultRowSpan(Medium)
-            if style == Medium
-            else self.defaultRowSpan(Large)
+            else self.defaultRowSpan(Medium) if style == Medium else self.defaultRowSpan(Large)
         )
         self.addWidget(button, **kwargs)
         return button
