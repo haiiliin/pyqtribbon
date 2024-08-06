@@ -472,23 +472,39 @@ class RibbonPanel(QtWidgets.QFrame):
     addMediumToggleButton = functools.partialmethod(addToggleButton, rowSpan=Medium)
     addLargeToggleButton = functools.partialmethod(addToggleButton, rowSpan=Large)
 
-    ribbonArguments = ["rowSpan", "colSpan", "mode", "alignment", "fixedHeight"]
-
-    def _addAnyWidget(self, *args, **kwargs) -> QtWidgets.QWidget:
+    def _addAnyWidget(
+        self,
+        *args,
+        cls,
+        initializer: Callable = None,
+        rowSpan: Union[int, RibbonButtonStyle] = Small,
+        colSpan: int = 1,
+        mode=ColumnWise,
+        alignment=QtCore.Qt.AlignCenter,
+        fixedHeight: Union[bool, float] = False,
+        **kwargs,
+    ) -> QtWidgets.QWidget:
         """Add any widget to the panel.
 
+        :param cls: The class of the widget to add.
+        :param initializer: The initializer function of the widget to add.
         :param args: The arguments passed to the initializer.
-        :param kwargs: The keyword arguments to pass to the initializer and to control the properties of the widget
-                       on the ribbon bar. The keyword argument `cls` must be provided to specify the class of the widget
-                       to add, the keyword argument `initializer` can be provided to specify the initializer function
-                       of the widget to add, keyword arguments `rowSpan`, `colSpan`, `mode`, `alignment`, `fixedHeight`
-                       are passed to the `addWidget` method, other keyword arguments are passed to the initializer
+        :param rowSpan: The number of rows the widget should span, 2: small, 3: medium, 6: large.
+        :param colSpan: The number of columns the widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The
+                            minimum height is 40% of the maximum height allowed.
+        :param kwargs: The keyword arguments are passed to the initializer
         """
-        ribbon_kwargs = {k: kwargs.pop(k) for k in self.ribbonArguments if k in kwargs}
-        cls, initializer = kwargs.pop("cls"), kwargs.pop("initializer", None)
         widget = cls(self)
-        initializer(widget, *args, **kwargs) if initializer else None
-        return self.addWidget(widget, **ribbon_kwargs)
+        initializer(widget, *args, **kwargs) if initializer is not None else None
+        return self.addWidget(
+            widget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
 
     def __getattr__(self, method: str) -> Callable:
         """Get the dynamic method `add[Small|Medium|Large][Widget]`.
