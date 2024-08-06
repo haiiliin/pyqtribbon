@@ -12,7 +12,7 @@ authors = [
 ]
 description = "Ribbon Bar for PyQt or PySide applications"
 readme = "README.md"
-dynamic = ["version", "dependencies", "optional-dependencies"]
+dynamic = ["version"]
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python",
@@ -27,27 +27,46 @@ classifiers = [
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
 ]
+dependencies = ["numpy", "qtpy"]
 
 [project.urls]
 "GitHub" = "https://github.com/haiiliin/pyqtribbon"
 "Documentation" = "https://pyqribbon.readthedocs.io/en/stable/"
+
+[project.optional-dependencies]
+dev = [
+    "coveralls",
+    "coverage",
+    "flake8",
+    "pytest",
+    "pytest-cov",
+    "pytest-qt",
+    "tox",
+]
+docs = [
+    "PyQt5",
+    "sphinx",
+    "sphinxcontrib-apidoc",
+    "sphinx-codeautolink",
+    "sphinx-copybutton",
+    "sphinx-hoverxref",
+    "sphinx-rtd-theme",
+    "sphinx-toolbox",
+    "sphinx-qt-documentation",
+]
+PyQt5 = ["PyQt5"]
+PyQt6 = ["PyQt6"]
+PySide2 = [
+    "PySide2; python_version < '3.11'",
+    "PySide6; python_version >= '3.11'",
+]
+PySide6 = ["PySide6"]
 
 [tool.setuptools]
 packages = ['pyqtribbon']
 
 [tool.setuptools.package-data]
 pyqtribbon = ["icons/*", "styles/*"]
-
-[tool.setuptools.dynamic.dependencies]
-file = ["requirements/deps.txt"]
-
-[tool.setuptools.dynamic.optional-dependencies]
-dev.file = ["requirements/dev.txt"]
-docs.file = ["docs/requirements.txt"]
-PyQt5.file = ["requirements/PyQt5.txt"]
-PyQt6.file = ["requirements/PyQt6.txt"]
-PySide2.file = ["requirements/PySide2.txt"]
-PySide6.file = ["requirements/PySide6.txt"]
 
 [tool.setuptools_scm]
 root = "."
