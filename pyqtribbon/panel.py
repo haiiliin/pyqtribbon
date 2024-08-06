@@ -524,6 +524,9 @@ class RibbonPanel(QtWidgets.QFrame):
         # Create the new method
         return functools.partial(base_method, rowSpan=rowSpan)
 
+    addCheckBox = functools.partialmethod(
+        _addAnyWidget, cls=QtWidgets.QCheckBox, initializer=QtWidgets.QCheckBox.setText
+    )
     addComboBox = functools.partialmethod(
         _addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems
     )
