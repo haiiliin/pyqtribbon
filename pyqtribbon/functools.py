@@ -2,7 +2,7 @@ import functools
 from functools import *
 from typing import TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def partialmethod(func: T, /, *args, **kwargs) -> T:
