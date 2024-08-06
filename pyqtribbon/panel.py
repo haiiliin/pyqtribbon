@@ -7,6 +7,7 @@ from typing import Any, Callable, Dict, List, Union, overload
 import numpy as np
 from qtpy import QtCore, QtGui, QtWidgets
 
+from . import functools
 from .constants import ColumnWise, Large, Medium, RibbonButtonStyle, Small
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
