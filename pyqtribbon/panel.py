@@ -527,7 +527,9 @@ class RibbonPanel(QtWidgets.QFrame):
     addCheckBox = functools.partialmethod(
         _addAnyWidget, cls=QtWidgets.QCheckBox, initializer=QtWidgets.QCheckBox.setText
     )
-    addComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
+    addComboBox = functools.partialmethod(
+        _addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems
+    )
     addFontComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QFontComboBox)
     addLineEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QLineEdit)
     addTextEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTextEdit)
