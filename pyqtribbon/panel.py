@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import functools
 import re
-import warnings
 from typing import Any, Callable, Dict, List, Union, overload
 
 import numpy as np
