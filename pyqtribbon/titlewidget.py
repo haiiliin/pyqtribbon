@@ -39,8 +39,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
     _quickAccessButtons = []
     _rightToolButtons = []
 
-    _quickAccessButtonHeight = 30
-    _rightButtonHeight = 24
+    _quickAccessButtonHeight = 20
+    _rightButtonHeight = 20
 
     # Mouse move events
     _start_point = None
@@ -197,15 +197,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._quickAccessButtons.append(button)
         self._quickAccessToolBar.addWidget(button)
 
-    def setQuickAccessButtonHeight(self, height: int = 30):
+    def setQuickAccessButtonHeight(self, height: int):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.
         """
         self._quickAccessButtonHeight = height
-        self._applicationButton.setIconSize(QtCore.QSize(height, height))
-        for button in self._quickAccessButtons:
-            button.setIconSize(QtCore.QSize(height, height))
+        self._applicationButton.setIcon(self._applicationButton.icon().pixmap(height, height))
+        self._quickAccessToolBar.setIconSize(QtCore.QSize(height, height))
 
     def title(self) -> str:
         """Return the title of the ribbon.
@@ -237,14 +236,13 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._rightToolButtons.append(button)
         self._rightToolBar.addWidget(button)
 
-    def setRightToolBarHeight(self, height: int = 24):
+    def setRightToolBarHeight(self, height: int):
         """Set the height of the right buttons.
 
         :param height: The height to set.
         """
         self._rightButtonHeight = height
-        for button in self._rightToolButtons:
-            button.setIconSize(QtCore.QSize(height, height))
+        self._rightToolBar.setIconSize(QtCore.QSize(height, height))
 
     def helpRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the help ribbon button.
@@ -281,6 +279,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         :return: The collapse ribbon button.
         """
         return self._collapseRibbonButton
+
+    def setTitleWidgetHeight(self, height: int):
+        """Set the height of the title widget.
+
+        :param height: The height to set.
+        """
+        self.setQuickAccessButtonHeight(height)
+        self.setRightToolBarHeight(height)
 
     def topLevelWidget(self) -> QtWidgets.QWidget:
         widget = self

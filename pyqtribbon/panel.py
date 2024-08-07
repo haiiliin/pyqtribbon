@@ -116,7 +116,7 @@ class RibbonPanel(QtWidgets.QFrame):
     _widgets: List[QtWidgets.QWidget] = []
 
     # height of the title widget
-    _titleHeight: int = 20
+    _titleHeight: int = 15
 
     # Panel options signal
     panelOptionClicked = QtCore.Signal(bool)
@@ -183,7 +183,7 @@ class RibbonPanel(QtWidgets.QFrame):
             self._panelOption = RibbonPanelOptionButton()  # type: ignore
             self._panelOption.setAutoRaise(True)
             self._panelOption.setIcon(QtGui.QIcon(DataFile("icons/linking.png")))
-            self._panelOption.setIconSize(QtCore.QSize(16, 16))
+            self._panelOption.setIconSize(QtCore.QSize(self._titleHeight, self._titleHeight))
             self._panelOption.setToolTip("Panel options")
             self._panelOption.clicked.connect(self.panelOptionClicked)  # type: ignore
             self._titleLayout.addWidget(self._panelOption, 0)
@@ -593,3 +593,19 @@ class RibbonPanel(QtWidgets.QFrame):
         :return: The title.
         """
         return self._titleLabel.text()
+
+    def setTitleHeight(self, height: int):
+        """Set the height of the title widget.
+
+        :param height: The height to set.
+        """
+        self._titleHeight = height
+        self._titleWidget.setFixedHeight(height)
+        self._panelOption.setIconSize(QtCore.QSize(height, height))
+
+    def titleHeight(self) -> int:
+        """Get the height of the title widget.
+
+        :return: The height of the title widget.
+        """
+        return self._titleHeight
