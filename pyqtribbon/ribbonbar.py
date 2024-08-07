@@ -98,6 +98,13 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._titleWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
         self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)  # type: ignore
         self.setRibbonStyle(RibbonStyle.Default)
+        
+    def autoHideRibbon(self) -> bool:
+        """Return whether the ribbon bar is automatically hidden when the mouse is pressed outside the ribbon bar.
+
+        :return: Whether the ribbon bar is automatically hidden.
+        """
+        return self._autoHideRibbon
 
     def setAutoHideRibbon(self, autoHide: bool):
         """Set whether the ribbon bar is automatically hidden when the mouse is pressed outside the ribbon bar.
@@ -563,6 +570,8 @@ class RibbonBar(QtWidgets.QMenuBar):
     def _collapseButtonClicked(self):
         self.tabBar().currentChanged.connect(self.showRibbon)  # type: ignore
         self.hideRibbon() if self._stackedWidget.isVisible() else self.showRibbon()
+        if self.autoHideRibbon():
+            self.setAutoHideRibbon(False)
 
     def showRibbon(self):
         """Show the ribbon."""
