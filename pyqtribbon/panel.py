@@ -326,10 +326,9 @@ class RibbonPanel(QtWidgets.QFrame):
         widgets = {}  # type: Dict[str, QtWidgets.QWidget]
         for key, widget_data in data.items():
             type = widget_data.pop("type", "").capitalize()
-            if hasattr(self, "add" + type):
-                method = getattr(self, "add" + type)  # type: Callable
-                if method is not None:
-                    widgets[key] = method(**widget_data.get("arguments", {}))
+            method = getattr(self, f"add{type}", None)  # type: Callable
+            assert callable(method), f"Method add{type} is not callable or does not exist"
+            widgets[key] = method(**widget_data.get("arguments", {}))
         return widgets
 
     def addWidget(
@@ -497,7 +496,10 @@ class RibbonPanel(QtWidgets.QFrame):
         :param kwargs: The keyword arguments are passed to the initializer
         """
         widget = cls(self)
-        initializer(widget, *args, **kwargs) if initializer is not None else None
+        if callable(initializer):
+            initializer(widget, *args, **kwargs)
+        elif args or kwargs:
+            raise ValueError("Arguments are provided but the initializer is not set")
         return self.addWidget(
             widget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
         )
