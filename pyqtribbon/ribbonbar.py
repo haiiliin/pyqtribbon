@@ -570,8 +570,6 @@ class RibbonBar(QtWidgets.QMenuBar):
     def _collapseButtonClicked(self):
         self.tabBar().currentChanged.connect(self.showRibbon)  # type: ignore
         self.hideRibbon() if self._stackedWidget.isVisible() else self.showRibbon()
-        if self.autoHideRibbon():
-            self.setAutoHideRibbon(False)
 
     def showRibbon(self):
         """Show the ribbon."""
