@@ -374,7 +374,8 @@ class RibbonBar(QtWidgets.QMenuBar):
                                 "widgets": {
                                     "widget-name": {
                                         "type": "Button",
-                                        "arguments": {
+                                        "args": (),
+                                        "kwargs": {  # or "arguments" for backward compatibility
                                             "key1": "value1",
                                             "key2": "value2"
                                         }
