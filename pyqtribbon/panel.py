@@ -309,7 +309,8 @@ class RibbonPanel(QtWidgets.QFrame):
                 {
                     "widget-name": {
                         "type": "Button",
-                        "arguments": {
+                        "args": (),
+                        "kwargs": {  # or "arguments" for backward compatibility
                             "key1": "value1",
                             "key2": "value2"
                         }
@@ -328,7 +329,9 @@ class RibbonPanel(QtWidgets.QFrame):
             type = widget_data.pop("type", "").capitalize()
             method = getattr(self, f"add{type}", None)  # type: Callable
             assert callable(method), f"Method add{type} is not callable or does not exist"
-            widgets[key] = method(**widget_data.get("arguments", {}))
+            args = widget_data.get("args", ())
+            kwargs = widget_data.get("kwargs", widget_data.get("arguments", {}))
+            widgets[key] = method(*args, **kwargs)
         return widgets
 
     def addWidget(
