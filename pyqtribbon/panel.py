@@ -7,7 +7,14 @@ from typing import Any, Callable, Dict, List, Union, overload
 import numpy as np
 from qtpy import QtCore, QtGui, QtWidgets
 
-from .constants import ColumnWise, Large, Medium, RibbonButtonStyle, Small
+from .constants import (
+    ColumnWise,
+    Large,
+    Medium,
+    RibbonButtonStyle,
+    RibbonSpaceFindMode,
+    Small,
+)
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton
@@ -31,7 +38,7 @@ class RibbonGridLayoutManager(object):
         self.rows = rows
         self.cells = np.ones((rows, 1), dtype=bool)
 
-    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=ColumnWise):
+    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode: RibbonSpaceFindMode = ColumnWise):
         """Request a number of available cells from the grid.
 
         :param rowSpan: The number of rows the cell should span.
@@ -340,8 +347,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any:
         """Add a widget to the panel.
@@ -405,7 +412,9 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
@@ -477,8 +486,8 @@ class RibbonPanel(QtWidgets.QFrame):
         initializer: Callable = None,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
         **kwargs,
     ) -> QtWidgets.QWidget:
