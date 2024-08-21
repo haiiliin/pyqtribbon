@@ -84,9 +84,7 @@ class RibbonBar : public QMenuBar {
     void setAutoHideRibbon(bool autoHide) { _autoHideRibbon = autoHide; }
 
     bool eventFilter(QObject* object, QEvent* event) {
-        if (_autoHideRibbon && event->type() == QEvent::HoverMove) {
-            setRibbonVisible(underMouse());
-        }
+        if (_autoHideRibbon && event->type() == QEvent::HoverMove) setRibbonVisible(underMouse());
         return QMenuBar::eventFilter(object, event);
     }
 
