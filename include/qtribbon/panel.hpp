@@ -20,12 +20,15 @@
 #include <QWidget>
 
 #include "constants.hpp"
+#include "gallery.hpp"
+#include "separator.hpp"
+#include "toolbutton.hpp"
 
 namespace qtribbon {
 
 class RibbonPanelTitle : public QLabel {
    public:
-    RibbonPanelTitle(QWidget *parent = nullptr) : QLabel(parent) {}
+    explicit RibbonPanelTitle(QWidget *parent = nullptr) : QLabel(parent) {}
 };
 
 class RibbonGridLayoutManager {
@@ -34,14 +37,14 @@ class RibbonGridLayoutManager {
     QVector<QVector<bool>> cells;
 
    public:
-    RibbonGridLayoutManager(int rows) : rows(rows) {
+    explicit RibbonGridLayoutManager(int rows) : rows(rows) {
         cells.resize(rows);
         for (auto &row : cells) {
             row.fill(true);
         }
     }
 
-    std::pair<int, int> requestCells(int rowSpan = 1, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise) {
+    std::pair<int, int> request_cells(int rowSpan = 1, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise) {
         if (rowSpan > rows) {
             throw std::invalid_argument("RowSpan is too large");
         }
@@ -108,7 +111,7 @@ class RibbonGridLayoutManager {
 
 class RibbonPanelItemWidget : public QFrame {
    public:
-    RibbonPanelItemWidget(QWidget *parent = nullptr) : QFrame(parent) {
+    explicit RibbonPanelItemWidget(QWidget *parent = nullptr) : QFrame(parent) {
         QVBoxLayout *layout = new QVBoxLayout(this);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(0);
@@ -120,7 +123,7 @@ class RibbonPanelItemWidget : public QFrame {
 
 class RibbonPanelOptionButton : public QToolButton {
    public:
-    RibbonPanelOptionButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    explicit RibbonPanelOptionButton(QWidget *parent = nullptr) : QToolButton(parent) {}
 };
 
 class RibbonPanel : public QFrame {
@@ -133,6 +136,7 @@ class RibbonPanel : public QFrame {
     RibbonPanelTitle *_titleLabel;
     RibbonPanelOptionButton *_panelOption = nullptr;
     QGridLayout *_actionsLayout;
+    QList<QWidget *> _widgets = {};
 
     int _maxRows = 6;
     int _largeRows = 6;
@@ -250,8 +254,65 @@ class RibbonPanel : public QFrame {
                                 _gridLayoutManager->rows);
     }
 
-    // The addWidget, removeWidget, widget, widgets, addButton, addSeparator, addGallery methods
-    // are not included because they involve more complex logic and interactions with other classes.
+    template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    QWidget *addWidget(QWidget *widget) {
+        int rowSpan1 = defaultRowSpan(rowSpan);
+        _widgets.append(widget);
+        int row, col;
+        std::tie(row, col) = _gridLayoutManager->request_cells(rowSpan1, colSpan, mode);
+        int maximumHeight = rowHeight() * rowSpan1 + _actionsLayout->verticalSpacing() * (rowSpan1 - 2);
+        widget->setMaximumHeight(maximumHeight);
+        if (fixedHeight) widget->setFixedHeight(std::max(int(fixedHeight * maximumHeight), int(0.4 * maximumHeight)));
+        RibbonPanelItemWidget *item = new RibbonPanelItemWidget(this);
+        item->addWidget(widget);
+        _actionsLayout->addWidget(item, row, col, rowSpan1, colSpan, alignment);
+        return widget;
+    }
+
+    void removeWidget(QWidget *widget) { _actionsLayout->removeWidget(widget); }
+
+    QWidget *widget(int index) { return _widgets.at(index); }
+
+    QList<QWidget *> widgets() { return _widgets; }
+
+    template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonToolButton *addButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                const char *slot = nullptr, QKeySequence shortcut = QKeySequence(),
+                                QString tooltip = "", QString statusTip = "", bool checkable = false) {
+        RibbonToolButton *button = new RibbonToolButton(this);
+        button->setButtonStyle(rowSpan);
+        if (!text.isEmpty()) button->setText(text);
+        if (!icon.isNull()) button->setIcon(icon);
+        if (slot) connect(button, SIGNAL(clicked()), this, slot);
+        if (!shortcut.isEmpty()) button->setShortcut(shortcut);
+        if (!tooltip.isEmpty()) button->setToolTip(tooltip);
+        if (!statusTip.isEmpty()) button->setStatusTip(statusTip);
+        if (!showText) button->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        button->setCheckable(checkable);
+        addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(button);
+        return button;
+    }
+
+    template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonSeparator *addSeparator(Qt::Orientation orientation = Qt::Vertical, int width = 6) {
+        RibbonSeparator *separator = new RibbonSeparator(orientation, width);
+        addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(separator);
+        return separator;
+    }
+
+    template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonGallery *addGallery(int minimumWidth = 800, bool popupHideOnClick = false) {
+        RibbonGallery *gallery = new RibbonGallery(minimumWidth, popupHideOnClick, this);
+        int rowSpan1 = defaultRowSpan(Large);
+        int maximumHeight = rowHeight() * rowSpan1 + _actionsLayout->verticalSpacing() * (rowSpan1 - 2);
+        gallery->setFixedHeight(maximumHeight);
+        addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(gallery);
+        return gallery;
+    }
 
     void setTitle(const QString &title) { _titleLabel->setText(title); }
 
