@@ -98,7 +98,7 @@ class RibbonGallery : public QFrame {
     explicit RibbonGallery(int minimumWidth = 800, bool popupHideOnClick = false, QWidget *parent = nullptr)
         : QFrame(parent) {
         setMinimumWidth(minimumWidth);
-        _popupHideOnClick = false;
+        _popupHideOnClick = popupHideOnClick;
 
         _mainLayout = new QHBoxLayout();
         _mainLayout->setContentsMargins(5, 5, 5, 5);
@@ -137,7 +137,7 @@ class RibbonGallery : public QFrame {
         connect(_downButton, &RibbonGalleryButton::clicked, _listWidget, &RibbonGalleryListWidget::scrollToNextRow);
 
         _popupWidget = new RibbonPopupWidget();
-        _popupWidget->setFont(QApplication::instance()->font());
+        _popupWidget->setFont(qApp->font());
         _popupWidget->setWindowFlags(Qt::Popup);
 
         _popupLayout = new QVBoxLayout(_popupWidget);
@@ -231,8 +231,8 @@ class RibbonGallery : public QFrame {
 
     void setPopupHideOnClick(bool popupHideOnClick) { _popupHideOnClick = popupHideOnClick; }
 
-    RibbonToolButton *addButton(QString text, QIcon icon, const char *slot, QKeySequence shortcut, QString tooltip,
-                                QString statusTip, bool checkable) {
+    RibbonToolButton *addButton(QString text = "", QIcon icon = QIcon(), QKeySequence shortcut = QKeySequence(),
+                                QString tooltip = "", QString statusTip = "", bool checkable = false) {
         RibbonToolButton *button = new RibbonToolButton(this);
         RibbonToolButton *popupButton = new RibbonToolButton(_popupWidget);
         if (!text.isEmpty()) {
@@ -242,10 +242,6 @@ class RibbonGallery : public QFrame {
         if (!icon.isNull()) {
             button->setIcon(icon);
             popupButton->setIcon(icon);
-        }
-        if (slot != nullptr) {
-            connect(button, &RibbonToolButton::clicked, this, slot);
-            connect(popupButton, &RibbonToolButton::clicked, this, slot);
         }
         if (!shortcut.isEmpty()) {
             button->setShortcut(shortcut);
@@ -266,9 +262,8 @@ class RibbonGallery : public QFrame {
         _buttons.append(button);
         _popupButtons.append(popupButton);
         connect(button, &RibbonToolButton::clicked, [popupButton](bool checked) { popupButton->setChecked(checked); });
-        if (_popupHideOnClick) {
-            connect(popupButton, &RibbonToolButton::clicked, this, &RibbonGallery::hidePopupWidget);
-        }
+        if (_popupHideOnClick) connect(popupButton, &RibbonToolButton::clicked, this, &RibbonGallery::hidePopupWidget);
+
         connect(popupButton, &RibbonToolButton::clicked, this, &RibbonGallery::setSelectedButton);
 
         if (text.isEmpty()) {
@@ -280,12 +275,6 @@ class RibbonGallery : public QFrame {
         }
         _addWidget(button);
         _addPopupWidget(popupButton);
-        return button;
-    }
-
-    RibbonToolButton *addToggleButton(QString text, QIcon icon, const char *slot, QKeySequence shortcut,
-                                      QString tooltip, QString statusTip) {
-        RibbonToolButton *button = addButton(text, icon, slot, shortcut, tooltip, statusTip, true);
         return button;
     }
 };
