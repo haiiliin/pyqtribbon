@@ -9,6 +9,7 @@
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QMap>
+#include <QMenuBar>
 #include <QPaintEvent>
 #include <QResizeEvent>
 #include <QScrollArea>
@@ -175,13 +176,13 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     RibbonCategoryStyle categoryStyle() const { return _style; }
 
     RibbonPanel *addPanel(QString title, bool showPanelOptionButton) {
-        RibbonPanel *panel = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
-        panel->setFixedHeight(this->height() - _mainLayout->spacing() - _mainLayout->contentsMargins().top() -
-                              _mainLayout->contentsMargins().bottom());
-        _panels[title] = panel;
-        this->addWidget(panel);
+        RibbonPanel *p = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
+        p->setFixedHeight(this->height() - _mainLayout->spacing() - _mainLayout->contentsMargins().top() -
+                          _mainLayout->contentsMargins().bottom());
+        _panels[title] = p;
+        this->addWidget(p);
         this->addWidget(new RibbonSeparator(Qt::Vertical, 10));
-        return panel;
+        return p;
     }
 
     void removePanel(QString title) {
@@ -190,9 +191,9 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     }
 
     RibbonPanel *takePanel(QString title) {
-        RibbonPanel *panel = _panels[title];
+        RibbonPanel *p = _panels[title];
         this->removePanel(title);
-        return panel;
+        return p;
     }
 
     RibbonPanel *panel(QString title) { return _panels[title]; }
@@ -204,9 +205,10 @@ class RibbonNormalCategory : public RibbonCategory {
     Q_OBJECT
 
    public:
-    explicit RibbonNormalCategory(QString title, QWidget *parent) : RibbonCategory(title, Normal, QColor(), parent) {}
+    explicit RibbonNormalCategory(QString title = "", QWidget *parent = nullptr)
+        : RibbonCategory(title, Normal, QColor(), parent) {}
 
-    void setCategoryStyle(RibbonCategoryStyle style) {
+    void setCategoryStyle(RibbonCategoryStyle style) override {
         throw std::runtime_error("You can not set the category style of a normal category.");
     }
 };
@@ -215,28 +217,15 @@ class RibbonContextCategory : public RibbonCategory {
     Q_OBJECT
 
    public:
-    explicit RibbonContextCategory(QString title, QColor color, QWidget *parent)
+    explicit RibbonContextCategory(QString title = "", QColor color = QColor(), QWidget *parent = nullptr)
         : RibbonCategory(title, Context, color, parent) {}
 
-    void setCategoryStyle(RibbonCategoryStyle style) {
+    void setCategoryStyle(RibbonCategoryStyle style) override {
         throw std::runtime_error("You can not set the category style of a context category.");
     }
 
     QColor color() const { return _color; }
     void setColor(QColor color) { _color = color; }
-
-    void showContextCategory() { _ribbon->showContextCategory(this); }
-
-    void hideContextCategory() { _ribbon->hideContextCategory(this); }
-
-    bool categoryVisible() const { return _ribbon->categoryVisible(this); }
-
-    void setCategoryVisible(bool visible) {
-        if (visible)
-            this->showContextCategory();
-        else
-            this->hideContextCategory();
-    }
 };
 
 class RibbonContextCategories : public QMap<QString, RibbonContextCategory *> {
@@ -254,24 +243,6 @@ class RibbonContextCategories : public QMap<QString, RibbonContextCategory *> {
     void setName(QString name) { _name = name; }
     QColor color() const { return _color; }
     void setColor(QColor color) { _color = color; }
-
-    void showContextCategories() { _ribbon->showContextCategory(this); }
-
-    void hideContextCategories() { _ribbon->hideContextCategory(this); }
-
-    bool categoriesVisible() const {
-        for (auto it = this->begin(); it != this->end(); ++it)
-            if (it.value()->categoryVisible()) return true;
-
-        return false;
-    }
-
-    void setCategoriesVisible(bool visible) {
-        if (visible)
-            this->showContextCategories();
-        else
-            this->hideContextCategories();
-    }
 };
 }  // namespace qtribbon
 
