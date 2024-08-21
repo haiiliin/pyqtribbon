@@ -136,3 +136,4 @@ dmypy.json
 
 pyqtribbon/_version.py
 docs/source/apidoc
+cmake-*/
