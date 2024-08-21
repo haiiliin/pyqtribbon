@@ -11,7 +11,5 @@ qt_standard_project_setup()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-qt_add_executable(qtribbon
-    main.cpp
-)
+qt_add_executable(qtribbon main.cpp)
 target_link_libraries(qtribbon PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)

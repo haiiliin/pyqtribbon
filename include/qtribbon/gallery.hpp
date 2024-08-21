@@ -18,6 +18,8 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 
+#include "menu.hpp"
+#include "separator.hpp"
 #include "toolbutton.hpp"
 #include "utils.hpp"
 
@@ -95,26 +97,26 @@ class RibbonGallery : public QFrame {
 
     explicit RibbonGallery(int minimumWidth = 800, bool popupHideOnClick = false, QWidget *parent = nullptr)
         : QFrame(parent) {
-        setMinimumWidth(800);
+        setMinimumWidth(minimumWidth);
         _popupHideOnClick = false;
 
-        _mainLayout = new QHBoxLayout(this);
+        _mainLayout = new QHBoxLayout();
         _mainLayout->setContentsMargins(5, 5, 5, 5);
         _mainLayout->setSpacing(5);
 
-        _upButton = new RibbonGalleryButton(this);
+        _upButton = new RibbonGalleryButton();
         _upButton->setIcon(QIcon(DataFile("icons/up.png")));
         _upButton->setIconSize(QSize(24, 24));
         _upButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
         _upButton->setAutoRaise(true);
 
-        _downButton = new RibbonGalleryButton(this);
+        _downButton = new RibbonGalleryButton();
         _downButton->setIcon(QIcon(DataFile("icons/down.png")));
         _downButton->setIconSize(QSize(24, 24));
         _downButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
         _downButton->setAutoRaise(true);
 
-        _moreButton = new RibbonGalleryButton(this);
+        _moreButton = new RibbonGalleryButton();
         _moreButton->setIcon(QIcon(DataFile("icons/more.png")));
         _moreButton->setIconSize(QSize(24, 24));
         _moreButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
@@ -187,7 +189,8 @@ class RibbonGallery : public QFrame {
 
     void showPopup() {
         _popupWidget->move(mapToGlobal(geometry().topLeft()));
-        _popupWidget->resize(QSize(max(popupWindowSize().width(), width()), max(popupWindowSize().height(), height())));
+        _popupWidget->resize(
+            QSize(std::max(popupWindowSize().width(), width()), std::max(popupWindowSize().height(), height())));
         _popupMenu->setFixedWidth(_popupWidget->width() - _popupLayout->contentsMargins().left() -
                                   _popupLayout->contentsMargins().right());
         _popupWidget->show();

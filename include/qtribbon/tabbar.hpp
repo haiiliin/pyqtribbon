@@ -78,7 +78,6 @@ class RibbonTabBar : public QTabBar {
 
     QColor currentTabColor() { return _tabColors[tabText(currentIndex())]; }
 
-   public slots:
     void changeColor(int inx) {
         if (count() > 0) {
             QString currentTabText = tabText(inx);
