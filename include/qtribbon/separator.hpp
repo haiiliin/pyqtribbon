@@ -41,7 +41,6 @@ class RibbonSeparator : public QFrame {
         _bottomMargins = bottom;
     }
 
-   protected:
     void paintEvent(QPaintEvent *event) override {
         QPainter painter(this);
         QPen pen;
