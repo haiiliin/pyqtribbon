@@ -176,13 +176,13 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     RibbonCategoryStyle categoryStyle() const { return _style; }
 
     RibbonPanel *addPanel(QString title, bool showPanelOptionButton) {
-        RibbonPanel *p = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
-        p->setFixedHeight(this->height() - _mainLayout->spacing() - _mainLayout->contentsMargins().top() -
-                          _mainLayout->contentsMargins().bottom());
-        _panels[title] = p;
-        this->addWidget(p);
+        RibbonPanel *panel = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
+        panel->setFixedHeight(this->height() - _mainLayout->spacing() - _mainLayout->contentsMargins().top() -
+                              _mainLayout->contentsMargins().bottom());
+        _panels[title] = panel;
+        this->addWidget(panel);
         this->addWidget(new RibbonSeparator(Qt::Vertical, 10));
-        return p;
+        return panel;
     }
 
     void removePanel(QString title) {
@@ -191,9 +191,9 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     }
 
     RibbonPanel *takePanel(QString title) {
-        RibbonPanel *p = _panels[title];
+        RibbonPanel *panel = _panels[title];
         this->removePanel(title);
-        return p;
+        return panel;
     }
 
     RibbonPanel *panel(QString title) { return _panels[title]; }
