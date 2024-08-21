@@ -279,13 +279,12 @@ class RibbonPanel : public QFrame {
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
     RibbonToolButton *addButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
-                                const char *slot = nullptr, QKeySequence shortcut = QKeySequence(),
-                                QString tooltip = "", QString statusTip = "", bool checkable = false) {
+                                QKeySequence shortcut = QKeySequence(), QString tooltip = "", QString statusTip = "",
+                                bool checkable = false) {
         RibbonToolButton *button = new RibbonToolButton(this);
         button->setButtonStyle(rowSpan);
         if (!text.isEmpty()) button->setText(text);
         if (!icon.isNull()) button->setIcon(icon);
-        if (slot) connect(button, SIGNAL(clicked()), this, slot);
         if (!shortcut.isEmpty()) button->setShortcut(shortcut);
         if (!tooltip.isEmpty()) button->setToolTip(tooltip);
         if (!statusTip.isEmpty()) button->setStatusTip(statusTip);
