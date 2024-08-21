@@ -18,6 +18,7 @@
 
 #include "constants.hpp"
 #include "panel.hpp"
+#include "separator.hpp"
 
 namespace qtribbon {
 
@@ -51,6 +52,8 @@ class RibbonCategoryLayoutWidget : public QFrame {
     RibbonCategoryScrollArea *_categoryScrollArea;
     RibbonCategoryLayoutButton *_previousButton;
     RibbonCategoryLayoutButton *_nextButton;
+
+   protected:
     QHBoxLayout *_mainLayout;
 
    signals:
@@ -148,13 +151,13 @@ class RibbonCategoryLayoutWidget : public QFrame {
     }
 };
 
-class RibbonCategory : public QFrame {
+class RibbonCategory : public RibbonCategoryLayoutWidget {
     Q_OBJECT
 
    private:
     QString _title;
     RibbonCategoryStyle _style;
-    QMap<QString, RibbonPanel *> _panels;
+    QMap<QString, RibbonPanel *> _panels = QMap<QString, RibbonPanel *>();
     int _maxRows = 6;
 
    protected:
@@ -164,11 +167,11 @@ class RibbonCategory : public QFrame {
     explicit RibbonCategory(QWidget *parent = nullptr) : RibbonCategory("", Normal, QColor(), parent) {}
     explicit RibbonCategory(QString title = "", RibbonCategoryStyle style = Normal, QColor color = QColor(),
                             QWidget *parent = nullptr)
-        : QFrame(parent), _title(title), _style(style), _color(color) {}
+        : RibbonCategoryLayoutWidget(parent), _title(title), _style(style), _color(color) {}
 
     void setMaximumRows(int rows) { _maxRows = rows; }
     QString title() const { return _title; }
-    void setCategoryStyle(RibbonCategoryStyle style) { _style = style; }
+    virtual void setCategoryStyle(RibbonCategoryStyle style) { _style = style; }
     RibbonCategoryStyle categoryStyle() const { return _style; }
 
     RibbonPanel *addPanel(QString title, bool showPanelOptionButton) {
@@ -177,7 +180,7 @@ class RibbonCategory : public QFrame {
                               _mainLayout->contentsMargins().bottom());
         _panels[title] = panel;
         this->addWidget(panel);
-        this->addWidget(new RibbonSeparator(10));
+        this->addWidget(new RibbonSeparator(Qt::Vertical, 10));
         return panel;
     }
 
