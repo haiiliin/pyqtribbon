@@ -5,9 +5,11 @@
 #ifndef QTRIBBON_RIBBONBAR_HPP
 #define QTRIBBON_RIBBONBAR_HPP
 
+#include <QFile>
 #include <QGraphicsDropShadowEffect>
 #include <QMenuBar>
 #include <QStackedWidget>
+#include <QString>
 #include <QVBoxLayout>
 
 #include "category.hpp"
@@ -18,7 +20,7 @@ namespace qtribbon {
 class RibbonStackedWidget : public QStackedWidget {
     Q_OBJECT
    public:
-    RibbonStackedWidget(QWidget* parent = nullptr) : QStackedWidget(parent) {
+    explicit RibbonStackedWidget(QWidget* parent = nullptr) : QStackedWidget(parent) {
         QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect(this);
         effect->setOffset(2, 2);
         this->setGraphicsEffect(effect);
@@ -74,7 +76,7 @@ class RibbonBar : public QMenuBar {
         delete _titleWidget;
         delete _stackedWidget;
         delete _mainLayout;
-        for (auto category : _categories) delete category;
+        for (auto c : _categories) delete c;
     }
 
     bool autoHideRibbon() const { return _autoHideRibbon; }
@@ -89,9 +91,13 @@ class RibbonBar : public QMenuBar {
     }
 
     void setRibbonStyle(RibbonStyle style) {
-        // Assuming RibbonStyle is an enum and DataFile is a function that retrieves the file path.
-        QString baseStyle = readStyleSheet(DataFile("styles/base.qss"));
-        QString specificStyle = readStyleSheet(DataFile(QString("styles/%1.qss").arg(style)));
+        QFile baseFile = QFile(DataFile("styles/base.qss"));
+        baseFile.open(QFile::ReadOnly);
+        QString baseStyle = baseFile.readAll();
+        QFile specificFile =
+            QFile(DataFile(QString("styles/%1.qss").arg(style == RibbonStyle::Debug ? "debug" : "default")));
+        specificFile.open(QFile::ReadOnly);
+        QString specificStyle = specificFile.readAll();
         setStyleSheet(baseStyle + specificStyle);
     }
 
@@ -164,9 +170,12 @@ class RibbonBar : public QMenuBar {
             color = contextColors[_contextCategoryCount % contextColors.size()];
             _contextCategoryCount++;
         }
-        RibbonCategory* category = (style == RibbonCategoryStyle::Context)
-                                       ? new RibbonContextCategory(title, color, this)
-                                       : new RibbonNormalCategory(title, this);
+        RibbonCategory* category;
+        if (style == RibbonCategoryStyle::Context)
+            category = new RibbonContextCategory(title, color, this);
+        else
+            category = new RibbonNormalCategory(title, this);
+
         category->setMaximumRows(_maxRows);
         category->setFixedHeight(_ribbonHeight - _mainLayout->spacing() * 2 - _mainLayout->contentsMargins().top() -
                                  _mainLayout->contentsMargins().bottom() - _titleWidget->height());
