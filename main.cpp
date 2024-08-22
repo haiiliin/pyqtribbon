@@ -3,7 +3,6 @@
 //
 
 #include <QApplication>
-#include <QFormLayout>
 #include <QIcon>
 #include <QLabel>
 #include <QLineEdit>
@@ -11,10 +10,6 @@
 #include <QMenu>
 #include <QVBoxLayout>
 
-#include "qtribbon/category.hpp"
-#include "qtribbon/gallery.hpp"
-#include "qtribbon/menu.hpp"
-#include "qtribbon/panel.hpp"
 #include "qtribbon/ribbonbar.hpp"
 #include "qtribbon/toolbutton.hpp"
 
