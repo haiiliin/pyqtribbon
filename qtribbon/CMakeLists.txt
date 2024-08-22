@@ -14,17 +14,17 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        qtribbon/category.hpp
-        qtribbon/constants.hpp
-        qtribbon/gallery.hpp
-        qtribbon/menu.hpp
-        qtribbon/panel.hpp
-        qtribbon/ribbonbar.hpp
-        qtribbon/separator.hpp
-        qtribbon/tabbar.hpp
-        qtribbon/titlewidget.hpp
-        qtribbon/toolbutton.hpp
-        qtribbon/resources.qrc
+        category.hpp
+        constants.hpp
+        gallery.hpp
+        menu.hpp
+        panel.hpp
+        ribbonbar.hpp
+        separator.hpp
+        tabbar.hpp
+        titlewidget.hpp
+        toolbutton.hpp
+        resources.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

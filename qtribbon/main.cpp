@@ -10,8 +10,8 @@
 #include <QMenu>
 #include <QVBoxLayout>
 
-#include "qtribbon/ribbonbar.hpp"
-#include "qtribbon/toolbutton.hpp"
+#include "ribbonbar.hpp"
+#include "toolbutton.hpp"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
