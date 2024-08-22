@@ -35,6 +35,7 @@ class RibbonToolButton : public QToolButton {
         setAutoRaise(true);
         setFocusPolicy(Qt::NoFocus);
     }
+    ~RibbonToolButton() {}
 
     void setMaximumIconSize(int size) {
         _maximumIconSize = size;

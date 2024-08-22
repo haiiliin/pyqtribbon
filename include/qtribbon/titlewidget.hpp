@@ -24,6 +24,7 @@ class RibbonApplicationButton : public QToolButton {
 
    public:
     explicit RibbonApplicationButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    ~RibbonApplicationButton() {}
 
     RibbonMenu *addFileMenu() {
         RibbonMenu *menu = new RibbonMenu(this);
@@ -38,6 +39,7 @@ class RibbonTitleLabel : public QLabel {
 
    public:
     explicit RibbonTitleLabel(QWidget *parent = nullptr) : QLabel(parent) {}
+    ~RibbonTitleLabel() {}
 };
 
 class RibbonTitleWidget : public QFrame {
@@ -109,7 +111,7 @@ class RibbonTitleWidget : public QFrame {
         this->_helpButton->setIcon(QIcon("icons/help.png"));
         this->_helpButton->setAutoRaise(true);
         this->_helpButton->setToolTip("Help");
-        connect(this->_helpButton, &QToolButton::clicked, this, &RibbonTitleWidget::helpButtonClicked);
+        connect(this->_helpButton, SIGNAL(clicked(bool)), this, SLOT(helpButtonClicked(bool)));
         this->addRightToolButton(this->_collapseRibbonButton);
         this->addRightToolButton(this->_helpButton);
 
@@ -138,7 +140,7 @@ class RibbonTitleWidget : public QFrame {
         this->_tabBarLayout->addWidget(this->_titleLabel, 1, Qt::AlignVCenter);
         this->_tabBarLayout->addWidget(this->_rightToolBar, 0, Qt::AlignVCenter);
     }
-    ~RibbonTitleWidget() override {
+    ~RibbonTitleWidget() {
         delete _applicationButton;
         delete _quickAccessToolBar;
         delete _quickAccessToolBarWidget;

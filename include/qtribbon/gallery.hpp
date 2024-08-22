@@ -27,7 +27,10 @@ namespace qtribbon {
 
 class RibbonPopupWidget : public QFrame {
     Q_OBJECT
-    // The popup widget for the gallery widget.
+
+   public:
+    explicit RibbonPopupWidget(QWidget *parent = nullptr) : QFrame(parent) {}
+    ~RibbonPopupWidget() {}
 };
 
 class RibbonGalleryListWidget : public QListWidget {
@@ -42,6 +45,7 @@ class RibbonGalleryListWidget : public QListWidget {
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setIconSize(QSize(64, 64));
     }
+    ~RibbonGalleryListWidget() {}
 
     void resizeEvent(QResizeEvent *e) override {
         // Resize the list widget.
@@ -61,7 +65,10 @@ class RibbonGalleryListWidget : public QListWidget {
 
 class RibbonGalleryButton : public QToolButton {
     Q_OBJECT
-    // Gallery button.
+
+   public:
+    explicit RibbonGalleryButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    ~RibbonGalleryButton() {}
 };
 
 class RibbonGalleryPopupListWidget : public RibbonGalleryListWidget {
@@ -71,6 +78,7 @@ class RibbonGalleryPopupListWidget : public RibbonGalleryListWidget {
     explicit RibbonGalleryPopupListWidget(QWidget *parent = nullptr) : RibbonGalleryListWidget(parent) {
         setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     }
+    ~RibbonGalleryPopupListWidget() {}
 };
 
 class RibbonGallery : public QFrame {
@@ -150,7 +158,7 @@ class RibbonGallery : public QFrame {
 
         _popupMenu = new RibbonPermanentMenu();
         _popupMenu->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        connect(_popupMenu, &RibbonPermanentMenu::actionAdded, this, &RibbonGallery::_handlePopupAction);
+        connect(_popupMenu, SIGNAL(actionAdded), this, SLOT(_handlePopupAction));
         _popupLayout->addWidget(_popupMenu);
 
         connect(_moreButton, &RibbonGalleryButton::clicked, this, &RibbonGallery::showPopup);

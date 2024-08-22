@@ -28,6 +28,7 @@ class RibbonCategoryLayoutButton : public QToolButton {
 
    public:
     explicit RibbonCategoryLayoutButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    ~RibbonCategoryLayoutButton() {}
 };
 
 class RibbonCategoryScrollArea : public QScrollArea {
@@ -35,6 +36,7 @@ class RibbonCategoryScrollArea : public QScrollArea {
 
    public:
     explicit RibbonCategoryScrollArea(QWidget *parent = nullptr) : QScrollArea(parent) {}
+    ~RibbonCategoryScrollArea() {}
 };
 
 class RibbonCategoryScrollAreaContents : public QFrame {
@@ -42,6 +44,7 @@ class RibbonCategoryScrollAreaContents : public QFrame {
 
    public:
     explicit RibbonCategoryScrollAreaContents(QWidget *parent = nullptr) : QFrame(parent) {}
+    ~RibbonCategoryScrollAreaContents() {}
 };
 
 class RibbonCategoryLayoutWidget : public QFrame {
@@ -169,6 +172,9 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     explicit RibbonCategory(QString title = "", RibbonCategoryStyle style = Normal, QColor color = QColor(),
                             QWidget *parent = nullptr)
         : RibbonCategoryLayoutWidget(parent), _title(title), _style(style), _color(color) {}
+    ~RibbonCategory() {
+        for (auto p : _panels) delete p;
+    }
 
     void setMaximumRows(int rows) { _maxRows = rows; }
     QString title() const { return _title; }
@@ -207,6 +213,7 @@ class RibbonNormalCategory : public RibbonCategory {
    public:
     explicit RibbonNormalCategory(QString title = "", QWidget *parent = nullptr)
         : RibbonCategory(title, Normal, QColor(), parent) {}
+    ~RibbonNormalCategory() {}
 
     void setCategoryStyle(RibbonCategoryStyle style) override {
         throw std::runtime_error("You can not set the category style of a normal category.");
@@ -219,6 +226,7 @@ class RibbonContextCategory : public RibbonCategory {
    public:
     explicit RibbonContextCategory(QString title = "", QColor color = QColor(), QWidget *parent = nullptr)
         : RibbonCategory(title, Context, color, parent) {}
+    ~RibbonContextCategory() {}
 
     void setCategoryStyle(RibbonCategoryStyle style) override {
         throw std::runtime_error("You can not set the category style of a context category.");
@@ -232,12 +240,11 @@ class RibbonContextCategories : public QMap<QString, RibbonContextCategory *> {
    private:
     QString _name;
     QColor _color;
-    QWidget *_ribbon;
 
    public:
-    RibbonContextCategories(QString name, QColor color, QMap<QString, RibbonContextCategory *> categories,
-                            QWidget *ribbon)
-        : QMap<QString, RibbonContextCategory *>(categories), _name(name), _color(color), _ribbon(ribbon) {}
+    RibbonContextCategories(QString name, QColor color, QMap<QString, RibbonContextCategory *> categories)
+        : QMap<QString, RibbonContextCategory *>(categories), _name(name), _color(color) {}
+    ~RibbonContextCategories() {}
 
     QString name() const { return _name; }
     void setName(QString name) { _name = name; }

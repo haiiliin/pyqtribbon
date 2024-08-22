@@ -29,6 +29,7 @@ class RibbonTabBar : public QTabBar {
         connect(this, &QTabBar::currentChanged, this, &RibbonTabBar::changeColor);
         setDrawBase(false);
     }
+    ~RibbonTabBar() {}
 
     int indexOf(const QString& tabName) {
         for (int i = 0; i < count(); ++i) {

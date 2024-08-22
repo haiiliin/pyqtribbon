@@ -29,6 +29,7 @@ namespace qtribbon {
 class RibbonPanelTitle : public QLabel {
    public:
     explicit RibbonPanelTitle(QWidget *parent = nullptr) : QLabel(parent) {}
+    ~RibbonPanelTitle() {}
 };
 
 class RibbonGridLayoutManager {
@@ -43,6 +44,7 @@ class RibbonGridLayoutManager {
             row.fill(true);
         }
     }
+    ~RibbonGridLayoutManager() {}
 
     std::pair<int, int> request_cells(int rowSpan = 1, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise) {
         if (rowSpan > rows) {
@@ -117,6 +119,7 @@ class RibbonPanelItemWidget : public QFrame {
         layout->setSpacing(0);
         setLayout(layout);
     }
+    ~RibbonPanelItemWidget() {}
 
     void addWidget(QWidget *widget) { layout()->addWidget(widget); }
 };
@@ -124,6 +127,7 @@ class RibbonPanelItemWidget : public QFrame {
 class RibbonPanelOptionButton : public QToolButton {
    public:
     explicit RibbonPanelOptionButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    ~RibbonPanelOptionButton() {}
 };
 
 class RibbonPanel : public QFrame {

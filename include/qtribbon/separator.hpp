@@ -35,6 +35,7 @@ class RibbonSeparator : public QFrame {
             this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         }
     }
+    ~RibbonSeparator() {}
 
     void setTopBottomMargins(int top, int bottom) {
         _topMargins = top;
@@ -64,6 +65,7 @@ class RibbonHorizontalSeparator : public RibbonSeparator {
    public:
     explicit RibbonHorizontalSeparator(int width = 6, QWidget *parent = nullptr)
         : RibbonSeparator(Qt::Horizontal, width, parent) {}
+    ~RibbonHorizontalSeparator() {}
 };
 
 class RibbonVerticalSeparator : public RibbonSeparator {
@@ -72,6 +74,7 @@ class RibbonVerticalSeparator : public RibbonSeparator {
    public:
     explicit RibbonVerticalSeparator(int width = 6, QWidget *parent = nullptr)
         : RibbonSeparator(Qt::Vertical, width, parent) {}
+    ~RibbonVerticalSeparator() {}
 };
 }  // namespace qtribbon
 

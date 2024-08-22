@@ -24,6 +24,7 @@ class RibbonMenu : public QMenu {
     explicit RibbonMenu(const QString &title, QWidget *parent = nullptr) : QMenu(title, parent) {
         this->setFont(QApplication::font());
     }
+    ~RibbonMenu() {}
 
     void addWidget(QWidget *widget) {
         QWidgetAction *widgetAction = new QWidgetAction(this);
@@ -86,6 +87,7 @@ class RibbonPermanentMenu : public RibbonMenu {
    public:
     explicit RibbonPermanentMenu(QWidget *parent = nullptr) : RibbonMenu(parent) {}
     explicit RibbonPermanentMenu(const QString &title, QWidget *parent = nullptr) : RibbonMenu(title, parent) {}
+    ~RibbonPermanentMenu() {}
 
     void hideEvent(QHideEvent *event) override { this->show(); }
 

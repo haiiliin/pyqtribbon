@@ -25,6 +25,7 @@ class RibbonStackedWidget : public QStackedWidget {
         effect->setOffset(2, 2);
         this->setGraphicsEffect(effect);
     }
+    ~RibbonStackedWidget() {}
 };
 
 class RibbonBar : public QMenuBar {
@@ -205,10 +206,8 @@ class RibbonBar : public QMenuBar {
             _contextCategoryCount++;
         }
         QMap<QString, RibbonContextCategory*> categories;
-        for (QString title : titles) {
-            categories[title] = addContextCategory(title, color);
-        }
-        return new RibbonContextCategories(name, color, categories, this);
+        for (QString title : titles) categories[title] = addContextCategory(title, color);
+        return new RibbonContextCategories(name, color, categories);
     }
 
     void showCategoryByIndex(int index) {
