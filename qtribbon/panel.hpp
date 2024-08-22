@@ -18,6 +18,7 @@
 #include <QVBoxLayout>
 #include <QVariant>
 #include <QWidget>
+#include <vector>
 
 #include "constants.hpp"
 #include "gallery.hpp"
@@ -35,7 +36,7 @@ class RibbonPanelTitle : public QLabel {
 class RibbonGridLayoutManager {
    public:
     int rows;
-    QVector<QVector<bool>> cells;
+    std::vector<std::vector<bool>> cells;
 
    public:
     explicit RibbonGridLayoutManager(int rows) : rows(rows) {
@@ -76,30 +77,23 @@ class RibbonGridLayoutManager {
                         all = false;
                         break;
                     }
-
                 if (all) {
-                    if (cells[0].size() - col < colSpan) {
+                    if (cells[0].size() - col < colSpan)
                         for (auto &cell : cells) cell.resize(cells[0].size() + colSpan - (cells[0].size() - col), true);
-                    }
                     for (auto &cell : cells) cell[col] = false;
-
                     return std::make_pair(0, col);
                 }
             }
         }
-
         int cols = cells[0].size();
         int colSpan1 = colSpan;
-        if (std::all_of(cells.begin(), cells.end(), [](const QVector<bool> &row) { return row.back(); })) {
+        if (std::all_of(cells.begin(), cells.end(), [](const std::vector<bool> &row) { return row.back(); })) {
             cols -= 1;
             colSpan1 -= 1;
         }
-
         for (auto &cell : cells) cell.resize(cols + colSpan1, true);
-
         for (int i = 0; i < rowSpan; ++i)
             for (int j = cols; j < cols + colSpan; ++j) cells[i][j] = false;
-
         return std::make_pair(0, cols);
     }
 };
