@@ -12,19 +12,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 set(PROJECT_SOURCES
         main.cpp
-        category.hpp
-        constants.hpp
-        gallery.hpp
-        menu.hpp
-        panel.hpp
-        ribbonbar.hpp
-        separator.hpp
-        tabbar.hpp
-        titlewidget.hpp
-        toolbutton.hpp
-        resources.qrc
+        qtribbon/category.hpp
+        qtribbon/constants.hpp
+        qtribbon/gallery.hpp
+        qtribbon/menu.hpp
+        qtribbon/panel.hpp
+        qtribbon/ribbonbar.hpp
+        qtribbon/separator.hpp
+        qtribbon/tabbar.hpp
+        qtribbon/titlewidget.hpp
+        qtribbon/toolbutton.hpp
+        qtribbon/resources.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

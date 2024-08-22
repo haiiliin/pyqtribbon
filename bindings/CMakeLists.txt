@@ -15,7 +15,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 get_filename_component(PARENT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 
 # Include directories
-include_directories(${PARENT_DIRECTORY})
+include_directories(${PARENT_DIRECTORY}/include)
 
 # Set up Python, be sure to have NumPy installed
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)

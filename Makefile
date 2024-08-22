@@ -14,7 +14,7 @@ bindings:
 		  binder_includes.hpp \
 		-- \
 		-std=c++11 \
-		-I.
+		-Iinclude
 
 format:
 	pre-commit run --all-files
