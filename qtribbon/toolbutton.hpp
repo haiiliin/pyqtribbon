@@ -8,8 +8,7 @@
 #include <QSize>
 #include <QStyle>
 #include <QToolButton>
-
-#include "constants.hpp"
+#include <qtribbon/constants.hpp>
 
 namespace qtribbon {
 

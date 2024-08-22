@@ -1,0 +1,10 @@
+#include <qtribbon/category.hpp>
+#include <qtribbon/constants.hpp>
+#include <qtribbon/gallery.hpp>
+#include <qtribbon/menu.hpp>
+#include <qtribbon/panel.hpp>
+#include <qtribbon/ribbonbar.hpp>
+#include <qtribbon/separator.hpp>
+#include <qtribbon/tabbar.hpp>
+#include <qtribbon/titlewidget.hpp>
+#include <qtribbon/toolbutton.hpp>
