@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     label.setAlignment(Qt::AlignCenter);
     layout.addWidget(&label, 1);
 
-    window.resize(1800, 350);
+    window.resize(1200, 350);
     window.show();
     return QApplication::exec();
 }
