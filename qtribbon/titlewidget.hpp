@@ -80,7 +80,7 @@ class RibbonTitleWidget : public QFrame {
 
         // Set up the application button
         this->_applicationButton = new RibbonApplicationButton();
-        this->_applicationButton->setIcon(QIcon("icons/python.png"));
+        this->_applicationButton->setIcon(QIcon(":/icons/python.png"));
         this->_applicationButton->setIconSize(QSize(this->_quickAccessButtonHeight, this->_quickAccessButtonHeight));
         this->_applicationButton->setText("QtRibbon");
         this->_applicationButton->setToolTip("QtRibbon");
@@ -103,14 +103,14 @@ class RibbonTitleWidget : public QFrame {
         this->_rightToolBar->setIconSize(QSize(this->_rightButtonHeight, this->_rightButtonHeight));
         this->_collapseRibbonButton = new QToolButton();
         this->_collapseRibbonButton->setIconSize(QSize(this->_rightButtonHeight, this->_rightButtonHeight));
-        this->_collapseRibbonButton->setIcon(QIcon("icons/up.png"));
+        this->_collapseRibbonButton->setIcon(QIcon(":/icons/up.png"));
         this->_collapseRibbonButton->setAutoRaise(true);
         this->_collapseRibbonButton->setToolTip("Collapse Ribbon");
         connect(this->_collapseRibbonButton, &QToolButton::clicked, this,
                 &RibbonTitleWidget::collapseRibbonButtonClicked);
         this->_helpButton = new QToolButton();
         this->_helpButton->setIconSize(QSize(this->_rightButtonHeight, this->_rightButtonHeight));
-        this->_helpButton->setIcon(QIcon("icons/help.png"));
+        this->_helpButton->setIcon(QIcon(":/icons/help.png"));
         this->_helpButton->setAutoRaise(true);
         this->_helpButton->setToolTip("Help");
         connect(this->_helpButton, SIGNAL(clicked(bool)), this, SIGNAL(helpButtonClicked(bool)));
