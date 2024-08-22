@@ -89,10 +89,10 @@ class RibbonBar : public QMenuBar {
     }
 
     void setRibbonStyle(RibbonStyle style) {
-        QFile baseFile = QFile("://styles/base.qss");
+        QFile baseFile = QFile(":/styles/base.qss");
         baseFile.open(QFile::ReadOnly);
         QString baseStyle = baseFile.readAll();
-        QFile specificFile = QFile(QString("://styles/%1.qss").arg(style == RibbonStyle::Debug ? "debug" : "default"));
+        QFile specificFile = QFile(QString(":/styles/%1.qss").arg(style == RibbonStyle::Debug ? "debug" : "default"));
         specificFile.open(QFile::ReadOnly);
         QString specificStyle = specificFile.readAll();
         setStyleSheet(baseStyle + specificStyle);
@@ -291,7 +291,7 @@ class RibbonBar : public QMenuBar {
         if (!_ribbonVisible) {
             _ribbonVisible = true;
             collapseRibbonButton()->setToolTip("Collapse Ribbon");
-            collapseRibbonButton()->setIcon(QIcon("://icons/up.png"));
+            collapseRibbonButton()->setIcon(QIcon(":/icons/up.png"));
             _stackedWidget->setVisible(true);
             setFixedSize(sizeHint());
         }
@@ -301,7 +301,7 @@ class RibbonBar : public QMenuBar {
         if (_ribbonVisible) {
             _ribbonVisible = false;
             collapseRibbonButton()->setToolTip("Expand Ribbon");
-            collapseRibbonButton()->setIcon(QIcon("://icons/down.png"));
+            collapseRibbonButton()->setIcon(QIcon(":/icons/down.png"));
             _stackedWidget->setVisible(false);
             setFixedSize(sizeHint().width(), _titleWidget->size().height() + 5);
         }
