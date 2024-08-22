@@ -111,7 +111,7 @@ class RibbonTitleWidget : public QFrame {
         this->_helpButton->setIcon(QIcon("icons/help.png"));
         this->_helpButton->setAutoRaise(true);
         this->_helpButton->setToolTip("Help");
-        connect(this->_helpButton, SIGNAL(clicked(bool)), this, SLOT(helpButtonClicked(bool)));
+        connect(this->_helpButton, SIGNAL(clicked(bool)), this, SIGNAL(helpButtonClicked(bool)));
         this->addRightToolButton(this->_collapseRibbonButton);
         this->addRightToolButton(this->_helpButton);
 
