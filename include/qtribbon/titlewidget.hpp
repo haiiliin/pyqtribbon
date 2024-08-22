@@ -221,25 +221,22 @@ class RibbonTitleWidget : public QFrame {
         return widget;
     }
 
-    void mousePressEvent(QMouseEvent *event) {
+    void mousePressEvent(QMouseEvent *event) override {
         _start_point = event->pos();
         _window_point = topLevelWidget()->frameGeometry().topLeft();
     }
 
-    void mouseMoveEvent(QMouseEvent *event) {
+    void mouseMoveEvent(QMouseEvent *event) override {
         QPoint relpos = event->pos() - _start_point;
-        if (!_start_point.isNull() && !_window_point.isNull()) {
-            topLevelWidget()->move(_window_point + relpos);
-        }
+        if (!_start_point.isNull() && !_window_point.isNull()) topLevelWidget()->move(_window_point + relpos);
         topLevelWidget()->windowHandle()->startSystemMove();
     }
 
-    void mouseDoubleClickEvent(QMouseEvent *event) {
-        if (topLevelWidget()->isMaximized()) {
+    void mouseDoubleClickEvent(QMouseEvent *event) override {
+        if (topLevelWidget()->isMaximized())
             topLevelWidget()->showNormal();
-        } else {
+        else
             topLevelWidget()->showMaximized();
-        }
     }
 };
 }  // namespace qtribbon
