@@ -24,11 +24,11 @@ set(PROJECT_SOURCES
         qtribbon/tabbar.hpp
         qtribbon/titlewidget.hpp
         qtribbon/toolbutton.hpp
+        qtribbon/resources.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(qtribbon MANUAL_FINALIZATION ${PROJECT_SOURCES}
-        qtribbon/resources.qrc)
+    qt_add_executable(qtribbon MANUAL_FINALIZATION ${PROJECT_SOURCES})
 else()
     if(ANDROID)
         add_library(qtribbon SHARED ${PROJECT_SOURCES})
