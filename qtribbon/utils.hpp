@@ -10,7 +10,7 @@
 
 namespace qtribbon {
 
-QString DataFile(const QString& filename) {
+inline QString DataFile(const QString& filename) {
     QDir dir = QDir::currentPath();
     return dir.absoluteFilePath(filename);
 }

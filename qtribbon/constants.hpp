@@ -15,7 +15,7 @@ enum class RibbonCategoryStyle { Normal = 0, Context = 1 };
 const RibbonCategoryStyle Normal = RibbonCategoryStyle::Normal;
 const RibbonCategoryStyle Context = RibbonCategoryStyle::Context;
 
-std::vector<QColor> contextColors = {
+inline std::vector<QColor> contextColors = {
     QColor(201, 89, 156),  // 玫红
     QColor(242, 203, 29),  // 黄
     QColor(255, 157, 0),   // 橙
