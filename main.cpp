@@ -16,7 +16,6 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     QApplication::setFont(QFont("Times New Roman", 10));
-    QApplication::setStyle("Windows");
 
     QMainWindow window;
     qtribbon::RibbonBar ribbon("Ribbon Bar Title", 6);
