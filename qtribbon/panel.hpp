@@ -317,6 +317,18 @@ class RibbonPanel : public QFrame {
         if (!statusTip.isEmpty()) button->setStatusTip(statusTip);
         if (!showText) button->setToolButtonStyle(Qt::ToolButtonIconOnly);
         button->setCheckable(checkable);
+
+        // Reduce the maximum height of the large button to make it look better
+        int maximumHeight = this->height() - _titleLabel->sizeHint().height() - _mainLayout->spacing() -
+                            _mainLayout->contentsMargins().top() - _mainLayout->contentsMargins().bottom();
+        button->setMaximumHeight(maximumHeight);
+        if (rowSpan == Large) {
+            int fontSize = std::max(button->font().pointSize() * 4 / 3, button->font().pixelSize());
+            int arrowSize = fontSize;
+            int maximumIconSize = std::max(maximumHeight - fontSize * 2 - arrowSize, 48);
+            button->setMaximumIconSize(maximumIconSize);
+        }
+
         addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(button);
         return button;
     }
