@@ -1,0 +1,110 @@
+RibbonApplicationButton, RibbonPanelOptionButton {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+QToolBar {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+RibbonApplicationButton::menu-indicator {
+    image: none;
+}
+
+RibbonTabBar {
+    border: 2px solid purple;
+    border-radius: 20px;
+}
+
+RibbonTitleLabel {
+    border: 2px solid purple;
+    border-radius: 20px;
+}
+
+RibbonBar {
+    border: 2px solid red;
+    border-radius: 20px;
+}
+
+RibbonCategory {
+    border: 2px solid green;
+    border-radius: 20px;
+}
+
+RibbonCategoryScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+RibbonCategoryScrollAreaContents {
+    border: none;
+    background-color: transparent;
+}
+
+RibbonPanel {
+    border: 2px solid brown;
+    border-radius: 20px;
+
+}
+
+RibbonSeparator {
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+RibbonPanelTitle {
+    border: 2px solid green;
+    border-radius: 20px;
+}
+
+RibbonPanelItemWidget {
+    border: 0px solid black;
+    border-radius: 20px;
+
+}
+
+QTabBar {
+    background-color: transparent;
+}
+
+QTabBar QToolButton {
+    background-color: transparent;
+}
+
+QTabBar::tab {
+	color: gray;
+	border: none;
+	background: transparent;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 6px;
+	margin-bottom: 0px;
+	min-width: 100px;
+	max-width: 250px;
+	min-height: 25px;
+	max-height: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+QTabBar::tab:selected {
+	color: blue;
+	background: transparent;
+	border-bottom: 3px solid blue;
+}
+
+QToolButton::menu-button {
+	border: 2px solid transparent;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	/* 16px width + 4px for border = 20px allocated above */
+	width: 16px;
+}
