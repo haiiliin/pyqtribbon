@@ -152,8 +152,7 @@ class RibbonPanel : public QFrame {
         : QFrame(parent),
           _maxRows(maxRows),
           _showPanelOptionButton(showPanelOptionButton),
-          _gridLayoutManager(new RibbonGridLayoutManager(maxRows)),
-          _titleHeight(30) {
+          _gridLayoutManager(new RibbonGridLayoutManager(maxRows)) {
         // Main Layout
         _mainLayout = new QVBoxLayout(this);
         _mainLayout->setContentsMargins(5, 2, 5, 2);
