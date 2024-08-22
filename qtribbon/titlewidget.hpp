@@ -24,10 +24,10 @@ class RibbonApplicationButton : public QToolButton {
 
    public:
     explicit RibbonApplicationButton(QWidget *parent = nullptr) : QToolButton(parent) {}
-    ~RibbonApplicationButton() {}
+    ~RibbonApplicationButton() override = default;
 
     RibbonMenu *addFileMenu() {
-        RibbonMenu *menu = new RibbonMenu(this);
+        auto *menu = new RibbonMenu(this);
         this->setPopupMode(QToolButton::InstantPopup);
         this->setMenu(menu);
         return menu;
@@ -39,7 +39,7 @@ class RibbonTitleLabel : public QLabel {
 
    public:
     explicit RibbonTitleLabel(QWidget *parent = nullptr) : QLabel(parent) {}
-    ~RibbonTitleLabel() {}
+    ~RibbonTitleLabel() override = default;
 };
 
 class RibbonTitleWidget : public QFrame {
@@ -58,8 +58,10 @@ class RibbonTitleWidget : public QFrame {
     QHBoxLayout *_tabBarLayout;
     QList<QToolButton *> _quickAccessButtons;
     QList<QToolButton *> _rightToolButtons;
-    int _quickAccessButtonHeight;
-    int _rightButtonHeight;
+
+    int _quickAccessButtonHeight = 20;
+    int _rightButtonHeight = 20;
+
     QPoint _start_point;
     QPoint _window_point;
 
@@ -140,7 +142,7 @@ class RibbonTitleWidget : public QFrame {
         this->_tabBarLayout->addWidget(this->_titleLabel, 1, Qt::AlignVCenter);
         this->_tabBarLayout->addWidget(this->_rightToolBar, 0, Qt::AlignVCenter);
     }
-    ~RibbonTitleWidget() {
+    ~RibbonTitleWidget() override {
         delete _applicationButton;
         delete _quickAccessToolBar;
         delete _quickAccessToolBarWidget;

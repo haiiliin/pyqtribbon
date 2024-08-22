@@ -20,11 +20,11 @@ class RibbonStackedWidget : public QStackedWidget {
     Q_OBJECT
    public:
     explicit RibbonStackedWidget(QWidget* parent = nullptr) : QStackedWidget(parent) {
-        QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect(this);
+        auto* effect = new QGraphicsDropShadowEffect(this);
         effect->setOffset(2, 2);
         this->setGraphicsEffect(effect);
     }
-    ~RibbonStackedWidget() {}
+    ~RibbonStackedWidget() override = default;
 };
 
 class RibbonBar : public QMenuBar {
@@ -48,7 +48,7 @@ class RibbonBar : public QMenuBar {
    public:
     explicit RibbonBar(QWidget* parent = nullptr) : RibbonBar("Ribbon Bar Title", 6, parent) {}
 
-    explicit RibbonBar(QString title = "Ribbon Bar Title", int maxRows = 6, QWidget* parent = nullptr)
+    explicit RibbonBar(const QString& title = "Ribbon Bar Title", int maxRows = 6, QWidget* parent = nullptr)
         : QMenuBar(parent), _maxRows(maxRows) {
         this->setFixedHeight(_ribbonHeight);
 
@@ -72,7 +72,7 @@ class RibbonBar : public QMenuBar {
         this->setRibbonStyle(RibbonStyle::Default);
     }
 
-    ~RibbonBar() {
+    ~RibbonBar() override {
         delete _titleWidget;
         delete _stackedWidget;
         delete _mainLayout;
@@ -83,7 +83,7 @@ class RibbonBar : public QMenuBar {
 
     void setAutoHideRibbon(bool autoHide) { _autoHideRibbon = autoHide; }
 
-    bool eventFilter(QObject* object, QEvent* event) {
+    bool eventFilter(QObject* object, QEvent* event) override {
         if (_autoHideRibbon && event->type() == QEvent::HoverMove) setRibbonVisible(underMouse());
         return QMenuBar::eventFilter(object, event);
     }
@@ -92,8 +92,7 @@ class RibbonBar : public QMenuBar {
         QFile baseFile = QFile("://styles/base.qss");
         baseFile.open(QFile::ReadOnly);
         QString baseStyle = baseFile.readAll();
-        QFile specificFile =
-            QFile(QString("://styles/%1.qss").arg(style == RibbonStyle::Debug ? "debug" : "default"));
+        QFile specificFile = QFile(QString("://styles/%1.qss").arg(style == RibbonStyle::Debug ? "debug" : "default"));
         specificFile.open(QFile::ReadOnly);
         QString specificStyle = specificFile.readAll();
         setStyleSheet(baseStyle + specificStyle);
@@ -160,7 +159,7 @@ class RibbonBar : public QMenuBar {
 
     QMap<QString, RibbonCategory*> categories() const { return _categories; }
 
-    RibbonCategory* addCategory(QString title, RibbonCategoryStyle style = Normal, QColor color = QColor()) {
+    RibbonCategory* addCategory(const QString& title, RibbonCategoryStyle style = Normal, QColor color = QColor()) {
         if (_categories.contains(title))
             throw std::invalid_argument(QString("Category with title %1 already exists.").arg(title).toStdString());
 
@@ -191,21 +190,21 @@ class RibbonBar : public QMenuBar {
         return category;
     }
 
-    RibbonNormalCategory* addNormalCategory(QString title) {
+    RibbonNormalCategory* addNormalCategory(const QString& title) {
         return dynamic_cast<RibbonNormalCategory*>(addCategory(title, RibbonCategoryStyle::Normal));
     }
 
-    RibbonContextCategory* addContextCategory(QString title, QColor color) {
+    RibbonContextCategory* addContextCategory(const QString& title, QColor color) {
         return dynamic_cast<RibbonContextCategory*>(addCategory(title, RibbonCategoryStyle::Context, color));
     }
 
-    RibbonContextCategories* addContextCategories(QString name, QStringList titles, QColor color) {
+    RibbonContextCategories* addContextCategories(const QString& name, const QStringList& titles, QColor color) {
         if (color == QColor()) {
             color = contextColors[_contextCategoryCount % contextColors.size()];
             _contextCategoryCount++;
         }
         QMap<QString, RibbonContextCategory*> categories;
-        for (QString title : titles) categories[title] = addContextCategory(title, color);
+        for (const QString& title : titles) categories[title] = addContextCategory(title, color);
         return new RibbonContextCategories(name, color, categories);
     }
 
@@ -218,13 +217,13 @@ class RibbonBar : public QMenuBar {
     }
 
     void showContextCategory(RibbonCategory* category) {
-        RibbonContextCategory* contextCategory = dynamic_cast<RibbonContextCategory*>(category);
+        auto* contextCategory = dynamic_cast<RibbonContextCategory*>(category);
         if (contextCategory) {
             _titleWidget->tabBar()->addTab(contextCategory->title(), contextCategory->color());
             _titleWidget->tabBar()->setCurrentIndex(_titleWidget->tabBar()->count() - 1);
             _stackedWidget->setCurrentWidget(contextCategory);
         }
-        RibbonContextCategories* contextCategories = dynamic_cast<RibbonContextCategories*>(category);
+        auto* contextCategories = dynamic_cast<RibbonContextCategories*>(category);
         if (contextCategories) {
             QStringList titles = contextCategories->keys();
             _titleWidget->tabBar()->addAssociatedTabs(contextCategories->name(), titles, contextCategories->color());
@@ -234,11 +233,11 @@ class RibbonBar : public QMenuBar {
     }
 
     void hideContextCategory(RibbonCategory* category) {
-        RibbonContextCategory* contextCategory = dynamic_cast<RibbonContextCategory*>(category);
+        auto* contextCategory = dynamic_cast<RibbonContextCategory*>(category);
         if (contextCategory) {
             tabBar()->removeTab(tabBar()->indexOf(contextCategory->title()));
         }
-        RibbonContextCategories* contextCategories = dynamic_cast<RibbonContextCategories*>(category);
+        auto* contextCategories = dynamic_cast<RibbonContextCategories*>(category);
         if (contextCategories) {
             for (RibbonContextCategory* c : *contextCategories) {
                 tabBar()->removeTab(tabBar()->indexOf(c->title()));
@@ -277,7 +276,7 @@ class RibbonBar : public QMenuBar {
         return _categories[_titleWidget->tabBar()->tabText(_titleWidget->tabBar()->currentIndex())];
     }
 
-    QSize minimumSizeHint() { return QSize(QMenuBar::minimumSizeHint().width(), _ribbonHeight); }
+    QSize minimumSizeHint() { return {QMenuBar::minimumSizeHint().width(), _ribbonHeight}; }
 
     void _collapseButtonClicked() {
         connect(tabBar(), &QTabBar::currentChanged, this, &RibbonBar::showRibbon);
@@ -308,7 +307,7 @@ class RibbonBar : public QMenuBar {
         }
     }
 
-    bool ribbonVisible() { return _ribbonVisible; }
+    bool ribbonVisible() const { return _ribbonVisible; }
 
     void setRibbonVisible(bool visible) {
         if (visible)

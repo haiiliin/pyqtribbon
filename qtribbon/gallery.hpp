@@ -29,7 +29,7 @@ class RibbonPopupWidget : public QFrame {
 
    public:
     explicit RibbonPopupWidget(QWidget *parent = nullptr) : QFrame(parent) {}
-    ~RibbonPopupWidget() {}
+    ~RibbonPopupWidget() override = default;
 };
 
 class RibbonGalleryListWidget : public QListWidget {
@@ -44,7 +44,7 @@ class RibbonGalleryListWidget : public QListWidget {
         setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         setIconSize(QSize(64, 64));
     }
-    ~RibbonGalleryListWidget() {}
+    ~RibbonGalleryListWidget() override = default;
 
     void resizeEvent(QResizeEvent *e) override {
         // Resize the list widget.
@@ -67,7 +67,7 @@ class RibbonGalleryButton : public QToolButton {
 
    public:
     explicit RibbonGalleryButton(QWidget *parent = nullptr) : QToolButton(parent) {}
-    ~RibbonGalleryButton() {}
+    ~RibbonGalleryButton() override = default;
 };
 
 class RibbonGalleryPopupListWidget : public RibbonGalleryListWidget {
@@ -77,7 +77,7 @@ class RibbonGalleryPopupListWidget : public RibbonGalleryListWidget {
     explicit RibbonGalleryPopupListWidget(QWidget *parent = nullptr) : RibbonGalleryListWidget(parent) {
         setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     }
-    ~RibbonGalleryPopupListWidget() {}
+    ~RibbonGalleryPopupListWidget() override = default;
 };
 
 class RibbonGallery : public QFrame {
@@ -163,7 +163,7 @@ class RibbonGallery : public QFrame {
         connect(_moreButton, &RibbonGalleryButton::clicked, this, &RibbonGallery::showPopup);
     }
 
-    ~RibbonGallery() {
+    ~RibbonGallery() override {
         delete _mainLayout;
         delete _scrollButtonLayout;
         delete _upButton;
@@ -178,13 +178,13 @@ class RibbonGallery : public QFrame {
         for (RibbonToolButton *button : _popupButtons) delete button;
     }
 
-    void _handlePopupAction(QAction *action) {
+    void _handlePopupAction(QAction *action) const {
         if (action != nullptr) {
             connect(action, &QAction::triggered, this, &RibbonGallery::hidePopupWidget);
         }
     }
 
-    void resizeEvent(QResizeEvent *event) {
+    void resizeEvent(QResizeEvent *event) override {
         int height = this->height() - _mainLayout->contentsMargins().top() - _mainLayout->contentsMargins().bottom();
         _upButton->setFixedSize(height / 4, height / 3);
         _downButton->setFixedSize(height / 4, height / 3);
@@ -210,7 +210,7 @@ class RibbonGallery : public QFrame {
     void setPopupWindowSize(QSize size) { _popupWindowSize = size; }
 
     void setSelectedButton() {
-        RibbonToolButton *button = qobject_cast<RibbonToolButton *>(sender());
+        auto *button = qobject_cast<RibbonToolButton *>(sender());
         if (button != nullptr) {
             int row = _popupButtons.indexOf(button);
             _listWidget->scrollTo(_listWidget->model()->index(row, 0), QAbstractItemView::EnsureVisible);
@@ -221,7 +221,7 @@ class RibbonGallery : public QFrame {
     }
 
     void _addWidget(QWidget *widget) {
-        QListWidgetItem *item = new QListWidgetItem();
+        auto *item = new QListWidgetItem();
         item->setSizeHint(widget->sizeHint());
         _listWidget->setSpacing((height() - item->sizeHint().height()) / 2);
         _listWidget->addItem(item);
@@ -229,7 +229,7 @@ class RibbonGallery : public QFrame {
     }
 
     void _addPopupWidget(QWidget *widget) {
-        QListWidgetItem *item = new QListWidgetItem();
+        auto *item = new QListWidgetItem();
         item->setSizeHint(widget->sizeHint());
         _popupListWidget->setSpacing((height() - item->sizeHint().height()) / 2);
         _popupListWidget->addItem(item);
@@ -238,10 +238,11 @@ class RibbonGallery : public QFrame {
 
     void setPopupHideOnClick(bool popupHideOnClick) { _popupHideOnClick = popupHideOnClick; }
 
-    RibbonToolButton *addButton(QString text = "", QIcon icon = QIcon(), QKeySequence shortcut = QKeySequence(),
-                                QString tooltip = "", QString statusTip = "", bool checkable = false) {
-        RibbonToolButton *button = new RibbonToolButton(this);
-        RibbonToolButton *popupButton = new RibbonToolButton(_popupWidget);
+    RibbonToolButton *addButton(const QString &text = "", const QIcon &icon = QIcon(),
+                                const QKeySequence &shortcut = QKeySequence(), const QString &tooltip = "",
+                                const QString &statusTip = "", bool checkable = false) {
+        auto *button = new RibbonToolButton(this);
+        auto *popupButton = new RibbonToolButton(_popupWidget);
         if (!text.isEmpty()) {
             button->setText(text);
             popupButton->setText(text);
@@ -285,8 +286,9 @@ class RibbonGallery : public QFrame {
         return button;
     }
 
-    RibbonToolButton *addToggleButton(QString text = "", QIcon icon = QIcon(), QKeySequence shortcut = QKeySequence(),
-                                      QString tooltip = "", QString statusTip = "") {
+    RibbonToolButton *addToggleButton(const QString &text = "", const QIcon &icon = QIcon(),
+                                      const QKeySequence &shortcut = QKeySequence(), const QString &tooltip = "",
+                                      const QString &statusTip = "") {
         return addButton(text, icon, shortcut, tooltip, statusTip, true);
     }
 };

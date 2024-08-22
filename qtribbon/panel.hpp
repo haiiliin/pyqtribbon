@@ -29,7 +29,7 @@ namespace qtribbon {
 class RibbonPanelTitle : public QLabel {
    public:
     explicit RibbonPanelTitle(QWidget *parent = nullptr) : QLabel(parent) {}
-    ~RibbonPanelTitle() {}
+    ~RibbonPanelTitle() override = default;
 };
 
 class RibbonGridLayoutManager {
@@ -44,7 +44,7 @@ class RibbonGridLayoutManager {
             row.fill(true);
         }
     }
-    ~RibbonGridLayoutManager() {}
+    ~RibbonGridLayoutManager() = default;
 
     std::pair<int, int> request_cells(int rowSpan = 1, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise) {
         if (rowSpan > rows) {
@@ -114,12 +114,12 @@ class RibbonGridLayoutManager {
 class RibbonPanelItemWidget : public QFrame {
    public:
     explicit RibbonPanelItemWidget(QWidget *parent = nullptr) : QFrame(parent) {
-        QVBoxLayout *layout = new QVBoxLayout(this);
+        auto *layout = new QVBoxLayout(this);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(0);
         setLayout(layout);
     }
-    ~RibbonPanelItemWidget() {}
+    ~RibbonPanelItemWidget() override = default;
 
     void addWidget(QWidget *widget) { layout()->addWidget(widget); }
 };
@@ -127,7 +127,7 @@ class RibbonPanelItemWidget : public QFrame {
 class RibbonPanelOptionButton : public QToolButton {
    public:
     explicit RibbonPanelOptionButton(QWidget *parent = nullptr) : QToolButton(parent) {}
-    ~RibbonPanelOptionButton() {}
+    ~RibbonPanelOptionButton() override = default;
 };
 
 class RibbonPanel : public QFrame {
@@ -146,8 +146,8 @@ class RibbonPanel : public QFrame {
     int _largeRows = 6;
     int _mediumRows = 3;
     int _smallRows = 2;
-    bool _showPanelOptionButton;
-    int _titleHeight;
+    bool _showPanelOptionButton = true;
+    int _titleHeight = 15;
 
    signals:
     void panelOptionClicked(bool);
@@ -156,7 +156,11 @@ class RibbonPanel : public QFrame {
     explicit RibbonPanel(QWidget *parent = nullptr) : RibbonPanel("", 6, true, parent) {}
     explicit RibbonPanel(const QString &title = "", int maxRows = 6, bool showPanelOptionButton = true,
                          QWidget *parent = nullptr)
-        : QFrame(parent), _maxRows(maxRows), _showPanelOptionButton(showPanelOptionButton) {
+        : QFrame(parent),
+          _maxRows(maxRows),
+          _showPanelOptionButton(showPanelOptionButton),
+          _gridLayoutManager(new RibbonGridLayoutManager(maxRows)),
+          _titleHeight(30) {
         // Main Layout
         _mainLayout = new QVBoxLayout(this);
         _mainLayout->setContentsMargins(5, 2, 5, 2);
@@ -171,7 +175,7 @@ class RibbonPanel : public QFrame {
         // Title Layout
         _titleWidget = new QWidget(this);
         _titleWidget->setFixedHeight(_titleHeight);
-        QHBoxLayout *_titleLayout = new QHBoxLayout(_titleWidget);
+        auto *_titleLayout = new QHBoxLayout(_titleWidget);
         _titleLayout->setContentsMargins(0, 0, 0, 0);
         _titleLayout->setSpacing(5);
         _titleLabel = new RibbonPanelTitle(this);
@@ -193,7 +197,7 @@ class RibbonPanel : public QFrame {
         _mainLayout->addWidget(_titleWidget, 0);
     }
 
-    ~RibbonPanel() {
+    ~RibbonPanel() override {
         delete _gridLayoutManager;
         delete _mainLayout;
         delete _titleWidget;
@@ -280,7 +284,7 @@ class RibbonPanel : public QFrame {
         int maximumHeight = rowHeight() * rowSpan1 + _actionsLayout->verticalSpacing() * (rowSpan1 - 2);
         widget->setMaximumHeight(maximumHeight);
         if (fixedHeight) widget->setFixedHeight(std::max(int(fixedHeight * maximumHeight), int(0.4 * maximumHeight)));
-        RibbonPanelItemWidget *item = new RibbonPanelItemWidget(this);
+        auto *item = new RibbonPanelItemWidget(this);
         item->addWidget(widget);
         _actionsLayout->addWidget(item, row, col, rowSpan1, colSpan, alignment);
         return widget;
@@ -309,10 +313,10 @@ class RibbonPanel : public QFrame {
 
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
-    RibbonToolButton *addButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
-                                QKeySequence shortcut = QKeySequence(), QString tooltip = "", QString statusTip = "",
-                                bool checkable = false) {
-        RibbonToolButton *button = new RibbonToolButton(this);
+    RibbonToolButton *addButton(const QString &text = "", const QIcon &icon = QIcon(), bool showText = true,
+                                const QKeySequence &shortcut = QKeySequence(), const QString &tooltip = "",
+                                const QString &statusTip = "", bool checkable = false) {
+        auto *button = new RibbonToolButton(this);
         button->setButtonStyle(rowSpan);
         if (!text.isEmpty()) button->setText(text);
         if (!icon.isNull()) button->setIcon(icon);
@@ -385,7 +389,7 @@ class RibbonPanel : public QFrame {
     template <RibbonButtonStyle rowSpan = Large, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
     RibbonSeparator *addSeparator(Qt::Orientation orientation = Qt::Vertical, int width = 6) {
-        RibbonSeparator *separator = new RibbonSeparator(orientation, width);
+        auto *separator = new RibbonSeparator(orientation, width);
         addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(separator);
         return separator;
     }
@@ -403,7 +407,7 @@ class RibbonPanel : public QFrame {
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
     RibbonGallery *addGallery(int minimumWidth = 800, bool popupHideOnClick = false) {
-        RibbonGallery *gallery = new RibbonGallery(minimumWidth, popupHideOnClick, this);
+        auto *gallery = new RibbonGallery(minimumWidth, popupHideOnClick, this);
         int rowSpan1 = defaultRowSpan(Large);
         int maximumHeight = rowHeight() * rowSpan1 + _actionsLayout->verticalSpacing() * (rowSpan1 - 2);
         gallery->setFixedHeight(maximumHeight);
