@@ -250,6 +250,6 @@ if __name__ == "__main__":
     label.setAlignment(QtCore.Qt.AlignCenter)
     layout.addWidget(label, 1)
 
-    window.resize(1800, 350)
+    window.resize(1200, 350)
     window.show()
     sys.exit(app.exec_())
