@@ -74,7 +74,7 @@ class RibbonTitleWidget : public QFrame {
     explicit RibbonTitleWidget(const QString &title = "QtRibbon", QWidget *parent = nullptr) : QFrame(parent) {
         // Set up the layout
         this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        this->_tabBarLayout = new QHBoxLayout();
+        this->_tabBarLayout = new QHBoxLayout(this);
         this->_tabBarLayout->setContentsMargins(0, 0, 0, 0);
         this->_tabBarLayout->setSpacing(0);
 
