@@ -229,7 +229,7 @@ class RibbonTitleWidget : public QFrame {
     void mouseMoveEvent(QMouseEvent *event) override {
         QPoint relpos = event->pos() - _start_point;
         if (!_start_point.isNull() && !_window_point.isNull()) topLevelWidget()->move(_window_point + relpos);
-        topLevelWidget()->windowHandle()->startSystemMove();
+        // TODO topLevelWidget()->windowHandle()->startSystemMove();
     }
 
     void mouseDoubleClickEvent(QMouseEvent *event) override {
