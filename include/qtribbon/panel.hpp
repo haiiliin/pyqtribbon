@@ -182,7 +182,7 @@ class RibbonPanel : public QFrame {
             _panelOption->setIcon(QIcon("path/to/icon.png"));  // Update the path to your icon
             _panelOption->setIconSize(QSize(_titleHeight, _titleHeight));
             _panelOption->setToolTip("Panel options");
-            connect(_panelOption, &QToolButton::clicked, [this]() { emit panelOptionClicked(true); });
+            connect(_panelOption, SIGNAL(clicked(bool)), this, SIGNAL(panelOptionClicked(bool)));
             _titleLayout->addWidget(_panelOption, 0);
         }
 
