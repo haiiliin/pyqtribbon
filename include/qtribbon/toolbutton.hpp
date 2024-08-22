@@ -24,7 +24,7 @@ class RibbonToolButton : public QToolButton {
     int _maximumIconSize;
 
    public:
-    explicit RibbonToolButton(QWidget *parent = nullptr)
+    explicit RibbonToolButton(QWidget* parent = nullptr)
         : QToolButton(parent),
           _buttonStyle(Large),
           _largeButtonIconSize(64),
@@ -85,6 +85,12 @@ class RibbonToolButton : public QToolButton {
     }
 
     RibbonButtonStyle buttonStyle() const { return _buttonStyle; }
+
+    RibbonMenu* addRibbonMenu() {
+        auto menu = new RibbonMenu();
+        setMenu(menu);
+        return menu;
+    }
 };
 }  // namespace qtribbon
 
