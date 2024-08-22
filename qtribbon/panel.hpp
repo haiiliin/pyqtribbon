@@ -40,9 +40,7 @@ class RibbonGridLayoutManager {
    public:
     explicit RibbonGridLayoutManager(int rows) : rows(rows) {
         cells.resize(rows);
-        for (auto &row : cells) {
-            row.fill(true);
-        }
+        for (auto &row : cells) row.fill(true);
     }
     ~RibbonGridLayoutManager() = default;
 
