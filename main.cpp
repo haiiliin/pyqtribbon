@@ -51,11 +51,9 @@ int main(int argc, char *argv[]) {
     panel->addSmallButton("Button 1", QIcon(":/icons/close.png"));
     panel->addSmallButton("Button 2", QIcon(":/icons/close.png"));
     panel->addSmallButton("Button 3", QIcon(":/icons/close.png"));
-    auto showCategoryButton2 =
-        panel->addMediumToggleButton("Show/Hide Category 2", QIcon(":/icons/close.png"));
+    auto showCategoryButton2 = panel->addMediumToggleButton("Show/Hide Category 2", QIcon(":/icons/close.png"));
     panel->addVerticalSeparator();
-    auto showCategoryButton3 =
-        panel->addMediumToggleButton("Show/Hide Category 3", QIcon(":/icons/close.png"));
+    auto showCategoryButton3 = panel->addMediumToggleButton("Show/Hide Category 3", QIcon(":/icons/close.png"));
     auto showCategoryButton45 =
         panel->addMediumToggleButton("Show/Hide Category 4/5", QIcon(":/icons/close.png"), 2, Qt::AlignLeft);
     panel->addLargeButton("Button 6", QIcon(":/icons/close.png"));
