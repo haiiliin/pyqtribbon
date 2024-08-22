@@ -45,66 +45,61 @@ class RibbonGridLayoutManager {
     ~RibbonGridLayoutManager() = default;
 
     std::pair<int, int> request_cells(int rowSpan = 1, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise) {
-        if (rowSpan > rows) {
-            throw std::invalid_argument("RowSpan is too large");
-        }
+        if (rowSpan > rows) throw std::invalid_argument("RowSpan is too large");
+
         if (mode == ColumnWise) {
-            for (int row = 0; row < cells.size() - rowSpan + 1; ++row) {
-                for (int col = 0; col < cells[0].size() - colSpan + 1; ++col) {
-                    bool allTrue = true;
+            for (int row = 0; row <= cells.size() - rowSpan; ++row) {
+                for (int col = 0; col <= cells[0].size() - colSpan; ++col) {
+                    bool all = true;
                     for (int i = row; i < row + rowSpan; ++i) {
-                        for (int j = col; j < col + colSpan; ++j) {
+                        for (int j = col; j < col + colSpan; ++j)
                             if (!cells[i][j]) {
-                                allTrue = false;
+                                all = false;
                                 break;
                             }
-                        }
-                        if (!allTrue) break;
+
+                        if (!all) break;
                     }
-                    if (allTrue) {
-                        for (int i = row; i < row + rowSpan; ++i) {
+                    if (all) {
+                        for (int i = row; i < row + rowSpan; ++i)
                             for (int j = col; j < col + colSpan; ++j) cells[i][j] = false;
-                        }
+
                         return std::make_pair(row, col);
                     }
                 }
             }
         } else {
             for (int col = 0; col < cells[0].size(); ++col) {
-                bool allTrue = true;
-                for (int i = 0; i < rows; ++i) {
-                    if (!cells[i][col]) {
-                        allTrue = false;
+                bool all = true;
+                for (const auto &cell : cells)
+                    if (!cell[col]) {
+                        all = false;
                         break;
                     }
-                }
-                if (allTrue) {
+
+                if (all) {
                     if (cells[0].size() - col < colSpan) {
-                        for (int i = 0; i < rows; ++i) cells[i].resize(colSpan - (cells[0].size() - col), true);
+                        for (auto &cell : cells) cell.resize(cells[0].size() + colSpan - (cells[0].size() - col), true);
                     }
-                    for (int i = 0; i < rows; ++i) cells[i][col] = false;
+                    for (auto &cell : cells) cell[col] = false;
 
                     return std::make_pair(0, col);
                 }
             }
         }
+
         int cols = cells[0].size();
         int colSpan1 = colSpan;
-        bool allTrue = true;
-        for (int i = 0; i < rows; ++i) {
-            if (!cells[i][cols - 1]) {
-                allTrue = false;
-                break;
-            }
+        if (std::all_of(cells.begin(), cells.end(), [](const QVector<bool> &row) { return row.back(); })) {
+            cols -= 1;
+            colSpan1 -= 1;
         }
-        if (allTrue) {
-            cols--;
-            colSpan1--;
-        }
-        for (int i = 0; i < rows; ++i) {
-            cells[i].resize(cols + colSpan1, true);
+
+        for (auto &cell : cells) cell.resize(cols + colSpan1, true);
+
+        for (int i = 0; i < rowSpan; ++i)
             for (int j = cols; j < cols + colSpan; ++j) cells[i][j] = false;
-        }
+
         return std::make_pair(0, cols);
     }
 };
