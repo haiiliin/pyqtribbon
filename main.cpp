@@ -11,21 +11,20 @@
 #include <QMenu>
 #include <QVBoxLayout>
 
-#include "qtribbon/RibbonBar.hpp"
-#include "qtribbon/RibbonButton.hpp"
-#include "qtribbon/RibbonCategory.hpp"
-#include "qtribbon/RibbonGallery.hpp"
-#include "qtribbon/RibbonMenu.hpp"
-#include "qtribbon/RibbonPanel.hpp"
-#include "qtribbon/RibbonToggleButton.hpp"
+#include "qtribbon/category.hpp"
+#include "qtribbon/gallery.hpp"
+#include "qtribbon/menu.hpp"
+#include "qtribbon/panel.hpp"
+#include "qtribbon/ribbonbar.hpp"
+#include "qtribbon/toolbutton.hpp"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    app.setFont(QFont("Times New Roman", 10));
-    app.setStyle("Windows");
+    QApplication::setFont(QFont("Times New Roman", 10));
+    QApplication::setStyle("Windows");
 
     QMainWindow window;
-    qtribbon::RibbonBar ribbon(6);
+    qtribbon::RibbonBar ribbon("Ribbon Bar Title", 6);
     ribbon.setRibbonStyle(qtribbon::RibbonStyle::Default);
     window.setMenuBar(&ribbon);
     window.setWindowTitle("Ribbon Test");
@@ -70,45 +69,45 @@ int main(int argc, char *argv[]) {
     panel->addMediumButton("Button 7", QIcon("pyqtribbon/icons/close.png"));
     panel->addMediumButton("Button 8", QIcon("pyqtribbon/icons/close.png"));
 
-    auto saveButton = panel->addLargeButton("Button 8", QIcon("pyqtribbon/icons/close.png"));
-    auto menu = new QMenu();
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
-    saveButton->setMenu(menu);
-    saveButton->setPopupMode(QToolButton::InstantPopup);
+    auto *saveButton1 = panel->addLargeButton("Button 8", QIcon("pyqtribbon/icons/close.png"));
+    auto menu1 = new QMenu();
+    menu1->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
+    menu1->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
+    menu1->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
+    saveButton1->setMenu(menu1);
+    saveButton1->setPopupMode(QToolButton::InstantPopup);
 
-    saveButton = panel->addLargeButton("Button 9", QIcon("pyqtribbon/icons/close.png"));
-    menu = new QMenu();
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
-    saveButton->setMenu(menu);
-    saveButton->setPopupMode(QToolButton::MenuButtonPopup);
+    auto *saveButton2 = panel->addLargeButton("Button 9", QIcon("pyqtribbon/icons/close.png"));
+    auto *menu2 = new QMenu();
+    menu2->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
+    menu2->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
+    menu2->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
+    saveButton2->setMenu(menu2);
+    saveButton2->setPopupMode(QToolButton::MenuButtonPopup);
 
-    saveButton = panel->addLargeButton("Button 10", QIcon("pyqtribbon/icons/close.png"));
-    menu = new QMenu();
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
-    saveButton->setMenu(menu);
-    saveButton->setPopupMode(QToolButton::DelayedPopup);
+    auto *saveButton3 = panel->addLargeButton("Button 10", QIcon("pyqtribbon/icons/close.png"));
+    auto *menu3 = new QMenu();
+    menu3->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
+    menu3->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
+    menu3->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
+    saveButton3->setMenu(menu3);
+    saveButton3->setPopupMode(QToolButton::DelayedPopup);
 
-    saveButton = panel->addLargeButton("Button 11", QIcon("pyqtribbon/icons/close.png"));
-    menu = saveButton->addRibbonMenu();
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
-    menu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
-    auto submenu = menu->addMenu(QIcon("pyqtribbon/icons/close.png"), "Submenu");
+    auto *saveButton4 = panel->addLargeButton("Button 11", QIcon("pyqtribbon/icons/close.png"));
+    auto *menu4 = saveButton4->addRibbonMenu();
+    menu4->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 1");
+    menu4->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2");
+    menu4->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3");
+    auto *submenu = menu4->addMenu(QIcon("pyqtribbon/icons/close.png"), "Submenu");
     submenu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 4");
     submenu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 5");
     submenu->addAction(QIcon("pyqtribbon/icons/close.png"), "Action 6");
-    menu->addSpacing();
-    menu->addLabel("This is a custom widget");
-    auto formLayout = menu->addFormLayoutWidget();
+    menu4->addSpacing();
+    menu4->addLabel("This is a custom widget");
+    auto formLayout = menu4->addFormLayoutWidget();
     formLayout->addRow(new QLabel("Row 1"), new QLineEdit());
-    saveButton->setPopupMode(QToolButton::InstantPopup);
-    panel->addWidget(saveButton, Large);
+    saveButton4->setPopupMode(QToolButton::InstantPopup);
+    panel->addLargeWidget(saveButton4);
 
     QLabel label("Ribbon Test Window");
     label.setFont(QFont("Arial", 20));
@@ -117,5 +116,5 @@ int main(int argc, char *argv[]) {
 
     window.resize(1800, 350);
     window.show();
-    return app.exec();
+    return QApplication::exec();
 }
