@@ -306,6 +306,36 @@ class RibbonPanel(QtWidgets.QFrame):
             / self._gridLayoutManager.rows
         )
 
+    def setTitle(self, title: str):
+        """Set the title of the panel.
+
+        :param title: The title to set.
+        """
+        self._titleLabel.setText(title)
+
+    def title(self):
+        """Get the title of the panel.
+
+        :return: The title.
+        """
+        return self._titleLabel.text()
+
+    def setTitleHeight(self, height: int):
+        """Set the height of the title widget.
+
+        :param height: The height to set.
+        """
+        self._titleHeight = height
+        self._titleWidget.setFixedHeight(height)
+        self._panelOption.setIconSize(QtCore.QSize(height, height))
+
+    def titleHeight(self) -> int:
+        """Get the height of the title widget.
+
+        :return: The height of the title widget.
+        """
+        return self._titleHeight
+
     def addWidgetsBy(self, data: Dict[str, Dict]) -> Dict[str, QtWidgets.QWidget]:
         """Add widgets to the panel.
 
@@ -591,33 +621,3 @@ class RibbonPanel(QtWidgets.QFrame):
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
         return self.addWidget(gallery, **kwargs)
-
-    def setTitle(self, title: str):
-        """Set the title of the panel.
-
-        :param title: The title to set.
-        """
-        self._titleLabel.setText(title)
-
-    def title(self):
-        """Get the title of the panel.
-
-        :return: The title.
-        """
-        return self._titleLabel.text()
-
-    def setTitleHeight(self, height: int):
-        """Set the height of the title widget.
-
-        :param height: The height to set.
-        """
-        self._titleHeight = height
-        self._titleWidget.setFixedHeight(height)
-        self._panelOption.setIconSize(QtCore.QSize(height, height))
-
-    def titleHeight(self) -> int:
-        """Get the height of the title widget.
-
-        :return: The height of the title widget.
-        """
-        return self._titleHeight
