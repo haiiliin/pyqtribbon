@@ -254,6 +254,18 @@ class RibbonPanel : public QFrame {
                                 _gridLayoutManager->rows);
     }
 
+    void setTitle(const QString &title) { _titleLabel->setText(title); }
+
+    QString title() const { return _titleLabel->text(); }
+
+    void setTitleHeight(int height) {
+        _titleHeight = height;
+        _titleWidget->setFixedHeight(height);
+        _panelOption->setIconSize(QSize(height, height));
+    }
+
+    int titleHeight() const { return _titleHeight; }
+
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
     QWidget *addWidget(QWidget *widget) {
@@ -268,6 +280,21 @@ class RibbonPanel : public QFrame {
         item->addWidget(widget);
         _actionsLayout->addWidget(item, row, col, rowSpan1, colSpan, alignment);
         return widget;
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    QWidget *addSmallWidget(QWidget *widget) {
+        return addWidget<Small, colSpan, mode, alignment, fixedHeight>(widget);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    QWidget *addMediumWidget(QWidget *widget) {
+        return addWidget<Medium, colSpan, mode, alignment, fixedHeight>(widget);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    QWidget *addLargeWidget(QWidget *widget) {
+        return addWidget<Large, colSpan, mode, alignment, fixedHeight>(widget);
     }
 
     void removeWidget(QWidget *widget) { _actionsLayout->removeWidget(widget); }
@@ -293,13 +320,80 @@ class RibbonPanel : public QFrame {
         addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(button);
         return button;
     }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addSmallButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                     QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                     QString statusTip = "", bool checkable = false) {
+        return addButton<Small, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                       statusTip, checkable);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addMediumButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                      QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                      QString statusTip = "", bool checkable = false) {
+        return addButton<Medium, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                        statusTip, checkable);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addLargeButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                     QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                     QString statusTip = "", bool checkable = false) {
+        return addButton<Large, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                       statusTip, checkable);
+    }
 
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonToolButton *addToggleButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                      QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                      QString statusTip = "") {
+        return addButton<rowSpan, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                         statusTip, true);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addSmallToggleButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                           QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                           QString statusTip = "") {
+        return addToggleButton<Small, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                             statusTip);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addMediumToggleButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                            QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                            QString statusTip = "") {
+        return addToggleButton<Medium, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                              statusTip);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonToolButton *addLargeToggleButton(QString text = "", QIcon icon = QIcon(), bool showText = true,
+                                           QKeySequence shortcut = QKeySequence(), QString tooltip = "",
+                                           QString statusTip = "") {
+        return addToggleButton<Large, colSpan, mode, alignment, fixedHeight>(text, icon, showText, shortcut, tooltip,
+                                                                             statusTip);
+    }
+
+    template <RibbonButtonStyle rowSpan = Large, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
               Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
     RibbonSeparator *addSeparator(Qt::Orientation orientation = Qt::Vertical, int width = 6) {
         RibbonSeparator *separator = new RibbonSeparator(orientation, width);
         addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(separator);
         return separator;
+    }
+    template <RibbonButtonStyle rowSpan = Large, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonSeparator *addHorizontalSeparator(int height = 6) {
+        return addSeparator<rowSpan, colSpan, mode, alignment, fixedHeight>(Qt::Horizontal, height);
+    }
+    template <RibbonButtonStyle rowSpan = Large, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
+              Qt::AlignmentFlag alignment = Qt::AlignCenter, bool fixedHeight = false>
+    RibbonSeparator *addVerticalSeparator(int width = 6) {
+        return addSeparator<rowSpan, colSpan, mode, alignment, fixedHeight>(Qt::Vertical, width);
     }
 
     template <RibbonButtonStyle rowSpan = Small, int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise,
@@ -312,18 +406,21 @@ class RibbonPanel : public QFrame {
         addWidget<rowSpan, colSpan, mode, alignment, fixedHeight>(gallery);
         return gallery;
     }
-
-    void setTitle(const QString &title) { _titleLabel->setText(title); }
-
-    QString title() const { return _titleLabel->text(); }
-
-    void setTitleHeight(int height) {
-        _titleHeight = height;
-        _titleWidget->setFixedHeight(height);
-        _panelOption->setIconSize(QSize(height, height));
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonGallery *addSmallGallery(int minimumWidth = 800, bool popupHideOnClick = false) {
+        return addGallery<Small, colSpan, mode, alignment, fixedHeight>(minimumWidth, popupHideOnClick);
     }
-
-    int titleHeight() const { return _titleHeight; }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonGallery *addMediumGallery(int minimumWidth = 800, bool popupHideOnClick = false) {
+        return addGallery<Medium, colSpan, mode, alignment, fixedHeight>(minimumWidth, popupHideOnClick);
+    }
+    template <int colSpan = 1, RibbonSpaceFindMode mode = ColumnWise, Qt::AlignmentFlag alignment = Qt::AlignCenter,
+              bool fixedHeight = false>
+    RibbonGallery *addLargeGallery(int minimumWidth = 800, bool popupHideOnClick = false) {
+        return addGallery<Large, colSpan, mode, alignment, fixedHeight>(minimumWidth, popupHideOnClick);
+    }
 };
 
 }  // namespace qtribbon

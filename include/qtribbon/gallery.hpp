@@ -277,6 +277,11 @@ class RibbonGallery : public QFrame {
         _addPopupWidget(popupButton);
         return button;
     }
+
+    RibbonToolButton *addToggleButton(QString text = "", QIcon icon = QIcon(), QKeySequence shortcut = QKeySequence(),
+                                      QString tooltip = "", QString statusTip = "") {
+        return addButton(text, icon, shortcut, tooltip, statusTip, true);
+    }
 };
 
 }  // namespace qtribbon
