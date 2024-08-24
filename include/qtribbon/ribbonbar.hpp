@@ -11,8 +11,9 @@
 #include <QStackedWidget>
 #include <QString>
 #include <QVBoxLayout>
-#include <qtribbon/category.hpp>
-#include <qtribbon/titlewidget.hpp>
+
+#include "category.hpp"
+#include "titlewidget.hpp"
 
 namespace qtribbon {
 class RibbonStackedWidget : public QStackedWidget {

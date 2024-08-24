@@ -17,9 +17,10 @@
 #include <QSize>
 #include <QToolButton>
 #include <QVBoxLayout>
-#include <qtribbon/menu.hpp>
-#include <qtribbon/separator.hpp>
-#include <qtribbon/toolbutton.hpp>
+
+#include "menu.hpp"
+#include "separator.hpp"
+#include "toolbutton.hpp"
 
 namespace qtribbon {
 

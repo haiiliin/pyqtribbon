@@ -16,10 +16,11 @@
 #include <QScrollBar>
 #include <QToolButton>
 #include <QVariant>
-#include <qtribbon/constants.hpp>
-#include <qtribbon/panel.hpp>
-#include <qtribbon/separator.hpp>
 #include <utility>
+
+#include "constants.hpp"
+#include "panel.hpp"
+#include "separator.hpp"
 
 namespace qtribbon {
 

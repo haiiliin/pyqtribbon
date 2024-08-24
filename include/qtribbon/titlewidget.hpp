@@ -13,8 +13,9 @@
 #include <QTabBar>
 #include <QToolBar>
 #include <QToolButton>
-#include <qtribbon/menu.hpp>
-#include <qtribbon/tabbar.hpp>
+
+#include "menu.hpp"
+#include "tabbar.hpp"
 
 namespace qtribbon {
 

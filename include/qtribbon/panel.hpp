@@ -18,11 +18,12 @@
 #include <QVBoxLayout>
 #include <QVariant>
 #include <QWidget>
-#include <qtribbon/constants.hpp>
-#include <qtribbon/gallery.hpp>
-#include <qtribbon/separator.hpp>
-#include <qtribbon/toolbutton.hpp>
 #include <vector>
+
+#include "constants.hpp"
+#include "gallery.hpp"
+#include "separator.hpp"
+#include "toolbutton.hpp"
 
 namespace qtribbon {
 
