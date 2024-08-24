@@ -142,18 +142,7 @@ class RibbonTitleWidget : public QFrame {
         this->_tabBarLayout->addWidget(this->_titleLabel, 1, Qt::AlignVCenter);
         this->_tabBarLayout->addWidget(this->_rightToolBar, 0, Qt::AlignVCenter);
     }
-    ~RibbonTitleWidget() override {
-        delete _applicationButton;
-        delete _quickAccessToolBar;
-        delete _quickAccessToolBarWidget;
-        delete _quickAccessToolBarLayout;
-        delete _rightToolBar;
-        delete _collapseRibbonButton;
-        delete _helpButton;
-        delete _tabBar;
-        delete _titleLabel;
-        delete _tabBarLayout;
-    }
+    ~RibbonTitleWidget() override = default;
 
     RibbonApplicationButton *applicationButton() { return _applicationButton; }
 

@@ -183,14 +183,7 @@ class RibbonPanel : public QFrame {
         _mainLayout->addWidget(_titleWidget, 0);
     }
 
-    ~RibbonPanel() override {
-        delete _gridLayoutManager;
-        delete _mainLayout;
-        delete _titleWidget;
-        delete _titleLabel;
-        if (_showPanelOptionButton) delete _panelOption;
-        delete _actionsLayout;
-    }
+    ~RibbonPanel() override = default;
 
     int maximumRows() const { return _maxRows; }
 

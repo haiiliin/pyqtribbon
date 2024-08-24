@@ -72,12 +72,7 @@ class RibbonBar : public QMenuBar {
         this->setRibbonStyle(RibbonStyle::Default);
     }
 
-    ~RibbonBar() override {
-        delete _titleWidget;
-        delete _stackedWidget;
-        delete _mainLayout;
-        for (auto c : _categories) delete c;
-    }
+    ~RibbonBar() override = default;
 
     bool autoHideRibbon() const { return _autoHideRibbon; }
 

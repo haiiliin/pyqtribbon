@@ -107,14 +107,7 @@ class RibbonCategoryLayoutWidget : public QFrame {
         this->autoSetScrollButtonsVisible();
     }
 
-    ~RibbonCategoryLayoutWidget() override {
-        delete _categoryScrollAreaContents;
-        delete _categoryLayout;
-        delete _categoryScrollArea;
-        delete _previousButton;
-        delete _nextButton;
-        delete _mainLayout;
-    }
+    ~RibbonCategoryLayoutWidget() override = default;
 
     void paintEvent(QPaintEvent *event) override {
         QFrame::paintEvent(event);
@@ -173,9 +166,7 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     explicit RibbonCategory(QString title = "", RibbonCategoryStyle style = Normal, QColor color = QColor(),
                             QWidget *parent = nullptr)
         : RibbonCategoryLayoutWidget(parent), _title(std::move(title)), _style(style), _color(color) {}
-    ~RibbonCategory() override {
-        for (auto p : _panels) delete p;
-    }
+    ~RibbonCategory() override = default;
 
     void setMaximumRows(int rows) { _maxRows = rows; }
     QString title() const { return _title; }

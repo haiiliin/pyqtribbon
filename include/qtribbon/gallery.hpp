@@ -163,20 +163,7 @@ class RibbonGallery : public QFrame {
         connect(_moreButton, &RibbonGalleryButton::clicked, this, &RibbonGallery::showPopup);
     }
 
-    ~RibbonGallery() override {
-        delete _mainLayout;
-        delete _scrollButtonLayout;
-        delete _upButton;
-        delete _downButton;
-        delete _moreButton;
-        delete _listWidget;
-        delete _popupWidget;
-        delete _popupLayout;
-        delete _popupListWidget;
-        delete _popupMenu;
-        for (RibbonToolButton *button : _buttons) delete button;
-        for (RibbonToolButton *button : _popupButtons) delete button;
-    }
+    ~RibbonGallery() override = default;
 
     void _handlePopupAction(QAction *action) const {
         if (action != nullptr) {
