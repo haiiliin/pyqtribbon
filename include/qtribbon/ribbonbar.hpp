@@ -57,7 +57,7 @@ class RibbonBar : public QMenuBar {
 
         // Main Layout
         _mainLayout = new QVBoxLayout(this);
-        _mainLayout->setContentsMargins(5, 5, 5, 5);
+        _mainLayout->setContentsMargins(0, 0, 0, 0);
         _mainLayout->setSpacing(0);
         _mainLayout->addWidget(_titleWidget, 0);
         _mainLayout->addWidget(_stackedWidget, 1);

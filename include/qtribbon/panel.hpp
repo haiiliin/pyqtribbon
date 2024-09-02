@@ -149,12 +149,12 @@ class RibbonPanel : public QFrame {
           _gridLayoutManager(new RibbonGridLayoutManager(maxRows)) {
         // Main Layout
         _mainLayout = new QVBoxLayout(this);
-        _mainLayout->setContentsMargins(5, 2, 5, 2);
-        _mainLayout->setSpacing(5);
+        _mainLayout->setContentsMargins(0, 0, 0, 0);
+        _mainLayout->setSpacing(0);
 
         // Actions Layout
         _actionsLayout = new QGridLayout();
-        _actionsLayout->setContentsMargins(5, 0, 5, 0);
+        _actionsLayout->setContentsMargins(5, 5, 5, 5);
         _actionsLayout->setSpacing(0);
         _mainLayout->addLayout(_actionsLayout, 1);
 
@@ -163,7 +163,7 @@ class RibbonPanel : public QFrame {
         _titleWidget->setFixedHeight(_titleHeight);
         auto *_titleLayout = new QHBoxLayout(_titleWidget);
         _titleLayout->setContentsMargins(0, 0, 0, 0);
-        _titleLayout->setSpacing(5);
+        _titleLayout->setSpacing(0);
         _titleLabel = new RibbonPanelTitle(this);
         _titleLabel->setText(title);
         _titleLabel->setAlignment(Qt::AlignCenter);

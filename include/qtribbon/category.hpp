@@ -96,8 +96,8 @@ class RibbonCategoryLayoutWidget : public QFrame {
 
         // Add the widgets to the main layout
         this->_mainLayout = new QHBoxLayout(this);
-        this->_mainLayout->setContentsMargins(5, 0, 5, 0);
-        this->_mainLayout->setSpacing(5);
+        this->_mainLayout->setContentsMargins(0, 0, 0, 0);
+        this->_mainLayout->setSpacing(0);
         this->_mainLayout->addWidget(this->_previousButton, 0, Qt::AlignVCenter);
         this->_mainLayout->addWidget(this->_categoryScrollArea, 1);
         this->_mainLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
