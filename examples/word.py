@@ -22,11 +22,22 @@ if __name__ == "__main__":
     ribbonbar.setApplicationIcon(QIcon("word.png"))
     ribbonbar.applicationOptionButton().setToolTip("Microsoft Word")
 
+    undoButton = QtWidgets.QToolButton()
+    undoButton.setAutoRaise(True)
+    undoButton.setText("Button")
+    undoButton.setIcon(QIcon("undo.png"))
+    undoButton.setToolTip("Undo")
+    ribbonbar.addQuickAccessButton(undoButton)
+
+    redoButton = QtWidgets.QToolButton()
+    redoButton.setAutoRaise(True)
+    redoButton.setText("Button")
+    redoButton.setIcon(QIcon("redo.png"))
+    redoButton.setToolTip("Redo")
+    ribbonbar.addQuickAccessButton(redoButton)
+
     # Home category
     homeCategory = ribbonbar.addCategory("Home")
-    undoPanel = homeCategory.addPanel("Undo")
-    undoPanel.addMediumButton("Undo", icon=QIcon("undo.png"))
-    undoPanel.addMediumButton("Redo", icon=QIcon("redo.png"))
 
     clipboardPanel = homeCategory.addPanel("Clipboard")
     pasteButton = clipboardPanel.addLargeButton("Paste", icon=QIcon("paste.png"), tooltip="Paste")
