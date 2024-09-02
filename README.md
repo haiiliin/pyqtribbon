@@ -71,4 +71,4 @@ The ribbon is first introduced by Microsoft in the 2000's. It is a toolbar with 
 
 ## Screenshots
 
-![An Example](screenshots/main.png)
+![An Example](main.png)
