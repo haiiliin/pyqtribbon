@@ -19,11 +19,11 @@ class RibbonGalleryListWidget(QtWidgets.QListWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setViewMode(QtWidgets.QListWidget.IconMode)
-        self.setResizeMode(QtWidgets.QListWidget.Adjust)
-        self.setVerticalScrollMode(QtWidgets.QListWidget.ScrollPerPixel)
-        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setViewMode(QtWidgets.QListWidget.ViewMode.IconMode)
+        self.setResizeMode(QtWidgets.QListWidget.ResizeMode.Adjust)
+        self.setVerticalScrollMode(QtWidgets.QListWidget.ScrollMode.ScrollPerPixel)
+        self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setIconSize(QtCore.QSize(64, 64))
 
     def resizeEvent(self, e: QtGui.QResizeEvent) -> None:
@@ -50,7 +50,7 @@ class RibbonGalleryPopupListWidget(RibbonGalleryListWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
 
 
 class RibbonGallery(QtWidgets.QFrame):
@@ -97,17 +97,17 @@ class RibbonGallery(QtWidgets.QFrame):
         self._upButton = RibbonGalleryButton()
         self._upButton.setIcon(QtGui.QIcon(DataFile("icons/up.png")))
         self._upButton.setIconSize(QtCore.QSize(24, 24))
-        self._upButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self._upButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         self._upButton.setAutoRaise(True)
         self._downButton = RibbonGalleryButton()
         self._downButton.setIcon(QtGui.QIcon(DataFile("icons/down.png")))
         self._downButton.setIconSize(QtCore.QSize(24, 24))
-        self._downButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self._downButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         self._downButton.setAutoRaise(True)
         self._moreButton = RibbonGalleryButton()
         self._moreButton.setIcon(QtGui.QIcon(DataFile("icons/more.png")))
         self._moreButton.setIconSize(QtCore.QSize(24, 24))
-        self._moreButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self._moreButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         self._moreButton.setAutoRaise(True)
         self._scrollButtonLayout = QtWidgets.QVBoxLayout()
         self._scrollButtonLayout.setContentsMargins(0, 0, 0, 0)
@@ -125,7 +125,7 @@ class RibbonGallery(QtWidgets.QFrame):
 
         self._popupWidget = RibbonPopupWidget()  # type: ignore
         self._popupWidget.setFont(QtWidgets.QApplication.instance().font())  # type: ignore
-        self._popupWidget.setWindowFlags(QtCore.Qt.Popup)
+        self._popupWidget.setWindowFlags(QtCore.Qt.WindowType.Popup)
         self._popupLayout = QtWidgets.QVBoxLayout(self._popupWidget)
         self._popupLayout.setContentsMargins(5, 5, 5, 5)
         self._popupLayout.setSpacing(2)
@@ -196,7 +196,9 @@ class RibbonGallery(QtWidgets.QFrame):
         button = self.sender()
         if isinstance(button, RibbonToolButton):
             row = self._popupButtons.index(button)
-            self._listWidget.scrollTo(self._listWidget.model().index(row, 0), QtWidgets.QAbstractItemView.EnsureVisible)
+            self._listWidget.scrollTo(
+                self._listWidget.model().index(row, 0), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible
+            )
             if self._buttons[row].isCheckable():
                 self._buttons[row].setChecked(not self._buttons[row].isChecked())
 
@@ -281,13 +283,13 @@ class RibbonGallery(QtWidgets.QFrame):
         popupButton.clicked.connect(self.setSelectedButton)  # type: ignore
 
         if text is None:
-            button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
-            popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+            button.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
+            popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         else:
-            button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
-            popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
-        self._addWidget(button)
-        self._addPopupWidget(popupButton)
+            button.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
+            popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
+        self._addWidget(button)  # noqa
+        self._addPopupWidget(popupButton)  # noqa
         return button
 
     def addToggleButton(

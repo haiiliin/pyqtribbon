@@ -47,7 +47,10 @@ if __name__ == "__main__":
     panel.addVerticalSeparator()
     showCategoryButton3 = panel.addMediumToggleButton("Show/Hide Category 3", icon=QIcon("pyqtribbon/icons/close.png"))
     showCategoryButton45 = panel.addMediumToggleButton(
-        "Show/Hide Category 4/5", icon=QIcon("pyqtribbon/icons/close.png"), colSpan=2, alignment=QtCore.Qt.AlignLeft
+        "Show/Hide Category 4/5",
+        icon=QIcon("pyqtribbon/icons/close.png"),
+        colSpan=2,
+        alignment=QtCore.Qt.AlignmentFlag.AlignLeft,
     )
     panel.addLargeButton("Button 6", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addVerticalSeparator()
@@ -60,7 +63,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
 
     saveButton = panel.addLargeButton("Button 9", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -68,7 +71,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup)
 
     saveButton = panel.addLargeButton("Button 10", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -76,7 +79,7 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.DelayedPopup)
 
     saveButton = panel.addLargeButton("Button 11", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = saveButton.addRibbonMenu()
@@ -91,8 +94,8 @@ if __name__ == "__main__":
     menu.addLabel("This is a custom widget")
     formLayout = menu.addFormLayoutWidget()
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
-    saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-    panel.addWidget(saveButton, rowSpan=Large)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
+    panel.addWidget(saveButton, rowSpan=Large)  # noqa
 
     panel = category1.addPanel("Panel 2")
     button = panel.addMediumButton("Button 8", icon=QIcon("pyqtribbon/icons/close.png"))
@@ -135,8 +138,8 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-    panel.addWidget(saveButton, rowSpan=Large)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
+    panel.addWidget(saveButton, rowSpan=Large)  # noqa
 
     saveButton = panel.addLargeButton("Button 9", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -144,8 +147,8 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.MenuButtonPopup)
-    panel.addWidget(saveButton, rowSpan=Large)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup)
+    panel.addWidget(saveButton, rowSpan=Large)  # noqa
 
     saveButton = panel.addLargeButton("Button 10", icon=QIcon("pyqtribbon/icons/close.png"))
     menu = QtWidgets.QMenu()
@@ -153,8 +156,8 @@ if __name__ == "__main__":
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 2")
     menu.addAction(QIcon("pyqtribbon/icons/close.png"), "Action 3")
     saveButton.setMenu(menu)
-    saveButton.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
-    panel.addWidget(saveButton, rowSpan=Large)
+    saveButton.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.DelayedPopup)
+    panel.addWidget(saveButton, rowSpan=Large)  # noqa
 
     panel.addCalendarWidget()
 
@@ -176,7 +179,7 @@ if __name__ == "__main__":
     popupMenu.addAction(QtGui.QIcon("pyqtribbon/icons/close.png"), "Action 1")
     popupMenu.addAction(QtGui.QIcon("pyqtribbon/icons/close.png"), "Action 2")
     popupMenu.addSeparator()
-    popupMenu.addWidget(QtWidgets.QLabel("This is a custom widget"))
+    popupMenu.addWidget(QtWidgets.QLabel("This is a custom widget"))  # noqa
     formLayout = popupMenu.addFormLayoutWidget()
     formLayout.addRow(QtWidgets.QLabel("Row 1"), QtWidgets.QLineEdit())
 

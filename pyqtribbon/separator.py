@@ -13,7 +13,7 @@ class RibbonSeparator(QtWidgets.QFrame):
     _orientation: QtCore.Qt.Orientation
 
     @typing.overload
-    def __init__(self, orientation=QtCore.Qt.Vertical, width=6, parent=None):
+    def __init__(self, orientation=QtCore.Qt.Orientation.Vertical, width=6, parent=None):
         pass
 
     @typing.overload
@@ -28,16 +28,16 @@ class RibbonSeparator(QtWidgets.QFrame):
         :param parent: The parent widget.
         """
         if (args and not isinstance(args[0], QtWidgets.QWidget)) or ("orientation" in kwargs or "width" in kwargs):
-            orientation = args[0] if len(args) > 0 else kwargs.get("orientation", QtCore.Qt.Vertical)
+            orientation = args[0] if len(args) > 0 else kwargs.get("orientation", QtCore.Qt.Orientation.Vertical)
             width = args[1] if len(args) > 1 else kwargs.get("width", 6)
             parent = args[2] if len(args) > 2 else kwargs.get("parent", None)
         else:
-            orientation = QtCore.Qt.Vertical
+            orientation = QtCore.Qt.Orientation.Vertical
             width = 6
             parent = args[0] if len(args) > 0 else kwargs.get("parent", None)
         super().__init__(parent=parent)
         self._orientation = orientation
-        if orientation == QtCore.Qt.Horizontal:
+        if orientation == QtCore.Qt.Orientation.Horizontal:
             self.setFixedHeight(width)
             self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)  # type: ignore
         else:
@@ -57,9 +57,9 @@ class RibbonSeparator(QtWidgets.QFrame):
         """Paint the separator."""
         painter = QtGui.QPainter(self)
         pen = QtGui.QPen()
-        pen.setColor(QtGui.QColor(QtCore.Qt.gray))
+        pen.setColor(QtGui.QColor(QtCore.Qt.GlobalColor.gray))
         painter.setPen(pen)
-        if self._orientation == QtCore.Qt.Vertical:
+        if self._orientation == QtCore.Qt.Orientation.Vertical:
             x1 = self.rect().center().x()
             painter.drawLine(
                 QtCore.QPoint(x1, self.rect().top() + self._topMargins),
@@ -82,7 +82,7 @@ class RibbonHorizontalSeparator(RibbonSeparator):
         :param width: The width of the separator.
         :param parent: The parent widget.
         """
-        super().__init__(QtCore.Qt.Horizontal, width, parent)
+        super().__init__(QtCore.Qt.Orientation.Horizontal, width, parent)
 
 
 class RibbonVerticalSeparator(RibbonSeparator):
@@ -94,4 +94,4 @@ class RibbonVerticalSeparator(RibbonSeparator):
         :param width: The width of the separator.
         :param parent: The parent widget.
         """
-        super().__init__(QtCore.Qt.Vertical, width, parent)
+        super().__init__(QtCore.Qt.Orientation.Vertical, width, parent)

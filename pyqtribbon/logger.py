@@ -26,7 +26,9 @@ class UncaughtHook(QtCore.QObject):
         """
         if QtWidgets.QApplication.instance() is not None:
             errorbox = QtWidgets.QMessageBox()
-            errorbox.setWindowIcon(QtWidgets.QApplication.style().standardIcon(QtWidgets.QStyle.SP_MessageBoxCritical))
+            errorbox.setWindowIcon(
+                QtWidgets.QApplication.style().standardIcon(QtWidgets.QStyle.StandardPixmap.SP_MessageBoxCritical)
+            )
             errorbox.setWindowTitle("Critical error occurred")
             errorbox.setText(f"Oops. An unexpected error occurred:\n```\n{log_msg}\n```")
             errorbox.setTextFormat(QtCore.Qt.TextFormat.MarkdownText)
