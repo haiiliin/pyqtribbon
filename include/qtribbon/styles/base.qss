@@ -1,0 +1,57 @@
+
+RibbonApplicationButton::menu-indicator {
+    image: none;
+}
+
+RibbonCategory, RibbonCategoryScrollArea, RibbonCategoryScrollAreaContents {
+    border: none;
+    background-color: transparent;
+}
+
+RibbonTabBar::tab {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+RibbonTabBar::tab:selected {
+	border-bottom: 3px solid blue;
+}
+
+RibbonTabBar::tab:!selected {
+	border-bottom: none;
+}
+
+RibbonTabBar::tab:hover:!selected {
+    padding-left: 10px;
+	border-bottom: 3px solid gray;
+}
+
+RibbonPopupWidget {
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+QMenu {
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+QMenu:selected {
+    background-color: #e0e0e0;
+}
+
+RibbonGallery {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+RibbonGalleryButton {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+RibbonGalleryListWidget {
+    border: none;
+}
