@@ -167,8 +167,8 @@ if __name__ == "__main__":
     panel.addLargeButton("Button 2", icon=QIcon("pyqtribbon/icons/close.png"))
     panel.addLargeButton("Button 3", icon=QIcon("pyqtribbon/icons/close.png"))
 
-    showCategoryButton2.clicked.connect(category2.setCategoryVisible)  # type: ignore
-    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))  # type: ignore
+    showCategoryButton2.clicked.connect(category2.setCategoryVisible)
+    showCategoryButton3.clicked.connect(lambda checked: category3.setCategoryVisible(not category3.categoryVisible()))
 
     gallery = panel.addGallery(popupHideOnClick=True)
     for i in range(100):
@@ -250,7 +250,7 @@ if __name__ == "__main__":
 
     label = QtWidgets.QLabel("Ribbon Test Window")
     label.setFont(QtGui.QFont("Arial", 20))
-    label.setAlignment(QtCore.Qt.AlignCenter)
+    label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
     layout.addWidget(label, 1)
 
     window.resize(1200, 350)
