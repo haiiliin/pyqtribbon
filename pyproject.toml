@@ -53,10 +53,10 @@ docs = [
     "sphinx-toolbox",
     "sphinx-qt-documentation",
 ]
-PyQt5 = ["PyQt5"]
-PyQt6 = ["PyQt6"]
-PySide2 = ["PySide2"]
-PySide6 = ["PySide6"]
+pyqt5 = ["PyQt5"]
+pyqt6 = ["PyQt6"]
+pyside2 = ["PySide2"]
+pyside6 = ["PySide6"]
 
 [tool.setuptools]
 packages = ['pyqtribbon']
