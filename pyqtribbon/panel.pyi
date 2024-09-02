@@ -5,7 +5,7 @@ from typing import Any, Callable, Dict, Iterable, List, Union, overload
 import numpy as np
 from qtpy import QtCore, QtGui, QtWidgets
 
-from .constants import ColumnWise, Large, RibbonButtonStyle, Small
+from .constants import ColumnWise, Large, RibbonButtonStyle, RibbonSpaceFindMode, Small
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton
@@ -17,7 +17,7 @@ class RibbonGridLayoutManager(object):
     cells: np.ndarray
 
     def __init__(self, rows: int): ...
-    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=ColumnWise): ...
+    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode: RibbonSpaceFindMode = ColumnWise): ...
 
 class RibbonPanelItemWidget(QtWidgets.QFrame):
     def __init__(self, parent=None): ...
@@ -63,6 +63,10 @@ class RibbonPanel(QtWidgets.QFrame):
     def panelOptionButton(self) -> RibbonPanelOptionButton: ...
     def setPanelOptionToolTip(self, text: str): ...
     def rowHeight(self) -> int: ...
+    def setTitle(self, title: str): ...
+    def title(self) -> str: ...
+    def setTitleHeight(self, height: int): ...
+    def titleHeight(self) -> int: ...
     def addWidgetsBy(self, data: Dict[str, Dict]) -> Dict[str, QtWidgets.QWidget]: ...
     def addWidget(
         self,
@@ -70,8 +74,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any: ...
     def addSmallWidget(
@@ -79,8 +83,8 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any: ...
     def addMediumWidget(
@@ -88,8 +92,8 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any: ...
     def addLargeWidget(
@@ -97,8 +101,8 @@ class RibbonPanel(QtWidgets.QFrame):
         widget: QtWidgets.QWidget,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any: ...
     def removeWidget(self, widget: QtWidgets.QWidget): ...
@@ -110,15 +114,17 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
         *,
         rowSpan: RibbonButtonStyle = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addSmallButton(
@@ -127,14 +133,16 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addMediumButton(
@@ -143,14 +151,16 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addLargeButton(
@@ -159,14 +169,16 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addToggleButton(
@@ -175,14 +187,16 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         *,
         rowSpan: RibbonButtonStyle = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addSmallToggleButton(
@@ -191,13 +205,15 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addMediumToggleButton(
@@ -206,13 +222,15 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
     def addLargeToggleButton(
@@ -221,13 +239,15 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         *,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonToolButton: ...
 
@@ -240,8 +260,8 @@ class RibbonPanel(QtWidgets.QFrame):
         initializer: Callable = None,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
         **kwargs,
     ) -> QtWidgets.QWidget: ...
@@ -252,8 +272,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QComboBox: ...
     addSmallComboBox = addComboBox
@@ -264,8 +284,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QFontComboBox: ...
     addSmallFontComboBox = addFontComboBox
@@ -276,8 +296,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QLineEdit: ...
     addSmallLineEdit = addLineEdit
@@ -288,8 +308,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QTextEdit: ...
     addSmallTextEdit = addTextEdit
@@ -300,8 +320,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QPlainTextEdit: ...
     addSmallPlainTextEdit = addPlainTextEdit
@@ -313,8 +333,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QLabel: ...
     addSmallLabel = addLabel
@@ -325,8 +345,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QProgressBar: ...
     addSmallProgressBar = addProgressBar
@@ -337,8 +357,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QSlider: ...
     addSmallSlider = addSlider
@@ -349,8 +369,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QSpinBox: ...
     addSmallSpinBox = addSpinBox
@@ -361,8 +381,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QDoubleSpinBox: ...
     addSmallDoubleSpinBox = addDoubleSpinBox
@@ -373,8 +393,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QDateEdit: ...
     addSmallDateEdit = addDateEdit
@@ -385,8 +405,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QTimeEdit: ...
     addSmallTimeEdit = addTimeEdit
@@ -397,8 +417,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QDateTimeEdit: ...
     addSmallDateTimeEdit = addDateTimeEdit
@@ -409,8 +429,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QTableWidget: ...
     addSmallTableWidget = addTableWidget
@@ -421,8 +441,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QTreeWidget: ...
     addSmallTreeWidget = addTreeWidget
@@ -433,8 +453,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QListWidget: ...
     addSmallListWidget = addListWidget
@@ -445,8 +465,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QCalendarWidget: ...
     addSmallCalendarWidget = addCalendarWidget
@@ -459,8 +479,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonSeparator: ...
     addSmallSeparator = addSeparator
@@ -472,8 +492,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 2,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonSeparator: ...
     addSmallHorizontalSeparator = addHorizontalSeparator
@@ -485,8 +505,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonSeparator: ...
     addSmallVerticalSeparator = addVerticalSeparator
@@ -499,12 +519,10 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Large,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> RibbonGallery: ...
     addSmallGallery = addGallery
     addMediumGallery = addGallery
     addLargeGallery = addGallery
-    def setTitle(self, title: str): ...
-    def title(self) -> str: ...

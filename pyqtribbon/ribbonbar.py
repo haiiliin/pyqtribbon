@@ -49,7 +49,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     _ribbonVisible = True
 
     #: heights of the ribbon elements
-    _ribbonHeight = 180
+    _ribbonHeight = 150
 
     #: current tab index
     _currentTabIndex = 0
@@ -98,6 +98,13 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._titleWidget.collapseRibbonButtonClicked.connect(self._collapseButtonClicked)
         self._titleWidget.tabBar().currentChanged.connect(self.showCategoryByIndex)  # type: ignore
         self.setRibbonStyle(RibbonStyle.Default)
+
+    def autoHideRibbon(self) -> bool:
+        """Return whether the ribbon bar is automatically hidden when the mouse is pressed outside the ribbon bar.
+
+        :return: Whether the ribbon bar is automatically hidden.
+        """
+        return self._autoHideRibbon
 
     def setAutoHideRibbon(self, autoHide: bool):
         """Set whether the ribbon bar is automatically hidden when the mouse is pressed outside the ribbon bar.
@@ -243,7 +250,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         button.setAutoRaise(True)
         self._titleWidget.quickAccessToolBar().addWidget(button)
 
-    def setQuickAccessButtonHeight(self, height: int = 30):
+    def setQuickAccessButtonHeight(self, height: int):
         """Set the height of the quick access buttons.
 
         :param height: The height to set.
@@ -264,6 +271,13 @@ class RibbonBar(QtWidgets.QMenuBar):
         """
         self._titleWidget.setTitle(title)
 
+    def setTitleWidgetHeight(self, height: int):
+        """Set the height of the title widget.
+
+        :param height: The height to set.
+        """
+        self._titleWidget.setTitleWidgetHeight(height)
+
     def rightToolBar(self) -> QtWidgets.QToolBar:
         """Return the right toolbar of the ribbon.
 
@@ -279,7 +293,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         button.setAutoRaise(True)
         self._titleWidget.addRightToolButton(button)
 
-    def setRightToolBarHeight(self, height: int = 24):
+    def setRightToolBarHeight(self, height: int):
         """Set the height of the right buttons.
 
         :param height: The height to set.
@@ -360,7 +374,8 @@ class RibbonBar(QtWidgets.QMenuBar):
                                 "widgets": {
                                     "widget-name": {
                                         "type": "Button",
-                                        "arguments": {
+                                        "args": (),
+                                        "kwargs": {  # or "arguments" for backward compatibility
                                             "key1": "value1",
                                             "key2": "value2"
                                         }

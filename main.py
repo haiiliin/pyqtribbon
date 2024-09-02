@@ -3,8 +3,7 @@ import sys
 from qtpy import QtCore, QtGui, QtWidgets
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import Large, Normal, RibbonBar
-from pyqtribbon.ribbonbar import RibbonStyle
+from pyqtribbon import Large, Normal, RibbonBar, RibbonStyle
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -251,6 +250,6 @@ if __name__ == "__main__":
     label.setAlignment(QtCore.Qt.AlignCenter)
     layout.addWidget(label, 1)
 
-    window.resize(1800, 350)
+    window.resize(1200, 350)
     window.show()
     sys.exit(app.exec_())

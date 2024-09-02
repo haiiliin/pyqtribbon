@@ -7,7 +7,14 @@ from typing import Any, Callable, Dict, List, Union, overload
 import numpy as np
 from qtpy import QtCore, QtGui, QtWidgets
 
-from .constants import ColumnWise, Large, Medium, RibbonButtonStyle, Small
+from .constants import (
+    ColumnWise,
+    Large,
+    Medium,
+    RibbonButtonStyle,
+    RibbonSpaceFindMode,
+    Small,
+)
 from .gallery import RibbonGallery
 from .separator import RibbonSeparator
 from .toolbutton import RibbonToolButton
@@ -31,7 +38,7 @@ class RibbonGridLayoutManager(object):
         self.rows = rows
         self.cells = np.ones((rows, 1), dtype=bool)
 
-    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode=ColumnWise):
+    def request_cells(self, rowSpan: int = 1, colSpan: int = 1, mode: RibbonSpaceFindMode = ColumnWise):
         """Request a number of available cells from the grid.
 
         :param rowSpan: The number of rows the cell should span.
@@ -116,7 +123,7 @@ class RibbonPanel(QtWidgets.QFrame):
     _widgets: List[QtWidgets.QWidget] = []
 
     # height of the title widget
-    _titleHeight: int = 20
+    _titleHeight: int = 15
 
     # Panel options signal
     panelOptionClicked = QtCore.Signal(bool)
@@ -183,7 +190,7 @@ class RibbonPanel(QtWidgets.QFrame):
             self._panelOption = RibbonPanelOptionButton()  # type: ignore
             self._panelOption.setAutoRaise(True)
             self._panelOption.setIcon(QtGui.QIcon(DataFile("icons/linking.png")))
-            self._panelOption.setIconSize(QtCore.QSize(16, 16))
+            self._panelOption.setIconSize(QtCore.QSize(self._titleHeight, self._titleHeight))
             self._panelOption.setToolTip("Panel options")
             self._panelOption.clicked.connect(self.panelOptionClicked)  # type: ignore
             self._titleLayout.addWidget(self._panelOption, 0)
@@ -299,6 +306,36 @@ class RibbonPanel(QtWidgets.QFrame):
             / self._gridLayoutManager.rows
         )
 
+    def setTitle(self, title: str):
+        """Set the title of the panel.
+
+        :param title: The title to set.
+        """
+        self._titleLabel.setText(title)
+
+    def title(self):
+        """Get the title of the panel.
+
+        :return: The title.
+        """
+        return self._titleLabel.text()
+
+    def setTitleHeight(self, height: int):
+        """Set the height of the title widget.
+
+        :param height: The height to set.
+        """
+        self._titleHeight = height
+        self._titleWidget.setFixedHeight(height)
+        self._panelOption.setIconSize(QtCore.QSize(height, height))
+
+    def titleHeight(self) -> int:
+        """Get the height of the title widget.
+
+        :return: The height of the title widget.
+        """
+        return self._titleHeight
+
     def addWidgetsBy(self, data: Dict[str, Dict]) -> Dict[str, QtWidgets.QWidget]:
         """Add widgets to the panel.
 
@@ -309,7 +346,8 @@ class RibbonPanel(QtWidgets.QFrame):
                 {
                     "widget-name": {
                         "type": "Button",
-                        "arguments": {
+                        "args": (),
+                        "kwargs": {  # or "arguments" for backward compatibility
                             "key1": "value1",
                             "key2": "value2"
                         }
@@ -326,10 +364,11 @@ class RibbonPanel(QtWidgets.QFrame):
         widgets = {}  # type: Dict[str, QtWidgets.QWidget]
         for key, widget_data in data.items():
             type = widget_data.pop("type", "").capitalize()
-            if hasattr(self, "add" + type):
-                method = getattr(self, "add" + type)  # type: Callable
-                if method is not None:
-                    widgets[key] = method(**widget_data.get("arguments", {}))
+            method = getattr(self, f"add{type}", None)  # type: Callable
+            assert callable(method), f"Method add{type} is not callable or does not exist"
+            args = widget_data.get("args", ())
+            kwargs = widget_data.get("kwargs", widget_data.get("arguments", {}))
+            widgets[key] = method(*args, **kwargs)
         return widgets
 
     def addWidget(
@@ -338,8 +377,8 @@ class RibbonPanel(QtWidgets.QFrame):
         *,
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
-        mode=ColumnWise,
-        alignment=QtCore.Qt.AlignCenter,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any:
         """Add a widget to the panel.
@@ -365,9 +404,7 @@ class RibbonPanel(QtWidgets.QFrame):
             fixedHeight = (
                 int(fixedHeight * maximumHeight)
                 if 0 < fixedHeight <= 1
-                else fixedHeight
-                if 1 < fixedHeight < maximumHeight
-                else maximumHeight
+                else fixedHeight if 1 < fixedHeight < maximumHeight else maximumHeight
             )
             fixedHeight = max(fixedHeight, 0.4 * maximumHeight)  # minimum height is 40% of the maximum height
             widget.setFixedHeight(fixedHeight)
@@ -405,7 +442,9 @@ class RibbonPanel(QtWidgets.QFrame):
         icon: QtGui.QIcon = None,
         showText: bool = True,
         slot: Callable = None,
-        shortcut: QtGui.QKeySequence = None,
+        shortcut: (
+            QtCore.Qt.Key | QtGui.QKeySequence | QtCore.QKeyCombination | QtGui.QKeySequence.StandardKey | str | int
+        ) = None,
         tooltip: str = None,
         statusTip: str = None,
         checkable: bool = False,
@@ -457,9 +496,7 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = (
             self.defaultRowSpan(Small)
             if style == Small
-            else self.defaultRowSpan(Medium)
-            if style == Medium
-            else self.defaultRowSpan(Large)
+            else self.defaultRowSpan(Medium) if style == Medium else self.defaultRowSpan(Large)
         )
         self.addWidget(button, **kwargs)
         return button
@@ -472,23 +509,42 @@ class RibbonPanel(QtWidgets.QFrame):
     addMediumToggleButton = functools.partialmethod(addToggleButton, rowSpan=Medium)
     addLargeToggleButton = functools.partialmethod(addToggleButton, rowSpan=Large)
 
-    ribbonArguments = ["rowSpan", "colSpan", "mode", "alignment", "fixedHeight"]
-
-    def _addAnyWidget(self, *args, **kwargs) -> QtWidgets.QWidget:
+    def _addAnyWidget(
+        self,
+        *args,
+        cls,
+        initializer: Callable = None,
+        rowSpan: Union[int, RibbonButtonStyle] = Small,
+        colSpan: int = 1,
+        mode: RibbonSpaceFindMode = ColumnWise,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
+        fixedHeight: Union[bool, float] = False,
+        **kwargs,
+    ) -> QtWidgets.QWidget:
         """Add any widget to the panel.
 
+        :param cls: The class of the widget to add.
+        :param initializer: The initializer function of the widget to add.
         :param args: The arguments passed to the initializer.
-        :param kwargs: The keyword arguments to pass to the initializer and to control the properties of the widget
-                       on the ribbon bar. The keyword argument `cls` must be provided to specify the class of the widget
-                       to add, the keyword argument `initializer` can be provided to specify the initializer function
-                       of the widget to add, keyword arguments `rowSpan`, `colSpan`, `mode`, `alignment`, `fixedHeight`
-                       are passed to the `addWidget` method, other keyword arguments are passed to the initializer
+        :param rowSpan: The number of rows the widget should span, 2: small, 3: medium, 6: large.
+        :param colSpan: The number of columns the widget should span.
+        :param mode: The mode to find spaces.
+        :param alignment: The alignment of the widget.
+        :param fixedHeight: Whether to fix the height of the widget, it can be a boolean, a percentage or a fixed
+                            height, when a boolean is given, the height is fixed to the maximum height allowed if the
+                            value is True, when a percentage is given (0 < percentage < 1) the height is calculated
+                            from the height of the maximum height allowed, depends on the number of rows to span. The
+                            minimum height is 40% of the maximum height allowed.
+        :param kwargs: The keyword arguments are passed to the initializer
         """
-        ribbon_kwargs = {k: kwargs.pop(k) for k in self.ribbonArguments if k in kwargs}
-        cls, initializer = kwargs.pop("cls"), kwargs.pop("initializer", None)
         widget = cls(self)
-        initializer(widget, *args, **kwargs) if initializer else None
-        return self.addWidget(widget, **ribbon_kwargs)
+        if callable(initializer):
+            initializer(widget, *args, **kwargs)
+        elif args or kwargs:
+            raise ValueError("Arguments are provided but the initializer is not set")
+        return self.addWidget(
+            widget, rowSpan=rowSpan, colSpan=colSpan, mode=mode, alignment=alignment, fixedHeight=fixedHeight
+        )
 
     def __getattr__(self, method: str) -> Callable:
         """Get the dynamic method `add[Small|Medium|Large][Widget]`.
@@ -512,7 +568,12 @@ class RibbonPanel(QtWidgets.QFrame):
         # Create the new method
         return functools.partial(base_method, rowSpan=rowSpan)
 
-    addComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems)  # fmt: skip
+    addCheckBox = functools.partialmethod(
+        _addAnyWidget, cls=QtWidgets.QCheckBox, initializer=QtWidgets.QCheckBox.setText
+    )
+    addComboBox = functools.partialmethod(
+        _addAnyWidget, cls=QtWidgets.QComboBox, initializer=QtWidgets.QComboBox.addItems
+    )
     addFontComboBox = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QFontComboBox)
     addLineEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QLineEdit)
     addTextEdit = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QTextEdit)
@@ -560,17 +621,3 @@ class RibbonPanel(QtWidgets.QFrame):
         maximumHeight = self.rowHeight() * rowSpan + self._actionsLayout.verticalSpacing() * (rowSpan - 2)
         gallery.setFixedHeight(maximumHeight)
         return self.addWidget(gallery, **kwargs)
-
-    def setTitle(self, title: str):
-        """Set the title of the panel.
-
-        :param title: The title to set.
-        """
-        self._titleLabel.setText(title)
-
-    def title(self):
-        """Get the title of the panel.
-
-        :return: The title.
-        """
-        return self._titleLabel.text()

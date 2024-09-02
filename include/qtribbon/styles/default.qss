@@ -1,0 +1,16 @@
+
+RibbonBar {
+    border: none;
+    background-color: transparent;
+}
+
+RibbonTitleWidget {
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+RibbonStackedWidget {
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+}

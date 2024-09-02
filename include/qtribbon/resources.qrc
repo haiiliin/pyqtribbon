@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/backward.png</file>
+        <file>icons/close.png</file>
+        <file>icons/down.png</file>
+        <file>icons/forward.png</file>
+        <file>icons/help.png</file>
+        <file>icons/linking.png</file>
+        <file>icons/max.png</file>
+        <file>icons/min.png</file>
+        <file>icons/more.png</file>
+        <file>icons/python.png</file>
+        <file>icons/redo.png</file>
+        <file>icons/save.png</file>
+        <file>icons/undo.png</file>
+        <file>icons/up.png</file>
+        <file>styles/base.qss</file>
+        <file>styles/debug.qss</file>
+        <file>styles/default.qss</file>
+    </qresource>
+</RCC>
