@@ -86,11 +86,11 @@ class RibbonMenu(QtWidgets.QMenu):
         :param spacing: The spacing.
         """
         spacer = QtWidgets.QLabel()
-        spacer.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        spacer.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed)
         spacer.setFixedHeight(spacing)
-        self.addWidget(spacer)
+        self.addWidget(spacer)  # noqa
 
-    def addLabel(self, text: str = "", alignment=QtCore.Qt.AlignLeft):
+    def addLabel(self, text: str = "", alignment=QtCore.Qt.AlignmentFlag.AlignLeft):
         """Add a label to the menu.
 
         :param text: The text of the label.
@@ -98,7 +98,7 @@ class RibbonMenu(QtWidgets.QMenu):
         """
         label = QtWidgets.QLabel(text)
         label.setAlignment(alignment)
-        self.addWidget(label)
+        self.addWidget(label)  # noqa
 
 
 class RibbonPermanentMenu(RibbonMenu):

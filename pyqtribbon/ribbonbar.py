@@ -91,7 +91,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._mainLayout.setSpacing(0)
         self._mainLayout.addWidget(self._titleWidget, 0)
         self._mainLayout.addWidget(self._stackedWidget, 1)
-        self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
+        self._mainLayout.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetMinAndMaxSize)
 
         # Connect signals
         self._titleWidget.helpButtonClicked.connect(self.helpButtonClicked)
@@ -114,7 +114,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self._autoHideRibbon = autoHide
 
     def eventFilter(self, a0: QtCore.QObject, a1: QtCore.QEvent) -> bool:
-        if self._autoHideRibbon and a1.type() == QtCore.QEvent.HoverMove:
+        if self._autoHideRibbon and a1.type() == QtCore.QEvent.Type.HoverMove:
             self.setRibbonVisible(self.underMouse())
         return super().eventFilter(a0, a1)
 
@@ -416,9 +416,9 @@ class RibbonBar(QtWidgets.QMenuBar):
                 color = contextColors[self._contextCategoryCount % len(contextColors)]
                 self._contextCategoryCount += 1
         category = (
-            RibbonContextCategory(title, color, self)
+            RibbonContextCategory(title, color, self)  # noqa
             if style == RibbonCategoryStyle.Context
-            else RibbonNormalCategory(title, self)
+            else RibbonNormalCategory(title, self)  # noqa
         )
         category.setMaximumRows(self._maxRows)
         category.setFixedHeight(
@@ -450,7 +450,7 @@ class RibbonBar(QtWidgets.QMenuBar):
     def addContextCategory(
         self,
         title: str,
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.GlobalColor.blue,
     ) -> RibbonContextCategory:
         """Add a new context category to the ribbon.
 
@@ -464,7 +464,7 @@ class RibbonBar(QtWidgets.QMenuBar):
         self,
         name: str,
         titles: typing.List[str],
-        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.blue,
+        color: typing.Union[QtGui.QColor, QtCore.Qt.GlobalColor] = QtCore.Qt.GlobalColor.blue,
     ) -> RibbonContextCategories:
         """Add a group of context categories with the same tab color to the ribbon.
 

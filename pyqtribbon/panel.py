@@ -85,8 +85,8 @@ class RibbonPanelItemWidget(QtWidgets.QFrame):
         self.setLayout(QtWidgets.QVBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
         self.layout().setSpacing(0)
-        self.layout().setAlignment(QtCore.Qt.AlignCenter)
-        self.layout().setSizeConstraint(QtWidgets.QLayout.SetMaximumSize)
+        self.layout().setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.layout().setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetMaximumSize)
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)  # type: ignore
 
     def addWidget(self, widget):
@@ -179,10 +179,10 @@ class RibbonPanel(QtWidgets.QFrame):
         self._titleWidget.setFixedHeight(self._titleHeight)
         self._titleLayout = QtWidgets.QHBoxLayout(self._titleWidget)
         self._titleLayout.setContentsMargins(0, 0, 0, 0)
-        self._titleLayout.setSpacing(5)
+        self._titleLayout.setSpacing(0)
         self._titleLabel = RibbonPanelTitle()  # type: ignore
         self._titleLabel.setText(title)
-        self._titleLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self._titleLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self._titleLayout.addWidget(self._titleLabel, 1)
 
         # Panel option button
@@ -378,7 +378,7 @@ class RibbonPanel(QtWidgets.QFrame):
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode: RibbonSpaceFindMode = ColumnWise,
-        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignmentFlag.AlignCenter,
         fixedHeight: Union[bool, float] = False,
     ) -> QtWidgets.QWidget | Any:
         """Add a widget to the panel.
@@ -491,14 +491,14 @@ class RibbonPanel(QtWidgets.QFrame):
             maximumIconSize = max(maximumHeight - fontSize * 2 - arrowSize, 48)
             button.setMaximumIconSize(int(maximumIconSize))
         if not showText:
-            button.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+            button.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         button.setCheckable(checkable)
         kwargs["rowSpan"] = (
             self.defaultRowSpan(Small)
             if style == Small
             else self.defaultRowSpan(Medium) if style == Medium else self.defaultRowSpan(Large)
         )
-        self.addWidget(button, **kwargs)
+        self.addWidget(button, **kwargs)  # noqa
         return button
 
     addSmallButton = functools.partialmethod(addButton, rowSpan=Small)
@@ -517,7 +517,7 @@ class RibbonPanel(QtWidgets.QFrame):
         rowSpan: Union[int, RibbonButtonStyle] = Small,
         colSpan: int = 1,
         mode: RibbonSpaceFindMode = ColumnWise,
-        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignCenter,
+        alignment: QtCore.Qt.AlignmentFlag = QtCore.Qt.AlignmentFlag.AlignCenter,
         fixedHeight: Union[bool, float] = False,
         **kwargs,
     ) -> QtWidgets.QWidget:
@@ -591,7 +591,7 @@ class RibbonPanel(QtWidgets.QFrame):
     addListWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QListWidget, rowSpan=Large)
     addCalendarWidget = functools.partialmethod(_addAnyWidget, cls=QtWidgets.QCalendarWidget, rowSpan=Large)
 
-    def addSeparator(self, orientation=QtCore.Qt.Vertical, width=6, **kwargs) -> RibbonSeparator:
+    def addSeparator(self, orientation=QtCore.Qt.Orientation.Vertical, width=6, **kwargs) -> RibbonSeparator:
         """Add a separator to the panel.
 
         :param orientation: The orientation of the separator.
@@ -603,8 +603,8 @@ class RibbonPanel(QtWidgets.QFrame):
         kwargs["rowSpan"] = Large if "rowSpan" not in kwargs else kwargs["rowSpan"]
         return self.addWidget(RibbonSeparator(orientation, width), **kwargs)
 
-    addHorizontalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Horizontal)
-    addVerticalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Vertical)
+    addHorizontalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Orientation.Horizontal)
+    addVerticalSeparator = functools.partialmethod(addSeparator, orientation=QtCore.Qt.Orientation.Vertical)
 
     def addGallery(self, minimumWidth=800, popupHideOnClick=False, **kwargs) -> RibbonGallery:
         """Add a gallery to the panel.

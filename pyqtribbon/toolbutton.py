@@ -25,7 +25,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
         # Styles
         self.setButtonStyle(RibbonButtonStyle.Large)
         self.setAutoRaise(True)
-        self.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
 
     def setMaximumIconSize(self, size: int):
         """Set the maximum icon size of the button.
@@ -52,7 +52,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = self._smallButtonIconSize
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
-            self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+            self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
             self.setStyleSheet(
                 """
                 RibbonToolButton::menu-indicator {
@@ -66,7 +66,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = self._mediumButtonIconSize
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
-            self.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+            self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
             self.setStyleSheet(
                 """
                 RibbonToolButton::menu-indicator {
@@ -80,7 +80,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = self._largeButtonIconSize
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
-            self.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+            self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
             self.setStyleSheet(
                 """
                 RibbonToolButton[popupMode="0"]::menu-indicator {

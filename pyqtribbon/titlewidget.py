@@ -16,7 +16,7 @@ class RibbonApplicationButton(QtWidgets.QToolButton):
         :return: The new ribbon menu.
         """
         menu = RibbonMenu(self)
-        self.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
         self.setMenu(menu)
         return menu
 
@@ -82,18 +82,18 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
         self._quickAccessToolBar = QtWidgets.QToolBar()
         self._quickAccessToolBar.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
-        self._quickAccessToolBar.setOrientation(QtCore.Qt.Horizontal)
+        self._quickAccessToolBar.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self._quickAccessToolBar.setMovable(False)
         self._quickAccessToolBar.addWidget(self._applicationButton)
         self._quickAccessToolBarWidget = QtWidgets.QWidget()
         self._quickAccessToolBarLayout = QtWidgets.QHBoxLayout(self._quickAccessToolBarWidget)
         self._quickAccessToolBarLayout.setContentsMargins(0, 0, 0, 0)
         self._quickAccessToolBarLayout.setSpacing(0)
-        self._quickAccessToolBarLayout.addWidget(self._quickAccessToolBar, 0, QtCore.Qt.AlignBottom)
+        self._quickAccessToolBarLayout.addWidget(self._quickAccessToolBar, 0, QtCore.Qt.AlignmentFlag.AlignBottom)
 
         # right toolbar
         self._rightToolBar = QtWidgets.QToolBar()
-        self._rightToolBar.setOrientation(QtCore.Qt.Horizontal)
+        self._rightToolBar.setOrientation(QtCore.Qt.Orientation.Horizontal)
         self._rightToolBar.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._collapseRibbonButton = QtWidgets.QToolButton(self)
         self._collapseRibbonButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
@@ -117,7 +117,7 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         font = self._tabBar.font()
         font.setPointSize(font.pointSize() + 3)
         self._tabBar.setFont(font)
-        self._tabBar.setShape(QtWidgets.QTabBar.RoundedNorth)
+        self._tabBar.setShape(QtWidgets.QTabBar.Shape.RoundedNorth)
         self._tabBar.setDocumentMode(True)
 
         # Title label
@@ -129,10 +129,10 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         font.setPointSize(font.pointSize() + 3)
         self._titleLabel.setFont(font)
 
-        self._tabBarLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignVCenter)
-        self._tabBarLayout.addWidget(self._tabBar, 0, QtCore.Qt.AlignVCenter)
-        self._tabBarLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignVCenter)
-        self._tabBarLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignVCenter)
+        self._tabBarLayout.addWidget(self._quickAccessToolBarWidget, 0, QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self._tabBarLayout.addWidget(self._tabBar, 0, QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self._tabBarLayout.addWidget(self._titleLabel, 1, QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self._tabBarLayout.addWidget(self._rightToolBar, 0, QtCore.Qt.AlignmentFlag.AlignVCenter)
 
     def applicationButton(self) -> RibbonApplicationButton:
         """Return the application button."""
