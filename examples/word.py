@@ -3,7 +3,7 @@ import sys
 from qtpy import QtGui, QtWidgets
 from qtpy.QtGui import QIcon
 
-from pyqtribbon import RibbonBar
+from pyqtribbon import RibbonBar, RowWise
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -16,7 +16,6 @@ if __name__ == "__main__":
     window.setCentralWidget(centralWidget)
     layout = QtWidgets.QVBoxLayout(centralWidget)
     ribbonbar = RibbonBar()
-    ribbonbar.setRibbonHeight(160)
     window.setMenuBar(ribbonbar)
 
     layout.addWidget(QtWidgets.QTextEdit(), 1)
@@ -38,7 +37,7 @@ if __name__ == "__main__":
     clipboardPanel.addSmallButton("Painter", icon=QIcon("painter.png"), showText=False, tooltip="Format Painter")
 
     fontPanel = homeCategory.addPanel("Font")
-    fontComboBox = fontPanel.addFontComboBox(rowSpan=3, colSpan=6)
+    fontComboBox = fontPanel.addSmallFontComboBox(colSpan=5, fixedHeight=True)
     fontPanel.addSmallToggleButton("Bold", icon=QIcon("bold.png"), showText=False, tooltip="Bold")
     fontPanel.addSmallToggleButton("Italic", icon=QIcon("italic.png"), showText=False, tooltip="Italic")
     fontPanel.addSmallToggleButton("Underline", icon=QIcon("underline.png"), showText=False, tooltip="Underline")
@@ -47,7 +46,6 @@ if __name__ == "__main__":
     )
     fontPanel.addSmallToggleButton("Superscript", icon=QIcon("superscript.png"), showText=False, tooltip="Superscript")
     fontPanel.addSmallToggleButton("Subscript", icon=QIcon("subscript.png"), showText=False, tooltip="Subscript")
-    fontSizeComboBox = fontPanel.addComboBox(["8", "9", "10"], rowSpan=3, colSpan=2)
     fontPanel.addSmallToggleButton(
         "Increase Font Size", icon=QIcon("increase-font.png"), showText=False, tooltip="Increase Font Size"
     )
@@ -57,6 +55,7 @@ if __name__ == "__main__":
     fontPanel.addSmallToggleButton(
         "Decrease Font Size", icon=QIcon("decrease-font.png"), showText=False, tooltip="Decrease Font Size"
     )
+    fontSizeComboBox = fontPanel.addSmallComboBox(["8", "9", "10"], fixedHeight=True, mode=RowWise)
 
     window.resize(1500, 1000)
     window.show()
