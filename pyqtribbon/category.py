@@ -48,7 +48,7 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
         self._categoryScrollAreaContents.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)  # type: ignore
         self._categoryLayout = QtWidgets.QHBoxLayout(self._categoryScrollAreaContents)
         self._categoryLayout.setContentsMargins(0, 0, 0, 0)
-        self._categoryLayout.setSpacing(5)
+        self._categoryLayout.setSpacing(0)
         self._categoryLayout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
 
         # Category scroll area
@@ -73,8 +73,8 @@ class RibbonCategoryLayoutWidget(QtWidgets.QFrame):
 
         # Add the widgets to the main layout
         self._mainLayout = QtWidgets.QHBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 0, 5, 0)
-        self._mainLayout.setSpacing(5)
+        self._mainLayout.setContentsMargins(0, 0, 0, 0)
+        self._mainLayout.setSpacing(0)
         self._mainLayout.addWidget(self._previousButton, 0, QtCore.Qt.AlignVCenter)
         self._mainLayout.addWidget(self._categoryScrollArea, 1)
         self._mainLayout.addSpacerItem(QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding,

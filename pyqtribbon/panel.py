@@ -165,12 +165,12 @@ class RibbonPanel(QtWidgets.QFrame):
 
         # Main layout
         self._mainLayout = QtWidgets.QVBoxLayout(self)
-        self._mainLayout.setContentsMargins(5, 2, 5, 2)
-        self._mainLayout.setSpacing(5)
+        self._mainLayout.setContentsMargins(0, 0, 0, 0)
+        self._mainLayout.setSpacing(0)
 
         # Actions layout
         self._actionsLayout = QtWidgets.QGridLayout()
-        self._actionsLayout.setContentsMargins(5, 0, 5, 0)
+        self._actionsLayout.setContentsMargins(5, 5, 5, 5)
         self._actionsLayout.setSpacing(0)
         self._mainLayout.addLayout(self._actionsLayout, 1)
 
