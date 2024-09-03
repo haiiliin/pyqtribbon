@@ -65,10 +65,7 @@ packages = ['pyqtribbon']
 pyqtribbon = ["icons/*", "styles/*"]
 
 [tool.setuptools_scm]
-root = "."
-version_scheme = "post-release"
 write_to = "pyqtribbon/_version.py"
-fallback_version = "0.0.0-unknown"
 
 [tool.pytest.ini_options]
 testpaths = ["pyqtribbon", "tests"]
