@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
@@ -73,7 +74,7 @@ addopts = "-rf -s --cov=pyqtribbon --cov-report=xml --cov-report=html --cov-repo
 
 [tool.black]
 line-length = 120
-target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312', 'py313']
 include = '(pyqtribbon/.*\.py|tests/.*\.py|docs/source/conf\.py)'
 
 [tool.isort]
