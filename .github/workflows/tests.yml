@@ -19,7 +19,10 @@ jobs:
   tox:
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os:
+          - windows-2022
+          - ubuntu-24.04
+          - macos-13  # intel runner for testing PySide2 on macOS
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
