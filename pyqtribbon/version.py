@@ -10,12 +10,13 @@ def _get_version():
 
             return setuptools_scm.get_version(root=str(root))
         except (ImportError, RegexError, LookupError):
-            try:
-                from ._version import version
+            pass
+    try:
+        from ._version import version
 
-                return version
-            except ImportError:
-                return "0.0.0-unknown"
+        return version
+    except ImportError:
+        return "0.0.0-unknown"
 
 
 __version__ = _get_version()
