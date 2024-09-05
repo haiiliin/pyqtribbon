@@ -18,8 +18,8 @@
 #include <QVBoxLayout>
 #include <QVariant>
 #include <QWidget>
-#include <vector>
 #include <cmath>
+#include <vector>
 
 #include "constants.hpp"
 #include "gallery.hpp"
