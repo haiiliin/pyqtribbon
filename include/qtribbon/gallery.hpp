@@ -107,23 +107,23 @@ class RibbonGallery : public QFrame {
         setMinimumWidth(minimumWidth);
         _popupHideOnClick = popupHideOnClick;
 
-        _mainLayout = new QHBoxLayout();
+        _mainLayout = new QHBoxLayout(this);
         _mainLayout->setContentsMargins(5, 5, 5, 5);
         _mainLayout->setSpacing(5);
 
-        _upButton = new RibbonGalleryButton();
+        _upButton = new RibbonGalleryButton(this);
         _upButton->setIcon(QIcon(":/icons/up.png"));
         _upButton->setIconSize(QSize(24, 24));
         _upButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
         _upButton->setAutoRaise(true);
 
-        _downButton = new RibbonGalleryButton();
+        _downButton = new RibbonGalleryButton(this);
         _downButton->setIcon(QIcon(":/icons/down.png"));
         _downButton->setIconSize(QSize(24, 24));
         _downButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
         _downButton->setAutoRaise(true);
 
-        _moreButton = new RibbonGalleryButton();
+        _moreButton = new RibbonGalleryButton(this);
         _moreButton->setIcon(QIcon(":/icons/more.png"));
         _moreButton->setIconSize(QSize(24, 24));
         _moreButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
