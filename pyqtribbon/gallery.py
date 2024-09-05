@@ -240,7 +240,7 @@ class RibbonGallery(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         checkable=False,
-    ) -> RibbonToolButton:
+    ) -> typing.Tuple[RibbonToolButton, RibbonToolButton]:
         """Add a button to the gallery
 
         :param text: text of the button
@@ -250,7 +250,7 @@ class RibbonGallery(QtWidgets.QFrame):
         :param tooltip: tooltip of the button
         :param statusTip: status tip of the button
         :param checkable: checkable flag of the button.
-        :return: the button added
+        :return: the button and the popup button added
         """
         button = RibbonToolButton(self)
         popupButton = RibbonToolButton(self._popupWidget)
@@ -290,7 +290,7 @@ class RibbonGallery(QtWidgets.QFrame):
             popupButton.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
         self._addWidget(button)  # noqa
         self._addPopupWidget(popupButton)  # noqa
-        return button
+        return button, popupButton
 
     def addToggleButton(
         self,
@@ -300,7 +300,7 @@ class RibbonGallery(QtWidgets.QFrame):
         shortcut=None,
         tooltip=None,
         statusTip=None,
-    ) -> RibbonToolButton:
+    ) -> typing.Tuple[RibbonToolButton, RibbonToolButton]:
         """Add a toggle button to the gallery
 
         :param text: text of the button
@@ -309,7 +309,6 @@ class RibbonGallery(QtWidgets.QFrame):
         :param shortcut: shortcut of the button
         :param tooltip: tooltip of the button
         :param statusTip: status tip of the button.
-        :return: the button added
+        :return: the button and the popup button added
         """
-        button = self.addButton(text, icon, slot, shortcut, tooltip, statusTip, True)
-        return button
+        return self.addButton(text, icon, slot, shortcut, tooltip, statusTip, True)
