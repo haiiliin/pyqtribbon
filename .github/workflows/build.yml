@@ -1,0 +1,32 @@
+name: Build C++ library
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/build.yml"
+      - "include/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/build.yml"
+      - "include/**"
+
+concurrency:
+  group: "build-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jurplel/install-qt-action@v4
+      - name: Generate
+        run: cmake -S . -B build
+        working-directory: include
+      - name: Build
+        run: cmake --build build
+        working-directory: include
