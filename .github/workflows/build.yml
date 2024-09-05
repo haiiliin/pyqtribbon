@@ -24,8 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: jurplel/install-qt-action@v4
-        with:
-          version: "6.*"
       - name: Generate
         run: cmake -S . -B build
         working-directory: include
