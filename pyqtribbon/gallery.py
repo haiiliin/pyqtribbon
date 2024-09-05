@@ -240,7 +240,7 @@ class RibbonGallery(QtWidgets.QFrame):
         tooltip=None,
         statusTip=None,
         checkable=False,
-    ) -> tuple[RibbonToolButton, RibbonToolButton]:
+    ) -> typing.Tuple[RibbonToolButton, RibbonToolButton]:
         """Add a button to the gallery
 
         :param text: text of the button
@@ -300,7 +300,7 @@ class RibbonGallery(QtWidgets.QFrame):
         shortcut=None,
         tooltip=None,
         statusTip=None,
-    ) -> tuple[RibbonToolButton, RibbonToolButton]:
+    ) -> typing.Tuple[RibbonToolButton, RibbonToolButton]:
         """Add a toggle button to the gallery
 
         :param text: text of the button
