@@ -27,6 +27,6 @@ jobs:
       - name: Generate
         run: cmake -S . -B build
         working-directory: include
-      - name: Test
+      - name: Build
         run: cmake --build build
         working-directory: include
