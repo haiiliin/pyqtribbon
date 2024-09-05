@@ -17,6 +17,7 @@
 #include <QSize>
 #include <QToolButton>
 #include <QVBoxLayout>
+#include <tuple>
 
 #include "menu.hpp"
 #include "separator.hpp"
@@ -225,9 +226,11 @@ class RibbonGallery : public QFrame {
 
     void setPopupHideOnClick(bool popupHideOnClick) { _popupHideOnClick = popupHideOnClick; }
 
-    RibbonToolButton *addButton(const QString &text = "", const QIcon &icon = QIcon(),
-                                const QKeySequence &shortcut = QKeySequence(), const QString &tooltip = "",
-                                const QString &statusTip = "", bool checkable = false) {
+    std::tuple<RibbonToolButton *, RibbonToolButton *> addButton(const QString &text = "", const QIcon &icon = QIcon(),
+                                                                 const QKeySequence &shortcut = QKeySequence(),
+                                                                 const QString &tooltip = "",
+                                                                 const QString &statusTip = "",
+                                                                 bool checkable = false) {
         auto *button = new RibbonToolButton(this);
         auto *popupButton = new RibbonToolButton(_popupWidget);
         if (!text.isEmpty()) {
@@ -270,12 +273,14 @@ class RibbonGallery : public QFrame {
         }
         _addWidget(button);
         _addPopupWidget(popupButton);
-        return button;
+        return std::make_tuple(button, popupButton);
     }
 
-    RibbonToolButton *addToggleButton(const QString &text = "", const QIcon &icon = QIcon(),
-                                      const QKeySequence &shortcut = QKeySequence(), const QString &tooltip = "",
-                                      const QString &statusTip = "") {
+    std::tuple<RibbonToolButton *, RibbonToolButton *> addToggleButton(const QString &text = "",
+                                                                       const QIcon &icon = QIcon(),
+                                                                       const QKeySequence &shortcut = QKeySequence(),
+                                                                       const QString &tooltip = "",
+                                                                       const QString &statusTip = "") {
         return addButton(text, icon, shortcut, tooltip, statusTip, true);
     }
 };
