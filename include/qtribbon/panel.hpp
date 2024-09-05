@@ -19,6 +19,7 @@
 #include <QVariant>
 #include <QWidget>
 #include <vector>
+#include <cmath>
 
 #include "constants.hpp"
 #include "gallery.hpp"
@@ -196,8 +197,8 @@ class RibbonPanel : public QFrame {
     void setMaximumRows(int maxRows) {
         _maxRows = maxRows;
         _largeRows = maxRows;
-        _mediumRows = std::max(static_cast<int>(round(maxRows / 2.0)), 1);
-        _smallRows = std::max(static_cast<int>(round(maxRows / 3.0)), 1);
+        _mediumRows = std::max(static_cast<int>(std::round(maxRows / 2.0)), 1);
+        _smallRows = std::max(static_cast<int>(std::round(maxRows / 3.0)), 1);
     }
 
     void setLargeRows(int rows) {
