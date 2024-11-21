@@ -2,15 +2,6 @@
 User Manual
 ===========
 
-The RibbonScreenShotWindow Class
---------------------------------
-
-The :py:class:`~ribbon.screenshotwindow.RibbonScreenShotWindow` class is just for taking a screenshot of the window, 
-the window will be closed 0.1s after it is shown. It is just used for documenting the window.
-
-.. autoclass:: pyqtribbon.screenshotwindow.RibbonScreenShotWindow
-    :members:
-    :noindex:
 
 Instantiate a Ribbon Bar
 --------------------------
