@@ -38,10 +38,12 @@ dev = [
     "coveralls",
     "coverage",
     "flake8",
+    "pdm",
     "pytest",
     "pytest-cov",
     "pytest-qt",
     "tox",
+    "tox-pdm",
 ]
 docs = [
     "PyQt5",
@@ -54,10 +56,6 @@ docs = [
     "sphinx-toolbox",
     "sphinx-qt-documentation",
 ]
-pyqt5 = ["PyQt5"]
-pyqt6 = ["PyQt6"]
-pyside2 = ["PySide2"]
-pyside6 = ["PySide6"]
 
 [tool.setuptools]
 packages = ['pyqtribbon']
