@@ -12,4 +12,3 @@ python:
       path: .
       extra_requirements:
         - docs
-        - PyQt5
