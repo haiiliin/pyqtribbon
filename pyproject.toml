@@ -38,12 +38,10 @@ dev = [
     "coveralls",
     "coverage",
     "flake8",
-    "pdm",
     "pytest",
     "pytest-cov",
     "pytest-qt",
     "tox",
-    "tox-pdm",
 ]
 docs = [
     "PyQt5",
