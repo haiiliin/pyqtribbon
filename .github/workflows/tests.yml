@@ -6,6 +6,8 @@ on:
     - main
     paths:
     - 'pyqtribbon/**'
+    - 'tests/**'
+    - 'tox.ini'
     - '.github/workflows/tests.yml'
   pull_request:
     types: [opened, reopened, synchronize]
