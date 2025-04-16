@@ -4,11 +4,6 @@ on:
   push:
     branches:
     - main
-    paths:
-    - 'pyqtribbon/**'
-    - 'tests/**'
-    - 'tox.ini'
-    - '.github/workflows/tests.yml'
   pull_request:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
