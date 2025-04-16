@@ -39,6 +39,7 @@ pip install git+https://github.com/haiiliin/pyqtribbon.git@main
 |   3.10       | :white_check_mark:  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 |   3.11       | :white_check_mark:  | :white_check_mark: |      :x: [^1]      | :white_check_mark: |
 |   3.12       | :white_check_mark:  | :white_check_mark: |      :x: [^1]      | :white_check_mark: |
+|   3.13       | :white_check_mark:  | :white_check_mark: |      :x: [^1]      | :white_check_mark: |
 
 [py]: https://www.python.org/
 [PyQt5]: https://pypi.org/project/PyQt5/
