@@ -33,7 +33,7 @@ dependencies = ["numpy", "qtpy"]
 "GitHub" = "https://github.com/haiiliin/pyqtribbon"
 "Documentation" = "https://pyqribbon.readthedocs.io/en/stable/"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "coveralls",
     "coverage",
