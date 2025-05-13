@@ -101,14 +101,14 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._collapseRibbonButton.setAutoRaise(True)
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)  # type: ignore
-        self._collapseRibbonAction = self.addRightToolButton(self._collapseRibbonButton)
+        self._collapseRibbonButtonAction = self.addRightToolButton(self._collapseRibbonButton)
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._helpButton.setIcon(QtGui.QIcon(DataFile("icons/help.png")))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)  # type: ignore
-        self._helpAction = self.addRightToolButton(self._helpButton)
+        self._helpButtonAction = self.addRightToolButton(self._helpButton)
 
         # category tab bar
         self._tabBar = RibbonTabBar(self)
@@ -278,8 +278,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def removeHelpButton(self):
         """Remove the help button from the ribbon."""
-        self.removeRightToolButton(self._helpButton, self._helpAction)
-        self._helpButton = self._helpAction = None
+        self.removeRightToolButton(self._helpButton, self._helpButtonAction)
+        self._helpButton = self._helpButtonAction = None
 
     def setCollapseButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the min button.
@@ -290,8 +290,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def removeCollapseButton(self):
         """Remove the min button from the ribbon."""
-        self.removeRightToolButton(self._collapseRibbonButton, self._collapseRibbonAction)
-        self._collapseRibbonButton = self._collapseRibbonAction = None
+        self.removeRightToolButton(self._collapseRibbonButton, self._collapseRibbonButtonAction)
+        self._collapseRibbonButton = self._collapseRibbonButtonAction = None
 
     def collapseRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the collapse ribbon button.
