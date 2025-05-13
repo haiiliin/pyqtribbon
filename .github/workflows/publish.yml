@@ -19,6 +19,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
     steps:
     - uses: actions/checkout@v4
       with:
@@ -35,6 +38,3 @@ jobs:
       run: python -m build
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@v1.12.4
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
