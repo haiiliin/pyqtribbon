@@ -101,13 +101,13 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._collapseRibbonButton.setAutoRaise(True)
         self._collapseRibbonButton.setToolTip("Collapse Ribbon")
         self._collapseRibbonButton.clicked.connect(self.collapseRibbonButtonClicked)  # type: ignore
+        self._collapseRibbonAction = self.addRightToolButton(self._collapseRibbonButton)
         self._helpButton = QtWidgets.QToolButton(self)
         self._helpButton.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._helpButton.setIcon(QtGui.QIcon(DataFile("icons/help.png")))
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)  # type: ignore
-        self._collapseRibbonAction = self.addRightToolButton(self._collapseRibbonButton)
         self._helpAction = self.addRightToolButton(self._helpButton)
 
         # category tab bar
