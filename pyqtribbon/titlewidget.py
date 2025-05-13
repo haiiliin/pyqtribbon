@@ -107,8 +107,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         self._helpButton.setAutoRaise(True)
         self._helpButton.setToolTip("Help")
         self._helpButton.clicked.connect(self.helpButtonClicked)  # type: ignore
-        self.addRightToolButton(self._collapseRibbonButton)
-        self.addRightToolButton(self._helpButton)
+        self._collapseRibbonAction = self.addRightToolButton(self._collapseRibbonButton)
+        self._helpAction = self.addRightToolButton(self._helpButton)
 
         # category tab bar
         self._tabBar = RibbonTabBar(self)
@@ -195,7 +195,16 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         button.setIconSize(QtCore.QSize(self._quickAccessButtonHeight, self._quickAccessButtonHeight))
         self._quickAccessButtons.append(button)
-        self._quickAccessToolBar.addWidget(button)
+        return self._quickAccessToolBar.addWidget(button)
+
+    def removeQuickAccessButton(self, button: QtWidgets.QToolButton, action: QtWidgets.QAction):
+        """Remove a widget from the quick access bar.
+
+        :param button: The button to remove.
+        :param action: The widget action returned by the addQuickAccessButton method.
+        """
+        self._quickAccessButtons.remove(button)
+        self._quickAccessToolBar.removeAction(action)
 
     def setQuickAccessButtonHeight(self, height: int):
         """Set the height of the quick access buttons.
@@ -234,7 +243,16 @@ class RibbonTitleWidget(QtWidgets.QFrame):
         """
         button.setIconSize(QtCore.QSize(self._rightButtonHeight, self._rightButtonHeight))
         self._rightToolButtons.append(button)
-        self._rightToolBar.addWidget(button)
+        return self._rightToolBar.addWidget(button)
+
+    def removeRightToolButton(self, button: QtWidgets.QToolButton, action: QtWidgets.QAction):
+        """Remove a widget from the right button bar.
+
+        :param button: The button to remove.
+        :param action: The widget action returned by the addRightToolButton method.
+        """
+        self._rightToolButtons.remove(button)
+        self._rightToolBar.removeAction(action)
 
     def setRightToolBarHeight(self, height: int):
         """Set the height of the right buttons.
@@ -260,7 +278,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def removeHelpButton(self):
         """Remove the help button from the ribbon."""
-        self._helpButton.setVisible(False)
+        self.removeRightToolButton(self._helpButton, self._helpAction)
+        self._helpButton = self._helpAction = None
 
     def setCollapseButtonIcon(self, icon: QtGui.QIcon):
         """Set the icon of the min button.
@@ -271,7 +290,8 @@ class RibbonTitleWidget(QtWidgets.QFrame):
 
     def removeCollapseButton(self):
         """Remove the min button from the ribbon."""
-        self._collapseRibbonButton.setVisible(False)
+        self.removeRightToolButton(self._collapseRibbonButton, self._collapseRibbonAction)
+        self._collapseRibbonButton = self._collapseRibbonAction = None
 
     def collapseRibbonButton(self) -> QtWidgets.QToolButton:
         """Return the collapse ribbon button.
