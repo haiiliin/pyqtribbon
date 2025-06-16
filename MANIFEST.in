@@ -1,0 +1,17 @@
+prune .github
+prune docs
+prune examples
+prune tests
+
+exclude .clang-format
+exclude .flake8
+exclude .gitignore
+exclude .pre-commit-config.yaml
+exclude .readthedocs.yml
+exclude CHANGE_LOG.md
+exclude main.png
+exclude main.py
+exclude Makefile
+exclude pdm.lock
+exclude requirements.txt
+exclude tox.ini
