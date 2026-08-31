@@ -53,36 +53,31 @@ class RibbonToolButton(QtWidgets.QToolButton):
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
-            self.setStyleSheet(
-                """
+            self.setStyleSheet("""
                 RibbonToolButton::menu-indicator {
                     subcontrol-origin: padding;
                     subcontrol-position: right;
                     right: -5px;
                 }
-                """
-            )
+                """)
         elif style == RibbonButtonStyle.Medium:
             height = self._mediumButtonIconSize
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
-            self.setStyleSheet(
-                """
+            self.setStyleSheet("""
                 RibbonToolButton::menu-indicator {
                     subcontrol-origin: padding;
                     subcontrol-position: right;
                     right: -5px;
                 }
-                """
-            )
+                """)
         elif style == RibbonButtonStyle.Large:
             height = self._largeButtonIconSize
             height = min(height, self._maximumIconSize)
             self.setIconSize(QtCore.QSize(height, height))
             self.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
-            self.setStyleSheet(
-                """
+            self.setStyleSheet("""
                 RibbonToolButton[popupMode="0"]::menu-indicator {
                     subcontrol-origin: padding;
                     subcontrol-position: bottom;
@@ -93,8 +88,7 @@ class RibbonToolButton(QtWidgets.QToolButton):
                     subcontrol-position: bottom;
                     bottom: -5px;
                 }
-                """
-            )
+                """)
 
     def buttonStyle(self) -> RibbonButtonStyle:
         """Get the button style of the button.
