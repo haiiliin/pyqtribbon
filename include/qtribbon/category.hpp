@@ -28,7 +28,7 @@ class RibbonCategoryLayoutButton : public QToolButton {
     Q_OBJECT
 
    public:
-    explicit RibbonCategoryLayoutButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    explicit RibbonCategoryLayoutButton(QWidget* parent = nullptr) : QToolButton(parent) {}
     ~RibbonCategoryLayoutButton() override = default;
 };
 
@@ -36,7 +36,7 @@ class RibbonCategoryScrollArea : public QScrollArea {
     Q_OBJECT
 
    public:
-    explicit RibbonCategoryScrollArea(QWidget *parent = nullptr) : QScrollArea(parent) {}
+    explicit RibbonCategoryScrollArea(QWidget* parent = nullptr) : QScrollArea(parent) {}
     ~RibbonCategoryScrollArea() override = default;
 };
 
@@ -44,7 +44,7 @@ class RibbonCategoryScrollAreaContents : public QFrame {
     Q_OBJECT
 
    public:
-    explicit RibbonCategoryScrollAreaContents(QWidget *parent = nullptr) : QFrame(parent) {}
+    explicit RibbonCategoryScrollAreaContents(QWidget* parent = nullptr) : QFrame(parent) {}
     ~RibbonCategoryScrollAreaContents() override = default;
 };
 
@@ -52,20 +52,20 @@ class RibbonCategoryLayoutWidget : public QFrame {
     Q_OBJECT
 
    private:
-    RibbonCategoryScrollAreaContents *_categoryScrollAreaContents;
-    QHBoxLayout *_categoryLayout;
-    RibbonCategoryScrollArea *_categoryScrollArea;
-    RibbonCategoryLayoutButton *_previousButton;
-    RibbonCategoryLayoutButton *_nextButton;
+    RibbonCategoryScrollAreaContents* _categoryScrollAreaContents;
+    QHBoxLayout* _categoryLayout;
+    RibbonCategoryScrollArea* _categoryScrollArea;
+    RibbonCategoryLayoutButton* _previousButton;
+    RibbonCategoryLayoutButton* _nextButton;
 
    protected:
-    QHBoxLayout *_mainLayout;
+    QHBoxLayout* _mainLayout;
 
    signals:
     void displayOptionsButtonClicked();
 
    public:
-    explicit RibbonCategoryLayoutWidget(QWidget *parent = nullptr) : QFrame(parent) {
+    explicit RibbonCategoryLayoutWidget(QWidget* parent = nullptr) : QFrame(parent) {
         // Set up the contents of the category scroll area
         this->_categoryScrollAreaContents = new RibbonCategoryScrollAreaContents(this);
         this->_categoryScrollAreaContents->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -109,18 +109,18 @@ class RibbonCategoryLayoutWidget : public QFrame {
 
     ~RibbonCategoryLayoutWidget() override = default;
 
-    void paintEvent(QPaintEvent *event) override {
+    void paintEvent(QPaintEvent* event) override {
         QFrame::paintEvent(event);
         autoSetScrollButtonsVisible();
     }
 
-    void resizeEvent(QResizeEvent *event) override {
+    void resizeEvent(QResizeEvent* event) override {
         QFrame::resizeEvent(event);
         autoSetScrollButtonsVisible();
     }
 
     void autoSetScrollButtonsVisible() {
-        QScrollBar *horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
+        QScrollBar* horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
         _previousButton->setVisible(horizontalScrollBar->value() > horizontalScrollBar->minimum());
         _nextButton->setVisible(horizontalScrollBar->value() < horizontalScrollBar->maximum());
         _previousButton->setIconSize(QSize(12, this->size().height() - 15));
@@ -128,22 +128,22 @@ class RibbonCategoryLayoutWidget : public QFrame {
     }
 
     void scrollPrevious() {
-        QScrollBar *horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
+        QScrollBar* horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
         horizontalScrollBar->setValue(horizontalScrollBar->value() - 50);
         autoSetScrollButtonsVisible();
     }
 
     void scrollNext() {
-        QScrollBar *horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
+        QScrollBar* horizontalScrollBar = _categoryScrollArea->horizontalScrollBar();
         horizontalScrollBar->setValue(horizontalScrollBar->value() + 50);
         autoSetScrollButtonsVisible();
     }
 
-    void addWidget(QWidget *widget) { _categoryLayout->addWidget(widget); }
+    void addWidget(QWidget* widget) { _categoryLayout->addWidget(widget); }
 
-    void removeWidget(QWidget *widget) { _categoryLayout->removeWidget(widget); }
+    void removeWidget(QWidget* widget) { _categoryLayout->removeWidget(widget); }
 
-    QWidget *takeWidget(QWidget *widget) {
+    QWidget* takeWidget(QWidget* widget) {
         _categoryLayout->removeWidget(widget);
         return widget;
     }
@@ -155,16 +155,16 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
    private:
     QString _title;
     RibbonCategoryStyle _style;
-    QMap<QString, RibbonPanel *> _panels = QMap<QString, RibbonPanel *>();
+    QMap<QString, RibbonPanel*> _panels = QMap<QString, RibbonPanel*>();
     int _maxRows = 6;
 
    protected:
     QColor _color;
 
    public:
-    explicit RibbonCategory(QWidget *parent = nullptr) : RibbonCategory("", Normal, QColor(), parent) {}
+    explicit RibbonCategory(QWidget* parent = nullptr) : RibbonCategory("", Normal, QColor(), parent) {}
     explicit RibbonCategory(QString title = "", RibbonCategoryStyle style = Normal, QColor color = QColor(),
-                            QWidget *parent = nullptr)
+                            QWidget* parent = nullptr)
         : RibbonCategoryLayoutWidget(parent), _title(std::move(title)), _style(style), _color(color) {}
     ~RibbonCategory() override = default;
 
@@ -173,8 +173,8 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
     virtual void setCategoryStyle(RibbonCategoryStyle style) { _style = style; }
     RibbonCategoryStyle categoryStyle() const { return _style; }
 
-    RibbonPanel *addPanel(const QString &title, bool showPanelOptionButton) {
-        auto *panel = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
+    RibbonPanel* addPanel(const QString& title, bool showPanelOptionButton) {
+        auto* panel = new RibbonPanel(title, _maxRows, showPanelOptionButton, this);
         panel->setFixedHeight(this->height() - _mainLayout->spacing() - _mainLayout->contentsMargins().top() -
                               _mainLayout->contentsMargins().bottom());
         _panels[title] = panel;
@@ -183,27 +183,27 @@ class RibbonCategory : public RibbonCategoryLayoutWidget {
         return panel;
     }
 
-    void removePanel(const QString &title) {
+    void removePanel(const QString& title) {
         this->removeWidget(_panels[title]);
         _panels.remove(title);
     }
 
-    RibbonPanel *takePanel(const QString &title) {
-        RibbonPanel *panel = _panels[title];
+    RibbonPanel* takePanel(const QString& title) {
+        RibbonPanel* panel = _panels[title];
         this->removePanel(title);
         return panel;
     }
 
-    RibbonPanel *panel(const QString &title) { return _panels[title]; }
+    RibbonPanel* panel(const QString& title) { return _panels[title]; }
 
-    QMap<QString, RibbonPanel *> panels() { return _panels; }
+    QMap<QString, RibbonPanel*> panels() { return _panels; }
 };
 
 class RibbonNormalCategory : public RibbonCategory {
     Q_OBJECT
 
    public:
-    explicit RibbonNormalCategory(QString title = "", QWidget *parent = nullptr)
+    explicit RibbonNormalCategory(QString title = "", QWidget* parent = nullptr)
         : RibbonCategory(std::move(title), Normal, QColor(), parent) {}
     ~RibbonNormalCategory() override = default;
 
@@ -216,7 +216,7 @@ class RibbonContextCategory : public RibbonCategory {
     Q_OBJECT
 
    public:
-    explicit RibbonContextCategory(QString title = "", QColor color = QColor(), QWidget *parent = nullptr)
+    explicit RibbonContextCategory(QString title = "", QColor color = QColor(), QWidget* parent = nullptr)
         : RibbonCategory(std::move(title), Context, color, parent) {}
     ~RibbonContextCategory() override = default;
 
@@ -228,14 +228,14 @@ class RibbonContextCategory : public RibbonCategory {
     void setColor(QColor color) { _color = color; }
 };
 
-class RibbonContextCategories : public QMap<QString, RibbonContextCategory *> {
+class RibbonContextCategories : public QMap<QString, RibbonContextCategory*> {
    private:
     QString _name;
     QColor _color;
 
    public:
-    RibbonContextCategories(QString name, QColor color, QMap<QString, RibbonContextCategory *> categories)
-        : QMap<QString, RibbonContextCategory *>(std::move(categories)), _name(std::move(name)), _color(color) {}
+    RibbonContextCategories(QString name, QColor color, QMap<QString, RibbonContextCategory*> categories)
+        : QMap<QString, RibbonContextCategory*>(std::move(categories)), _name(std::move(name)), _color(color) {}
     ~RibbonContextCategories() = default;
 
     QString name() const { return _name; }

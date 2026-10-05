@@ -23,11 +23,11 @@ class RibbonApplicationButton : public QToolButton {
     Q_OBJECT
 
    public:
-    explicit RibbonApplicationButton(QWidget *parent = nullptr) : QToolButton(parent) {}
+    explicit RibbonApplicationButton(QWidget* parent = nullptr) : QToolButton(parent) {}
     ~RibbonApplicationButton() override = default;
 
-    RibbonMenu *addFileMenu() {
-        auto *menu = new RibbonMenu(this);
+    RibbonMenu* addFileMenu() {
+        auto* menu = new RibbonMenu(this);
         this->setPopupMode(QToolButton::InstantPopup);
         this->setMenu(menu);
         return menu;
@@ -38,7 +38,7 @@ class RibbonTitleLabel : public QLabel {
     Q_OBJECT
 
    public:
-    explicit RibbonTitleLabel(QWidget *parent = nullptr) : QLabel(parent) {}
+    explicit RibbonTitleLabel(QWidget* parent = nullptr) : QLabel(parent) {}
     ~RibbonTitleLabel() override = default;
 };
 
@@ -46,18 +46,18 @@ class RibbonTitleWidget : public QFrame {
     Q_OBJECT
 
    private:
-    RibbonApplicationButton *_applicationButton;
-    QToolBar *_quickAccessToolBar;
-    QWidget *_quickAccessToolBarWidget;
-    QHBoxLayout *_quickAccessToolBarLayout;
-    QToolBar *_rightToolBar;
-    QToolButton *_collapseRibbonButton;
-    QToolButton *_helpButton;
-    RibbonTabBar *_tabBar;
-    RibbonTitleLabel *_titleLabel;
-    QHBoxLayout *_tabBarLayout;
-    QList<QToolButton *> _quickAccessButtons;
-    QList<QToolButton *> _rightToolButtons;
+    RibbonApplicationButton* _applicationButton;
+    QToolBar* _quickAccessToolBar;
+    QWidget* _quickAccessToolBarWidget;
+    QHBoxLayout* _quickAccessToolBarLayout;
+    QToolBar* _rightToolBar;
+    QToolButton* _collapseRibbonButton;
+    QToolButton* _helpButton;
+    RibbonTabBar* _tabBar;
+    RibbonTitleLabel* _titleLabel;
+    QHBoxLayout* _tabBarLayout;
+    QList<QToolButton*> _quickAccessButtons;
+    QList<QToolButton*> _rightToolButtons;
 
     int _quickAccessButtonHeight = 20;
     int _rightButtonHeight = 20;
@@ -70,8 +70,8 @@ class RibbonTitleWidget : public QFrame {
     void collapseRibbonButtonClicked(bool checked);
 
    public:
-    explicit RibbonTitleWidget(QWidget *parent = nullptr) : RibbonTitleWidget("QtRibbon", parent) {}
-    explicit RibbonTitleWidget(const QString &title = "QtRibbon", QWidget *parent = nullptr) : QFrame(parent) {
+    explicit RibbonTitleWidget(QWidget* parent = nullptr) : RibbonTitleWidget("QtRibbon", parent) {}
+    explicit RibbonTitleWidget(const QString& title = "QtRibbon", QWidget* parent = nullptr) : QFrame(parent) {
         // Set up the layout
         this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
         this->_tabBarLayout = new QHBoxLayout(this);
@@ -144,23 +144,23 @@ class RibbonTitleWidget : public QFrame {
     }
     ~RibbonTitleWidget() override = default;
 
-    RibbonApplicationButton *applicationButton() { return _applicationButton; }
+    RibbonApplicationButton* applicationButton() { return _applicationButton; }
 
-    void setApplicationIcon(const QIcon &icon) { _applicationButton->setIcon(icon); }
+    void setApplicationIcon(const QIcon& icon) { _applicationButton->setIcon(icon); }
 
-    void addTitleWidget(QWidget *widget) { _tabBarLayout->addWidget(widget); }
+    void addTitleWidget(QWidget* widget) { _tabBarLayout->addWidget(widget); }
 
-    void insertTitleWidget(int index, QWidget *widget) { _tabBarLayout->insertWidget(index, widget); }
+    void insertTitleWidget(int index, QWidget* widget) { _tabBarLayout->insertWidget(index, widget); }
 
-    void removeTitleWidget(QWidget *widget) { _tabBarLayout->removeWidget(widget); }
+    void removeTitleWidget(QWidget* widget) { _tabBarLayout->removeWidget(widget); }
 
-    RibbonTabBar *tabBar() { return _tabBar; }
+    RibbonTabBar* tabBar() { return _tabBar; }
 
-    QToolBar *quickAccessToolBar() { return _quickAccessToolBar; }
+    QToolBar* quickAccessToolBar() { return _quickAccessToolBar; }
 
-    QList<QToolButton *> quickAccessButtons() { return _quickAccessButtons; }
+    QList<QToolButton*> quickAccessButtons() { return _quickAccessButtons; }
 
-    void addQuickAccessButton(QToolButton *button) {
+    void addQuickAccessButton(QToolButton* button) {
         button->setIconSize(QSize(_quickAccessButtonHeight, _quickAccessButtonHeight));
         _quickAccessButtons.append(button);
         _quickAccessToolBar->addWidget(button);
@@ -174,11 +174,11 @@ class RibbonTitleWidget : public QFrame {
 
     QString title() { return _titleLabel->text(); }
 
-    void setTitle(const QString &title) { _titleLabel->setText(title); }
+    void setTitle(const QString& title) { _titleLabel->setText(title); }
 
-    QToolBar *rightToolBar() { return _rightToolBar; }
+    QToolBar* rightToolBar() { return _rightToolBar; }
 
-    void addRightToolButton(QToolButton *button) {
+    void addRightToolButton(QToolButton* button) {
         button->setIconSize(QSize(_rightButtonHeight, _rightButtonHeight));
         _rightToolButtons.append(button);
         _rightToolBar->addWidget(button);
@@ -189,43 +189,43 @@ class RibbonTitleWidget : public QFrame {
         _rightToolBar->setIconSize(QSize(height, height));
     }
 
-    QToolButton *helpRibbonButton() { return _helpButton; }
+    QToolButton* helpRibbonButton() { return _helpButton; }
 
-    void setHelpButtonIcon(const QIcon &icon) { _helpButton->setIcon(icon); }
+    void setHelpButtonIcon(const QIcon& icon) { _helpButton->setIcon(icon); }
 
     void removeHelpButton() { _helpButton->setVisible(false); }
 
-    void setCollapseButtonIcon(const QIcon &icon) { _collapseRibbonButton->setIcon(icon); }
+    void setCollapseButtonIcon(const QIcon& icon) { _collapseRibbonButton->setIcon(icon); }
 
     void removeCollapseButton() { _collapseRibbonButton->setVisible(false); }
 
-    QToolButton *collapseRibbonButton() { return _collapseRibbonButton; }
+    QToolButton* collapseRibbonButton() { return _collapseRibbonButton; }
 
     void setTitleWidgetHeight(int height) {
         setQuickAccessButtonHeight(height);
         setRightToolBarHeight(height);
     }
 
-    QWidget *topLevelWidget() {
-        QWidget *widget = this;
+    QWidget* topLevelWidget() {
+        QWidget* widget = this;
         while (widget->parentWidget()) {
             widget = widget->parentWidget();
         }
         return widget;
     }
 
-    void mousePressEvent(QMouseEvent *event) override {
+    void mousePressEvent(QMouseEvent* event) override {
         _start_point = event->pos();
         _window_point = topLevelWidget()->frameGeometry().topLeft();
     }
 
-    void mouseMoveEvent(QMouseEvent *event) override {
+    void mouseMoveEvent(QMouseEvent* event) override {
         QPoint relpos = event->pos() - _start_point;
         if (!_start_point.isNull() && !_window_point.isNull()) topLevelWidget()->move(_window_point + relpos);
         // TODO topLevelWidget()->windowHandle()->startSystemMove();
     }
 
-    void mouseDoubleClickEvent(QMouseEvent *event) override {
+    void mouseDoubleClickEvent(QMouseEvent* event) override {
         if (topLevelWidget()->isMaximized())
             topLevelWidget()->showNormal();
         else
