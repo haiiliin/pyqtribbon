@@ -24,8 +24,8 @@ class RibbonSeparator : public QFrame {
     int _width;
 
    public:
-    explicit RibbonSeparator(QWidget *parent = nullptr) : RibbonSeparator(Qt::Vertical, 6, parent) {}
-    explicit RibbonSeparator(Qt::Orientation orientation = Qt::Vertical, int width = 6, QWidget *parent = nullptr)
+    explicit RibbonSeparator(QWidget* parent = nullptr) : RibbonSeparator(Qt::Vertical, 6, parent) {}
+    explicit RibbonSeparator(Qt::Orientation orientation = Qt::Vertical, int width = 6, QWidget* parent = nullptr)
         : QFrame(parent), _orientation(orientation), _width(width) {
         if (orientation == Qt::Horizontal) {
             this->setFixedHeight(width);
@@ -42,7 +42,7 @@ class RibbonSeparator : public QFrame {
         _bottomMargins = bottom;
     }
 
-    void paintEvent(QPaintEvent *event) override {
+    void paintEvent(QPaintEvent* event) override {
         QPainter painter(this);
         QPen pen;
         pen.setColor(Qt::gray);
@@ -63,7 +63,7 @@ class RibbonHorizontalSeparator : public RibbonSeparator {
     Q_OBJECT
 
    public:
-    explicit RibbonHorizontalSeparator(int width = 6, QWidget *parent = nullptr)
+    explicit RibbonHorizontalSeparator(int width = 6, QWidget* parent = nullptr)
         : RibbonSeparator(Qt::Horizontal, width, parent) {}
     ~RibbonHorizontalSeparator() override = default;
 };
@@ -72,7 +72,7 @@ class RibbonVerticalSeparator : public RibbonSeparator {
     Q_OBJECT
 
    public:
-    explicit RibbonVerticalSeparator(int width = 6, QWidget *parent = nullptr)
+    explicit RibbonVerticalSeparator(int width = 6, QWidget* parent = nullptr)
         : RibbonSeparator(Qt::Vertical, width, parent) {}
     ~RibbonVerticalSeparator() override = default;
 };
